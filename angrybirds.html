@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPlay</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/angrybirds.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">Games</a></li>
+
+                <li><a href="#featured">Featured</a></li>
+
+                <li><a href="#footer">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="#" class="active">Home</a>
+
+            <a href="games.html">🎮 Games</a>
+
+            <a href="#featured">⭐ Featured</a>
+
+            <a href="#footer">📄 About</a>
+
+        </div>
+
+    </header>
+
+    <section class="game-hero">
+
+        <div class="hero-left">
+
+            <span class="game-tag">Puzzle • Physics</span>
+
+            <h1>Angry Birds</h1>
+
+            <p>
+                Launch birds, destroy pig fortresses,
+                and defeat every pig using strategy and physics.
+            </p>
+
+            <div class="game-meta">
+                <span>⭐ 4.8</span>
+                <span>📅 2009</span>
+                <span>📱 Mobile</span>
+            </div>
+
+            <a href="#game" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+                Play Angry Birds
+            </a>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="images/angry birds.jpg" alt="Angry Birds">
+
+        </div>
+
+    </section>
+
+    <section id="game" class="game-section">
+
+        <h2>Play Angry Birds</h2>
+
+        <div class="game-frame">
+
+            <iframe src="games/angry birds/Angry Birds 2.html" frameborder="0" allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+    <section class="controls">
+
+        <h2>Controls</h2>
+
+        <ul>
+
+            <li>🖱 Drag to aim</li>
+
+            <li>🖱 Release to shoot</li>
+
+            <li>🐦 Eliminate all pigs</li>
+
+        </ul>
+
+    </section>
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#footer">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/ab.js"></script>
+    <script src="js/recent.js"></script>
+    <script>saveRecentGame("Angry Birds 2","images/angry birds.jpg","angrybirds.html");</script>
+    
+</body>
+
+</html>

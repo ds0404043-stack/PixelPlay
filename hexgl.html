@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>HexGL | PixelPlay</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/hexgl.css">
+
+</head>
+
+<body>
+
+<header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">Games</a></li>
+
+                <li><a href="#featured">Featured</a></li>
+
+                <li><a href="#footer">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="#" class="active">Home</a>
+
+            <a href="games.html">🎮 Games</a>
+
+            <a href="#featured">⭐ Featured</a>
+
+            <a href="#footer">📄 About</a>
+
+        </div>
+
+    </header>
+
+    <!-- Hero -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <span class="tag">🏎️ Futuristic Racing</span>
+
+            <h1>HexGL</h1>
+
+            <p>
+
+                Experience high-speed futuristic racing directly in your browser.
+                Dodge obstacles, master sharp turns, and become the fastest pilot.
+
+            </p>
+
+            <div class="game-info">
+
+                <span>⭐ 4.9</span>
+                <span>🎮 Racing</span>
+                <span>💻 HTML5</span>
+
+            </div>
+
+            <a href="#game" class="play-btn">
+
+                ▶ Play Now
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- GAME -->
+
+    <section id="game" class="game-section">
+
+        <h2>Play HexGL</h2>
+
+        <div class="game-container">
+
+            <iframe src="games/HexGL-master/index.html" frameborder="0" allowfullscreen tabindex="0">
+            </iframe>
+
+        </div>
+
+    </section>
+
+    <div class="game-actions">
+        <button id="fullscreenBtn">
+            ⛶ Fullscreen
+        </button>
+
+        <button id="reloadBtn">
+            ↻ Restart
+        </button>
+
+        <button id="favoriteBtn">
+            ❤️ Favorite
+        </button>
+    </div>
+
+
+    <!-- Controls -->
+
+    <section class="controls">
+
+        <h2>Controls</h2>
+
+        <div class="control-grid">
+            <div>W - Accelerate</div>
+            <div>A - Turn Left</div>
+            <div>D - Turn Right</div>
+            <div>S - Brake / Reverse</div>
+            <div>R - Restart</div>
+            <div>P - Pause</div>
+        </div>
+
+    </section>
+
+
+    <!-- Description -->
+
+    <section class="description">
+
+        <h2>About HexGL</h2>
+
+        <p>
+
+            HexGL is an open-source futuristic racing game built using HTML5 and
+            WebGL. It showcases impressive graphics and smooth gameplay directly
+            in your browser without requiring any installation.
+
+        </p>
+
+    </section>
+
+
+    <!-- Footer -->
+
+        <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#footer">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+
+    <script src="js/header.js"></script>
+    <script src="js/hexgl.js"></script>
+    <script>
+        window.addEventListener("keydown", function (e) {
+            if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", " "].includes(e.key)) {
+                e.preventDefault();
+            }
+        }, { passive: false });
+    </script>
+    <script src="js/recent.js"></script>
+    <script>saveRecentGame("HexGL","images/hexgl.jpg","hexgl.html");</script>
+
+</body>
+
+</html>

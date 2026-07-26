@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minecraft - PixelPlay</title>
+
+    <style>
+            body {
+
+                background: #08111f;
+
+                overflow: hidden;
+
+            }
+
+            .game-header {
+
+                position: fixed;
+
+                top: 20px;
+
+                left: 50%;
+
+                transform: translateX(-50%);
+
+                width: min(95%, 1500px);
+
+                height: 82px;
+
+                padding: 0 28px;
+
+                display: flex;
+
+                justify-content: space-between;
+
+                align-items: center;
+
+                border-radius: 22px;
+
+                background: rgba(11, 18, 32, .70);
+
+                backdrop-filter: blur(18px);
+
+                border: 1px solid rgba(255, 255, 255, .08);
+
+                box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+
+                z-index: 1000;
+
+            }
+
+            .game-title {
+
+                display: flex;
+
+                align-items: center;
+
+                gap: 15px;
+
+            }
+
+            .game-title img {
+
+                width: 55px;
+
+                height: 55px;
+
+                border-radius: 12px;
+
+                object-fit: cover;
+
+            }
+
+            .game-title h2 {
+
+                color: white;
+
+                font-size: 24px;
+
+            }
+
+            .game-title span {
+
+                color: #94a3b8;
+
+                font-size: 14px;
+
+            }
+
+            .back-btn,
+
+            .fullscreen-btn {
+
+                padding: 13px 26px;
+
+                border: none;
+
+                border-radius: 50px;
+
+                background: #22c55e;
+
+                color: white;
+
+                font-weight: 600;
+
+                cursor: pointer;
+
+                text-decoration: none;
+
+                transition: .3s;
+
+            }
+
+            .back-btn:hover,
+
+            .fullscreen-btn:hover {
+
+                transform: translateY(-2px);
+
+                box-shadow: 0 10px 20px rgba(34, 197, 94, .35);
+
+            }
+
+            .game {
+
+                margin-top: 110px;
+
+                height: calc(100vh - 110px);
+
+            }
+
+            iframe {
+
+                width: 100%;
+
+                height: 100%;
+
+                border: none;
+
+                border-radius: 18px;
+
+            }
+    </style>
+
+</head>
+
+<body>
+
+    <header class="game-header">
+
+        <a href="index.html" class="back-btn">
+            ← Back
+        </a>
+
+        <div class="game-title">
+
+            <img src="images/minecraft.png" alt="Minecraft">
+
+            <div>
+
+                <h2>Minecraft</h2>
+
+            </div>
+
+        </div>
+
+        <button class="fullscreen-btn" onclick="fullscreenGame()">
+            ⛶ Fullscreen
+        </button>
+
+    </header>
+    <div class="game">
+
+        <iframe id="gameFrame" src="games/minecraft/index.html" tabindex="0" allowfullscreen
+            allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
+
+    </div>
+
+    <script>
+
+        // Save recently played game
+        localStorage.setItem("recentGame", JSON.stringify({
+            name: "Minecraft",
+            page: "minecraft.html",
+            image: "images/minecraft.png",
+            time: Date.now()
+        }));
+
+        function fullscreenGame() {
+            const iframe = document.getElementById("gameFrame");
+
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+
+            setTimeout(() => {
+                iframe.focus();
+                try {
+                    iframe.contentWindow.focus();
+                } catch (e) { }
+            }, 300);
+        }
+
+    </script>
+
+</body>
+
+</html>

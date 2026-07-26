@@ -1,0 +1,651 @@
+/* =====================================================
+   01. VARIABLES
+===================================================== */
+
+
+:root{
+
+    --primary:#22c55e;
+    --bg:#08131f;
+    --bg2:#0f172a;
+    --bg3:#111827;
+
+    --card:#1e293b;
+
+    --text:#ffffff;
+    --text-light:#cbd5e1;
+    --text-muted:#94a3b8;
+
+    --radius:20px;
+
+    --transition:.3s;
+
+}
+
+
+/* =====================================================
+   02. RESET
+===================================================== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Poppins",sans-serif;
+}
+
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    background:#08131f;
+    color:#fff;
+}
+
+a{
+    text-decoration:none;
+    color:white;
+}
+
+header{
+    position:fixed;
+    top:15px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:95%;
+    max-width:1450px;
+
+    z-index:1000;
+
+    background:rgba(15,23,42,.55);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    border-radius:18px;
+
+    transition:.35s;
+}
+
+header:hover{
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.35);
+
+}
+
+
+/* ===========================
+   GAMES HERO
+=========================== */
+
+.games-hero {
+    width: 90%;
+    max-width: 1200px;
+    padding:100px 0 60px;
+    margin: 80px auto 60px;
+    text-align: center;
+}
+
+.games-hero span {
+    display: inline-block;
+    background: rgba(34, 197, 94, .15);
+    color: #22c55e;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.games-hero h1 {
+    font-size: 60px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.games-hero p {
+    max-width: 700px;
+    margin: auto;
+    color: #cbd5e1;
+    font-size: 18px;
+    line-height: 1.8;
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+
+.games-search {
+    width: 90%;
+    max-width: 700px;
+    margin: 40px auto;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    background: #1e293b;
+
+    padding: 18px 25px;
+
+    border-radius: 60px;
+
+    border: 1px solid rgba(255, 255, 255, .08);
+}
+
+.search-container i {
+    color: #22c55e;
+    font-size: 20px;
+}
+
+.search-container input {
+    width: 100%;
+
+    background: none;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+
+    font-size: 17px;
+}
+
+/* ===========================
+   SORT
+=========================== */
+
+.sort-section{
+
+    width:90%;
+    max-width:1300px;
+
+    margin:20px auto;
+
+    display:flex;
+    justify-content:flex-end;
+
+}
+
+#sortGames{
+
+    background:#1e293b;
+
+    color:white;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    padding:14px 20px;
+
+    border-radius:12px;
+
+    outline:none;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+#sortGames:hover{
+
+    border-color:#22c55e;
+
+}
+
+/* ===========================
+   CATEGORY BUTTONS
+=========================== */
+
+.categories {
+    width: 90%;
+    margin: 50px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 15px;
+}
+
+.category-btn {
+
+    padding: 12px 28px;
+
+    background: #1e293b;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 50px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+    font-weight: 600;
+}
+
+.category-btn:hover,
+.category-btn.active {
+
+    background: #22c55e;
+
+    transform: translateY(-4px);
+
+    box-shadow: 0 0 20px #22c55e55;
+}
+
+/* ===========================
+   GAME GRID
+=========================== */
+
+.games-grid {
+
+    width: 90%;
+    max-width: 1300px;
+
+    margin: 70px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+    gap: 35px;
+
+}
+
+
+.games-grid .game-card {
+    background: #1e293b;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: .35s;
+    border: 1px solid rgba(255, 255, 255, .08);
+
+    display: flex;
+    flex-direction: column;
+    position:relative;
+}
+
+
+.games-grid .game-card:hover {
+
+    transform: translateY(-12px);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
+
+    transform:scale(1.08);
+
+}
+
+
+.games-grid img{
+
+    width:100%;
+    height:220px;
+
+    object-fit:cover;
+
+    transition:.4s;
+}
+
+
+.game-content{
+    padding:25px;
+}
+
+
+.game-tag {
+
+    display: inline-block;
+
+    padding: 7px 15px;
+
+    border-radius: 50px;
+
+    background: #22c55e20;
+
+    color: #22c55e;
+
+    font-size: 14px;
+
+    margin-bottom: 18px;
+
+}
+
+.platform-tag{
+    display:inline-block;
+    padding:7px 15px;
+    margin-left:10px;
+    border-radius:50px;
+    background:#3b82f620;
+    color:#60a5fa;
+    font-size:14px;
+    font-weight:600;
+}
+
+
+.game-content h3 {
+
+    font-size: 28px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.game-content p {
+
+    color: #cbd5e1;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+
+}
+
+
+.game-bottom {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+}
+
+.year{
+
+    color:#94a3b8;
+
+    font-size:15px;
+
+}
+
+
+.rating {
+
+    color: #22c55e;
+
+    font-weight: 600;
+
+}
+
+
+.play-btn-small {
+
+    background: #22c55e;
+
+    color: white;
+
+    padding: 12px 22px;
+
+    border-radius: 50px;
+
+    transition: .3s;
+
+}
+
+
+.play-btn-small:hover {
+
+    transform: scale(1.05);
+
+    box-shadow: 0 0 20px #22c55e;
+
+}
+
+
+.coming-btn {
+
+    background: #374151;
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 22px;
+
+    border-radius: 50px;
+
+    cursor: not-allowed;
+
+}
+
+.favorite{
+    position:absolute;
+    top:15px;
+    right:15px;
+
+    width:45px;
+    height:45px;
+
+    background:rgba(0,0,0,.6);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    z-index:5;
+}
+
+.status-badge{
+
+    position:absolute;
+
+    top:15px;
+
+    left:15px;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    color:white;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    z-index:5;
+
+}
+
+.live{
+
+    background:#22c55e;
+
+}
+
+.soon{
+
+    background:#f59e0b;
+
+}
+
+.favorite:hover{
+    background:#ff4d6d;
+}
+
+.favorite i{
+    color:white;
+    font-size:18px;
+}
+
+.favorite.active{
+    background:#ff4d6d;
+}
+
+.image-wrapper{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.image-wrapper::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    height:90px;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.75)
+    );
+
+}
+
+
+.games-info{
+
+    width:90%;
+    max-width:1300px;
+
+    margin:40px auto 20px;
+
+}
+
+.games-info h2{
+
+    font-size:34px;
+
+    color:white;
+
+}
+
+
+/* ===========================
+   LOAD MORE
+=========================== */
+
+.load-more{
+
+    width:90%;
+    max-width:1300px;
+
+    margin:20px auto 80px;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+#loadMoreBtn{
+
+    padding:16px 40px;
+
+    background:#22c55e;
+
+    color:white;
+
+    border:none;
+
+    border-radius:50px;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#loadMoreBtn:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 0 25px #22c55e55;
+
+}
+
+
+/* =====================================================
+   11. ANIMATIONS
+===================================================== */
+
+/* Background Animation */
+
+@keyframes bgAnimation {
+
+    0%{
+        background-position:0% 50%;
+    }
+
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
+
+}
+
+
+/* Hero Floating */
+
+@keyframes float {
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-20px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+
+/* Loader Progress */
+
+@keyframes loading {
+
+    from{
+        width:0%;
+    }
+
+    to{
+        width:100%;
+    }
+
+}

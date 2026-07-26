@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GTA Vice City | PixelPlay</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/gta.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">Games</a></li>
+
+                <li><a href="#featured">Featured</a></li>
+
+                <li><a href="#footer">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="index.html" class="active">Home</a>
+
+            <a href="games.html">🎮 Games</a>
+
+            <a href="#featured">⭐ Featured</a>
+
+            <a href="#footer">📄 About</a>
+
+        </div>
+
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <h1>Grand Theft Auto</h1>
+
+            <h2>Vice City</h2>
+
+            <p>
+                Welcome back to the 1980s.
+                Build your criminal empire in Vice City.
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="launcher" id="game">
+
+        <h2>Vice City</h2>
+
+        <div class="launcher-box">
+
+            <button class="launcher-btn play-game">
+                <i class="fa-solid fa-play"></i>
+                PLAY GAME
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="game-screen">
+
+        <div class="game-header">
+
+            <h2>Game Screen</h2>
+
+            <div class="game-actions">
+
+                <button id="fullscreenBtn">
+                    <i class="fa-solid fa-expand"></i>
+                    Fullscreen
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="game-container" id="gameContainer">
+
+            <iframe id="gtaFrame" src="games/gtavc/GTA_Vice_City.html" allowfullscreen style="display:none;">
+            </iframe>
+
+        </div>
+
+        <div class="placeholder">
+
+            <i class="fa-solid fa-gamepad"></i>
+
+            <h2>Grand Theft Auto: Vice City</h2>
+
+            <p>
+                Click <strong>PLAY GAME</strong> above to launch the game.
+            </p>
+
+        </div>
+
+        </div>
+
+    </section>
+
+    <div class="launcher-screen">
+
+        <img src="images/logo.png" class="launcher-logo">
+
+        <h2>Launching GTA Vice City</h2>
+
+        <div class="loader">
+
+            <div class="loader-bar"></div>
+
+        </div>
+
+        <p>Please wait...</p>
+
+    </div>
+
+    <!-- Footer -->
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">Games</a></li>
+                <li><a href="#featured">Featured</a></li>
+                <li><a href="#footer">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+
+        <script src="js/gta.js"></script>
+        <script src="js/recent.js"></script>
+        <script>saveRecentGame("Gta Vice City", "images/gta vice city.png", "gta.html");</script>
+        <script src="js/header.js"></script>
+</body>
+
+</html>
