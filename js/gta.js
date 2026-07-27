@@ -25,11 +25,14 @@ playBtn.onclick = () => {
 
 };
 
-fullscreen.onclick = () => {
+fullscreen.onclick = async () => {
 
     if (!document.fullscreenElement) {
 
-        overlay.requestFullscreen();
+        await overlay.requestFullscreen();
+
+        // Add a fake history entry
+        history.pushState({ game: true }, "");
 
     } else {
 
@@ -58,5 +61,32 @@ clickOverlay.addEventListener("click", () => {
     clickOverlay.classList.add("hide");
 
     frame.focus();
+
+});
+
+
+// Handle Android back button
+window.addEventListener("popstate", async () => {
+
+    if (document.fullscreenElement) {
+
+        // Exit fullscreen on first back press
+        await document.exitFullscreen();
+
+        // Stay on the page
+        history.pushState({ game: true }, "");
+
+        return;
+    }
+
+});
+
+const escBtn = document.getElementById("escBtn");
+
+escBtn.addEventListener("click", () => {
+
+    frame.contentWindow.postMessage({
+        action: "releaseCursor"
+    }, "*");
 
 });

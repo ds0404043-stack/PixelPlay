@@ -28,7 +28,6 @@
             right: 35vmin;
             bottom: 30vmin;
         }
-        
     </style>
 
 
@@ -88,7 +87,19 @@
     </div>
 
     <script>
+        window.addEventListener("message", (event) => {
+
+            if (event.data.action === "releaseCursor") {
+
+                if (document.pointerLockElement) {
+                    document.exitPointerLock();
+                }
+
+            }
+
+        });
     </script>
+    
     <script>
         const loadingText = document.querySelector("#loading-text");
         let loadedBytes = 0;
