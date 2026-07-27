@@ -8,6 +8,27 @@
         content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
     <title>GTA Vice City</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        #move,
+        #look {
+            position: fixed;
+            width: clamp(220px, 42vw, 320px);
+            height: clamp(220px, 42px, 320px);
+            bottom: 5vmin;
+            z-index: 9999;
+            touch-action: none;
+        }
+
+        #move {
+            left: 5vmin;
+            bottom: 10vmin;
+        }
+
+        #look {
+            right: 35vmin;
+            bottom: 30vmin;
+        }
+    </style>
 </head>
 
 <body data-is-touch="0" data-state-car="0" data-state-car-gun="0" data-state-gun="0" data-state-bike="0"
@@ -214,7 +235,7 @@
 
             // Load game scripts
             const script = document.createElement("script");
-            script.src = window.location.origin + "/gamepadEmulator.js";
+            script.src = window.location.origin + "/GamepadEmulator.js";
             document.body.appendChild(script);
 
             ["idbfs.js", "game.js"].forEach(src => {
