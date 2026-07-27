@@ -27,6 +27,8 @@ playBtn.onclick = () => {
 
 fullscreen.onclick = async () => {
 
+    gameMenu.classList.remove("open");
+
     if (!document.fullscreenElement) {
 
         await overlay.requestFullscreen();
@@ -42,7 +44,11 @@ fullscreen.onclick = async () => {
 
 };
 
+
+
 exit.onclick = () => {
+
+    gameMenu.classList.remove("open");
 
     frame.src = "";
 
@@ -53,6 +59,8 @@ exit.onclick = () => {
     location.reload();
 
 };
+
+
 
 const clickOverlay = document.querySelector("#clickToPlay");
 
@@ -85,8 +93,21 @@ const escBtn = document.getElementById("escBtn");
 
 escBtn.addEventListener("click", () => {
 
+    gameMenu.classList.remove("open");
+
+
     frame.contentWindow.postMessage({
         action: "releaseCursor"
     }, "*");
 
 });
+
+
+const menuBtn = document.getElementById("gameMenuBtn");
+const gameMenu = document.querySelector(".game-menu");
+
+menuBtn.onclick = () => {
+
+    gameMenu.classList.toggle("open");
+
+};
