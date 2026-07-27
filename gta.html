@@ -129,6 +129,7 @@
 
     </section>
 
+    <!-- Launcher -->
     <div class="launcher-screen">
 
         <img src="images/logo.png" class="launcher-logo">
@@ -136,12 +137,48 @@
         <h2>Launching GTA Vice City</h2>
 
         <div class="loader">
-
             <div class="loader-bar"></div>
-
         </div>
 
         <p>Please wait...</p>
+
+    </div>
+
+    <!-- GTA Overlay -->
+    <div id="gameOverlay">
+
+        <div class="game-toolbar">
+
+            <button id="fullscreenBtn">
+                <i class="fa-solid fa-expand"></i>
+                Full Screen
+            </button>
+
+            <button id="closeGame">
+                <i class="fa-solid fa-xmark"></i>
+                Exit
+            </button>
+
+        </div>
+
+        <div id="clickToPlay">
+
+            <div class="click-box">
+
+                <i class="fa-solid fa-computer-mouse"></i>
+
+                <h2>🖱 Double click to Activate Controls</h2>
+
+                <p>
+                   Doble click the game screen to activate keyboard and mouse controls.
+                </p>
+
+            </div>
+
+        </div>
+
+        <iframe id="gameFrame" src="" allow="fullscreen" allowfullscreen>
+        </iframe>
 
     </div>
 

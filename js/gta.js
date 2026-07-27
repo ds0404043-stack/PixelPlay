@@ -1,14 +1,62 @@
-console.log("gta.js loaded");
+console.log("GTA Loaded");
 
 const playBtn = document.querySelector(".play-game");
-const launcherScreen = document.querySelector(".launcher-screen");
+const launcher = document.querySelector(".launcher-screen");
 
-playBtn.addEventListener("click", () => {
+const overlay = document.querySelector("#gameOverlay");
+const frame = document.querySelector("#gameFrame");
 
-    launcherScreen.classList.add("active");
+const fullscreen = document.querySelector("#fullscreenBtn");
+const exit = document.querySelector("#closeGame");
+
+playBtn.onclick = () => {
+
+    launcher.classList.add("active");
 
     setTimeout(() => {
-        window.location.href = "games/gtavc/GTA_Vice_City.html";
+
+        launcher.style.display = "none";
+
+        overlay.classList.add("active");
+
+        frame.src = "games/gtavc/GTA_Vice_City.html";
+
     }, 2500);
+
+};
+
+fullscreen.onclick = () => {
+
+    if (!document.fullscreenElement) {
+
+        overlay.requestFullscreen();
+
+    } else {
+
+        document.exitFullscreen();
+
+    }
+
+};
+
+exit.onclick = () => {
+
+    frame.src = "";
+
+    overlay.classList.remove("active");
+
+    launcher.style.display = "none";
+
+    location.reload();
+
+};
+
+const clickOverlay = document.querySelector("#clickToPlay");
+
+clickOverlay.addEventListener("click", () => {
+
+    clickOverlay.classList.add("hide");
+
+    frame.focus();
 
 });
