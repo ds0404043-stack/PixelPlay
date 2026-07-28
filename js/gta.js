@@ -1,39 +1,56 @@
 console.log("GTA Loaded");
 
-const playBtn = document.querySelector(".play-game");
-const launcher = document.querySelector(".launcher-screen");
+// =========================
+// ELEMENTS
+// =========================
 
-const overlay = document.querySelector("#gameOverlay");
-const frame = document.querySelector("#gameFrame");
+const gtaPlayBtn = document.querySelector(".play-game");
+const gtaLauncher = document.querySelector(".launcher-screen");
 
-const fullscreen = document.querySelector("#fullscreenBtn");
-const exit = document.querySelector("#closeGame");
+const gameOverlay = document.querySelector("#gameOverlay");
+const gameFrame = document.querySelector("#gameFrame");
 
-playBtn.onclick = () => {
+const gtaFullscreenBtn = document.querySelector("#fullscreenBtn");
+const gtaExitBtn = document.querySelector("#closeGame");
+const gtaEscBtn = document.querySelector("#escBtn");
 
-    launcher.classList.add("active");
+const gameMenuBtn = document.getElementById("gameMenuBtn");
+const gtaMenu = document.querySelector(".game-menu");
+
+const clickOverlay = document.querySelector("#clickToPlay");
+
+// =========================
+// PLAY GAME
+// =========================
+
+gtaPlayBtn.onclick = () => {
+
+    gtaLauncher.classList.add("active");
 
     setTimeout(() => {
 
-        launcher.style.display = "none";
+        gtaLauncher.style.display = "none";
 
-        overlay.classList.add("active");
+        gameOverlay.classList.add("active");
 
-        frame.src = "games/gtavc/GTA_Vice_City.html";
+        gameFrame.src = "games/gtavc/GTA_Vice_City.html";
 
     }, 2500);
 
 };
 
-fullscreen.onclick = async () => {
+// =========================
+// FULLSCREEN
+// =========================
 
-    gameMenu.classList.remove("open");
+gtaFullscreenBtn.onclick = async () => {
+
+    gtaMenu.classList.remove("open");
 
     if (!document.fullscreenElement) {
 
-        await overlay.requestFullscreen();
+        await gameOverlay.requestFullscreen();
 
-        // Add a fake history entry
         history.pushState({ game: true }, "");
 
     } else {
@@ -44,77 +61,86 @@ fullscreen.onclick = async () => {
 
 };
 
+// =========================
+// EXIT GAME
+// =========================
 
+gtaExitBtn.onclick = () => {
 
-exit.onclick = () => {
+    gtaMenu.classList.remove("open");
 
-    gameMenu.classList.remove("open");
+    gameFrame.src = "";
 
-    frame.src = "";
+    gameOverlay.classList.remove("active");
 
-    overlay.classList.remove("active");
-
-    launcher.style.display = "none";
+    gtaLauncher.style.display = "none";
 
     location.reload();
 
 };
 
-
-
-const clickOverlay = document.querySelector("#clickToPlay");
+// =========================
+// CLICK TO PLAY
+// =========================
 
 clickOverlay.addEventListener("click", () => {
 
     clickOverlay.classList.add("hide");
 
-    frame.focus();
+    gameFrame.focus();
 
 });
 
+// =========================
+// ANDROID BACK BUTTON
+// =========================
 
-// Handle Android back button
 window.addEventListener("popstate", async () => {
 
     if (document.fullscreenElement) {
 
-        // Exit fullscreen on first back press
         await document.exitFullscreen();
 
-        // Stay on the page
         history.pushState({ game: true }, "");
 
         return;
+
     }
 
 });
 
-const escBtn = document.getElementById("escBtn");
+// =========================
+// ESC BUTTON
+// =========================
 
-escBtn.addEventListener("click", () => {
+gtaEscBtn.addEventListener("click", () => {
 
-    gameMenu.classList.remove("open");
+    gtaMenu.classList.remove("open");
 
-
-    frame.contentWindow.postMessage({
+    gameFrame.contentWindow.postMessage({
         action: "releaseCursor"
     }, "*");
 
 });
 
+// =========================
+// HAMBURGER MENU
+// =========================
 
-const menuBtn = document.getElementById("gameMenuBtn");
-const gameMenu = document.querySelector(".game-menu");
+gameMenuBtn.addEventListener("click", (e) => {
 
-menuBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    gameMenu.classList.toggle("open");
+
+    gtaMenu.classList.toggle("open");
+
 });
 
 document.addEventListener("click", (e) => {
 
-    if (!gameMenu.contains(e.target)) {
-        gameMenu.classList.remove("open");
+    if (!gtaMenu.contains(e.target)) {
+
+        gtaMenu.classList.remove("open");
+
     }
 
 });
