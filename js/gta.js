@@ -106,8 +106,15 @@ escBtn.addEventListener("click", () => {
 const menuBtn = document.getElementById("gameMenuBtn");
 const gameMenu = document.querySelector(".game-menu");
 
-menuBtn.onclick = () => {
-
+menuBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
     gameMenu.classList.toggle("open");
+});
 
-};
+document.addEventListener("click", (e) => {
+
+    if (!gameMenu.contains(e.target)) {
+        gameMenu.classList.remove("open");
+    }
+
+});

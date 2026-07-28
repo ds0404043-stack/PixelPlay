@@ -858,26 +858,18 @@ body {
    CLICK TO START
 =================================== */
 
-#clickToPlay {
+#clickToPlay{
+    position:absolute;
+    inset:0;
 
-    position: absolute;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    inset: 0;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(4px);
 
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    background: rgba(0, 0, 0, .45);
-
-    backdrop-filter: blur(4px);
-
-    z-index: 99999;
-
-    transition: .35s;
-
+    z-index:1000;
 }
 
 #clickToPlay.hide {
