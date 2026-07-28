@@ -681,8 +681,6 @@ body {
 
     transition: .3s;
 
-    backdrop-filter: blur(12px);
-
     display: flex;
     align-items: center;
     gap: 10px;
@@ -770,49 +768,87 @@ body {
 
 }
 
-/* ================================
-   TOOLBAR
-================================ */
+/* ==========================
+      GAME MENU
+========================== */
 
-.game-toolbar {
-
+.game-menu {
     position: absolute;
-
     top: 20px;
-
-    right: 20px;
-
-    display: flex;
-
-    gap: 12px;
-
+    left: 20px;
     z-index: 999999;
-
 }
 
-.game-toolbar button {
-
-    background: rgba(0, 0, 0, .75);
-
+#gameMenuBtn {
+    width: 56px;
+    height: 56px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
     color: #fff;
+    font-size: 22px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+#gameMenuBtn:hover {
+    transform: scale(1.08);
+}
+
+.game-menu-popup {
+    position: absolute;
+    top: 70px;
+    left: 0;
+
+    width: 240px;
+
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 15px;
+
+    border-radius: 16px;
+
+    background: transparent;
+
+    box-shadow: none
+}
+
+.game-menu-popup.active {
+    display: flex;
+}
+
+.game-menu-popup button {
 
     border: none;
 
-    padding: 12px 18px;
+    background: transparent;
+
+    color: white;
+
+    padding: 14px 16px;
 
     border-radius: 12px;
 
     cursor: pointer;
 
-    transition: .3s;
-
     font-size: 15px;
+
+    text-align: left;
+
+    transition: .25s;
+}
+
+.game-menu-popup button:hover {
+
+    transform: translateX(4px);
 
 }
 
-.game-toolbar button:hover {
+.game-menu-popup i {
 
-    background: #22c55e;
+    width: 25px;
 
 }
 
@@ -833,8 +869,6 @@ body {
     align-items: center;
 
     background: rgba(0, 0, 0, .45);
-
-    backdrop-filter: blur(4px);
 
     z-index: 99999;
 

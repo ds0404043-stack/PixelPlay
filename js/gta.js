@@ -18,6 +18,7 @@ playBtn.onclick = () => {
         launcher.style.display = "none";
 
         overlay.classList.add("active");
+        document.querySelector(".menu-btn").style.display = "none";
 
         frame.src = "games/gtavc/GTA_Vice_City.html";
 
@@ -49,6 +50,8 @@ exit.onclick = () => {
     overlay.classList.remove("active");
 
     launcher.style.display = "none";
+
+    document.querySelector(".menu-btn").style.display = "";
 
     location.reload();
 
@@ -88,5 +91,55 @@ escBtn.addEventListener("click", () => {
     frame.contentWindow.postMessage({
         action: "releaseCursor"
     }, "*");
+
+});
+
+const toolbar = document.querySelector(".game-toolbar");
+
+fullscreen.onclick = async () => {
+    if (!document.fullscreenElement) {
+        await overlay.requestFullscreen();
+
+        toolbar.style.opacity = "1";
+
+        setTimeout(() => {
+            toolbar.style.opacity = "0";
+        }, 2500);
+    }
+};
+
+let hideTimer;
+
+overlay.addEventListener("mousemove", showToolbar);
+overlay.addEventListener("touchstart", showToolbar);
+
+function showToolbar() {
+    toolbar.style.opacity = "1";
+
+    clearTimeout(hideTimer);
+
+    hideTimer = setTimeout(() => {
+        if (document.fullscreenElement) {
+            toolbar.style.opacity = "0";
+        }
+    }, 2500);
+}
+
+const gameMenuBtn = document.getElementById("gameMenuBtn");
+const gameMenuPopup = document.querySelector(".game-menu-popup");
+
+gameMenuBtn.addEventListener("click", () => {
+
+    gameMenuPopup.classList.toggle("active");
+
+});
+
+document.addEventListener("click", (e) => {
+
+    if (
+        !e.target.closest(".game-menu")
+    ) {
+        gameMenuPopup.classList.remove("active");
+    }
 
 });
