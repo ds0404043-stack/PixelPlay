@@ -774,13 +774,17 @@ body {
    TOOLBAR
 ================================ */
 
-.game-menu{
-    position:absolute;
+.game-menu {
+    position: absolute;
+    top: 18px;
+    left: 18px;
 
-    top:18px;
-    left:18px;
+    width: fit-content;
+    height: fit-content;
 
-    z-index:999999;
+    display: inline-block;
+
+    z-index: 999999;
 }
 
 #gameMenuBtn {
@@ -808,68 +812,70 @@ body {
     transform: scale(1.1);
 }
 
-.game-menu-panel{
+.game-menu-panel {
 
-    margin-top:10px;
+    margin-top: 10px;
 
-    display:none;
+    display: none;
 
-    flex-direction:column;
+    flex-direction: column;
 
-    gap:10px;
+    gap: 10px;
 }
 
-.game-menu.open .game-menu-panel{
+.game-menu.open .game-menu-panel {
 
-    display:flex;
+    display: flex;
 }
 
-.game-menu-panel button{
+.game-menu-panel button {
 
-    min-width:170px;
+    min-width: 170px;
 
-    border:none;
+    border: none;
 
-    border-radius:12px;
+    border-radius: 12px;
 
-    padding:12px 16px;
+    padding: 12px 16px;
 
-    background:rgba(0,0,0,.82);
+    background: rgba(0, 0, 0, .82);
 
-    color:#fff;
+    color: #fff;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
 
-    gap:12px;
+    gap: 12px;
 
-    cursor:pointer;
+    cursor: pointer;
 
-    transition:.25s;
+    transition: .25s;
 }
 
-.game-menu-panel button:hover{
+.game-menu-panel button:hover {
 
-    background:#22c55e;
+    background: #22c55e;
 }
 
 /* ===================================
    CLICK TO START
 =================================== */
 
-#clickToPlay{
-    position:absolute;
-    inset:0;
+#clickToPlay {
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    display: none !important;
+    position: absolute;
+    inset: 0;
 
-    background:rgba(0,0,0,.45);
-    backdrop-filter:blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    z-index:1000;
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(4px);
+
+    z-index: 1000;
 }
 
 #clickToPlay.hide {
