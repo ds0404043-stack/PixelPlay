@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PixelPlay | Chess</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade</a></li>
+
+                <li><a href="#footer">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="#" class="active">Home</a>
+
+            <a href="games.html">🎮 Games</a>
+
+            <a href="#featured">⭐ Featured</a>
+
+            <a href="#footer">📄 About</a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= GAME HERO ================= -->
+
+    <section class="game-hero">
+
+        <div class="game-left">
+
+            <span class="game-badge">
+                ♟ Strategy • Board Game
+            </span>
+
+            <h1>Chess</h1>
+
+            <div class="game-meta">
+
+                <span>
+                    ⭐ 4.9
+                </span>
+
+                <span>
+                    Browser
+                </span>
+
+                <span>
+                    Single Player
+                </span>
+
+            </div>
+
+            <p>
+
+                Master the world's most famous strategy game.
+                Challenge the computer, improve your tactics,
+                and sharpen your mind directly in your browser.
+
+            </p>
+
+            <div class="game-features">
+
+                <div>
+                    <i class="fa-solid fa-robot"></i>
+                    AI Opponent
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Undo Moves
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-chess-board"></i>
+                    Classic Rules
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-bolt"></i>
+                    Instant Play
+                </div>
+
+            </div>
+
+            <div class="hero-buttons">
+
+                <a href="arcade/chess-master/index.html" class="play-btn">
+
+                    ▶ Play Now
+
+                </a>
+
+                <a href="#about" class="info-btn">
+
+                    Learn More
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="game-right">
+
+            <img src="images/chess.jpg" alt="Chess">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ABOUT GAME ================= -->
+
+    <section class="game-about" id="about">
+
+        <div class="section-heading">
+
+            <span>ABOUT THE GAME</span>
+
+            <h2>Master Every Move</h2>
+
+        </div>
+
+        <div class="about-grid">
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-brain"></i>
+
+                <h3>Improve Your Strategy</h3>
+
+                <p>
+                    Chess challenges your decision making, planning,
+                    and tactical thinking with every move.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h3>Play Anytime</h3>
+
+                <p>
+                    Start a new game instantly in your browser without
+                    downloading or installing anything.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <h3>Challenge Yourself</h3>
+
+                <p>
+                    Practice against the computer and improve your
+                    chess skills at your own pace.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= CONTROLS ================= -->
+
+    <section class="game-controls">
+
+        <div class="section-heading">
+
+            <span>CONTROLS</span>
+
+            <h2>How To Play</h2>
+
+        </div>
+
+        <div class="controls-grid">
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-computer-mouse"></i>
+
+                <h3>Select Piece</h3>
+
+                <p>
+                    Click on any of your pieces to view all available legal moves.
+                </p>
+
+            </div>
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-arrow-pointer"></i>
+
+                <h3>Move Piece</h3>
+
+                <p>
+                    Click the highlighted square to move your selected piece.
+                </p>
+
+            </div>
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                <h3>Undo Move</h3>
+
+                <p>
+                    Use the Undo button whenever you want to take back your previous move.
+                </p>
+
+            </div>
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-flag-checkered"></i>
+
+                <h3>Win the Match</h3>
+
+                <p>
+                    Checkmate your opponent while protecting your own king.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= SCREENSHOTS ================= -->
+
+    <section class="game-gallery">
+
+        <div class="section-heading">
+
+            <span>SCREENSHOTS</span>
+
+            <h2>Game Preview</h2>
+
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="images/chess-1.jpg" alt="Chess Screenshot 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-2.jpg" alt="Chess Screenshot 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-3.jpg" alt="Chess Screenshot 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-4.jpg" alt="Chess Screenshot 4">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= RELATED GAMES ================= -->
+
+    <section class="related-games">
+
+        <div class="section-heading">
+
+            <span>DISCOVER MORE</span>
+
+            <h2>You Might Also Like</h2>
+
+        </div>
+
+        <div class="related-grid">
+
+            <div class="related-card">
+
+                <img src="images/2048.jpg" alt="2048">
+
+                <div class="related-content">
+
+                    <h3>2048</h3>
+
+                    <p>Slide and combine tiles to reach the legendary 2048 tile.</p>
+
+                    <a href="2048.html" class="play-btn">Play</a>
+
+                </div>
+
+            </div>
+
+            <div class="related-card">
+
+                <img src="images/snake.jpg" alt="Snake">
+
+                <div class="related-content">
+
+                    <h3>Snake</h3>
+
+                    <p>Classic arcade fun. Eat, grow and survive as long as possible.</p>
+
+                    <a href="#" class="info-btn">Coming Soon</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade</a></li>
+                <li><a href="#footer">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/recent.js"></script>
+    <script>saveRecentGame("Chess", "images/chess.jpg", "chess.html");</script>
+
+</body>
+
+</html>

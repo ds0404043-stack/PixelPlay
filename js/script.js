@@ -6,57 +6,42 @@ const featuredGames = [
 
     {
         title: "Minecraft",
-
         heading: "Play Minecraft <br> Directly In Your Browser",
-
         description: "Build, explore and survive in an endless block world.",
-
         image: "images/minecraft.png",
-
         page: "minecraft.html"
-
     },
 
     {
-
-        title: "Angry Birds",
-
-        heading: "Destroy Pig Fortresses <br> With Physics",
-
-        description: "Launch birds, defeat pigs and complete hundreds of fun physics puzzles.",
-
-        image: "images/angry birds.jpg",
-
-        page: "angrybirds.html"
-
-    },
-
-    {
-
-        title: "HexGL",
-
-        heading: "Experience <br> Futuristic Racing",
-
-        description: "Race anti-gravity ships with stunning graphics directly inside your browser.",
-
-        image: "images/hexgl.jpg",
-
-        page: "hexgl.html"
-
-    },
-
-    {
-
         title: "GTA Vice City",
-
-        heading: "GTA Vice City",
-
-        description: "Experience the legendary open-world crime adventure directly in your browser.",
-
+        heading: "Return To Vice City",
+        description: "Experience the legendary open-world crime adventure.",
         image: "images/gta vice city.png",
-
         page: "gta.html"
+    },
 
+    {
+        title: "Angry Birds",
+        heading: "Destroy Pig Fortresses",
+        description: "Launch birds and solve fun physics puzzles.",
+        image: "images/angry birds.jpg",
+        page: "angrybirds.html"
+    },
+
+    {
+        title: "Chess",
+        heading: "Challenge Your Mind",
+        description: "Play the world's most iconic strategy game.",
+        image: "images/chess.jpg",
+        page: "chess.html"
+    },
+
+    {
+        title: "2048",
+        heading: "Can You Reach 2048?",
+        description: "Slide the tiles and beat your highest score.",
+        image: "images/2048.jpg",
+        page: "2048.html"
     }
 
 ];

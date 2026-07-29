@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PixelPlay | Games</title>
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/arcade.css">
     <link rel="stylesheet" href="css/footer.css">
 
     <!-- Google Font -->
@@ -84,11 +84,11 @@
 
             <a href="#" class="mobile-login-btn">Login</a>
 
-            <a href="index.html" class="active">Home</a>
+            <a href="#" class="active">Home</a>
 
-            <a href="games.html">3D Games</a>
+            <a href="games.html">🎮 Games</a>
 
-            <a href="arcade.html">Arcade Games</a>
+            <a href="#featured">⭐ Featured</a>
 
             <a href="#footer">📄 About</a>
 
@@ -103,23 +103,22 @@
 
         <div class="hero-left">
 
-            <span>🎮 PixelPlay 3D</span>
+            <span>🕹 PixelPlay Arcade</span>
 
             <h1>
-                Play Amazing <br>
-                3D Games
+                Classic Arcade Games
             </h1>
 
             <p>
-                Explore immersive browser games with stunning graphics and exciting gameplay.
+                Relive the golden age of gaming with timeless arcade classics.
                 No downloads, no installs — just click and play instantly.
             </p>
 
             <div class="hero-features">
 
                 <div>
-                    <i class="fa-solid fa-cube"></i>
-                    High Quality
+                    <i class="fa-solid fa-bolt"></i>
+                    Instant Play
                 </div>
 
                 <div>
@@ -128,13 +127,13 @@
                 </div>
 
                 <div>
-                    <i class="fa-solid fa-gamepad"></i>
-                    Free to Play
+                    <i class="fa-solid fa-gift"></i>
+                    Free Forever
                 </div>
 
                 <div>
-                    <i class="fa-solid fa-arrows-rotate"></i>
-                    Regular Updates
+                    <i class="fa-solid fa-shield-halved"></i>
+                    Safe & Secure
                 </div>
 
             </div>
@@ -142,26 +141,12 @@
             <a href="#gameCount" class="hero-btn">
                 Browse Games
             </a>
-
         </div>
+
 
         <div class="hero-right">
 
-            <img src="images/3d.jpg" alt="3D Games">
-
-        </div>
-
-    </section>
-
-    <!-- ================= SEARCH ================= -->
-
-    <section class="games-search">
-
-        <div class="search-container">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input type="text" id="gameSearch" placeholder="Search your favorite game...">
+            <img src="images/arcade.jpg" alt="Arcade">
 
         </div>
 
@@ -174,7 +159,7 @@
             <option value="default">Sort By</option>
             <option value="az">A - Z</option>
             <option value="rating">Highest Rating</option>
-            <option value="year">Newest</option>
+            <option value="year">Most Played</option>
 
         </select>
 
@@ -187,22 +172,20 @@
 
         <button class="category-btn active" data-filter="all">All</button>
 
-        <button class="category-btn" data-filter="Adventure">Adventure</button>
+        <button class="category-btn" data-filter="Puzzle">Puzzle</button>
+
+        <button class="category-btn" data-filter="Strategy">Strategy</button>
+
+        <button class="category-btn" data-filter="Classic">Classic</button>
 
         <button class="category-btn" data-filter="Action">Action</button>
-
-        <button class="category-btn" data-filter="Sandbox">Sandbox</button>
-
-        <button class="category-btn" data-filter="Racing">Racing</button>
-
-        <button class="category-btn" data-filter="RPG">RPG</button>
 
     </section>
 
     <section class="games-info">
 
         <h2>
-            🎮 <span id="gameCount">3</span> Games Available
+            🎮 <span id="gameCount">3</span> Arcade Games Available
         </h2>
 
     </section>
@@ -211,14 +194,11 @@
 
     <section class="games-grid">
 
-        <!-- Minecraft -->
-
-        <div class="game-card" data-category="Sandbox">
+        <!-- Chess -->
+        <div class="game-card" data-category="Strategy">
 
             <div class="image-wrapper">
-
-                <img src="images/minecraft.png" alt="Minecraft">
-
+                <img src="images/chess.jpg" alt="Chess">
             </div>
 
             <div class="favorite">
@@ -231,14 +211,14 @@
 
             <div class="game-content">
 
-                <span class="game-tag">Sandbox</span>
-                <span class="platform-tag">PC</span>
-                <span class="year">2011</span>
+                <span class="game-tag">Strategy</span>
+                <span class="platform-tag">Browser</span>
+                <span class="year">1850</span>
 
-                <h3>Minecraft</h3>
+                <h3>Chess</h3>
 
                 <p>
-                    Build, survive and explore endless worlds directly in your browser.
+                    Challenge your mind with the timeless game of chess. Play instantly in your browser.
                 </p>
 
                 <div class="game-bottom">
@@ -247,7 +227,7 @@
                         ⭐ 4.9
                     </span>
 
-                    <a href="minecraft.html" class="play-btn-small">
+                    <a href="chess.html" class="play-btn-small">
                         Play Now
                     </a>
 
@@ -258,59 +238,11 @@
         </div>
 
 
-        <!-- GTA -->
-
-        <div class="game-card" data-category="Action">
-
-            <div class="image-wrapper">
-
-                <img src="images/gta vice city.png" alt="GTA Vice City">
-
-            </div>
-
-            <div class="favorite">
-                <i class="fa-regular fa-heart"></i>
-            </div>
-
-            <div class="status-badge live">
-                LIVE
-            </div>
-
-            <div class="game-content">
-
-                <span class="game-tag">Action</span>
-                <span class="platform-tag">PC</span>
-                <span class="year">2002</span>
-
-                <h3>GTA Vice City</h3>
-
-                <p>
-                    Return to Vice City and build your criminal empire.
-                </p>
-
-                <div class="game-bottom">
-
-                    <span class="rating">
-                        ⭐ 4.9
-                    </span>
-
-                    <a href="gta.html" class="play-btn-small">
-                        Play Now
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="game-card" data-category="Action">
+        <!-- 2048 -->
+        <div class="game-card" data-category="Puzzle">
 
             <div class="image-wrapper">
-
-                <img src="images/angry birds.jpg" alt="GTA Vice City">
-
+                <img src="images/2048.jpg" alt="2048">
             </div>
 
             <div class="favorite">
@@ -324,56 +256,13 @@
             <div class="game-content">
 
                 <span class="game-tag">Puzzle</span>
-                <span class="platform-tag">Mobile</span>
-                <span class="year">2009</span>
+                <span class="platform-tag">Browser</span>
+                <span class="year">2014</span>
 
-                <h3>Angry Birds</h3>
-
-                <p>
-                    Launch birds, smash pig fortresses, and solve fun physics-based puzzles.
-                </p>
-
-                <div class="game-bottom">
-
-                    <span class="rating">
-                        ⭐ 4.9
-                    </span>
-
-                    <a href="angrybirds.html" class="play-btn-small">
-                        ▶ Play Now
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- HexGL -->
-        <div class="game-card" data-category="Racing">
-
-            <div class="image-wrapper">
-                <img src="images/hexgl.jpg" alt="HexGL">
-            </div>
-
-            <div class="favorite">
-                <i class="fa-regular fa-heart"></i>
-            </div>
-
-            <div class="status-badge live">
-                LIVE
-            </div>
-
-            <div class="game-content">
-
-                <span class="game-tag">Racing</span>
-                <span class="platform-tag">HTML5</span>
-                <span class="year">2013</span>
-
-                <h3>HexGL</h3>
+                <h3>2048</h3>
 
                 <p>
-                    Race futuristic anti-gravity ships at incredible speed in this beautiful WebGL racing game.
+                    Slide the numbered tiles and reach the legendary 2048 block in this addictive puzzle game.
                 </p>
 
                 <div class="game-bottom">
@@ -382,7 +271,7 @@
                         ⭐ 4.8
                     </span>
 
-                    <a href="hexgl.html" class="play-btn-small">
+                    <a href="2048.html" class="play-btn-small">
                         Play Now
                     </a>
 
@@ -392,8 +281,8 @@
 
         </div>
 
-
     </section>
+
 
 
 
@@ -407,6 +296,99 @@
 
     </section>
 
+    <!-- ================= COMING SOON ================= -->
+
+    <section class="coming-soon">
+
+        <div class="section-title">
+            <span>🚀 Future Releases</span>
+            <h2>Coming Soon</h2>
+            <p>
+                More legendary arcade games are on the way.
+            </p>
+        </div>
+
+        <div class="coming-grid">
+
+            <!-- Pac-Man -->
+            <div class="coming-card">
+                <img src="images/pacman.jpg" alt="Pac-Man">
+
+                <div class="coming-content">
+                    <span class="coming-tag">Coming Soon</span>
+
+                    <h3>Pac-Man</h3>
+
+                    <p>
+                        Escape ghosts and clear every maze in the world's most iconic arcade game.
+                    </p>
+
+                    <button disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tetris -->
+            <div class="coming-card">
+                <img src="images/tetris.jpg" alt="Tetris">
+
+                <div class="coming-content">
+                    <span class="coming-tag">Coming Soon</span>
+
+                    <h3>Tetris</h3>
+
+                    <p>
+                        Stack falling blocks and chase the highest score.
+                    </p>
+
+                    <button disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+            <!-- Snake -->
+            <div class="coming-card">
+                <img src="images/snake.jpg" alt="Snake">
+
+                <div class="coming-content">
+                    <span class="coming-tag">Coming Soon</span>
+
+                    <h3>Snake</h3>
+
+                    <p>
+                        Eat food, grow longer, and avoid crashing into yourself.
+                    </p>
+
+                    <button disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+            <!-- Doom -->
+            <div class="coming-card">
+                <img src="images/doom.jpg" alt="Doom">
+
+                <div class="coming-content">
+                    <span class="coming-tag">Coming Soon</span>
+
+                    <h3>Doom</h3>
+
+                    <p>
+                        The legendary FPS that changed gaming forever.
+                    </p>
+
+                    <button disabled>
+                        Coming Soon
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
 
     <footer class="footer" id="footer">
 
@@ -455,7 +437,7 @@
 
     </footer>
 
-    <script src="js/games.js"></script>
+    <script src="js/arcade.js"></script>
     <script src="js/header.js"></script>
 
 </body>

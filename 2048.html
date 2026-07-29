@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PixelPlay | 2048</title>
+
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/game.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body class="game2048-page">
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade</a></li>
+
+                <li><a href="#footer">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="#" class="active">Home</a>
+
+            <a href="games.html">🎮 Games</a>
+
+            <a href="#featured">⭐ Featured</a>
+
+            <a href="#footer">📄 About</a>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ================= GAME HERO ================= -->
+
+    <section class="game-hero">
+
+        <div class="game-left">
+
+            <span class="game-badge">
+                🎮 Endless Puzzle
+            </span>
+
+            <h1>2048</h1>
+
+            <div class="game-meta">
+
+                <span>
+                    ⭐ 4.8
+                </span>
+
+                <span>
+                    Browser
+                </span>
+
+                <span>
+                    Puzzle
+                </span>
+
+            </div>
+
+            <p>
+
+                Slide and merge numbered tiles to reach the legendary 2048 tile.
+                Simple to learn, difficult to master, and endlessly addictive.
+
+            </p>
+
+            <div class="game-features">
+
+                <div>
+                    <i class="fa-solid fa-robot"></i>
+                    Easy Controls
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Unlimited Games
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-chess-board"></i>
+                    Brain Training
+                </div>
+
+                <div>
+                    <i class="fa-solid fa-bolt"></i>
+                    Instant Play
+                </div>
+
+            </div>
+
+            <div class="hero-buttons">
+
+                <a href="arcade/2048-lite-master/index.html" class="play-btn">
+
+                    ▶ Play Now
+
+                </a>
+
+                <a href="#about" class="info-btn">
+
+                    Learn More
+
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="game-right">
+
+            <img src="images/2048.jpg" alt="Chess">
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= ABOUT GAME ================= -->
+
+    <section class="game-about" id="about">
+
+        <div class="section-heading">
+
+            <span>ABOUT THE GAME</span>
+
+            <h2>Master Every Move</h2>
+
+        </div>
+
+        <div class="about-grid">
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-brain"></i>
+
+                <h3>Merge Tiles</h3>
+
+                <p>
+                    Combine matching numbered tiles to create larger numbers and climb toward 2048.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-clock"></i>
+
+                <h3>Train Your Brain</h3>
+
+                <p>
+                    Every move matters. Plan ahead and think strategically to avoid running out of space.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <i class="fa-solid fa-trophy"></i>
+
+                <h3>Beat Your High Score</h3>
+
+                <p>
+                    Challenge yourself to achieve higher scores and reach even bigger tiles.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= CONTROLS ================= -->
+
+    <section class="game-controls">
+
+        <div class="section-heading">
+
+            <span>CONTROLS</span>
+
+            <h2>How To Play</h2>
+
+        </div>
+
+        <div class="controls-grid">
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-computer-mouse"></i>
+
+                <h3>Swipe</h3>
+
+                <p>
+                    Use Arrow keys or Swipe.
+                </p>
+
+            </div>
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-arrow-pointer"></i>
+
+                <h3>Merge Tiles</h3>
+
+                <p>
+                    Combine Identical Numbers
+                </p>
+
+            </div>
+
+            <div class="control-card">
+
+                <i class="fa-solid fa-rotate-left"></i>
+
+                <h3>Think Ahead</h3>
+
+                <p>
+                    Create the 2048 tile to win
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= SCREENSHOTS ================= -->
+
+    <section class="game-gallery">
+
+        <div class="section-heading">
+
+            <span>SCREENSHOTS</span>
+
+            <h2>Game Preview</h2>
+
+        </div>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <img src="images/chess-1.jpg" alt="Chess Screenshot 1">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-2.jpg" alt="Chess Screenshot 2">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-3.jpg" alt="Chess Screenshot 3">
+            </div>
+
+            <div class="gallery-item">
+                <img src="images/chess-4.jpg" alt="Chess Screenshot 4">
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ================= RELATED GAMES ================= -->
+
+    <section class="related-games">
+
+        <div class="section-heading">
+
+            <span>DISCOVER MORE</span>
+
+            <h2>You Might Also Like</h2>
+
+        </div>
+
+        <div class="related-grid">
+
+            <div class="related-card">
+
+                <img src="images/chess.jpg" alt="Chess">
+
+                <div class="related-content">
+
+                    <h3>Chess</h3>
+
+                    <p>Challenge your mind with the timeless game of chess. Play instantly in your browser.</p>
+
+                    <a href="chess.html" class="play-btn">Play</a>
+
+                </div>
+
+            </div>
+
+            <div class="related-card">
+
+                <img src="images/snake.jpg" alt="Snake">
+
+                <div class="related-content">
+
+                    <h3>Snake</h3>
+
+                    <p>Classic arcade fun. Eat, grow and survive as long as possible.</p>
+
+                    <a href="#" class="info-btn">Coming Soon</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade</a></li>
+                <li><a href="#footer">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/recent.js"></script>
+    <script>saveRecentGame("2048", "images/2048.jpg", "2048.html");</script>
+
+</body>
+
+</html>
