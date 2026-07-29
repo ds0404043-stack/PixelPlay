@@ -22,6 +22,15 @@
   <meta name="viewport"
     content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
   <style>
+    html,
+    body {
+
+      background: #0f172a;
+
+      min-height: 100%;
+
+    }
+
     body {
 
       margin: 0;
@@ -85,13 +94,135 @@
 
       margin: 40px auto;
 
-      padding: 35px;
+      padding: 20px;
 
       background: #1e293b;
 
       border-radius: 20px;
 
       box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+    }
+
+    .container{
+
+    width:100%;
+
+    max-width:500px;
+
+    margin:0 auto;
+
+    padding:0;
+
+}
+
+    /*=========================
+RESPONSIVE
+=========================*/
+
+    @media (max-width:768px) {
+
+      .topbar {
+        flex-direction: column;
+        gap: 18px;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .topbar h1 {
+
+        margin-top: 10px;
+
+      }
+
+      .back-btn {
+
+        width: auto;
+
+        min-width: 180px;
+
+        padding: 10px 18px;
+
+      }
+
+      .game-card {
+
+        width: calc(100% - 24px);
+
+        margin: 12px;
+
+        padding: 20px 12px;
+
+        border-radius: 18px;
+
+        display: flex;
+
+        justify-content: center;
+
+        align-items: flex-start;
+
+        overflow: visible;
+      }
+
+      .container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .heading {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .scores-container {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .above-game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        text-align: center;
+      }
+
+      .game-intro {
+        width: 100%;
+        text-align: center;
+      }
+
+      .restart-button {
+        float: none;
+        width: 220px;
+        margin: 0 auto;
+      }
+
+      .game-explanation {
+
+        width: 100%;
+
+        max-width: 280px;
+
+        text-align: center;
+
+        margin: 20px auto 0;
+
+        line-height: 1.7;
+      }
+
     }
   </style>
 
