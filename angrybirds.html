@@ -19,7 +19,7 @@
 
 <body>
 
-   <header id="top">
+    <header id="top">
         <nav class="navbar">
 
             <a href="#" class="logo">
@@ -134,9 +134,20 @@
 
         <h2>Play Angry Birds</h2>
 
+        <div class="game-actions">
+            <button id="fullscreenBtn">
+                <i class="fa-solid fa-expand"></i> Fullscreen
+            </button>
+        </div>
+
+        <div class="game-tip">
+            <i class="fa-solid fa-expand"></i>
+            <span>💡 Tap the game's built-in <strong>Fullscreen</strong> button for the best gaming experience.</span>
+        </div>
+
         <div class="game-frame">
 
-            <iframe src="games/angry birds/Angry Birds 2.html" frameborder="0" allowfullscreen>
+            <iframe src="games/angry birds/Angry Birds Chrome.html" frameborder="0" allowfullscreen>
             </iframe>
 
         </div>
@@ -175,7 +186,7 @@
                 <h3>Quick Links</h3>
 
                 <li><a href="#" id="homeLink">Home</a></li>
-                <li><a href="games.html">3D Games/a></li>
+                <li><a href="games.html">3D Games</a></li>
                 <li><a href="arcade.html">Arcade Games</a></li>
                 <li><a href="about.html">About</a></li>
             </div>
@@ -209,7 +220,7 @@
     <script src="js/header.js"></script>
     <script src="js/ab.js"></script>
     <script src="js/recent.js"></script>
-    <script>saveRecentGame("Angry Birds 2", "images/angry birds.jpg", "angrybirds.html");</script>
+    <script>saveRecentGame("Angry Birds", "images/angry birds.jpg", "angrybirds.html");</script>
 
 </body>
 

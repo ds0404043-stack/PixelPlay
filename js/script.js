@@ -24,7 +24,7 @@ const featuredGames = [
         title: "Angry Birds",
         heading: "Destroy Pig Fortresses",
         description: "Launch birds and solve fun physics puzzles.",
-        image: "images/angry birds.jpg",
+        image: "images/angrybirdshero.png",
         page: "angrybirds.html"
     },
 

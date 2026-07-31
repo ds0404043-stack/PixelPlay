@@ -2,15 +2,15 @@
 
 const playBtn = document.querySelector(".play-btn");
 
-if(playBtn){
+if (playBtn) {
 
-    playBtn.addEventListener("click",e=>{
+    playBtn.addEventListener("click", e => {
 
         e.preventDefault();
 
         document.querySelector("#game").scrollIntoView({
 
-            behavior:"smooth"
+            behavior: "smooth"
 
         });
 
@@ -22,17 +22,17 @@ if(playBtn){
 
 const heroImage = document.querySelector(".hero-right img");
 
-if(heroImage){
+if (heroImage) {
 
-    heroImage.addEventListener("mousemove",()=>{
+    heroImage.addEventListener("mousemove", () => {
 
-        heroImage.style.transform="scale(1.03) rotate(1deg)";
+        heroImage.style.transform = "scale(1.03) rotate(1deg)";
 
     });
 
-    heroImage.addEventListener("mouseleave",()=>{
+    heroImage.addEventListener("mouseleave", () => {
 
-        heroImage.style.transform="scale(1) rotate(0deg)";
+        heroImage.style.transform = "scale(1) rotate(0deg)";
 
     });
 
@@ -40,31 +40,48 @@ if(heroImage){
 
 // Fade in sections
 
-const sections=document.querySelectorAll("section");
+const sections = document.querySelectorAll("section");
 
-const observer=new IntersectionObserver(entries=>{
+const observer = new IntersectionObserver(entries => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
-            entry.target.style.opacity="1";
-            entry.target.style.transform="translateY(0)";
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
 
         }
 
     });
 
-},{
-    threshold:.2
+}, {
+    threshold: .2
 });
 
-sections.forEach(section=>{
+sections.forEach(section => {
 
-    section.style.opacity="0";
-    section.style.transform="translateY(60px)";
-    section.style.transition=".8s";
+    section.style.opacity = "0";
+    section.style.transform = "translateY(60px)";
+    section.style.transition = ".8s";
 
     observer.observe(section);
 
+});
+
+const fullscreenBtn = document.getElementById("fullscreenBtn");
+const iframe = document.querySelector(".game-frame iframe");
+
+fullscreenBtn.addEventListener("click", async () => {
+    try {
+        if (iframe.requestFullscreen) {
+            await iframe.requestFullscreen();
+        } else if (iframe.webkitRequestFullscreen) {
+            iframe.webkitRequestFullscreen();
+        } else if (iframe.msRequestFullscreen) {
+            iframe.msRequestFullscreen();
+        }
+    } catch (err) {
+        console.log(err);
+    }
 });
