@@ -4,11 +4,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixelPlay | Games</title>
+    <title>PixelPlay | PC Games</title>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/games.css">
     <link rel="stylesheet" href="css/footer.css">
+    <style>
+        /* ================= Desktop Notice ================= */
 
+        .desktop-notice {
+            width: min(1400px, 95%);
+            margin: 35px auto 10px;
+        }
+
+        .desktop-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            background: linear-gradient(135deg, #111b2b, #162338);
+
+            border: 1px solid rgba(34, 197, 94, 0.25);
+
+            border-left: 5px solid #22c55e;
+
+            border-radius: 18px;
+
+            padding: 22px 28px;
+
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .25);
+        }
+
+        .desktop-info i {
+            font-size: 42px;
+            color: #22c55e;
+
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .desktop-info h3 {
+            font-size: 22px;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .desktop-info p {
+            font-size: 15px;
+            color: #b8c4d6;
+            line-height: 1.7;
+        }
+
+        /* Mobile */
+
+        @media (max-width:768px) {
+
+            .desktop-info {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                gap: 15px;
+                padding: 20px;
+            }
+
+            .desktop-info i {
+                font-size: 34px;
+            }
+
+            .desktop-info h3 {
+                font-size: 20px;
+            }
+
+            .desktop-info p {
+                font-size: 14px;
+            }
+
+        }
+
+        .coming-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+
+            background: #7c3aed;
+            color: #fff;
+
+            padding: 8px 14px;
+
+            border-radius: 30px;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+        .coming-btn {
+
+            width: 100%;
+
+            background: #2d3748;
+
+            color: #b8c4d6;
+
+            border: none;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            font-size: 16px;
+
+            cursor: not-allowed;
+        }
+    </style>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -32,9 +139,11 @@
 
                 <li><a href="index.html">Home</a></li>
 
-                <li><a href="games.html" class="active">3D Games</a></li>
+                <li><a href="games.html">3D Games</a></li>
 
                 <li><a href="arcade.html">Arcade Games</a></li>
+
+                <li><a href="pc.html" class="active">PC Games</a></li>
 
                 <li><a href="about.html">About</a></li>
 
@@ -91,6 +200,8 @@
 
             <a href="arcade.html"> Arcade Games</a>
 
+            <a href="pc.html" class="active">PC Games</a>
+
             <a href="about.html"> About</a>
 
         </div>
@@ -104,54 +215,68 @@
 
         <div class="hero-left">
 
-            <span>🎮 PixelPlay 3D</span>
+            <span>💻 PixelPlay PC</span>
 
             <h1>
-                Play Amazing <br>
-                3D Games
+                PC Exclusive <br>
+                Games
             </h1>
 
             <p>
-                Explore immersive browser games with stunning graphics and exciting gameplay.
-                No downloads, no installs — just click and play instantly.
+                These games are designed for desktop and laptop users.
+                A keyboard, mouse or game controller is required for the best experience.
             </p>
 
             <div class="hero-features">
 
                 <div>
-                    <i class="fa-solid fa-cube"></i>
-                    High Quality
+                    <i class="fa-solid fa-desktop"></i>
+                    Desktop Only
                 </div>
 
                 <div>
-                    <i class="fa-solid fa-globe"></i>
-                    Browser Based
+                    <i class="fa-solid fa-keyboard"></i>
+                    Keyboard & Mouse
                 </div>
 
                 <div>
                     <i class="fa-solid fa-gamepad"></i>
-                    Free to Play
+                    Controller Ready
                 </div>
 
                 <div>
-                    <i class="fa-solid fa-arrows-rotate"></i>
-                    Regular Updates
+                    <i class="fa-solid fa-bolt"></i>
+                    High Performance
                 </div>
 
             </div>
 
             <a href="#gameCount" class="hero-btn">
-                Browse Games
+                Explore PC Games
             </a>
 
         </div>
-
         <div class="hero-right">
 
-            <img src="images/3d.jpg" alt="3D Games">
+            <img src="images/pc.jpg" alt="3D Games">
 
         </div>
 
+    </section>
+
+    <section class="desktop-notice">
+        <div class="desktop-info">
+            <i class="fa-solid fa-circle-info"></i>
+
+            <div>
+                <h3>Desktop Optimized</h3>
+
+                <p>
+                    These games are designed for keyboard and mouse.
+                    Mobile support may be limited or unavailable.
+                </p>
+            </div>
+        </div>
     </section>
 
     <!-- ================= SEARCH ================= -->
@@ -188,22 +313,22 @@
 
         <button class="category-btn active" data-filter="all">All</button>
 
-        <button class="category-btn" data-filter="Adventure">Adventure</button>
+        <button class="category-btn" data-filter="Open World">Open World</button>
 
-        <button class="category-btn" data-filter="Action">Action</button>
+        <button class="category-btn" data-filter="Shooter">Shooter</button>
 
-        <button class="category-btn" data-filter="Sandbox">Sandbox</button>
+        <button class="category-btn" data-filter="Simulation">Simulation</button>
 
         <button class="category-btn" data-filter="Racing">Racing</button>
 
-        <button class="category-btn" data-filter="RPG">RPG</button>
+        <button class="category-btn" data-filter="Strategy">Strategy</button>
 
     </section>
 
     <section class="games-info">
 
         <h2>
-            🎮 <span id="gameCount">3</span> Games Available
+            💻 Desktop Games Available
         </h2>
 
     </section>
@@ -212,13 +337,13 @@
 
     <section class="games-grid">
 
-        <!-- Minecraft -->
+        <!-- gta iii-->
 
-        <div class="game-card" data-category="Sandbox">
+        <div class="game-card">
 
             <div class="image-wrapper">
 
-                <img src="images/minecraft.png" alt="Minecraft">
+                <img src="images/gta3.jpg" alt="GTA III">
 
             </div>
 
@@ -232,149 +357,14 @@
 
             <div class="game-content">
 
-                <span class="game-tag">Sandbox</span>
-                <span class="platform-tag">PC</span>
-                <span class="year">2011</span>
+                <span class="game-tag">Open World</span>
+                <span class="platform-tag">PC Only</span>
+                <span class="year">2001</span>
 
-                <h3>Minecraft</h3>
-
-                <p>
-                    Build, survive and explore endless worlds directly in your browser.
-                </p>
-
-                <div class="game-bottom">
-
-                    <span class="rating">
-                        ⭐ 4.9
-                    </span>
-
-                    <a href="minecraft.html" class="play-btn-small">
-                        Play Now
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- GTA -->
-
-        <div class="game-card" data-category="Action">
-
-            <div class="image-wrapper">
-
-                <img src="images/gta vice city.png" alt="GTA Vice City">
-
-            </div>
-
-            <div class="favorite">
-                <i class="fa-regular fa-heart"></i>
-            </div>
-
-            <div class="status-badge live">
-                LIVE
-            </div>
-
-            <div class="game-content">
-
-                <span class="game-tag">Action</span>
-                <span class="platform-tag">PC</span>
-                <span class="year">2002</span>
-
-                <h3>GTA Vice City</h3>
+                <h3>GTA III</h3>
 
                 <p>
-                    Return to Vice City and build your criminal empire.
-                </p>
-
-                <div class="game-bottom">
-
-                    <span class="rating">
-                        ⭐ 4.9
-                    </span>
-
-                    <a href="gta.html" class="play-btn-small">
-                        Play Now
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="game-card" data-category="Action">
-
-            <div class="image-wrapper">
-
-                <img src="images/angrybirdshero.png" alt="GTA Vice City">
-
-            </div>
-
-            <div class="favorite">
-                <i class="fa-regular fa-heart"></i>
-            </div>
-
-            <div class="status-badge live">
-                LIVE
-            </div>
-
-            <div class="game-content">
-
-                <span class="game-tag">Puzzle</span>
-                <span class="platform-tag">Mobile</span>
-                <span class="year">2009</span>
-
-                <h3>Angry Birds</h3>
-
-                <p>
-                    Launch birds, smash pig fortresses, and solve fun physics-based puzzles.
-                </p>
-
-                <div class="game-bottom">
-
-                    <span class="rating">
-                        ⭐ 4.9
-                    </span>
-
-                    <a href="angrybirds.html" class="play-btn-small">
-                        ▶ Play Now
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- HexGL -->
-        <div class="game-card" data-category="Racing">
-
-            <div class="image-wrapper">
-                <img src="images/hexgl.jpg" alt="HexGL">
-            </div>
-
-            <div class="favorite">
-                <i class="fa-regular fa-heart"></i>
-            </div>
-
-            <div class="status-badge live">
-                LIVE
-            </div>
-
-            <div class="game-content">
-
-                <span class="game-tag">Racing</span>
-                <span class="platform-tag">HTML5</span>
-                <span class="year">2013</span>
-
-                <h3>HexGL</h3>
-
-                <p>
-                    Race futuristic anti-gravity ships at incredible speed in this beautiful WebGL racing game.
+                    Explore Liberty City in the revolutionary open-world action classic.
                 </p>
 
                 <div class="game-bottom">
@@ -383,9 +373,76 @@
                         ⭐ 4.8
                     </span>
 
-                    <a href="hexgl.html" class="play-btn-small">
+                    <a href="gta3.html" class="play-btn-small">
                         Play Now
                     </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="game-card coming-soon">
+
+            <div class="game-image">
+                <img src="images/coming-soon.jpg" alt="Coming Soon">
+
+                <span class="coming-badge">COMING SOON</span>
+            </div>
+
+            <div class="game-content">
+
+                <div class="game-tags">
+                    <span>Desktop</span>
+                    <span>TBA</span>
+                </div>
+
+                <h3>DOOM</h3>
+
+                <p>
+                    Classic FPS experience is coming soon to PixelPlay.
+                </p>
+
+                <div class="game-footer">
+
+                    <button class="coming-btn" disabled>
+                        Coming Soon
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="game-card coming-soon">
+
+            <div class="game-image">
+                <img src="images/coming-soon.jpg" alt="Coming Soon">
+
+                <span class="coming-badge">COMING SOON</span>
+            </div>
+
+            <div class="game-content">
+
+                <div class="game-tags">
+                    <span>Desktop</span>
+                    <span>TBA</span>
+                </div>
+
+                <h3>Quake</h3>
+
+                <p>
+                    Classic FPS experience is coming soon to PixelPlay.
+                </p>
+
+                <div class="game-footer">
+
+                    <button class="coming-btn" disabled>
+                        Coming Soon
+                    </button>
 
                 </div>
 
@@ -398,7 +455,7 @@
 
 
 
-    <section class="load-more">
+    <!-- <section class="load-more">
 
         <button id="loadMoreBtn">
 
@@ -406,7 +463,7 @@
 
         </button>
 
-    </section>
+    </section> -->
 
 
     <footer class="footer" id="footer">

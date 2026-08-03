@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PixelPlay | GTA III </title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/angrybirds.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade Games</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <a href="#" class="login-btn">
+                    Login
+                </a>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+
+                <h2>PixelPlay</h2>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Search games...">
+            </div>
+
+            <a href="#" class="mobile-login-btn">Login</a>
+
+            <a href="index.html">Home</a>
+
+            <a href="games.html">3D Games</a>
+
+            <a href="arcade.html"> Arcade Games</a>
+
+            <a href="about.html"> About</a>
+
+        </div>
+
+    </header>
+
+    <section class="game-hero">
+
+        <div class="hero-left">
+
+            <span class="game-tag">Open World • Action • PC Only</span>
+
+            <h1>Grand Theft Auto III</h1>
+
+            <p>
+                Welcome to Liberty City. Experience the revolutionary open-world
+                action game that changed gaming forever.
+            </p>
+
+            <div class="game-meta">
+                <span>⭐ 4.8</span>
+                <span>📅 2001</span>
+                <span>🖥️ Desktop</span>
+            </div>
+
+            <a href="#game" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+                Play GTA III
+            </a>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="images/gta3.jpg" alt="GTA III">
+
+        </div>
+
+    </section>
+
+    <section id="game" class="game-section">
+
+        <h2>Play GTA III</h2>
+
+        <div class="game-actions">
+            <button id="fullscreenBtn">
+                <i class="fa-solid fa-expand"></i> Fullscreen
+            </button>
+        </div>
+
+        <div class="game-tip">
+            <i class="fa-solid fa-expand"></i>
+            <span>💡 GTA III works best in Fullscreen mode using a keyboard and mouse.</span>
+        </div>
+
+        <div class="game-frame">
+
+            <iframe src="games/gta3/Grand Theft Auto 3.html"> frameborder="0" allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+    <section class="controls">
+
+    <h2>Controls</h2>
+
+    <ul>
+        <li>⌨️ W A S D — Move</li>
+        <li>🖱 Mouse — Look Around</li>
+        <li>🚗 F / Enter — Enter Vehicle</li>
+        <li>🔫 Left Click — Attack / Fire</li>
+        <li>⏸ Esc — Pause Menu</li>
+    </ul>
+
+</section>
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade Games</a></li>
+                <li><a href="about.html">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/ab.js"></script>
+    <script src="js/recent.js"></script>
+    <script>
+saveRecentGame("GTA III", "images/gta3.jpg", "gta3.html");
+</script>
+
+</body>
+
+</html>
