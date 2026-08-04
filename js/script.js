@@ -348,68 +348,6 @@ if (recentGame && recentSection) {
 
 
 // ======================================================
-// SEARCH
-// ======================================================
-
-const searchInput = document.getElementById("searchInput");
-
-if (searchInput) {
-
-    const cards = [
-
-        {
-            element: document.getElementById("minecraft-card"),
-            keywords: "minecraft"
-        },
-
-        {
-            element: document.getElementById("minecraft-trending"),
-            keywords: "minecraft"
-        },
-
-        {
-            element: document.getElementById("mario-card"),
-            keywords: "super mario bros mario"
-        },
-
-        {
-            element: document.getElementById("gta-card"),
-            keywords: "gta vice city gta"
-        },
-
-        {
-            element: document.getElementById("angrybirds-card"),
-            keywords: "angry birds angrybirds birds"
-        },
-
-    ];
-
-    searchInput.addEventListener("input", () => {
-
-        const value = searchInput.value.toLowerCase().trim();
-
-        cards.forEach(card => {
-
-            if (!card.element) return;
-
-            if (value === "") {
-
-                card.element.style.display = "";
-
-            } else {
-
-                card.element.style.display =
-                    card.keywords.includes(value) ? "" : "none";
-
-            }
-
-        });
-
-    });
-
-}
-
-// ======================================================
 // STICKY HEADER
 // ======================================================
 

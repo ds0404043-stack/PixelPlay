@@ -1497,18 +1497,6 @@ a {
 
 @media (max-width:1024px) {
 
-    .navbar {
-        width: 95%;
-    }
-
-    .nav-links {
-        gap: 25px;
-    }
-
-    .search-box input {
-        width: 130px;
-    }
-
     .hero {
         gap: 40px;
     }
@@ -1587,6 +1575,7 @@ a {
     }
 
 }
+
 
 
 @media (max-width:427px) {

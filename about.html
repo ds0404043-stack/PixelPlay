@@ -45,7 +45,7 @@
 
                 <li><a href="pc.html">PC Only</a></li>
 
-                <li><a href="#top" class="active">About</a></li>
+                <li><a href="about.html" class="active">About</a></li>
 
             </ul>
 
@@ -59,9 +59,53 @@
 
                 </div>
 
-                <a href="#" class="login-btn">
-                    Login
-                </a>
+                <div id="userArea">
+                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+                        Login
+                    </button>
+
+                    <div id="profileMenu" class="profile-menu" style="display:none;">
+                        <img id="userPhoto" src="" alt="">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <div class="profile-header">
+                            <img id="dropdownPhoto" src="" alt="">
+                            <div>
+                                <h4 id="dropdownName">Player</h4>
+                                <p id="dropdownEmail">player@example.com</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <a href="#">
+                            🏆 <span>Achievements</span>
+                        </a>
+
+                        <a href="#">
+                            ❤️ <span>Favorites</span>
+                        </a>
+
+                        <a href="#">
+                            🕒 <span>Continue Playing</span>
+                        </a>
+
+                        <a href="#">
+                            ⚙️ <span>Settings</span>
+                        </a>
+
+                        <hr>
+
+                        <a href="#" id="logoutBtn">
+                            🚪 <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
 
                 <button class="menu-btn">
 
@@ -80,8 +124,10 @@
         <div class="mobile-menu">
 
             <div class="mobile-top">
-
-                <h2>PixelPlay</h2>
+                <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
 
                 <button class="close-btn">&times;</button>
 
@@ -89,20 +135,18 @@
 
             <div class="mobile-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search games...">
+                <input id="mobileSearchInput" type="text" placeholder="Search games...">
             </div>
 
-            <a href="#" class="mobile-login-btn">Login</a>
-
-            <a href="index.html">Home</a>
+            <a href="index.html" id="homeLink">Home</a>
 
             <a href="games.html">3D Games</a>
 
             <a href="arcade.html"> Arcade Games</a>
 
             <a href="pc.html">PC Only</a>
-            
-            <a href="#top"> About</a>
+
+            <a href="about.html" class="active"> About</a>
 
         </div>
 
@@ -423,7 +467,7 @@
                 <div class="footer-links">
                     <h3>Quick Links</h3>
 
-                    <li><a href="#" id="homeLink">Home</a></li>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="games.html">3D Games</a></li>
                     <li><a href="arcade.html">Arcade Games</a></li>
                     <li><a href="pc.html">PC Only</a></li>
@@ -459,6 +503,9 @@
         <div class="cursor-glow"></div>
 
         <script src="js/header.js"></script>
+        <script src="js/search-data.js"></script>
+        <script src="js/search.js"></script>
+        <script type="module" src="js/firebase.js"></script>
 
 </body>
 

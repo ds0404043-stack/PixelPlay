@@ -51,9 +51,53 @@
 
                 </div>
 
-                <a href="#" class="login-btn">
-                    Login
-                </a>
+                <div id="userArea">
+                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+                        Login
+                    </button>
+
+                    <div id="profileMenu" class="profile-menu" style="display:none;">
+                        <img id="userPhoto" src="" alt="">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <div class="profile-header">
+                            <img id="dropdownPhoto" src="" alt="">
+                            <div>
+                                <h4 id="dropdownName">Player</h4>
+                                <p id="dropdownEmail">player@example.com</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <a href="#">
+                            🏆 <span>Achievements</span>
+                        </a>
+
+                        <a href="#">
+                            ❤️ <span>Favorites</span>
+                        </a>
+
+                        <a href="#">
+                            🕒 <span>Continue Playing</span>
+                        </a>
+
+                        <a href="#">
+                            ⚙️ <span>Settings</span>
+                        </a>
+
+                        <hr>
+
+                        <a href="#" id="logoutBtn">
+                            🚪 <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
 
                 <button class="menu-btn">
 
@@ -72,8 +116,10 @@
         <div class="mobile-menu">
 
             <div class="mobile-top">
-
-                <h2>PixelPlay</h2>
+                <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
 
                 <button class="close-btn">&times;</button>
 
@@ -81,10 +127,8 @@
 
             <div class="mobile-search">
                 <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" placeholder="Search games...">
+                <input id="mobileSearchInput" type="text" placeholder="Search games...">
             </div>
-
-            <a href="#" class="mobile-login-btn">Login</a>
 
             <a href="index.html">Home</a>
 
@@ -160,17 +204,17 @@
 
     <section class="controls">
 
-    <h2>Controls</h2>
+        <h2>Controls</h2>
 
-    <ul>
-        <li>⌨️ W A S D — Move</li>
-        <li>🖱 Mouse — Look Around</li>
-        <li>🚗 F / Enter — Enter Vehicle</li>
-        <li>🔫 Left Click — Attack / Fire</li>
-        <li>⏸ Esc — Pause Menu</li>
-    </ul>
+        <ul>
+            <li>⌨️ W A S D — Move</li>
+            <li>🖱 Mouse — Look Around</li>
+            <li>🚗 F / Enter — Enter Vehicle</li>
+            <li>🔫 Left Click — Attack / Fire</li>
+            <li>⏸ Esc — Pause Menu</li>
+        </ul>
 
-</section>
+    </section>
 
     <footer class="footer" id="footer">
 
@@ -224,8 +268,12 @@
     <script src="js/ab.js"></script>
     <script src="js/recent.js"></script>
     <script>
-saveRecentGame("GTA III", "images/gta3.jpg", "gta3.html");
-</script>
+        saveRecentGame("GTA III", "images/gta3.jpg", "gta3.html");
+    </script>
+    <script src="js/search-data.js"></script>
+    <script src="js/search-ui.js"></script>
+    <script src="js/search.js"></script>
+    <script type="module" src="js/firebase.js"></script>
 
 </body>
 

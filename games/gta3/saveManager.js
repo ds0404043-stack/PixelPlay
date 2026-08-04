@@ -34,8 +34,13 @@ request.onupgradeneeded = function (event) {
 };
 
 request.onsuccess = function (event) {
+
     saveDB = event.target.result;
+
     console.log("✅ Save database ready");
+
+    restoreSave();
+
 };
 
 request.onerror = function () {
@@ -69,8 +74,7 @@ function backupSave() {
 
 setInterval(() => {
     backupSave();
-}, 3000);
-
+}, 10000);
 // ---------- Restore Save ----------
 
 function restoreSave() {

@@ -1,233 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coming Soon | PixelPlay</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coming Soon | PixelPlay</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-<style>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Poppins, sans-serif;
+        }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Poppins,sans-serif;
-}
+        body {
 
-body{
+            background: #08131f;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
 
-background:#08131f;
-color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
-overflow:hidden;
+        }
 
-}
+        body::before {
 
-body::before{
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, #22c55e33, transparent 70%);
+            animation: rotate 15s linear infinite;
 
-content:"";
-position:absolute;
-width:700px;
-height:700px;
-background:radial-gradient(circle,#22c55e33,transparent 70%);
-animation:rotate 15s linear infinite;
+        }
 
-}
+        .container {
 
-.container{
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 700px;
+            padding: 40px;
 
-position:relative;
-z-index:2;
-text-align:center;
-max-width:700px;
-padding:40px;
+        }
 
-}
+        .logo {
 
-.logo{
+            font-size: 55px;
+            margin-bottom: 15px;
 
-font-size:55px;
-margin-bottom:15px;
+        }
 
-}
+        h1 {
 
-h1{
+            font-size: 55px;
+            margin-bottom: 20px;
 
-font-size:55px;
-margin-bottom:20px;
+        }
 
-}
+        p {
 
-p{
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 35px;
 
-color:#cbd5e1;
-font-size:18px;
-line-height:1.8;
-margin-bottom:35px;
+        }
 
-}
+        .progress {
 
-.progress{
+            width: 100%;
+            height: 12px;
+            background: #1f2937;
+            border-radius: 30px;
+            overflow: hidden;
+            margin-bottom: 30px;
 
-width:100%;
-height:12px;
-background:#1f2937;
-border-radius:30px;
-overflow:hidden;
-margin-bottom:30px;
+        }
 
-}
+        .progress span {
 
-.progress span{
+            display: block;
+            height: 100%;
+            width: 65%;
+            background: #22c55e;
+            animation: loading 2s infinite alternate;
 
-display:block;
-height:100%;
-width:65%;
-background:#22c55e;
-animation:loading 2s infinite alternate;
+        }
 
-}
+        .btn {
 
-.btn{
+            display: inline-block;
+            padding: 15px 35px;
+            background: #22c55e;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: .3s;
 
-display:inline-block;
-padding:15px 35px;
-background:#22c55e;
-border-radius:40px;
-color:white;
-text-decoration:none;
-font-weight:600;
-transition:.3s;
+        }
 
-}
+        .btn:hover {
 
-.btn:hover{
+            transform: translateY(-4px);
+            box-shadow: 0 0 20px #22c55e;
 
-transform:translateY(-4px);
-box-shadow:0 0 20px #22c55e;
+        }
 
-}
+        .small {
 
-.small{
+            margin-top: 25px;
+            font-size: 14px;
+            color: #94a3b8;
 
-margin-top:25px;
-font-size:14px;
-color:#94a3b8;
+        }
 
-}
+        @keyframes loading {
 
-@keyframes loading{
+            from {
 
-from{
+                width: 35%;
 
-width:35%;
+            }
 
-}
+            to {
 
-to{
+                width: 80%;
 
-width:80%;
+            }
 
-}
+        }
 
-}
+        @keyframes rotate {
 
-@keyframes rotate{
+            from {
 
-from{
+                transform: rotate(0deg);
 
-transform:rotate(0deg);
+            }
 
-}
+            to {
 
-to{
+                transform: rotate(360deg);
 
-transform:rotate(360deg);
+            }
 
-}
+        }
 
-}
+        .fade {
 
-.fade{
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fade .8s forwards;
 
-opacity:0;
-transform:translateY(40px);
-animation:fade .8s forwards;
+        }
 
-}
+        @keyframes fade {
 
-@keyframes fade{
+            to {
 
-to{
+                opacity: 1;
+                transform: translateY(0);
 
-opacity:1;
-transform:translateY(0);
+            }
 
-}
-
-}
-
-</style>
+        }
+    </style>
 
 </head>
 
 <body>
 
-<div class="container fade">
+    <div class="container fade">
 
-<div class="logo">🎮</div>
+        <div class="logo">🎮</div>
 
-<h1>Coming Soon</h1>
+        <h1>Coming Soon</h1>
 
-<p>
-We're working hard to bring this game to PixelPlay.
-Stay tuned for future updates!
-</p>
+        <p>
+            We're working hard to bring this game to PixelPlay.
+            Stay tuned for future updates!
+        </p>
 
-<div class="progress">
-<span></span>
-</div>
+        <div class="progress">
+            <span></span>
+        </div>
 
-<a href="index.html" class="btn">
-🏠 Back to Home
-</a>
+        <a href="index.html" class="btn">
+            🏠 Back to Home
+        </a>
 
-<div class="small" id="status">
-Preparing amazing things...
-</div>
+        <div class="small" id="status">
+            Preparing amazing things...
+        </div>
 
-</div>
+    </div>
 
-<script>
+    <script>
 
-const messages=[
+        const messages = [
 
-"Preparing amazing things...",
+            "Preparing amazing things...",
 
-"Optimizing gameplay...",
+            "Optimizing gameplay...",
 
-"Building the experience...",
+            "Building the experience...",
 
-"Almost Ready..."
+            "Almost Ready..."
 
-];
+        ];
 
-let i=0;
+        let i = 0;
 
-setInterval(()=>{
+        setInterval(() => {
 
-i=(i+1)%messages.length;
+            i = (i + 1) % messages.length;
 
-document.getElementById("status").textContent=messages[i];
+            document.getElementById("status").textContent = messages[i];
 
-},2500);
+        }, 2500);
 
-</script>
-
+    </script>
+    <script src="js/search-data.js"></script>
+    <script src="js/search-ui.js"></script>
+    <script src="js/search.js"></script>
 </body>
+
 </html>

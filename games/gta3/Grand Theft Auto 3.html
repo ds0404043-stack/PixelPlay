@@ -178,10 +178,25 @@
         Module.setStatus('Loading...');
     </script>
     <script src="re3.js"></script>
-    
-    <script>const script = document.createElement("script");
-        script.src = window.location.origin + "/games/gta3/saveManager.js";
-        document.body.appendChild(script);</script>
+
+    <script>
+        [
+            "runtime.js",
+            // "stateManager.js",
+            // "watchdog.js",
+            // "debug.js",
+            // "controls.js",
+            "saveManager.js"
+        ].forEach(file => {
+
+            const s = document.createElement("script");
+
+            s.src = window.location.origin + "/games/gta3/" + file;
+
+            document.body.appendChild(s);
+
+        });
+    </script>
 </body>
 
 </html>
