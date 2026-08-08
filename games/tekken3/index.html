@@ -36,12 +36,115 @@
             border: none;
             border-radius: 10px;
         }
+
+        #loadingBox {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10000;
+
+            width: min(90%, 520px);
+            padding: 25px;
+            box-sizing: border-box;
+
+            background: rgba(15, 15, 15, 0.97);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+
+            color: white;
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+
+        .loading-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .loading-text {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 18px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: #292929;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #progressBar {
+            width: 0%;
+            height: 100%;
+            background: #ff1744;
+            transition: width 0.15s ease;
+        }
+
+        #progressText {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .info-box {
+            margin-top: 18px;
+            padding: 13px;
+
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 10px;
+
+            font-size: 13px;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        .controls-box {
+            margin-top: 10px;
+        }
     </style>
 </head>
 
 <body>
 
     <button id="startGame">START GAME</button>
+
+    <div id="loadingBox">
+
+        <div class="loading-title">
+            🎮 Loading Tekken 3
+        </div>
+
+        <div class="loading-text">
+            Downloading game data...
+        </div>
+
+        <div class="progress-track">
+            <div id="progressBar"></div>
+        </div>
+
+        <div id="progressText">
+            0 / 0 MB
+        </div>
+
+        <div class="info-box">
+            📥 <strong>First download may take some time.</strong><br>
+            Please keep this page open while the game is downloading.
+            Once the data is cached, future launches may be faster.
+        </div>
+
+        <div class="info-box controls-box">
+            🎮 <strong>Controls</strong><br>
+            If you're not comfortable with the default controls,
+            you can remap the controls to your own keys from the
+            emulator's control settings.
+        </div>
+
+    </div>
 
     <div id="game"></div>
 
@@ -56,93 +159,351 @@
         const PARTS = 19;
 
         const BASE_URL =
-            "https://raw.githubusercontent.com/ds0404043-stack/tekken3data/main/";
+            "https://ds0404043-stack.github.io/tekken3data/";
 
-        const CACHE_NAME = "tekken3-data-v1";
+        const CACHE_NAME = "tekken3-data-v2";
 
-        document.getElementById("startGame").addEventListener("click", async function () {
+        const loadingBox =
+            document.getElementById("loadingBox");
 
-            const button = this;
+        const progressBar =
+            document.getElementById("progressBar");
 
-            button.disabled = true;
-            button.textContent = "LOADING...";
+        const progressText =
+            document.getElementById("progressText");
 
-            try {
 
-                // Ask browser to keep the stored data if possible
-                if (navigator.storage && navigator.storage.persist) {
-                    await navigator.storage.persist();
-                }
+        let downloadedBytes = 0;
+        let totalBytes = 0;
 
-                const cache = await caches.open(CACHE_NAME);
 
-                const downloads = [];
+        function formatMB(bytes) {
 
-                for (let i = 1; i <= PARTS; i++) {
+            return (bytes / (1024 * 1024)).toFixed(1);
 
-                    const name =
-                        `tekken3.chd.${String(i).padStart(3, "0")}`;
+        }
 
-                    const url = BASE_URL + name;
 
-                    const saved = await cache.match(url);
+        function updateProgress() {
 
-                    if (saved) {
+            const downloadedMB =
+                formatMB(downloadedBytes);
 
-                        console.log("Using saved:", name);
+            const totalMB =
+                formatMB(totalBytes);
 
-                        downloads.push(saved.arrayBuffer());
+            let percent = 0;
 
-                    } else {
+            if (totalBytes > 0) {
 
-                        console.log("Downloading:", name);
+                percent =
+                    (downloadedBytes / totalBytes) * 100;
 
-                        downloads.push(
-                            fetch(url).then(async response => {
-
-                                if (!response.ok) {
-                                    throw new Error(name + " failed");
-                                }
-
-                                // Save a copy for next time
-                                await cache.put(url, response.clone());
-
-                                return await response.arrayBuffer();
-                            })
-                        );
-                    }
-                }
-
-                const chunks = await Promise.all(downloads);
-
-                console.log("All 19 parts ready.");
-
-                const blob = new Blob(chunks, {
-                    type: "application/octet-stream"
-                });
-
-                EJS_gameUrl = URL.createObjectURL(blob);
-
-                button.style.display = "none";
-
-                const loader = document.createElement("script");
-
-                loader.src =
-                    "https://cdn.emulatorjs.org/stable/data/loader.js";
-
-                document.body.appendChild(loader);
-
-            } catch (error) {
-
-                console.error("Tekken 3 error:", error);
-
-                button.disabled = false;
-                button.textContent = "START GAME";
-
-                alert("Game loading failed. Check Console.");
             }
 
-        });
+            percent =
+                Math.min(percent, 100);
+
+
+            progressBar.style.width =
+                percent + "%";
+
+
+            progressText.textContent =
+                `${downloadedMB} / ${totalMB} MB`;
+
+        }
+
+
+        async function downloadWithProgress(
+            url,
+            name,
+            cache
+        ) {
+
+            const response =
+                await fetch(url);
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    name + " failed: " +
+                    response.status
+                );
+
+            }
+
+
+            const contentLength =
+                Number(
+                    response.headers.get(
+                        "content-length"
+                    )
+                ) || 0;
+
+
+            totalBytes += contentLength;
+
+            updateProgress();
+
+
+            const reader =
+                response.body.getReader();
+
+
+            const chunks = [];
+
+            let received = 0;
+
+
+            while (true) {
+
+                const { done, value } =
+                    await reader.read();
+
+
+                if (done) break;
+
+
+                chunks.push(value);
+
+
+                received += value.length;
+
+                downloadedBytes +=
+                    value.length;
+
+
+                updateProgress();
+
+            }
+
+
+            const blob =
+                new Blob(chunks);
+
+
+            const arrayBuffer =
+                await blob.arrayBuffer();
+
+
+            // Save downloaded data
+            // for future launches
+            await cache.put(
+                url,
+                new Response(arrayBuffer)
+            );
+
+
+            return arrayBuffer;
+
+        }
+
+
+        document
+            .getElementById("startGame")
+            .addEventListener(
+                "click",
+                async function () {
+
+                    const button = this;
+
+
+                    button.disabled = true;
+
+                    button.style.display =
+                        "none";
+
+
+                    loadingBox.style.display =
+                        "block";
+
+
+                    downloadedBytes = 0;
+
+                    totalBytes = 0;
+
+
+                    updateProgress();
+
+
+                    try {
+
+                        if (
+                            navigator.storage &&
+                            navigator.storage.persist
+                        ) {
+
+                            await navigator.storage.persist();
+
+                        }
+
+
+                        const cache =
+                            await caches.open(
+                                CACHE_NAME
+                            );
+
+
+                        const downloads = [];
+
+
+                        for (
+                            let i = 1;
+                            i <= PARTS;
+                            i++
+                        ) {
+
+                            const name =
+                                `tekken3.chd.${String(i)
+                                    .padStart(3, "0")}`;
+
+
+                            const url =
+                                BASE_URL + name;
+
+
+                            const saved =
+                                await cache.match(url);
+
+
+                            if (saved) {
+
+                                console.log(
+                                    "Using cached:",
+                                    name
+                                );
+
+
+                                const buffer =
+                                    await saved.arrayBuffer();
+
+
+                                downloadedBytes +=
+                                    buffer.byteLength;
+
+
+                                totalBytes +=
+                                    buffer.byteLength;
+
+
+                                updateProgress();
+
+
+                                downloads.push(
+                                    buffer
+                                );
+
+
+                            } else {
+
+                                console.log(
+                                    "Downloading:",
+                                    name
+                                );
+
+
+                                downloads.push(
+                                    downloadWithProgress(
+                                        url,
+                                        name,
+                                        cache
+                                    )
+                                );
+
+                            }
+
+                        }
+
+
+                        const chunks =
+                            await Promise.all(
+                                downloads
+                            );
+
+
+                        progressBar.style.width =
+                            "100%";
+
+
+                        progressText.textContent =
+                            `${formatMB(downloadedBytes)} / ${formatMB(totalBytes)} MB`;
+
+
+                        console.log(
+                            "All 19 parts ready."
+                        );
+
+
+                        const blob =
+                            new Blob(
+                                chunks,
+                                {
+                                    type:
+                                        "application/octet-stream"
+                                }
+                            );
+
+
+                        EJS_gameUrl =
+                            URL.createObjectURL(
+                                blob
+                            );
+
+
+                        loadingBox.style.display =
+                            "none";
+
+
+                        const loader =
+                            document.createElement(
+                                "script"
+                            );
+
+
+                        loader.src =
+                            "https://cdn.emulatorjs.org/stable/data/loader.js";
+
+
+                        document.body.appendChild(
+                            loader
+                        );
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Tekken 3 error:",
+                            error
+                        );
+
+
+                        button.style.display =
+                            "block";
+
+
+                        button.disabled =
+                            false;
+
+
+                        button.textContent =
+                            "START GAME";
+
+
+                        loadingBox.style.display =
+                            "none";
+
+
+                        alert(
+                            "Game loading failed. Check your internet connection and reload the site dont worry your downloaded data is safe."
+                        );
+
+                    }
+
+                }
+            );
+
     </script>
 
 </body>
