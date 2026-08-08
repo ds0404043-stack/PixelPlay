@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tekken 3 - PixelPlay</title>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        #game {
+            width: 100%;
+            height: 100%;
+        }
+
+        #startGame {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+
+            padding: 18px 35px;
+            font-size: 20px;
+            font-weight: bold;
+
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="startGame">START GAME</button>
+
+    <div id="game"></div>
+
+    <script>
+        EJS_player = "#game";
+        EJS_core = "psx";
+        EJS_pathtodata = "https://cdn.emulatorjs.org/stable/data/";
+        EJS_startOnLoaded = true;
+    </script>
+
+    <script>
+        const PARTS = 19;
+
+        const BASE_URL =
+            "https://raw.githubusercontent.com/ds0404043-stack/tekken3data/main/";
+
+        const CACHE_NAME = "tekken3-data-v1";
+
+        document.getElementById("startGame").addEventListener("click", async function () {
+
+            const button = this;
+
+            button.disabled = true;
+            button.textContent = "LOADING...";
+
+            try {
+
+                // Ask browser to keep the stored data if possible
+                if (navigator.storage && navigator.storage.persist) {
+                    await navigator.storage.persist();
+                }
+
+                const cache = await caches.open(CACHE_NAME);
+
+                const downloads = [];
+
+                for (let i = 1; i <= PARTS; i++) {
+
+                    const name =
+                        `tekken3.chd.${String(i).padStart(3, "0")}`;
+
+                    const url = BASE_URL + name;
+
+                    const saved = await cache.match(url);
+
+                    if (saved) {
+
+                        console.log("Using saved:", name);
+
+                        downloads.push(saved.arrayBuffer());
+
+                    } else {
+
+                        console.log("Downloading:", name);
+
+                        downloads.push(
+                            fetch(url).then(async response => {
+
+                                if (!response.ok) {
+                                    throw new Error(name + " failed");
+                                }
+
+                                // Save a copy for next time
+                                await cache.put(url, response.clone());
+
+                                return await response.arrayBuffer();
+                            })
+                        );
+                    }
+                }
+
+                const chunks = await Promise.all(downloads);
+
+                console.log("All 19 parts ready.");
+
+                const blob = new Blob(chunks, {
+                    type: "application/octet-stream"
+                });
+
+                EJS_gameUrl = URL.createObjectURL(blob);
+
+                button.style.display = "none";
+
+                const loader = document.createElement("script");
+
+                loader.src =
+                    "https://cdn.emulatorjs.org/stable/data/loader.js";
+
+                document.body.appendChild(loader);
+
+            } catch (error) {
+
+                console.error("Tekken 3 error:", error);
+
+                button.disabled = false;
+                button.textContent = "START GAME";
+
+                alert("Game loading failed. Check Console.");
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

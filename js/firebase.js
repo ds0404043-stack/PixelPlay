@@ -8,6 +8,15 @@ import {
     onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.17.0/firebase-auth.js";
 
+import {
+    getDatabase,
+    ref,
+    get,
+    set,
+    update,
+    onValue
+} from "https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js";
+
 // Firebase Config
 const firebaseConfig = {
     apiKey: "AIzaSyBlpR4X-MoGhi_lvcc8WcDJaVSWPOQE6og",
@@ -22,6 +31,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const db = getDatabase(app);
 
 window.loginGoogle = () => {
     signInWithPopup(auth, provider);
@@ -33,6 +43,11 @@ window.logoutUser = () => {
 
 onAuthStateChanged(auth, (user) => {
 
+    // Favorites page
+    if (typeof window.loadUserFavorites === "function") {
+        window.loadUserFavorites(user);
+    }
+
     const loginBtn = document.getElementById("loginBtn");
     const profileMenu = document.getElementById("profileMenu");
     const userName = document.getElementById("userName");
@@ -41,8 +56,28 @@ onAuthStateChanged(auth, (user) => {
     if (!loginBtn || !profileMenu) return;
 
     if (user) {
-        
-            user.photoURL ||
+
+        const userRef = ref(db, "users/" + user.uid);
+
+        get(userRef).then((snapshot) => {
+
+            if (!snapshot.exists()) {
+
+                set(userRef, {
+
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL,
+                    favorites: {},
+                    createdAt: Date.now()
+
+                });
+
+            }
+
+        });
+
+        user.photoURL ||
             "https://ui-avatars.com/api/?name=" +
             encodeURIComponent(user.displayName);
 
@@ -99,5 +134,173 @@ if (profileMenu && profileDropdown) {
 document.getElementById("logoutBtn").onclick = () => {
 
     logoutUser();
+
+};
+
+// ==========================================
+// FAVORITES SYSTEM
+// ==========================================
+
+window.toggleFavorite = async function (gameId, gameData) {
+
+    const user = auth.currentUser;
+
+    // ==========================
+    // NOT LOGGED IN
+    // ==========================
+
+    if (!user) {
+
+        if (typeof window.showLoginModal === "function") {
+
+            window.showLoginModal();
+
+        } else {
+
+            console.log("Login required.");
+
+        }
+
+        return null;
+
+    }
+
+    // ==========================
+    // FAVORITE REFERENCE
+    // ==========================
+
+    const favoriteRef = ref(
+        db,
+        "users/" + user.uid + "/favorites/" + gameId
+    );
+
+    try {
+
+        const snapshot = await get(favoriteRef);
+
+        // ==========================
+        // REMOVE FAVORITE
+        // ==========================
+
+        if (snapshot.exists()) {
+
+            await set(favoriteRef, null);
+
+            return false;
+
+        }
+
+        // ==========================
+        // ADD FAVORITE
+        // ==========================
+
+        await set(favoriteRef, {
+
+            name: gameData.name,
+            image: gameData.image,
+            page: gameData.page,
+            genre: gameData.genre,
+            platform: gameData.platform,
+            addedAt: Date.now()
+
+        });
+
+        return true;
+
+    } catch (error) {
+
+        console.error("Firebase favorite error:", error);
+
+        return null;
+
+    }
+
+};
+
+// ==========================================
+// TEKKEN 3 FAVORITE
+// ==========================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const favoriteBtn = document.getElementById("tekkenFavorite");
+
+    if (!favoriteBtn) return;
+
+    const icon = favoriteBtn.querySelector("i");
+
+    favoriteBtn.addEventListener("click", async () => {
+
+        const saved = await toggleFavorite("tekken3", {
+
+            name: "Tekken 3",
+            image: "images/tekken3.jpg",
+            page: "tekken3.html",
+            genre: "Fighting",
+            platform: "PlayStation"
+
+        });
+
+        if (saved === undefined) return;
+
+        if (saved) {
+
+            favoriteBtn.classList.add("active");
+
+            icon.classList.remove("fa-regular");
+            icon.classList.add("fa-solid");
+
+        } else {
+
+            favoriteBtn.classList.remove("active");
+
+            icon.classList.remove("fa-solid");
+            icon.classList.add("fa-regular");
+
+        }
+
+    });
+
+});
+
+
+// ==========================================
+// FAVORITES PAGE HELPERS
+// ==========================================
+
+window.firebaseAuth = auth;
+
+window.firebaseFavoritesRef = function (uid) {
+
+    return ref(
+        db,
+        "users/" + uid + "/favorites"
+    );
+
+};
+
+window.firebaseOnValue = function (favoriteRef, callback) {
+
+    import("https://www.gstatic.com/firebasejs/12.17.0/firebase-database.js")
+        .then(({ onValue }) => {
+
+            onValue(favoriteRef, callback);
+
+        });
+
+};
+
+window.firebaseRemoveFavorite = async function (gameId) {
+
+    const user = auth.currentUser;
+
+    if (!user) return;
+
+    const favoriteRef = ref(
+        db,
+        "users/" + user.uid + "/favorites/" + gameId
+    );
+
+    await set(favoriteRef, null);
 
 };

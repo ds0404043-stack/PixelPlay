@@ -1,23 +1,25 @@
 const gameSearchInput = document.getElementById("gameSearch");
 const gameCards = document.querySelectorAll(".games-grid .game-card");
 
-gameSearchInput.addEventListener("keyup", () => {
+if (gameSearchInput) {
 
-    const value = gameSearchInput.value.toLowerCase();
+    gameSearchInput.addEventListener("keyup", () => {
 
-    gameCards.forEach(card => {
+        const value = gameSearchInput.value.toLowerCase();
 
-        const title = card.querySelector("h3").textContent.toLowerCase();
+        gameCards.forEach(card => {
 
-        if (title.includes(value)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
+            const title = card.querySelector("h3").textContent.toLowerCase();
+
+            card.style.display = title.includes(value)
+                ? "block"
+                : "none";
+
+        });
 
     });
 
-});
+}
 
 const buttons = document.querySelectorAll(".category-btn");
 
@@ -50,18 +52,99 @@ buttons.forEach(button => {
 
 const counter = document.getElementById("gameCount");
 
-counter.textContent = document.querySelectorAll(".games-grid .game-card").length;
+if (counter) {
+    counter.textContent =
+        document.querySelectorAll(".games-grid .game-card").length;
+}
 
-document.querySelectorAll(".favorite").forEach(btn=>{
+// ==========================================
+// FAVORITES
+// ==========================================
 
-    btn.addEventListener("click",()=>{
+document.querySelectorAll(".favorite").forEach(btn => {
 
-        btn.classList.toggle("active");
+    btn.addEventListener("click", async (e) => {
 
-        const icon = btn.querySelector("i");
+        e.preventDefault();
+        e.stopPropagation();
 
-        icon.classList.toggle("fa-regular");
-        icon.classList.toggle("fa-solid");
+        const card = btn.closest(".game-card");
+
+        if (!card) return;
+
+        const titleElement = card.querySelector("h3");
+        const imageElement = card.querySelector("img");
+
+        if (!titleElement || !imageElement) return;
+
+        const title = titleElement.textContent.trim();
+
+        const image = imageElement.getAttribute("src");
+
+        const genre = card.dataset.category || "Unknown";
+
+        const platform =
+            card.querySelector(".platform-tag")?.textContent.trim() ||
+            "Browser";
+
+        const page =
+            card.querySelector(".play-btn-small")?.getAttribute("href") ||
+            "#";
+
+        const gameId = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
+
+        // Firebase must be loaded
+        if (typeof window.toggleFavorite !== "function") {
+
+            console.error("Firebase favorite system is not loaded.");
+
+            return;
+
+        }
+
+        try {
+
+            const saved = await window.toggleFavorite(gameId, {
+
+                name: title,
+                image: image,
+                page: page,
+                genre: genre,
+                platform: platform
+
+            });
+
+            // User was not logged in
+            if (saved === null) return;
+
+            const icon = btn.querySelector("i");
+
+            if (!icon) return;
+
+            if (saved) {
+
+                btn.classList.add("active");
+
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+
+            } else {
+
+                btn.classList.remove("active");
+
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+
+            }
+
+        } catch (error) {
+
+            console.error("Favorite error:", error);
+
+        }
 
     });
 
@@ -78,9 +161,9 @@ sortSelect.addEventListener("change", () => {
 
     const cards = [...document.querySelectorAll(".game-card")];
 
-    if(sortSelect.value === "az"){
+    if (sortSelect.value === "az") {
 
-        cards.sort((a,b)=>{
+        cards.sort((a, b) => {
 
             return a.querySelector("h3").textContent.localeCompare(
                 b.querySelector("h3").textContent
@@ -90,27 +173,27 @@ sortSelect.addEventListener("change", () => {
 
     }
 
-    else if(sortSelect.value === "rating"){
+    else if (sortSelect.value === "rating") {
 
-        cards.sort((a,b)=>{
+        cards.sort((a, b) => {
 
             const ratingA = parseFloat(
-                a.querySelector(".rating").textContent.replace(/[^\d.]/g,"")
+                a.querySelector(".rating").textContent.replace(/[^\d.]/g, "")
             ) || 0;
 
             const ratingB = parseFloat(
-                b.querySelector(".rating").textContent.replace(/[^\d.]/g,"")
+                b.querySelector(".rating").textContent.replace(/[^\d.]/g, "")
             ) || 0;
 
-            return ratingB-ratingA;
+            return ratingB - ratingA;
 
         });
 
     }
 
-    else if(sortSelect.value === "year"){
+    else if (sortSelect.value === "year") {
 
-        cards.sort((a,b)=>{
+        cards.sort((a, b) => {
 
             return Number(
                 b.querySelector(".year").textContent
@@ -122,7 +205,7 @@ sortSelect.addEventListener("change", () => {
 
     }
 
-    cards.forEach(card=>gamesGrid.appendChild(card));
+    cards.forEach(card => gamesGrid.appendChild(card));
 
 });
 
@@ -137,15 +220,15 @@ const loadMoreBtn = document.getElementById("loadMoreBtn");
 
 let visibleCards = 2;
 
-if(cards.length <= visibleCards){
+if (cards.length <= visibleCards) {
 
     loadMoreBtn.style.display = "none";
 
 }
 
-cards.forEach((card,index)=>{
+cards.forEach((card, index) => {
 
-    if(index >= visibleCards){
+    if (index >= visibleCards) {
 
         card.style.display = "none";
 
@@ -153,13 +236,13 @@ cards.forEach((card,index)=>{
 
 });
 
-loadMoreBtn.addEventListener("click",()=>{
+loadMoreBtn.addEventListener("click", () => {
 
     visibleCards += 6;
 
-    cards.forEach((card,index)=>{
+    cards.forEach((card, index) => {
 
-        if(index < visibleCards){
+        if (index < visibleCards) {
 
             card.style.display = "flex";
 
@@ -167,7 +250,7 @@ loadMoreBtn.addEventListener("click",()=>{
 
     });
 
-    if(visibleCards >= cards.length){
+    if (visibleCards >= cards.length) {
 
         loadMoreBtn.style.display = "none";
 

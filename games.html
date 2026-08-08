@@ -7,6 +7,7 @@
     <title>PixelPlay | Games</title>
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/login-modal.css">
     <link rel="stylesheet" href="css/footer.css">
 
     <!-- Google Font -->
@@ -18,6 +19,66 @@
 </head>
 
 <body>
+
+    <!-- ================= LOGIN MODAL ================= -->
+
+<div id="loginModal" class="login-modal">
+
+    <div class="login-modal-overlay"></div>
+
+    <div class="login-modal-box">
+
+        <button id="closeLoginModal" class="login-modal-close">
+            &times;
+        </button>
+
+        <div class="login-modal-icon">
+            🎮
+        </div>
+
+        <h2>Login Required</h2>
+
+        <p class="login-modal-text">
+            Sign in to save your favorite games and
+            keep your PixelPlay library synced.
+        </p>
+
+        <div class="login-benefits">
+
+            <div>
+                <span>❤️</span>
+                <p>Save Favorite Games</p>
+            </div>
+
+            <div>
+                <span>☁️</span>
+                <p>Sync Across Devices</p>
+            </div>
+
+            <div>
+                <span>🎮</span>
+                <p>Build Your Game Library</p>
+            </div>
+
+        </div>
+
+        <button id="modalLoginBtn" class="modal-login-btn">
+
+            <i class="fa-brands fa-google"></i>
+
+            Continue with Google
+
+        </button>
+
+        <button id="modalLaterBtn" class="modal-later-btn">
+
+            Maybe Later
+
+        </button>
+
+    </div>
+
+</div>
 
 
     <header id="top">
@@ -78,7 +139,7 @@
                             🏆 <span>Achievements</span>
                         </a>
 
-                        <a href="#">
+                        <a href="favorites.html">
                             ❤️ <span>Favorites</span>
                         </a>
 
@@ -118,9 +179,9 @@
 
             <div class="mobile-top">
                 <a href="#" class="logo">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>PixelPlay</span>
-            </a>
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>PixelPlay</span>
+                </a>
 
                 <button class="close-btn">&times;</button>
 
@@ -245,6 +306,8 @@
         <button class="category-btn" data-filter="Racing">Racing</button>
 
         <button class="category-btn" data-filter="RPG">RPG</button>
+
+        <button class="category-btn" data-filter="Fighting">Fighting</button>
 
     </section>
 
@@ -398,6 +461,56 @@
 
         </div>
 
+        <!-- Tekken 3 -->
+
+        <div class="game-card" data-category="Fighting">
+
+            <div class="image-wrapper">
+
+                <img src="images/tekken3.jpg" alt="Tekken 3">
+
+            </div>
+
+            <div class="favorite">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </div>
+
+            <div class="status-badge live">
+                LIVE
+            </div>
+
+            <div class="game-content">
+
+                <span class="game-tag">Fighting</span>
+
+                <span class="platform-tag">PlayStation</span>
+
+                <span class="year">1997</span>
+
+                <h3>Tekken 3</h3>
+
+                <p>
+                    Enter the legendary fighting tournament and battle your way through Tekken 3.
+                </p>
+
+                <div class="game-bottom">
+
+                    <span class="rating">
+                        ⭐ 4.9
+                    </span>
+
+                    <a href="tekken3.html" class="play-btn-small">
+                        ▶ Play Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
         <!-- HexGL -->
         <div class="game-card" data-category="Racing">
 
@@ -508,8 +621,8 @@
     <script src="js/games.js"></script>
     <script src="js/header.js"></script>
     <script src="js/search-data.js"></script>
-    <script src="js/search-ui.js"></script>
     <script src="js/search.js"></script>
+    <script src="js/login-modal.js"></script>
     <script type="module" src="js/firebase.js"></script>
 
 </body>

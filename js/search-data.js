@@ -98,6 +98,23 @@ const gamesDatabase = [
             "future",
             "webgl"
         ]
+    },
+
+        {
+        name: "Tekken 3",
+        genre: "Fighting",
+        platform: "PlayStation",
+        page: "tekken3.html",
+        image: "images/tekken3.jpg",
+        keywords: [
+            "tekken",
+            "tekken 3",
+            "fighting",
+            "arcade",
+            "playstation",
+            "ps1",
+            "psx"
+        ]
     }
 
 ];

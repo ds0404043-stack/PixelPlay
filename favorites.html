@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPlay | Games</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/games.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html" class="active">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade Games</a></li>
+
+                <li><a href="pc.html">PC Only</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <div id="userArea">
+                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+                        Login
+                    </button>
+
+                    <div id="profileMenu" class="profile-menu" style="display:none;">
+                        <img id="userPhoto" src="" alt="">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <div class="profile-header">
+                            <img id="dropdownPhoto" src="" alt="">
+                            <div>
+                                <h4 id="dropdownName">Player</h4>
+                                <p id="dropdownEmail">player@example.com</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <a href="#">
+                            🏆 <span>Achievements</span>
+                        </a>
+
+                        <a href="#">
+                            ❤️ <span>Favorites</span>
+                        </a>
+
+                        <a href="#">
+                            🕒 <span>Continue Playing</span>
+                        </a>
+
+                        <a href="#">
+                            ⚙️ <span>Settings</span>
+                        </a>
+
+                        <hr>
+
+                        <a href="#" id="logoutBtn">
+                            🚪 <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>PixelPlay</span>
+                </a>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="mobileSearchInput" type="text" placeholder="Search games...">
+            </div>
+
+            <a href="index.html">Home</a>
+
+            <a href="games.html" class="active">3D Games</a>
+
+            <a href="arcade.html"> Arcade Games</a>
+
+            <a href="pc.html">PC Only</a>
+
+            <a href="about.html"> About</a>
+
+        </div>
+
+    </header>
+
+
+    <!-- HERO -->
+
+    <section class="games-hero">
+
+        <div class="hero-left">
+
+            <span>❤️ PixelPlay</span>
+
+            <h1>My Favorites</h1>
+
+            <p>
+                All your favorite games are stored here.
+                Login from any device and they'll always be with you.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- COUNT -->
+
+    <section class="games-info">
+
+        <h2>
+            ❤️ <span id="favoriteCount">0</span> Favorite Games
+        </h2>
+
+    </section>
+
+    <!-- GRID -->
+
+    <section class="games-grid" id="favoritesGrid">
+
+    </section>
+
+    <!-- EMPTY -->
+
+    <section id="emptyFavorites" style="display:none;text-align:center;padding:80px 20px;">
+
+        <h2 style="font-size:42px;">❤️</h2>
+
+        <h2>No Favorite Games Yet</h2>
+
+        <p style="margin:20px 0;color:#b8c4d6;">
+            Click the heart on any game to save it here.
+        </p>
+
+        <a href="games.html" class="play-btn-small">
+            Browse Games
+        </a>
+
+    </section>
+
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade Games</a></li>
+                <li><a href="pc.html">PC Only</a></li>
+                <li><a href="about.html">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/search-data.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/favorites.js"></script>
+    <script type="module" src="js/firebase.js"></script>
+
+</body>
+
+</html>
