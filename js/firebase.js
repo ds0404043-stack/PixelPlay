@@ -48,6 +48,10 @@ onAuthStateChanged(auth, (user) => {
         window.loadUserFavorites(user);
     }
 
+    if (typeof window.updateFavoriteButtons === "function") {
+        window.updateFavoriteButtons(user);
+    }
+
     const loginBtn = document.getElementById("loginBtn");
     const profileMenu = document.getElementById("profileMenu");
     const userName = document.getElementById("userName");

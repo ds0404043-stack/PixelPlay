@@ -150,6 +150,90 @@ document.querySelectorAll(".favorite").forEach(btn => {
 
 });
 
+// ==========================================
+// LOAD SAVED FAVORITES
+// ==========================================
+
+window.updateFavoriteButtons = function (user) {
+
+    if (!user) return;
+
+    if (typeof window.firebaseFavoritesRef !== "function") {
+        return;
+    }
+
+    if (typeof window.firebaseOnValue !== "function") {
+        return;
+    }
+
+
+    const favoritesRef =
+        window.firebaseFavoritesRef(user.uid);
+
+
+    window.firebaseOnValue(favoritesRef, (snapshot) => {
+
+        const favorites = snapshot.val() || {};
+
+
+        document.querySelectorAll(".game-card").forEach(card => {
+
+            const favoriteBtn =
+                card.querySelector(".favorite");
+
+            if (!favoriteBtn) return;
+
+
+            const icon =
+                favoriteBtn.querySelector("i");
+
+            if (!icon) return;
+
+
+            const titleElement =
+                card.querySelector("h3");
+
+            if (!titleElement) return;
+
+
+            const title =
+                titleElement.textContent.trim();
+
+
+            const gameId = title
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, "-")
+                .replace(/^-|-$/g, "");
+
+
+            const isFavorite =
+                !!favorites[gameId];
+
+
+            if (isFavorite) {
+
+                favoriteBtn.classList.add("active");
+
+                icon.classList.remove("fa-regular");
+
+                icon.classList.add("fa-solid");
+
+            } else {
+
+                favoriteBtn.classList.remove("active");
+
+                icon.classList.remove("fa-solid");
+
+                icon.classList.add("fa-regular");
+
+            }
+
+        });
+
+    });
+
+};
+
 // ===========================
 // SORT GAMES
 // ===========================

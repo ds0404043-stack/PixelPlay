@@ -58,8 +58,11 @@ exit.onclick = () => {
 };
 
 const clickOverlay = document.querySelector("#clickToPlay");
+const gotItBtn = document.querySelector("#gotItBtn");
 
-clickOverlay.addEventListener("click", () => {
+gotItBtn.addEventListener("click", (e) => {
+
+    e.stopPropagation();
 
     clickOverlay.classList.add("hide");
 

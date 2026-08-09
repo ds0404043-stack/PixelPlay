@@ -42,6 +42,13 @@ const featuredGames = [
         description: "Slide the tiles and beat your highest score.",
         image: "images/2048.jpg",
         page: "2048.html"
+    },
+
+    {
+        title: "Play Subway Surfers <br> Directly In Your Browser",
+        description: "Run, dodge trains, collect coins and escape the inspector in this endless runner.",
+        image: "images/subway-surfers.jpg",
+        link: "subway.html"
     }
 
 ];
