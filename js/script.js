@@ -46,9 +46,10 @@ const featuredGames = [
 
     {
         title: "Play Subway Surfers <br> Directly In Your Browser",
+        heading:"Escape the Inspector",
         description: "Run, dodge trains, collect coins and escape the inspector in this endless runner.",
         image: "images/subway-surfers.jpg",
-        link: "subway.html"
+        page: "subway.html"
     }
 
 ];
