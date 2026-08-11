@@ -205,6 +205,11 @@
 
             <div class="game-menu-popup">
 
+                <button id="cheatsBtn">
+                    <i class="fa-solid fa-gamepad"></i>
+                    Cheats
+                </button>
+
                 <button id="fullscreenBtn">
                     <i class="fa-solid fa-expand"></i>
                     Fullscreen
@@ -221,6 +226,148 @@
                 </button>
 
 
+
+            </div>
+
+        </div>
+
+        <!-- Cheats Popup -->
+        <div id="cheatsPopup">
+
+            <div class="cheats-box">
+
+                <div class="cheats-header">
+                    <h2>🎮 GTA Vice City Cheats</h2>
+                    <button id="closeCheats">&times;</button>
+                </div>
+
+                <div class="cheats-list">
+
+                    <button class="cheat-btn" data-cheat="health">
+                        ❤️ Health
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="armor">
+                        🛡️ Armor
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="weapons1">
+                        🔫 Weapons 1
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="weapons2">
+                        🔫 Weapons 2
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="weapons3">
+                        🔫 Weapons 3
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="wantedUp">
+                        🚓 Wanted +
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="wantedDown">
+                        🚓 Wanted -
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="tank">
+                        🚙 Rhino Tank
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="carsFly">
+                        🚗 Flying Cars
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="betterHandling">
+                        🏎️ Better Handling
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="aggressiveDrivers">
+                        🚘 Aggressive Traffic
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="trafficChaos">
+                        🚦 Traffic Chaos
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="sunny">
+                        ☀️ Sunny
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="verySunny">
+                        🌞 Very Sunny
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="cloudy">
+                        ☁️ Cloudy
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="foggy">
+                        🌫️ Foggy
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="rainy">
+                        🌧️ Rainy
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="fasterClock">
+                        ⏰ Faster Clock
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="fastGameplay">
+                        ⚡ Fast Gameplay
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="slowGameplay">
+                        🐌 Slow Gameplay
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="ladiesFollow">
+                        💃 Ladies Follow
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="womenArmed">
+                        🔫 Armed Women
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="pedsWeapons">
+                        🔫 Armed Pedestrians
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="riot">
+                        👊 Pedestrian Riot
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="pedsHate">
+                        😡 Pedestrians Hate You
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="pedsAttack">
+                        ⚔️ Pedestrians Attack
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="blackCars">
+                        🖤 Black Cars
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="pinkCars">
+                        💗 Pink Cars
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="invisibleCars">
+                        🚘 Invisible Cars
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="bigHead">
+                        🤪 Big Head
+                    </button>
+
+                    <button class="cheat-btn" data-cheat="smokeEffect">
+                        🚢 Fun Vehicle Effect
+                    </button>
+
+                </div>
 
             </div>
 
@@ -319,6 +466,21 @@
         <script src="js/search.js"></script>
         <script src="js/login-modal.js"></script>
         <script type="module" src="js/firebase.js"></script>
+        <script src="games/gtavc/cheats.js"></script>
+        <script>
+            const cheatsBtn = document.getElementById("cheatsBtn");
+            const cheatsPopup = document.getElementById("cheatsPopup");
+            const closeCheats = document.getElementById("closeCheats");
+
+            cheatsBtn.onclick = function () {
+                cheatsPopup.style.display = "flex";
+            };
+
+            closeCheats.onclick = function () {
+                cheatsPopup.style.display = "none";
+            };
+        </script>
+
 </body>
 
 </html>
