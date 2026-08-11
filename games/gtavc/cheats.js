@@ -1,5 +1,5 @@
 // ==========================================
-// GTA VICE CITY - FULL CHEAT LIBRARY
+// GTA VICE CITY - COMPLETE CHEAT LIBRARY
 // ==========================================
 
 function sendCheat(code) {
@@ -36,7 +36,7 @@ function sendCheat(code) {
 
 
 // ==========================================
-// CHEAT LIBRARY
+// COMPLETE CHEAT LIBRARY
 // ==========================================
 
 const GTA_CHEATS = {
@@ -44,58 +44,84 @@ const GTA_CHEATS = {
     // PLAYER
     health: "ASPIRINE",
     armor: "PRECIOUSPROTECTION",
+    suicide: "ICANTTAKEITANYMORE",
+    fat: "DEEPFRIEDMARSBARS",
+    skinny: "PROGRAMMER",
+    smoking: "CERTAINDEATH",
 
     // WEAPONS
-    weapons1: "THUGSTOOLS",
-    weapons2: "PROFESSIONALTOOLS",
-    weapons3: "NUTTERTOOLS",
+    weaponsLight: "THUGSTOOLS",
+    weaponsMedium: "PROFESSIONALTOOLS",
+    weaponsHeavy: "NUTTERTOOLS",
+
+    // VEHICLES
+    tank: "PANZER",
+    bloodring: "TRAVELINSTYLE",
+    bloodringV2: "GETTHEREQUICKLY",
+    caddy: "BETTERTHANWALKING",
+    hotring: "GETTHEREVERYFASTINDEED",
+    hotringV2: "GETTHEREAMAZINGLYFAST",
+    hearse: "THELASTRIDE",
+    sabreTurbo: "GETTHEREFAST",
+    garbageTruck: "RUBBISHCAR",
+    limousine: "ROCKANDROLLCAR",
+
+    // VEHICLE EFFECTS
+    blowUpCars: "BIGBANG",
+    perfectHandling: "GRIPISEVERYTHING",
+    invisibleCars: "WHEELSAREALLINEED",
+    boatsFly: "AIRSHIP",
+    flyingCars: "COMEFLYWITHME",
+    carsOnWater: "SEAWAYS",
+    hugeWheels: "LOADSOFLITTLETHINGS",
+
+    // TRAFFIC
+    aggressiveDrivers: "MIAMITRAFFIC",
+    blackTraffic: "IWANTITPAINTEDBLACK",
+    pinkTraffic: "AHAIRDRESSERSCAR",
+    greenLights: "GREENLIGHT",
+
+    // PEDESTRIANS
+    gangGirls: "CHICKSWITHGUNS",
+    armedPedestrians: "OURGODGIVENRIGHTTOBEARARMS",
+    womenEnterCars: "HOPINGIRL",
+    aggressivePedestrians: "NOBODYLIKESME",
+    pedestrianRiot: "FIGHTFIGHTFIGHT",
+    womenChase: "FANNYMAGNET",
 
     // WANTED LEVEL
     wantedUp: "YOUWONTTAKEMEALIVE",
     wantedDown: "LEAVEMEALONE",
+    mediaLevel: "CHASESTAT",
 
-    // VEHICLES
-    tank: "PANZER",
-
-    // VEHICLE / TRAFFIC
-    carsFly: "COMEFLYWITHME",
-    betterHandling: "GRIPISEVERYTHING",
-    aggressiveDrivers: "MIAMITRAFFIC",
-    trafficChaos: "TRAVELINSTYLE",
+    // GAMEPLAY
+    fastMotion: "ONSPEED",
+    slowMotion: "BOOOOOORING",
+    fastClock: "LIFEISPASSINGMEBY",
 
     // WEATHER
-    sunny: "ALOVELYDAY",
-    verySunny: "APLEASANTDAY",
-    cloudy: "ABITDRIEG",
-    foggy: "CANTSEEATHING",
     rainy: "CATSANDDOGS",
+    sunny: "ALOVELYDAY",
+    partlyCloudy: "APLEASANTDAY",
+    veryCloudy: "ABITDRIEG",
+    foggy: "CANTSEEATHING",
 
-    // TIME / GAMEPLAY
-    fasterClock: "LIFEISPASSINGMEBY",
-    fastGameplay: "ONSPEED",
-    slowGameplay: "BOOOOOORING",
-
-    // CHARACTER
-    ladiesFollow: "FANNYMAGNET",
-    womenArmed: "CHICKSWITHGUNS",
-    pedsWeapons: "OURGODGIVENRIGHTTOBEARARMS",
-    riot: "FIGHTFIGHTFIGHT",
-    pedsHate: "NOBODYLIKESME",
-    pedsAttack: "ITSALLGOINGMAAAD",
-
-    // VEHICLES / WORLD
-    blackCars: "IWANTITPAINTEDBLACK",
-    pinkCars: "AHAIRDRESSERSCAR",
-    invisibleCars: "WHEELSAREALLINEED",
-
-    // FUN
-    bigHead: "DEEPFRIEDMARSBARS",
-    smokeEffect: "AIRSHIP"
+    // CHARACTER SKINS
+    hilary: "LOOKLIKEHILARY",
+    lance: "LOOKLIKELANCE",
+    dick: "WELOVEOURDICK",
+    ken: "MYSONISALAWYER",
+    jezz: "ROCKANDROLLMAN",
+    candy: "IWANTBIGTITS",
+    mercedes: "FOXYLITTLETHING",
+    phil: "ONEARMEDBANDIT",
+    diaz: "CHEATSHAVEBEENCRACKED",
+    sonny: "IDONTHAVETHEMONEYSONNY"
 };
 
 
 // ==========================================
-// CONNECT BUTTONS
+// CONNECT ALL CHEAT BUTTONS
 // ==========================================
 
 document.querySelectorAll(".cheat-btn").forEach(button => {
@@ -106,12 +132,20 @@ document.querySelectorAll(".cheat-btn").forEach(button => {
         const cheatCode = GTA_CHEATS[cheatName];
 
         if (!cheatCode) {
-            console.warn("Cheat not found:", cheatName);
+
+            console.warn(
+                "Cheat not found:",
+                cheatName
+            );
+
             return;
         }
 
         console.log(
-            `Activating cheat: ${cheatName} → ${cheatCode}`
+            "Activating cheat:",
+            cheatName,
+            "→",
+            cheatCode
         );
 
         sendCheat(cheatCode);
