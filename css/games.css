@@ -425,7 +425,8 @@ header:hover {
 
     font-size: 28px;
 
-    margin-bottom: 15px;
+    min-height: 58px;
+    margin-bottom: 18px;
 
 }
 
@@ -437,6 +438,8 @@ header:hover {
     line-height: 1.7;
 
     margin-bottom: 25px;
+
+    min-height: 90px;
 
 }
 
@@ -624,55 +627,6 @@ header:hover {
 
 }
 
-
-/* ===========================
-   LOAD MORE
-=========================== */
-
-.load-more {
-
-    width: 90%;
-    max-width: 1300px;
-
-    margin: 20px auto 80px;
-
-    display: flex;
-
-    justify-content: center;
-
-}
-
-#loadMoreBtn {
-
-    padding: 16px 40px;
-
-    background: #22c55e;
-
-    color: white;
-
-    border: none;
-
-    border-radius: 50px;
-
-    font-size: 17px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: .3s;
-
-}
-
-#loadMoreBtn:hover {
-
-    transform: translateY(-4px);
-
-    box-shadow: 0 0 25px #22c55e55;
-
-}
-
-
 /* =====================================================
    11. ANIMATIONS
 ===================================================== */
@@ -728,4 +682,3 @@ header:hover {
     }
 
 }
-

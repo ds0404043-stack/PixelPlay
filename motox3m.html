@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moto X3M - PixelPlay</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/angrybirds.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade Games</a></li>
+
+                <li><a href="pc.html">PC Only</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <div id="userArea">
+                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+                        Login
+                    </button>
+
+                    <div id="profileMenu" class="profile-menu" style="display:none;">
+                        <img id="userPhoto" src="" alt="">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <div class="profile-header">
+                            <img id="dropdownPhoto" src="" alt="">
+                            <div>
+                                <h4 id="dropdownName">Player</h4>
+                                <p id="dropdownEmail">player@example.com</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <a href="#">
+                            🏆 <span>Achievements</span>
+                        </a>
+
+                        <a href="favorites.html">
+                            ❤️ <span>Favorites</span>
+                        </a>
+
+                        <a href="#">
+                            🕒 <span>Continue Playing</span>
+                        </a>
+
+                        <a href="#">
+                            ⚙️ <span>Settings</span>
+                        </a>
+
+                        <hr>
+
+                        <a href="#" id="logoutBtn">
+                            🚪 <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>PixelPlay</span>
+                </a>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="mobileSearchInput" type="text" placeholder="Search games...">
+            </div>
+
+            <a href="index.html">Home</a>
+
+            <a href="games.html">3D Games</a>
+
+            <a href="arcade.html"> Arcade Games</a>
+
+            <a href="pc.html">PC Only</a>
+
+            <a href="about.html"> About</a>
+
+        </div>
+
+    </header>
+
+    <section class="game-hero">
+
+        <div class="hero-left">
+
+            <span class="game-tag">Racing • Stunts</span>
+
+            <h1>Moto X3M</h1>
+
+            <p>
+                Race through dangerous tracks,
+                perform insane stunts, and reach the finish line as fast as possible.
+            </p>
+
+            <div class="game-meta">
+                <span>⭐ 4.8</span>
+                <span>📅 2015</span>
+                <span>📱 Mobile • PC</span>
+            </div>
+
+            <a href="#game" class="play-btn">
+                <i class="fa-solid fa-play"></i>
+                Play Moto X3M
+            </a>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="images/motox3m.jpg" alt="Moto X3M">
+
+        </div>
+
+    </section>
+
+    <section id="game" class="game-section">
+
+        <h2>Play Moto X3M</h2>
+
+        <div class="game-actions">
+            <button id="fullscreenBtn">
+                <i class="fa-solid fa-expand"></i> Fullscreen
+            </button>
+        </div>
+
+        <div class="game-tip">
+            <i class="fa-solid fa-expand"></i>
+            <span>💡 Use <strong>Fullscreen</strong> for the best gaming experience on mobile and PC.</span>
+        </div>
+
+        <div class="game-frame">
+
+            <iframe src="games/motox3m/index.html" frameborder="0" allow="fullscreen; autoplay; gamepad"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+    <section class="controls">
+
+        <h2>Controls</h2>
+
+        <ul>
+
+            <li>⬅️➡️ Use the on-screen controls to control the bike</li>
+
+            <li>🔄 Perform flips and stunts in the air</li>
+
+            <li>🏁 Reach the finish line and complete the level</li>
+
+        </ul>
+
+    </section>
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="#" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade Games</a></li>
+                <li><a href="pc.html">PC Only</a></li>
+                <li><a href="about.html">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="https://github.com/ds0404043-stack/PixelPlay"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg=="><i
+                            class="fa-brands fa-instagram"></i></a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script>
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+        const gameFrame = document.querySelector(".game-frame");
+
+        if (fullscreenBtn && gameFrame) {
+            fullscreenBtn.addEventListener("click", async () => {
+                try {
+                    if (!document.fullscreenElement) {
+                        await gameFrame.requestFullscreen();
+                        fullscreenBtn.innerHTML =
+                            '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
+                    } else {
+                        await document.exitFullscreen();
+                    }
+                } catch (error) {
+                    console.error("Fullscreen error:", error);
+                }
+            });
+
+            document.addEventListener("fullscreenchange", () => {
+                if (!document.fullscreenElement) {
+                    fullscreenBtn.innerHTML =
+                        '<i class="fa-solid fa-expand"></i> Fullscreen';
+                }
+            });
+        }
+    </script>
+    <script src="js/recent.js"></script>
+    <script>saveRecentGame("Moto X3M", "images/motox3m.jpg", "motox3m.html");</script>
+    <script src="js/search-data.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/login-modal.js"></script>
+    <script type="module" src="js/firebase.js"></script>
+</body>
+
+</html>

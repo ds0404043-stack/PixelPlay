@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> PixelPlay | Mortal Kombat Trilogy</title>
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/angrybirds.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <style>
+        /* =========================================
+   TEKKEN 3 PAGE
+========================================= */
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .hero-actions .favorite {
+            position: static;
+            width: 52px;
+            height: 52px;
+            border: none;
+            background: rgba(255, 255, 255, .08);
+            color: white;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: .3s;
+        }
+
+        .hero-actions .favorite:hover {
+            background: #ff4d6d;
+            transform: scale(1.08);
+        }
+
+        .hero-actions .favorite.active {
+            background: #ff4d6d;
+        }
+
+        .hero-actions .favorite i {
+            color: white;
+            font-size: 20px;
+        }
+
+
+        /* GAME FRAME */
+
+        .game-frame {
+            width: 100%;
+            max-width: 1200px;
+            margin: 30px auto 0;
+            background: #000;
+            border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .game-frame iframe {
+            display: block;
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+
+
+        /* ABOUT */
+
+        .game-about {
+            width: 90%;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 40px;
+            background: #111827;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 20px;
+        }
+
+        .game-about h2 {
+            margin-bottom: 20px;
+            font-size: 34px;
+        }
+
+        .game-about p {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+
+        /* MORE GAMES */
+
+        .more-games {
+            width: 90%;
+            max-width: 1200px;
+            margin: 80px auto;
+        }
+
+        .more-games>h2 {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+        }
+
+        .more-games-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .more-game-card {
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-radius: 18px;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .more-game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
+        }
+
+        .more-game-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .more-game-card h3 {
+            padding: 18px 20px 5px;
+        }
+
+        .more-game-card span {
+            display: block;
+            padding: 0 20px 20px;
+            color: #22c55e;
+            font-weight: 600;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            .game-frame iframe {
+                height: 500px;
+            }
+
+            .game-about {
+                padding: 25px;
+            }
+
+            .more-games-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 425px) {
+
+            .game-frame iframe {
+                height: 450px;
+            }
+
+            .hero-actions {
+                flex-wrap: wrap;
+            }
+
+        }
+    </style>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+
+    <header id="top">
+        <nav class="navbar">
+
+            <a href="#" class="logo">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>PixelPlay</span>
+            </a>
+
+            <ul class="nav-links">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li><a href="games.html">3D Games</a></li>
+
+                <li><a href="arcade.html">Arcade Games</a></li>
+
+                <li><a href="pc.html">PC Only</a></li>
+
+                <li><a href="about.html">About</a></li>
+
+            </ul>
+
+            <div class="nav-actions">
+
+                <div class="search-box">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                    <input id="searchInput" type="text" placeholder="Search games...">
+
+                </div>
+
+                <div id="userArea">
+                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
+                        Login
+                    </button>
+
+                    <div id="profileMenu" class="profile-menu" style="display:none;">
+                        <img id="userPhoto" src="" alt="">
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+
+                    <div id="profileDropdown" class="profile-dropdown">
+
+                        <div class="profile-header">
+                            <img id="dropdownPhoto" src="" alt="">
+                            <div>
+                                <h4 id="dropdownName">Player</h4>
+                                <p id="dropdownEmail">player@example.com</p>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <a href="#">
+                            🏆 <span>Achievements</span>
+                        </a>
+
+                        <a href="favorites.html">
+                            ❤️ <span>Favorites</span>
+                        </a>
+
+                        <a href="#">
+                            🕒 <span>Continue Playing</span>
+                        </a>
+
+                        <a href="#">
+                            ⚙️ <span>Settings</span>
+                        </a>
+
+                        <hr>
+
+                        <a href="#" id="logoutBtn">
+                            🚪 <span>Logout</span>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <button class="menu-btn">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+        <div class="overlay"></div>
+
+        <div class="mobile-menu">
+
+            <div class="mobile-top">
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <span>PixelPlay</span>
+                </a>
+
+                <button class="close-btn">&times;</button>
+
+            </div>
+
+            <div class="mobile-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input id="mobileSearchInput" type="text" placeholder="Search games...">
+            </div>
+
+            <a href="index.html">Home</a>
+
+            <a href="games.html">3D Games</a>
+
+            <a href="arcade.html"> Arcade Games</a>
+
+            <a href="pc.html">PC Only</a>
+
+            <a href="about.html"> About</a>
+
+        </div>
+
+    </header>
+
+    <section class="game-hero">
+
+        <div class="hero-left">
+
+            <span class="game-tag">
+                Fighting • Arcade • PS1
+            </span>
+
+            <h1>Mortal Kombat Trilogy</h1>
+
+            <p>
+                Enter the brutal world of Mortal Kombat Trilogy
+                and battle legendary fighters in classic PS1 combat.
+            </p>
+
+            <div class="game-meta">
+
+                <span>⭐ 4.8</span>
+                <span>📅 1996</span>
+                <span>🎮 PlayStation</span>
+
+            </div>
+
+            <a href="#game" class="play-btn">
+
+                <i class="fa-solid fa-play"></i>
+
+                Play Mortal Kombat Trilogy
+
+            </a>
+
+        </div>
+
+        <div class="hero-right">
+
+            <img src="images/mortalkombattrilogy.jpg" alt="Mortal Kombat Trilogy">
+
+        </div>
+
+    </section>
+
+    <section id="game" class="game-section">
+
+        <h2>🎮 Play Mortal Kombat Trilogy</h2>
+
+        <div class="game-actions">
+
+            <button id="fullscreenBtn">
+                <i class="fa-solid fa-expand"></i>
+                Fullscreen
+            </button>
+
+        </div>
+
+        <div class="game-tip">
+
+            <i class="fa-solid fa-gamepad"></i>
+
+            <span>
+                💡 For the best experience, use fullscreen mode.
+                Keyboard controls are available on PC.
+            </span>
+
+        </div>
+
+        <div class="game-frame">
+
+            <iframe src="games/mortal kombat/index.html" frameborder="0" allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+    <section class="controls">
+        <h2>🎮 Controls</h2>
+
+        <ul>
+            <li>⬆️⬇️⬅️➡️ — Move</li>
+            <li>👊 — Punch</li>
+            <li>🦵 — Kick</li>
+            <li>🛡️ — Block</li>
+            <li>🎮 — Special Attacks</li>
+            <li>⏸️ Esc — Pause</li>
+        </ul>
+    </section>
+
+    <section class="game-about">
+
+        <h2>About Mortal Kombat Trilogy</h2>
+
+        <p>
+            Mortal Kombat Trilogy is a classic fighting game
+            featuring legendary fighters, brutal combat,
+            special moves and iconic fatalities.
+        </p>
+
+        <p>
+            Choose your fighter, master their special moves
+            and battle your way through the Mortal Kombat tournament.
+        </p>
+
+    </section>
+
+    <section class="more-games">
+
+        <h2>🔥 More Games</h2>
+
+        <div class="more-games-container">
+
+            <a href="minecraft.html" class="more-game-card">
+
+                <img src="images/minecraft.png">
+
+                <h3>Minecraft</h3>
+
+                <span>Play Now →</span>
+
+            </a>
+
+            <a href="gta3.html" class="more-game-card">
+
+                <img src="images/gta3.jpg">
+
+                <h3>GTA III</h3>
+
+                <span>Play Now →</span>
+
+            </a>
+
+            <a href="arcade.html" class="more-game-card">
+
+                <img src="images/arcade.jpg">
+
+                <h3>Arcade Games</h3>
+
+                <span>Explore →</span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <h2>🎮 PixelPlay</h2>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+
+                <li><a href="index.html" id="homeLink">Home</a></li>
+                <li><a href="games.html">3D Games</a></li>
+                <li><a href="arcade.html">Arcade Games</a></li>
+                <li><a href="pc.html">PC Only</a></li>
+                <li><a href="about.html">About</a></li>
+            </div>
+
+            <div class="footer-social">
+
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+
+                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+
+                    <a href="https://github.com/ds0404043-stack/PixelPlay"><i class="fa-brands fa-github"></i></a>
+
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg=="><i
+                            class="fa-brands fa-instagram"></i></a>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
+
+        </div>
+
+    </footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/ab.js"></script>
+    <script src="js/recent.js"></script>
+    <script>
+        saveRecentGame(
+            "Mortal Kombat Trilogy",
+            "images/mortalkombattrilogy.jpg",
+            "mortalkombat.html"
+        );
+    </script>
+    <script src="js/search-data.js"></script>
+    <script src="js/search.js"></script>
+    <script src="js/login-modal.js"></script>
+    <script type="module" src="js/firebase.js"></script>
+
+</body>
+
+</html>
