@@ -160,36 +160,65 @@
                 const htmlContent = contentNode.textContent;
                 const doc = parser.parseFromString(htmlContent, 'text/html');
 
-                // Remove Google Play / App Store links
-                doc.querySelectorAll('a, img').forEach(el => {
-                    const text = (el.textContent || '').toLowerCase();
-                    const src = (el.getAttribute('src') || '').toLowerCase();
-                    const href = (el.getAttribute('href') || '').toLowerCase();
+                // Remove Google Play / App Store elements, including elements
+                // that the game creates later at runtime.
+                const removeStoreLinks = () => {
+                    const nodes = doc.querySelectorAll('a, img, iframe, div, span, button');
+                    nodes.forEach(el => {
+                        const text = (el.textContent || '').toLowerCase();
+                        const src = (el.getAttribute('src') || '').toLowerCase();
+                        const href = (el.getAttribute('href') || '').toLowerCase();
+                        const aria = (el.getAttribute('aria-label') || '').toLowerCase();
+                        const title = (el.getAttribute('title') || '').toLowerCase();
+                        const blob = text + ' ' + src + ' ' + href + ' ' + aria + ' ' + title;
 
-                    if (
-                        text.includes('google play') ||
-                        text.includes('app store') ||
-                        src.includes('google-play') ||
-                        src.includes('googleplay') ||
-                        src.includes('app-store') ||
-                        src.includes('appstore') ||
-                        href.includes('play.google.com') ||
-                        href.includes('apps.apple.com')
-                    ) {
-                        const parentLink = el.closest('a');
+                        const isStore =
+                            href.includes('play.google.com') ||
+                            href.includes('apps.apple.com') ||
+                            href.includes('itunes.apple.com') ||
+                            src.includes('google-play') ||
+                            src.includes('googleplay') ||
+                            src.includes('app-store') ||
+                            src.includes('appstore') ||
+                            blob.includes('google play') ||
+                            blob.includes('app store');
 
-                        if (parentLink) {
-                            parentLink.remove();
-                        } else {
-                            el.remove();
+                        if (isStore) {
+                            const target = el.closest('a') || el;
+                            target.remove();
                         }
-                    }
-                });
+                    });
+                };
 
+                // Remove anything already present.
+                removeStoreLinks();
+
+                // Remove store buttons/links created dynamically by the game.
+                const storeObserver = new MutationObserver(() => removeStoreLinks());
+                storeObserver.observe(doc.documentElement, { childList: true, subtree: true });
                 if (!doc.head) {
                     const headEl = doc.createElement('head');
                     doc.documentElement.insertBefore(headEl, doc.documentElement.firstChild);
                 }
+                // Force Moto X3M to fill the entire iframe.
+                const fullscreenStyle = doc.createElement('style');
+                fullscreenStyle.textContent = `
+                    html, body {
+                        width: 100vw !important;
+                        height: 100vh !important;
+                        margin: 0 !important;
+                        padding: 0 !important;
+                        overflow: hidden !important;
+                    }
+                    #content {
+                        width: 100vw !important;
+                        height: 100vh !important;
+                        max-width: none !important;
+                        max-height: none !important;
+                    }
+                `;
+                (doc.head || doc.documentElement).appendChild(fullscreenStyle);
+
                 const injectedHost = JSON.stringify(window.location.hostname);
                 const injectedHref = JSON.stringify(window.location.href);
                 const shimCode = `(function(){const injectedDomain=${injectedHost},injectedHref=${injectedHref},targetHosts=[];try{window.fulldomain=injectedHref,window._injected_real_host=injectedDomain}catch(e){}function shouldPatch(url){try{return!!url&&targetHosts.some(h=>-1!==url.indexOf(h))}catch(e){return!1}}function replaceDomainParam(u){try{const val=u.searchParams.get("domain");return!val||""===val.trim()||val.toLowerCase().startsWith("blob")?(u.searchParams.set("domain",injectedDomain),!0):!1}catch(e){return!1}}try{const _fetch=window.fetch;window.fetch=function(input,init){try{let urlStr=null;"string"==typeof input?urlStr=input:input instanceof Request&&(urlStr=input.url);if(urlStr&&shouldPatch(urlStr)){const uu=new URL(urlStr,location.href);replaceDomainParam(uu),"string"==typeof input?input=uu.toString():input=new Request(uu.toString(),input)}}catch(e){}return _fetch.call(this,input,init)}}catch(e){}try{const _open=XMLHttpRequest.prototype.open,_send=XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.open=function(method,url,async,user,pass){try{this._shim_url=url,this._shim_method=method}catch(e){}return _open.apply(this,arguments)},XMLHttpRequest.prototype.send=function(body){try{if(this._shim_url&&shouldPatch(this._shim_url)){const uu=new URL(this._shim_url,location.href);replaceDomainParam(uu),_open.call(this,this._shim_method||"GET",uu.toString(),!0)}}catch(e){}return _send.apply(this,arguments)}}catch(e){}try{Object.defineProperty(document,"referrer",{get:function(){return injectedHref},configurable:!0})}catch(e){try{document.referrer=injectedHref}catch(e){}}})();`;
