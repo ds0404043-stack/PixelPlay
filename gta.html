@@ -2,617 +2,1820 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GTA Vice City | Pixadu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
-    <meta charset="UTF-8">
+  <style>
+    /* =========================================================
+   PIXADU — GTA VICE CITY
+   Completely self-contained page.
+   No header.css / search.css / footer.css / gta.css.
+   ========================================================= */
+    :root {
+      --pink: #ff3d91;
+      --hot: #ff2d68;
+      --purple: #9a55ff;
+      --cyan: #38e8ff;
+      --bg: #07070d;
+      --muted: #9a95a4;
+      --line: rgba(255, 255, 255, .10);
+      --glass: rgba(255, 255, 255, .045);
+    }
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    * {
+      box-sizing: border-box
+    }
 
-    <title>GTA Vice City | PixelPlay</title>
+    html {
+      scroll-behavior: smooth
+    }
 
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/gta.css">
-    <link rel="stylesheet" href="css/search.css">
-    <link rel="stylesheet" href="css/footer.css">
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff;
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(255, 45, 135, .13), transparent 28%),
+        radial-gradient(circle at 90% 18%, rgba(105, 55, 255, .14), transparent 30%),
+        radial-gradient(circle at 50% 75%, rgba(255, 35, 100, .055), transparent 30%),
+        linear-gradient(145deg, #06060b, #100913 48%, #07080d);
+    }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    body:before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      opacity: .38;
+      background:
+        linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px);
+      background-size: 64px 64px;
+      mask-image: linear-gradient(to bottom, #000, transparent 72%);
+    }
 
+    a {
+      text-decoration: none
+    }
+
+    button {
+      font: inherit
+    }
+
+    /* ---------- NAV ---------- */
+    .vc-nav {
+      position: fixed;
+      z-index: 9999;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(1120px, calc(100% - 36px));
+      height: 64px;
+      padding: 0 14px 0 22px;
+      display: flex;
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 19px;
+      background: rgba(8, 7, 14, .78);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, .42), 0 0 40px rgba(255, 45, 120, .09);
+    }
+
+    .vc-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #fff;
+      font-size: 19px;
+      font-weight: 850;
+    }
+
+    .vc-logo i {
+      color: var(--pink);
+      filter: drop-shadow(0 0 10px rgba(255, 61, 145, .55))
+    }
+
+    .vc-back {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 16px;
+      color: #eee8ef;
+      border: 1px solid rgba(255, 61, 141, .28);
+      border-radius: 12px;
+      background: rgba(255, 45, 110, .07);
+      transition: .2s;
+    }
+
+    .vc-back:hover {
+      color: #fff;
+      border-color: rgba(255, 61, 141, .62);
+      background: rgba(255, 45, 110, .16);
+      transform: translateY(-1px);
+    }
+
+    /* ---------- HERO ---------- */
+    .vc-hero {
+      width: min(1220px, calc(100% - 48px));
+      min-height: 720px;
+      margin: auto;
+      padding: 145px 0 72px;
+      display: grid;
+      grid-template-columns: 1.04fr .96fr;
+      gap: 45px;
+      align-items: center;
+    }
+
+    .vc-copy {
+      min-width: 0
+    }
+
+    .vc-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ff7fb4;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+    }
+
+    .vc-eyebrow b {
+      color: #655f6d
+    }
+
+    .vc-title {
+      margin: 18px 0 0;
+      font-size: clamp(50px, 6vw, 82px);
+      line-height: .88;
+      letter-spacing: -4px;
+      font-weight: 950;
+    }
+
+    .vc-title-accent {
+      margin: 10px 0 22px;
+      font-size: clamp(58px, 7vw, 96px);
+      line-height: .82;
+      letter-spacing: -5px;
+      font-weight: 950;
+      color: transparent;
+      background: linear-gradient(90deg, #ff5ca7, #ff2e68 48%, #a45cff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 10px 25px rgba(255, 45, 120, .2));
+    }
+
+    .vc-description {
+      max-width: 590px;
+      margin: 0;
+      color: #aaa5b3;
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .vc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin: 24px 0;
+    }
+
+    .vc-meta span {
+      padding: 9px 12px;
+      color: #d8d3dc;
+      font-size: 12px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .vc-actions {
+      display: flex;
+      gap: 11px;
+      flex-wrap: wrap
+    }
+
+    .vc-play,
+    .vc-about-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 14px 19px;
+      border-radius: 12px;
+      font-weight: 850;
+      transition: .2s;
+    }
+
+    .vc-play {
+      color: #fff;
+      background: linear-gradient(135deg, #ff3f87, #d72762);
+      box-shadow: 0 14px 38px rgba(255, 43, 111, .25);
+    }
+
+    .vc-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 45px rgba(255, 43, 111, .35)
+    }
+
+    .vc-about-btn {
+      color: #ddd7e2;
+      border: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .vc-about-btn:hover {
+      color: #fff;
+      border-color: rgba(255, 61, 141, .4)
+    }
+
+    .vc-art {
+      position: relative;
+      min-width: 0;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .vc-art:before {
+      content: "";
+      position: absolute;
+      width: 470px;
+      height: 470px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 45, 130, .25), rgba(125, 55, 255, .10) 46%, transparent 70%);
+      filter: blur(7px);
+    }
+
+    .vc-art img {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: min(100%, 535px);
+      max-height: 485px;
+      object-fit: contain;
+      filter: drop-shadow(0 35px 50px rgba(0, 0, 0, .58)) drop-shadow(0 0 25px rgba(255, 45, 130, .13));
+      animation: vcFloat 5s ease-in-out infinite;
+    }
+
+    @keyframes vcFloat {
+      50% {
+        transform: translateY(-8px)
+      }
+    }
+
+    .vc-art-card {
+      position: absolute;
+      z-index: 2;
+      right: 0;
+      bottom: 5%;
+      padding: 12px 15px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 13px;
+      background: rgba(8, 7, 13, .72);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+    }
+
+    .vc-art-card strong {
+      display: block;
+      color: #ff5b9e;
+      font-size: 12px;
+      letter-spacing: 1.5px
+    }
+
+    .vc-art-card span {
+      display: block;
+      margin-top: 3px;
+      color: #898391;
+      font-size: 9px;
+      letter-spacing: 1px
+    }
+
+    /* ---------- STATS ---------- */
+    .vc-stats {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto 70px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .vc-stat {
+      min-height: 82px;
+      padding: 17px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, .18);
+    }
+
+    .vc-stat-icon {
+      font-size: 22px
+    }
+
+    .vc-stat strong {
+      display: block;
+      font-size: 14px
+    }
+
+    .vc-stat small {
+      display: block;
+      margin-top: 4px;
+      color: #817c89;
+      font-size: 11px
+    }
+
+    /* ---------- SECTIONS ---------- */
+    .vc-section {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto 68px;
+    }
+
+    .vc-heading {
+      text-align: center;
+      margin-bottom: 25px
+    }
+
+    .vc-heading span {
+      color: #ff5b9e;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px
+    }
+
+    .vc-heading h2 {
+      margin: 9px 0 7px;
+      font-size: 32px;
+      letter-spacing: -1px
+    }
+
+    .vc-heading p {
+      margin: 0;
+      color: #85808d;
+      font-size: 14px
+    }
+
+    /* ---------- GAME LAUNCHER ---------- */
+    .vc-game-shell {
+      padding: 10px;
+      border: 1px solid rgba(255, 61, 141, .20);
+      border-radius: 24px;
+      background: rgba(255, 255, 255, .035);
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .38);
+      backdrop-filter: blur(18px);
+    }
+
+    .vc-game-inner {
+      min-height: 245px;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 14px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 17px;
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 45, 120, .08), transparent 45%),
+        rgba(0, 0, 0, .18);
+    }
+
+    .vc-launch-play {
+      border: 0;
+      padding: 15px 25px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+      border-radius: 13px;
+      background: linear-gradient(135deg, #ff3f87, #d72762);
+      box-shadow: 0 14px 38px rgba(255, 43, 111, .25);
+      cursor: pointer;
+      font-weight: 900;
+      transition: .2s;
+    }
+
+    .vc-launch-play:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 45px rgba(255, 43, 111, .35)
+    }
+
+    .vc-ready {
+      color: #898492;
+      font-size: 12px
+    }
+
+    /* ---------- INFO ---------- */
+    .vc-info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px
+    }
+
+    .vc-card {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: 19px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .20);
+    }
+
+    .vc-card .icon {
+      font-size: 25px;
+      margin-bottom: 15px
+    }
+
+    .vc-card h3 {
+      margin: 0 0 8px
+    }
+
+    .vc-card p {
+      margin: 0;
+      color: #8f8a98;
+      line-height: 1.7;
+      font-size: 14px
+    }
+
+    /* ---------- CONTROLS ---------- */
+    .vc-controls {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .vc-control {
+      min-height: 78px;
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, .025);
+    }
+
+    .vc-control kbd {
+      padding: 5px 9px;
+      color: #ff76ac;
+      font-size: 10px;
+      border: 1px solid rgba(255, 61, 141, .22);
+      border-radius: 7px;
+      background: rgba(255, 45, 110, .10);
+    }
+
+    .vc-control span {
+      color: #aaa5b1;
+      font-size: 11px
+    }
+
+    /* ---------- ABOUT ---------- */
+    .vc-about {
+      padding: 32px;
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      gap: 45px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 21px;
+      background: var(--glass);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, .20);
+    }
+
+    .vc-about-label {
+      color: #ff5b9e;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px
+    }
+
+    .vc-about h2 {
+      margin: 9px 0 0;
+      font-size: 32px
+    }
+
+    .vc-about p {
+      margin: 0;
+      color: #9993a2;
+      line-height: 1.8;
+      font-size: 15px
+    }
+
+    /* ---------- FOOTER ---------- */
+    .vc-footer {
+      width: min(1120px, calc(100% - 36px));
+      margin: 75px auto 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 61, 141, .22);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(12, 10, 20, .96), rgba(25, 8, 19, .94));
+      box-shadow: 0 25px 70px rgba(0, 0, 0, .42), 0 0 45px rgba(255, 35, 85, .07);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .vc-footer-main {
+      display: grid;
+      grid-template-columns: 1.5fr .8fr;
+      gap: 70px;
+      padding: 40px 50px 32px;
+    }
+
+    .vc-footer h2 {
+      margin: 0 0 12px;
+      font-size: 29px
+    }
+
+    .vc-footer p {
+      max-width: 500px;
+      margin: 0;
+      color: #92909d;
+      font-size: 14px;
+      line-height: 1.7
+    }
+
+    .vc-footer h3 {
+      margin: 0 0 12px
+    }
+
+    .vc-footer ul {
+      list-style: none;
+      margin: 0;
+      padding: 0
+    }
+
+    .vc-footer li {
+      margin: 7px 0
+    }
+
+    .vc-footer a {
+      color: #92909d;
+      font-size: 14px;
+      transition: .2s
+    }
+
+    .vc-footer a:hover {
+      color: #ff3b67;
+      text-shadow: 0 0 14px rgba(255, 59, 103, .45)
+    }
+
+    .vc-footer-bottom {
+      margin: 0 50px;
+      padding: 18px 0 22px;
+      display: flex;
+      justify-content: space-between;
+      color: #6f6d79;
+      font-size: 12px;
+      border-top: 1px solid rgba(255, 255, 255, .08);
+    }
+
+    .vc-footer-bottom b {
+      color: #ff315f
+    }
+
+    /* ---------- ORIGINAL GTA OVERLAY, RECREATED LOCALLY ---------- */
+    .launcher-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 100000;
+      background: #050507;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .launcher-screen.active {
+      display: flex
+    }
+
+    .launcher-logo {
+      width: min(330px, 60vw);
+      max-height: 150px;
+      object-fit: contain;
+      margin-bottom: 20px
+    }
+
+    .launcher-screen h2 {
+      font-size: 22px;
+      margin: 0 0 18px
+    }
+
+    .loader {
+      width: min(360px, 70vw);
+      height: 7px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #1b1b20
+    }
+
+    .loader-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      animation: loadBar 3s linear forwards
+    }
+
+    @keyframes loadBar {
+      to {
+        width: 100%
+      }
+    }
+
+    .launcher-screen p {
+      color: #85818c
+    }
+
+    /* gameOverlay is hidden until gta.js opens it */
+    #gameOverlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 99998;
+      background: #000;
+    }
+
+    #gameOverlay.active {
+      display: block
+    }
+
+    #gameFrame {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #000;
+    }
+
+    .game-menu {
+      position: absolute;
+      z-index: 20;
+      top: 18px;
+      right: 18px
+    }
+
+    #gameMenuBtn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 14px;
+      color: #fff;
+      background: rgba(10, 8, 15, .72);
+      backdrop-filter: blur(15px);
+      cursor: pointer;
+    }
+
+    .game-menu-popup {
+      display: none;
+      position: absolute;
+      top: 57px;
+      right: 0;
+      width: 185px;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, .12);
+      border-radius: 15px;
+      background: rgba(12, 9, 17, .94);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 20px 55px rgba(0, 0, 0, .55);
+    }
+
+    .game-menu-popup.active {
+      display: block
+    }
+
+    .game-menu-popup button {
+      width: 100%;
+      padding: 11px;
+      border: 0;
+      border-radius: 9px;
+      color: #ddd;
+      text-align: left;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .game-menu-popup button:hover {
+      background: rgba(255, 61, 141, .12);
+      color: #fff
+    }
+
+    #cheatsPopup,
+    #clickToPlay {
+      display: none;
+      position: absolute;
+      inset: 0;
+      z-index: 30;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0, 0, 0, .70);
+    }
+
+    #cheatsPopup.active,
+    #clickToPlay.active {
+      display: flex
+    }
+
+    .cheats-box,
+    .click-box {
+      width: min(760px, 100%);
+      max-height: min(82vh, 760px);
+      overflow: auto;
+      padding: 25px;
+      border: 1px solid rgba(255, 61, 141, .22);
+      border-radius: 22px;
+      background: rgba(12, 9, 18, .94);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .65);
+    }
+
+    .cheats-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 15px
+    }
+
+    .cheats-header h2 {
+      margin: 0;
+      font-size: 21px
+    }
+
+    #closeCheats {
+      border: 0;
+      background: none;
+      color: #aaa;
+      font-size: 28px;
+      cursor: pointer
+    }
+
+    .cheats-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px
+    }
+
+    .cheat-btn {
+      padding: 11px;
+      border: 1px solid rgba(255, 255, 255, .07);
+      border-radius: 10px;
+      color: #ddd;
+      background: rgba(255, 255, 255, .035);
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .cheat-btn:hover {
+      border-color: rgba(255, 61, 141, .3);
+      background: rgba(255, 45, 110, .09)
+    }
+
+    .click-box {
+      text-align: center;
+      max-width: 540px
+    }
+
+    .click-box>i {
+      font-size: 35px;
+      color: var(--pink)
+    }
+
+    .click-box h2 {
+      margin: 12px 0
+    }
+
+    .click-box p {
+      color: #a39eab;
+      line-height: 1.6
+    }
+
+    #gotItBtn {
+      margin-top: 10px;
+      padding: 11px 25px;
+      border: 0;
+      border-radius: 10px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--pink), var(--hot));
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media(max-width:850px) {
+      .vc-hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 125px 0 55px;
+        text-align: center
+      }
+
+      .vc-eyebrow,
+      .vc-meta,
+      .vc-actions {
+        justify-content: center
+      }
+
+      .vc-art {
+        order: -1;
+        min-height: 360px
+      }
+
+      .vc-art img {
+        max-height: 350px
+      }
+
+      .vc-stats {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .vc-info-grid {
+        grid-template-columns: 1fr
+      }
+
+      .vc-controls {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .vc-about {
+        grid-template-columns: 1fr;
+        gap: 20px
+      }
+    }
+
+    @media(max-width:560px) {
+      .vc-nav {
+        top: 10px;
+        width: calc(100% - 22px)
+      }
+
+      .vc-back {
+        padding: 10px 12px
+      }
+
+      .vc-back span {
+        display: none
+      }
+
+      .vc-hero,
+      .vc-section {
+        width: calc(100% - 28px)
+      }
+
+      .vc-stats {
+        width: calc(100% - 28px);
+        grid-template-columns: 1fr 1fr
+      }
+
+      .vc-title {
+        font-size: 46px;
+        letter-spacing: -2px
+      }
+
+      .vc-title-accent {
+        font-size: 54px;
+        letter-spacing: -3px
+      }
+
+      .vc-art {
+        min-height: 300px
+      }
+
+      .vc-art img {
+        max-width: 320px;
+        max-height: 290px
+      }
+
+      .vc-footer {
+        width: calc(100% - 24px);
+        border-radius: 20px
+      }
+
+      .vc-footer-main {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 30px 25px 24px
+      }
+
+      .vc-footer-bottom {
+        margin: 0 25px;
+        flex-direction: column;
+        gap: 8px
+      }
+
+      .cheats-list {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* ---------- IMPRESSIVE VICE CITY LAUNCHER ---------- */
+    .vc-game-shell {
+      position: relative;
+      overflow: hidden;
+      min-height: 560px
+    }
+
+    .vc-launcher-bg {
+      position: absolute;
+      inset: 0;
+      background: url("images/gta vice city.png") center/cover no-repeat;
+      filter: saturate(1.25) contrast(1.08);
+      transform: scale(1.04);
+      transition: transform 1s ease
+    }
+
+    .vc-game-shell:hover .vc-launcher-bg {
+      transform: scale(1.08)
+    }
+
+    .vc-launcher-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 2, 20, .98) 0%, rgba(7, 2, 20, .84) 40%, rgba(7, 2, 20, .34) 100%), linear-gradient(0deg, rgba(4, 1, 12, .94), transparent 58%)
+    }
+
+    .vc-launcher-content {
+      position: relative;
+      z-index: 2;
+      width: min(650px, 100%);
+      padding: 58px
+    }
+
+    .vc-launcher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 14px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 50px;
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .74);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      backdrop-filter: blur(12px)
+    }
+
+    .vc-launcher-badge i {
+      color: #ff32bd;
+      text-shadow: 0 0 14px #ff32bd
+    }
+
+    .vc-launcher-small {
+      margin-top: 28px;
+      color: rgba(255, 255, 255, .72);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 6px
+    }
+
+    .vc-launcher-content h3 {
+      margin: 3px 0 12px;
+      color: #fff;
+      font-size: clamp(58px, 9vw, 104px);
+      line-height: .88;
+      font-style: italic;
+      font-weight: 950;
+      letter-spacing: -5px;
+      text-shadow: 5px 5px 0 #ff25b7, 10px 10px 0 rgba(95, 40, 255, .38), 0 0 35px rgba(255, 25, 190, .4)
+    }
+
+    .vc-launcher-tagline {
+      margin: 0 0 22px;
+      max-width: 510px;
+      color: rgba(255, 255, 255, .73);
+      font-size: 15px;
+      line-height: 1.65
+    }
+
+    .vc-launcher-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 27px
+    }
+
+    .vc-launcher-meta span {
+      padding: 7px 10px;
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .06);
+      color: rgba(255, 255, 255, .75);
+      font-size: 10px;
+      font-weight: 800;
+      backdrop-filter: blur(10px)
+    }
+
+    .vc-launcher-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 250px;
+      padding: 6px;
+      border: 0;
+      border-radius: 14px;
+      cursor: pointer;
+      color: #fff;
+      background: linear-gradient(110deg, #ff1fb4, #8b32ff, #ff1fb4);
+      background-size: 200% 100%;
+      box-shadow: 0 16px 45px rgba(255, 20, 180, .32);
+      transition: .25s ease
+    }
+
+    .vc-launcher-btn:hover {
+      transform: translateY(-3px);
+      background-position: 100% 0;
+      box-shadow: 0 20px 55px rgba(255, 20, 180, .48)
+    }
+
+    .vc-launcher-btn:active {
+      transform: scale(.97)
+    }
+
+    .vc-launcher-btn .play-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(0, 0, 0, .24)
+    }
+
+    .vc-launcher-btn .play-text {
+      flex: 1;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.2px
+    }
+
+    .vc-launcher-btn .play-arrow {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .11);
+      font-size: 20px
+    }
+
+    .vc-launcher-hint {
+      margin-top: 14px;
+      color: rgba(255, 255, 255, .42);
+      font-size: 10px
+    }
+
+    .vc-launcher-hint i {
+      color: #ff32bd;
+      margin-right: 5px
+    }
+
+    /* Loading overlay */
+    .launcher-screen {
+      background: #05020d !important;
+      overflow: hidden
+    }
+
+    .launcher-screen::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(7, 2, 20, .97), rgba(7, 2, 20, .58), rgba(7, 2, 20, .25)), linear-gradient(0deg, rgba(4, 1, 12, .95), transparent 60%);
+      z-index: 1
+    }
+
+    .vc-loader-bg {
+      position: absolute;
+      inset: 0;
+      background: url("images/gta vice city.png") center/cover no-repeat;
+      filter: blur(3px) saturate(1.2);
+      transform: scale(1.05);
+      opacity: .6
+    }
+
+    .vc-loader-card {
+      position: relative;
+      z-index: 3;
+      width: min(520px, calc(100% - 36px));
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, .13);
+      border-radius: 25px;
+      background: rgba(10, 6, 22, .72);
+      backdrop-filter: blur(24px);
+      text-align: center;
+      box-shadow: 0 30px 90px rgba(0, 0, 0, .7), 0 0 60px rgba(255, 30, 180, .12)
+    }
+
+    .vc-loader-art {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 18px
+    }
+
+    .vc-loader-art img {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, .15)
+    }
+
+    .vc-loader-art:after {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border-radius: 20px;
+      background: #ff1fb4;
+      filter: blur(28px);
+      opacity: .35
+    }
+
+    .vc-loader-label {
+      color: #ff36bd;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      margin-bottom: 9px
+    }
+
+    .vc-loader-card h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 25px;
+      font-weight: 900
+    }
+
+    .vc-loader-card h2 span {
+      color: #ff32bd
+    }
+
+    .vc-loader-card p {
+      margin: 9px 0 22px;
+      color: rgba(255, 255, 255, .5);
+      font-size: 12px
+    }
+
+    .vc-loader-track {
+      height: 6px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, .08)
+    }
+
+    .vc-loader-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, #ff1fb4, #7c3cff);
+      box-shadow: 0 0 15px #ff1fb4;
+      animation: vcLoad 2.5s ease-in-out forwards
+    }
+
+    .vc-loader-status {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      color: rgba(255, 255, 255, .3);
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px
+    }
+
+    @keyframes vcLoad {
+      from {
+        width: 5%
+      }
+
+      to {
+        width: 100%
+      }
+    }
+
+    @media(max-width:700px) {
+      .vc-game-shell {
+        min-height: 570px
+      }
+
+      .vc-launcher-bg {
+        background-position: 63% center
+      }
+
+      .vc-launcher-overlay {
+        background: linear-gradient(0deg, rgba(7, 2, 20, .98), rgba(7, 2, 20, .72) 58%, rgba(7, 2, 20, .25))
+      }
+
+      .vc-launcher-content {
+        align-self: flex-end;
+        padding: 32px 24px
+      }
+
+      .vc-launcher-small {
+        margin-top: 20px;
+        font-size: 12px;
+        letter-spacing: 4px
+      }
+
+      .vc-launcher-content h3 {
+        font-size: clamp(54px, 17vw, 82px)
+      }
+
+      .vc-launcher-tagline {
+        font-size: 14px;
+        margin: 15px 0
+      }
+
+      .vc-launcher-meta {
+        margin-bottom: 21px
+      }
+
+      .vc-launcher-btn {
+        width: 100%;
+        min-width: 0
+      }
+    }
+  </style>
 </head>
 
 <body>
 
+  <!-- PIXADU NAVBAR -->
+  <nav class="vc-nav">
+    <a class="vc-logo" href="index.html">
+      <i class="fa-solid fa-gamepad"></i><span>Pixadu</span>
+    </a>
+    <a class="vc-back" href="games.html">
+      <i class="fa-solid fa-arrow-left"></i><span>Back to Games</span>
+    </a>
+  </nav>
 
-    <header id="top">
-        <nav class="navbar">
+  <!-- HERO -->
+  <section class="vc-hero">
+    <div class="vc-copy">
+      <div class="vc-eyebrow">
+        <span>🌴 OPEN WORLD</span><b>•</b><span>ACTION</span><b>•</b><span>VICE CITY</span>
+      </div>
+      <h1 class="vc-title">GRAND THEFT</h1>
+      <div class="vc-title-accent">AUTO: VICE CITY</div>
+      <p class="vc-description">
+        Welcome to Vice City. Explore the neon-lit streets, take on missions,
+        drive through the city and build your empire in the ultimate 1980s
+        crime-world experience — directly in your browser.
+      </p>
+      <div class="vc-meta">
+        <span>⭐ 4.9 Rating</span>
+        <span>🌴 Open World</span>
+        <span>💻 PC</span>
+        <span>⚡ Play in Browser</span>
+      </div>
+      <div class="vc-actions">
+        <a class="vc-play" href="#game"><i class="fa-solid fa-play"></i> Play Vice City</a>
+        <a class="vc-about-btn" href="#about"><i class="fa-solid fa-circle-info"></i> About Game</a>
+      </div>
+    </div>
 
-            <a href="#" class="logo">
-                <i class="fa-solid fa-gamepad"></i>
-                <span>PixelPlay</span>
-            </a>
+    <div class="vc-art">
+      <div></div>
+      <img src="images/gta vice city.png" alt="GTA Vice City">
+      <div class="vc-art-card">
+        <strong>VICE CITY</strong>
+        <span>WELCOME TO PARADISE</span>
+      </div>
+    </div>
+  </section>
 
-            <ul class="nav-links">
+  <!-- STATS -->
+  <section class="vc-stats">
+    <div class="vc-stat"><span class="vc-stat-icon">⭐</span>
+      <div><strong>4.9</strong><small>Player Rating</small></div>
+    </div>
+    <div class="vc-stat"><span class="vc-stat-icon">🌴</span>
+      <div><strong>Open World</strong><small>Genre</small></div>
+    </div>
+    <div class="vc-stat"><span class="vc-stat-icon">💻</span>
+      <div><strong>PC</strong><small>Platform</small></div>
+    </div>
+    <div class="vc-stat"><span class="vc-stat-icon">⚡</span>
+      <div><strong>Browser</strong><small>Play Mode</small></div>
+    </div>
+  </section>
 
-                <li><a href="index.html">Home</a></li>
+  <!-- GAME -->
+  <section class="vc-section" id="game">
+    <div class="vc-heading">
+      <span>🎮 PIXADU ARCADE</span>
+      <h2>Ready to enter Vice City?</h2>
+      <p>Launch the full browser experience below.</p>
+    </div>
 
-                <li><a href="games.html">3D Games</a></li>
+    <div class="vc-game-shell">
+      <div class="vc-launcher-bg"></div>
+      <div class="vc-launcher-overlay"></div>
+      <div class="vc-launcher-content">
+        <div class="vc-launcher-badge"><i class="fa-solid fa-bolt"></i> PIXADU • CLASSIC EDITION</div>
+        <div class="vc-launcher-small">GRAND THEFT AUTO</div>
+        <h3>VICE CITY</h3>
+        <p class="vc-launcher-tagline">Welcome to the neon-soaked streets of Vice City. Your browser adventure starts
+          here.</p>
+        <div class="vc-launcher-meta"><span>🎮 Open World</span><span>🔥 Action</span><span>💻 PC</span><span>⚡
+            Browser</span></div>
+        <button class="vc-launcher-btn play-game">
+          <span class="play-icon"><i class="fa-solid fa-play"></i></span>
+          <span class="play-text">PLAY VICE CITY</span>
+          <span class="play-arrow">→</span>
+        </button>
+        <div class="vc-launcher-hint"><i class="fa-solid fa-bolt"></i> Game runs directly in your browser</div>
+      </div>
+    </div>
+  </section>
 
-                <li><a href="arcade.html">Arcade Games</a></li>
+  <!-- PREMIUM GTA LOADING SCREEN -->
+  <div class="launcher-screen">
+    <div class="vc-loader-bg"></div>
+    <div class="vc-loader-card">
+      <div class="vc-loader-art"><img src="images/gta vice city.png" alt="GTA Vice City"></div>
+      <div class="vc-loader-label">PIXADU GAME ENGINE</div>
+      <h2>LAUNCHING <span>VICE CITY</span></h2>
+      <p>Preparing Vice City assets...</p>
+      <div class="vc-loader-track">
+        <div class="vc-loader-bar"></div>
+      </div>
+      <div class="vc-loader-status"><span>INITIALIZING GAME</span><span>PLEASE WAIT</span></div>
+    </div>
+  </div>
 
-                <li><a href="pc.html">PC Only</a></li>
+  <!-- INFO -->
+  <section class="vc-section">
+    <div class="vc-heading">
+      <span>VICE CITY GUIDE</span>
+      <h2>Everything you need to play</h2>
+      <p>Jump into the city, master the streets, and enjoy the classic experience.</p>
+    </div>
+    <div class="vc-info-grid">
+      <article class="vc-card">
+        <div class="icon">🎮</div>
+        <h3>Play in Browser</h3>
+        <p>Launch Vice City directly from Pixadu without leaving the page.</p>
+      </article>
+      <article class="vc-card">
+        <div class="icon">🚗</div>
+        <h3>Explore the City</h3>
+        <p>Drive, explore, complete missions, and build your empire across Vice City.</p>
+      </article>
+      <article class="vc-card">
+        <div class="icon">💾</div>
+        <h3>One-Time Setup</h3>
+        <p>The first launch may require game data to load before the experience begins.</p>
+      </article>
+    </div>
+  </section>
 
-                <li><a href="about.html">About</a></li>
+  <!-- CONTROLS -->
+  <section class="vc-section">
+    <div class="vc-heading">
+      <span>CONTROLS</span>
+      <h2>Know your controls</h2>
+      <p>Use these basics once the game has loaded.</p>
+    </div>
+    <div class="vc-controls">
+      <div class="vc-control"><kbd>W</kbd><span>Move Forward</span></div>
+      <div class="vc-control"><kbd>A</kbd><span>Move Left</span></div>
+      <div class="vc-control"><kbd>S</kbd><span>Move Back</span></div>
+      <div class="vc-control"><kbd>D</kbd><span>Move Right</span></div>
+      <div class="vc-control"><kbd>Mouse</kbd><span>Look / Aim</span></div>
+      <div class="vc-control"><kbd>F / Enter</kbd><span>Enter Vehicle</span></div>
+      <div class="vc-control"><kbd>ESC</kbd><span>Game Menu</span></div>
+      <div class="vc-control"><kbd>Click</kbd><span>Focus Game</span></div>
+    </div>
+  </section>
 
-            </ul>
+  <!-- ABOUT -->
+  <section class="vc-section" id="about">
+    <div class="vc-about">
+      <div>
+        <span class="vc-about-label">ABOUT THE GAME</span>
+        <h2>Welcome to Vice City.</h2>
+      </div>
+      <p>
+        Step into the neon-lit streets of a city inspired by 1980s Miami.
+        Take on missions, discover new areas, drive through the city,
+        and experience the world of Grand Theft Auto: Vice City right from Pixadu.
+      </p>
+    </div>
+  </section>
+  <!-- GTA Overlay -->
+  <div id="gameOverlay">
 
-            <div class="nav-actions">
+    <div class="game-menu">
 
-                <div class="search-box">
+      <button id="gameMenuBtn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
 
-                    <i class="fa-solid fa-magnifying-glass"></i>
+      <div class="game-menu-popup">
 
-                    <input id="searchInput" type="text" placeholder="Search games...">
+        <button id="cheatsBtn">
+          <i class="fa-solid fa-gamepad"></i>
+          Cheats
+        </button>
 
-                </div>
+        <button id="fullscreenBtn">
+          <i class="fa-solid fa-expand"></i>
+          Fullscreen
+        </button>
 
-                <div id="userArea">
-                    <button id="loginBtn" class="login-btn" onclick="loginGoogle()">
-                        Login
-                    </button>
+        <button id="escBtn">
+          <i class="fa-solid fa-keyboard"></i>
+          ESC
+        </button>
 
-                    <div id="profileMenu" class="profile-menu" style="display:none;">
-                        <img id="userPhoto" src="" alt="">
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </div>
+        <button id="closeGame">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          Exit Game
+        </button>
 
-                    <div id="profileDropdown" class="profile-dropdown">
 
-                        <div class="profile-header">
-                            <img id="dropdownPhoto" src="" alt="">
-                            <div>
-                                <h4 id="dropdownName">Player</h4>
-                                <p id="dropdownEmail">player@example.com</p>
-                            </div>
-                        </div>
 
-                        <hr>
-
-                        <a href="#">
-                            🏆 <span>Achievements</span>
-                        </a>
-
-                        <a href="favorites.html">
-                            ❤️ <span>Favorites</span>
-                        </a>
-
-                        <a href="#">
-                            🕒 <span>Continue Playing</span>
-                        </a>
-
-                        <a href="#">
-                            ⚙️ <span>Settings</span>
-                        </a>
-
-                        <hr>
-
-                        <a href="#" id="logoutBtn">
-                            🚪 <span>Logout</span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-                <button class="menu-btn">
-
-                    <span></span>
-                    <span></span>
-                    <span></span>
-
-                </button>
-
-            </div>
-
-        </nav>
-
-        <div class="overlay"></div>
-
-        <div class="mobile-menu">
-
-            <div class="mobile-top">
-                <a href="#" class="logo">
-                    <i class="fa-solid fa-gamepad"></i>
-                    <span>PixelPlay</span>
-                </a>
-
-                <button class="close-btn">&times;</button>
-
-            </div>
-
-            <div class="mobile-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input id="mobileSearchInput" type="text" placeholder="Search games...">
-            </div>
-
-            <a href="index.html">Home</a>
-
-            <a href="games.html">3D Games</a>
-
-            <a href="arcade.html"> Arcade Games</a>
-
-            <a href="pc.html">PC Only</a>
-
-            <a href="about.html"> About</a>
-
-        </div>
-
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-
-        <div class="hero-content">
-
-            <h1>Grand Theft Auto</h1>
-
-            <h2>Vice City</h2>
-
-            <p>
-                Welcome back to the 1980s.
-                Build your criminal empire in Vice City.
-            </p>
-
-        </div>
-
-    </section>
-
-    <section class="launcher" id="game">
-
-        <h2>Vice City</h2>
-
-        <div class="launcher-box">
-
-            <button class="launcher-btn play-game">
-                <i class="fa-solid fa-play"></i>
-                PLAY GAME
-            </button>
-
-        </div>
-
-    </section>
-
-    <!-- Launcher -->
-    <div class="launcher-screen">
-
-        <img src="images/logo.png" class="launcher-logo">
-
-        <h2>Launching GTA Vice City</h2>
-
-        <div class="loader">
-            <div class="loader-bar"></div>
-        </div>
-
-        <p>Please wait...</p>
+      </div>
 
     </div>
 
-    <!-- GTA Overlay -->
-    <div id="gameOverlay">
+    <!-- Cheats Popup -->
+    <div id="cheatsPopup">
 
-        <div class="game-menu">
+      <div class="cheats-box">
 
-            <button id="gameMenuBtn">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+        <div class="cheats-header">
+          <h2>🎮 GTA Vice City Cheats</h2>
+          <button id="closeCheats">&times;</button>
+        </div>
 
-            <div class="game-menu-popup">
+        <div class="cheats-list">
 
-                <button id="cheatsBtn">
-                    <i class="fa-solid fa-gamepad"></i>
-                    Cheats
-                </button>
+          <!-- PLAYER -->
 
-                <button id="fullscreenBtn">
-                    <i class="fa-solid fa-expand"></i>
-                    Fullscreen
-                </button>
+          <button class="cheat-btn" data-cheat="health">
+            ❤️ Max Health
+          </button>
 
-                <button id="escBtn">
-                    <i class="fa-solid fa-keyboard"></i>
-                    ESC
-                </button>
+          <button class="cheat-btn" data-cheat="armor">
+            🛡️ Full Armor
+          </button>
 
-                <button id="closeGame">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Exit Game
-                </button>
+          <button class="cheat-btn" data-cheat="suicide">
+            💀 Commit Suicide
+          </button>
+
+          <button class="cheat-btn" data-cheat="fat">
+            🍔 Tommy Gets Fatter
+          </button>
+
+          <button class="cheat-btn" data-cheat="skinny">
+            🏃 Tommy Gets Skinny
+          </button>
+
+          <button class="cheat-btn" data-cheat="smoking">
+            🚬 Tommy Starts Smoking
+          </button>
 
 
+          <!-- WEAPONS -->
 
-            </div>
+          <button class="cheat-btn" data-cheat="weaponsLight">
+            🔫 Light Weapons
+          </button>
+
+          <button class="cheat-btn" data-cheat="weaponsMedium">
+            🔫 Medium Weapons
+          </button>
+
+          <button class="cheat-btn" data-cheat="weaponsHeavy">
+            💣 Heavy Weapons
+          </button>
+
+
+          <!-- VEHICLES -->
+
+          <button class="cheat-btn" data-cheat="tank">
+            🚙 Battle Tank
+          </button>
+
+          <button class="cheat-btn" data-cheat="bloodring">
+            🏎️ Bloodring Banger
+          </button>
+
+          <button class="cheat-btn" data-cheat="bloodringV2">
+            🏎️ Bloodring Banger V2
+          </button>
+
+          <button class="cheat-btn" data-cheat="caddy">
+            🛺 Golf Cart
+          </button>
+
+          <button class="cheat-btn" data-cheat="hotring">
+            🏁 Hotring Racer
+          </button>
+
+          <button class="cheat-btn" data-cheat="hotringV2">
+            🏁 Hotring Racer V2
+          </button>
+
+          <button class="cheat-btn" data-cheat="hearse">
+            🚑 Hearse
+          </button>
+
+          <button class="cheat-btn" data-cheat="sabreTurbo">
+            🏎️ Sabre Turbo
+          </button>
+
+          <button class="cheat-btn" data-cheat="garbageTruck">
+            🚛 Garbage Truck
+          </button>
+
+          <button class="cheat-btn" data-cheat="limousine">
+            🚘 Limousine
+          </button>
+
+
+          <!-- VEHICLE EFFECTS -->
+
+          <button class="cheat-btn" data-cheat="blowUpCars">
+            💥 Blow Up All Cars
+          </button>
+
+          <button class="cheat-btn" data-cheat="perfectHandling">
+            🏎️ Perfect Handling
+          </button>
+
+          <button class="cheat-btn" data-cheat="invisibleCars">
+            🚘 Invisible Cars
+          </button>
+
+          <button class="cheat-btn" data-cheat="boatsFly">
+            🚤 Boats Can Fly
+          </button>
+
+          <button class="cheat-btn" data-cheat="flyingCars">
+            ✈️ Flying Cars
+          </button>
+
+          <button class="cheat-btn" data-cheat="carsOnWater">
+            🌊 Cars On Water
+          </button>
+
+          <button class="cheat-btn" data-cheat="hugeWheels">
+            🛞 Huge Wheels
+          </button>
+
+
+          <!-- TRAFFIC -->
+
+          <button class="cheat-btn" data-cheat="aggressiveDrivers">
+            🚘 Aggressive Drivers
+          </button>
+
+          <button class="cheat-btn" data-cheat="blackTraffic">
+            🖤 Black Traffic
+          </button>
+
+          <button class="cheat-btn" data-cheat="pinkTraffic">
+            💗 Pink Traffic
+          </button>
+
+          <button class="cheat-btn" data-cheat="greenLights">
+            🚦 All Lights Green
+          </button>
+
+
+          <!-- PEDESTRIANS -->
+
+          <button class="cheat-btn" data-cheat="gangGirls">
+            👩 Gang Members → Girls
+          </button>
+
+          <button class="cheat-btn" data-cheat="armedPedestrians">
+            🔫 Armed Pedestrians
+          </button>
+
+          <button class="cheat-btn" data-cheat="womenEnterCars">
+            👩 Women Enter Your Car
+          </button>
+
+          <button class="cheat-btn" data-cheat="aggressivePedestrians">
+            😡 Aggressive Pedestrians
+          </button>
+
+          <button class="cheat-btn" data-cheat="pedestrianRiot">
+            👊 Pedestrian Riot
+          </button>
+
+          <button class="cheat-btn" data-cheat="womenChase">
+            💃 Women Chase You
+          </button>
+
+
+          <!-- WANTED LEVEL -->
+
+          <button class="cheat-btn" data-cheat="wantedUp">
+            ⭐ Wanted +2
+          </button>
+
+          <button class="cheat-btn" data-cheat="wantedDown">
+            ⭐ Clear Wanted Level
+          </button>
+
+          <button class="cheat-btn" data-cheat="mediaLevel">
+            📺 Show Media Level
+          </button>
+
+
+          <!-- GAMEPLAY -->
+
+          <button class="cheat-btn" data-cheat="fastMotion">
+            ⚡ Fast Motion
+          </button>
+
+          <button class="cheat-btn" data-cheat="slowMotion">
+            🐌 Slow Motion
+          </button>
+
+          <button class="cheat-btn" data-cheat="fastClock">
+            ⏰ Faster Game Clock
+          </button>
+
+
+          <!-- WEATHER -->
+
+          <button class="cheat-btn" data-cheat="rainy">
+            🌧️ Rainy & Stormy
+          </button>
+
+          <button class="cheat-btn" data-cheat="sunny">
+            ☀️ Sunny
+          </button>
+
+          <button class="cheat-btn" data-cheat="partlyCloudy">
+            🌤️ Partly Cloudy
+          </button>
+
+          <button class="cheat-btn" data-cheat="veryCloudy">
+            ☁️ Very Cloudy
+          </button>
+
+          <button class="cheat-btn" data-cheat="foggy">
+            🌫️ Very Foggy
+          </button>
+
+
+          <!-- CHARACTER SKINS -->
+
+          <button class="cheat-btn" data-cheat="hilary">
+            👤 Play as Hilary
+          </button>
+
+          <button class="cheat-btn" data-cheat="lance">
+            👤 Play as Lance
+          </button>
+
+          <button class="cheat-btn" data-cheat="dick">
+            👤 Play as Dick
+          </button>
+
+          <button class="cheat-btn" data-cheat="ken">
+            👤 Play as Ken
+          </button>
+
+          <button class="cheat-btn" data-cheat="jezz">
+            👤 Play as Jezz
+          </button>
+
+          <button class="cheat-btn" data-cheat="candy">
+            👤 Play as Candy
+          </button>
+
+          <button class="cheat-btn" data-cheat="mercedes">
+            👤 Play as Mercedes
+          </button>
+
+          <button class="cheat-btn" data-cheat="phil">
+            👤 Play as Phil
+          </button>
+
+          <button class="cheat-btn" data-cheat="diaz">
+            👤 Play as Ricardo Diaz
+          </button>
+
+          <button class="cheat-btn" data-cheat="sonny">
+            👤 Play as Sonny Forelli
+          </button>
 
         </div>
 
-        <!-- Cheats Popup -->
-        <div id="cheatsPopup">
-
-            <div class="cheats-box">
-
-                <div class="cheats-header">
-                    <h2>🎮 GTA Vice City Cheats</h2>
-                    <button id="closeCheats">&times;</button>
-                </div>
-
-                <div class="cheats-list">
-
-                        <!-- PLAYER -->
-
-                        <button class="cheat-btn" data-cheat="health">
-                            ❤️ Max Health
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="armor">
-                            🛡️ Full Armor
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="suicide">
-                            💀 Commit Suicide
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="fat">
-                            🍔 Tommy Gets Fatter
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="skinny">
-                            🏃 Tommy Gets Skinny
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="smoking">
-                            🚬 Tommy Starts Smoking
-                        </button>
-
-
-                        <!-- WEAPONS -->
-
-                        <button class="cheat-btn" data-cheat="weaponsLight">
-                            🔫 Light Weapons
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="weaponsMedium">
-                            🔫 Medium Weapons
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="weaponsHeavy">
-                            💣 Heavy Weapons
-                        </button>
-
-
-                        <!-- VEHICLES -->
-
-                        <button class="cheat-btn" data-cheat="tank">
-                            🚙 Battle Tank
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="bloodring">
-                            🏎️ Bloodring Banger
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="bloodringV2">
-                            🏎️ Bloodring Banger V2
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="caddy">
-                            🛺 Golf Cart
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="hotring">
-                            🏁 Hotring Racer
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="hotringV2">
-                            🏁 Hotring Racer V2
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="hearse">
-                            🚑 Hearse
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="sabreTurbo">
-                            🏎️ Sabre Turbo
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="garbageTruck">
-                            🚛 Garbage Truck
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="limousine">
-                            🚘 Limousine
-                        </button>
-
-
-                        <!-- VEHICLE EFFECTS -->
-
-                        <button class="cheat-btn" data-cheat="blowUpCars">
-                            💥 Blow Up All Cars
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="perfectHandling">
-                            🏎️ Perfect Handling
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="invisibleCars">
-                            🚘 Invisible Cars
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="boatsFly">
-                            🚤 Boats Can Fly
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="flyingCars">
-                            ✈️ Flying Cars
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="carsOnWater">
-                            🌊 Cars On Water
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="hugeWheels">
-                            🛞 Huge Wheels
-                        </button>
-
-
-                        <!-- TRAFFIC -->
-
-                        <button class="cheat-btn" data-cheat="aggressiveDrivers">
-                            🚘 Aggressive Drivers
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="blackTraffic">
-                            🖤 Black Traffic
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="pinkTraffic">
-                            💗 Pink Traffic
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="greenLights">
-                            🚦 All Lights Green
-                        </button>
-
-
-                        <!-- PEDESTRIANS -->
-
-                        <button class="cheat-btn" data-cheat="gangGirls">
-                            👩 Gang Members → Girls
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="armedPedestrians">
-                            🔫 Armed Pedestrians
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="womenEnterCars">
-                            👩 Women Enter Your Car
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="aggressivePedestrians">
-                            😡 Aggressive Pedestrians
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="pedestrianRiot">
-                            👊 Pedestrian Riot
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="womenChase">
-                            💃 Women Chase You
-                        </button>
-
-
-                        <!-- WANTED LEVEL -->
-
-                        <button class="cheat-btn" data-cheat="wantedUp">
-                            ⭐ Wanted +2
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="wantedDown">
-                            ⭐ Clear Wanted Level
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="mediaLevel">
-                            📺 Show Media Level
-                        </button>
-
-
-                        <!-- GAMEPLAY -->
-
-                        <button class="cheat-btn" data-cheat="fastMotion">
-                            ⚡ Fast Motion
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="slowMotion">
-                            🐌 Slow Motion
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="fastClock">
-                            ⏰ Faster Game Clock
-                        </button>
-
-
-                        <!-- WEATHER -->
-
-                        <button class="cheat-btn" data-cheat="rainy">
-                            🌧️ Rainy & Stormy
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="sunny">
-                            ☀️ Sunny
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="partlyCloudy">
-                            🌤️ Partly Cloudy
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="veryCloudy">
-                            ☁️ Very Cloudy
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="foggy">
-                            🌫️ Very Foggy
-                        </button>
-
-
-                        <!-- CHARACTER SKINS -->
-
-                        <button class="cheat-btn" data-cheat="hilary">
-                            👤 Play as Hilary
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="lance">
-                            👤 Play as Lance
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="dick">
-                            👤 Play as Dick
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="ken">
-                            👤 Play as Ken
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="jezz">
-                            👤 Play as Jezz
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="candy">
-                            👤 Play as Candy
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="mercedes">
-                            👤 Play as Mercedes
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="phil">
-                            👤 Play as Phil
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="diaz">
-                            👤 Play as Ricardo Diaz
-                        </button>
-
-                        <button class="cheat-btn" data-cheat="sonny">
-                            👤 Play as Sonny Forelli
-                        </button>
-
-                    </div>
-
-            </div>
-
-        </div>
-
-        <div id="clickToPlay">
-
-            <div class="click-box">
-
-                <i class="fa-solid fa-computer-mouse"></i>
-
-                <h2>⚠️ Before You Play</h2>
-
-                <p class="download-info">
-                    📦 <strong>First launch:</strong> The game requires a one-time
-                    download of approximately <strong>600 MB</strong> of game data.
-                    Once downloaded, future launches will be much faster.
-                </p>
-
-                <p>🖱️ Click or tap the game screen to get the controls.</p>
-
-                <p>⌨️ Tap the <strong>ESC</strong> button once to use joystick after you get controls.</p>
-
-                <p>📺 Play in fullscreen for the best experience.</p>
-
-                <p>🚪 Tap <strong>Exit</strong> to return to PixelPlay.</p>
-
-                <button id="gotItBtn">
-                    Got it
-                </button>
-
-            </div>
-
-        </div>
-
-        <iframe id="gameFrame" src="" allow="fullscreen" allowfullscreen>
-        </iframe>
+      </div>
 
     </div>
 
-    <!-- Footer -->
+    <div id="clickToPlay">
 
-    <footer class="footer" id="footer">
+      <div class="click-box">
 
-        <div class="footer-container">
+        <i class="fa-solid fa-computer-mouse"></i>
 
-            <div class="footer-brand">
-                <h2>🎮 PixelPlay</h2>
-                <p>
-                    Play your favorite games directly in your browser.
-                    No downloads. Just play.
-                </p>
-            </div>
+        <h2>⚠️ Before You Play</h2>
 
-            <div class="footer-links">
-                <h3>Quick Links</h3>
+        <p class="download-info">
+          📦 <strong>First launch:</strong> The game requires a one-time
+          download of approximately <strong>600 MB</strong> of game data.
+          Once downloaded, future launches will be much faster.
+        </p>
 
-                <li><a href="#" id="homeLink">Home</a></li>
-                <li><a href="games.html">3D Games</a></li>
-                <li><a href="arcade.html">Arcade Games</a></li>
-                <li><a href="pc.html">PC Only</a></li>
-                <li><a href="about.html">About</a></li>
-            </div>
+        <p>🖱️ Click or tap the game screen to get the controls.</p>
 
-            <div class="footer-social">
+        <p>⌨️ Tap the <strong>ESC</strong> button once to use joystick after you get controls.</p>
 
-                <h3>Follow Us</h3>
+        <p>📺 Play in fullscreen for the best experience.</p>
 
-                <div class="social-icons">
+        <p>🚪 Tap <strong>Exit</strong> to return to Pixadu.</p>
 
-                    <a href="#"><i class="fa-brands fa-discord"></i></a>
+        <button id="gotItBtn">
+          Got it
+        </button>
 
-                    <a href="https://github.com/ds0404043-stack/PixelPlay"><i class="fa-brands fa-github"></i></a>
+      </div>
 
-                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg=="><i
-                            class="fa-brands fa-instagram"></i></a>
+    </div>
 
-                </div>
+    <iframe id="gameFrame" src="" allow="fullscreen" allowfullscreen>
+    </iframe>
 
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-
-            © 2026 PixelPlay • Made with ❤️ by Deepak Sharma
-
-        </div>
+  </div>
 
 
-        <script src="js/gta.js"></script>
-        <script src="js/recent.js"></script>
-        <script>saveRecentGame("Gta Vice City", "images/gta vice city.png", "gta.html");</script>
-        <script src="js/header.js"></script>
-        <script src="js/search-data.js"></script>
-        <script src="js/search.js"></script>
-        <script src="js/login-modal.js"></script>
-        <script type="module" src="js/firebase.js"></script>
-        <script src="games/gtavc/cheats.js"></script>
-        <script>
-            const cheatsBtn = document.getElementById("cheatsBtn");
-            const cheatsPopup = document.getElementById("cheatsPopup");
-            const closeCheats = document.getElementById("closeCheats");
 
-            cheatsBtn.onclick = function () {
-                cheatsPopup.style.display = "flex";
-            };
+  <!-- FOOTER -->
+  <footer class="vc-footer">
+    <div class="vc-footer-main">
+      <div>
+        <h2>🎮 Pixadu</h2>
+        <p>Play your favorite games directly in your browser. No downloads. Just play.</p>
+      </div>
+      <div>
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="games.html">3D Games</a></li>
+          <li><a href="arcade.html">Arcade Games</a></li>
+          <li><a href="pc.html">PC Only</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="vc-footer-bottom">
+      <span>© 2026 Pixadu</span>
+      <span>Made with <b>♥</b> by Deepak Sharma</span>
+    </div>
+  </footer>
 
-            closeCheats.onclick = function () {
-                cheatsPopup.style.display = "none";
-            };
-        </script>
+  <!-- ONLY THE GTA GAME LOGIC IS KEPT -->
+  <script src="js/gta.js"></script>
+  <script src="games/gtavc/cheats.js"></script>
+  <script>
+    const cheatsBtn = document.getElementById("cheatsBtn");
+    const cheatsPopup = document.getElementById("cheatsPopup");
+    const closeCheats = document.getElementById("closeCheats");
+
+    if (cheatsBtn && cheatsPopup) {
+      cheatsBtn.onclick = () => cheatsPopup.style.display = "flex";
+    }
+    if (closeCheats && cheatsPopup) {
+      closeCheats.onclick = () => cheatsPopup.style.display = "none";
+    }
+  </script>
 
 </body>
 

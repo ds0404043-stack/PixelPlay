@@ -1,185 +1,660 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Minecraft - PixelPlay</title>
+    <title>Minecraft | Pixadu</title>
 
     <style>
-            body {
+        * { box-sizing: border-box; }
 
-                background: #08111f;
+        html, body {
+            margin: 0;
+            min-height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07110b;
+            color: #fff;
+        }
 
-                overflow: hidden;
+        body { overflow-x: hidden; }
 
+        .page {
+            min-height: 100vh;
+            background:
+                linear-gradient(180deg, rgba(3,10,5,.20), #07110b 55%, #050a07),
+                radial-gradient(circle at 80% 10%, rgba(76,175,80,.18), transparent 35%);
+        }
+
+        .topbar {
+            position: fixed;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(94%, 1450px);
+            height: 68px;
+            padding: 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            background: rgba(8, 15, 10, .76);
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 18px;
+            backdrop-filter: blur(18px);
+            box-shadow: 0 15px 45px rgba(0,0,0,.35);
+            z-index: 50;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: .5px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: grid;
+            place-items: center;
+            background: #35a943;
+            box-shadow: inset 0 -5px rgba(0,0,0,.15);
+        }
+
+        .brand span { font-size: 20px; }
+
+        .top-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .top-btn, .play-btn, .full-btn {
+            border: 0;
+            text-decoration: none;
+            cursor: pointer;
+            color: #fff;
+            font-weight: 800;
+            border-radius: 12px;
+            transition: .25s ease;
+        }
+
+        .top-btn {
+            padding: 11px 17px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .top-btn:hover, .full-btn:hover {
+            background: rgba(255,255,255,.14);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 650px;
+            padding: 145px max(5vw, 28px) 75px;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            align-items: center;
+            gap: 45px;
+            max-width: 1500px;
+            margin: auto;
+        }
+
+        .hero-copy { max-width: 680px; }
+
+        .eyebrow {
+            display: inline-flex;
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: rgba(77,175,80,.13);
+            border: 1px solid rgba(77,175,80,.30);
+            color: #7bea7f;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+        }
+
+        h1 {
+            margin: 16px 0 12px;
+            font-size: clamp(48px, 7vw, 92px);
+            line-height: .9;
+            letter-spacing: -4px;
+            text-transform: uppercase;
+            text-shadow: 0 8px 25px rgba(0,0,0,.5);
+        }
+
+        .hero-copy p {
+            max-width: 600px;
+            margin: 0;
+            color: #b7c5ba;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .meta span {
+            padding: 9px 12px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 10px;
+            color: #dce8de;
+            font-size: 13px;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .play-btn {
+            padding: 15px 24px;
+            background: #39b54a;
+            box-shadow: 0 12px 30px rgba(57,181,74,.25);
+        }
+
+        .play-btn:hover {
+            transform: translateY(-3px);
+            background: #46c956;
+        }
+
+        .hero-art {
+            position: relative;
+            min-height: 390px;
+            display: grid;
+            place-items: center;
+        }
+
+        .hero-art::before {
+            content: "";
+            position: absolute;
+            width: 75%;
+            height: 75%;
+            background: rgba(65,160,69,.25);
+            filter: blur(70px);
+            border-radius: 50%;
+        }
+
+        .hero-art img {
+            position: relative;
+            width: min(100%, 600px);
+            max-height: 440px;
+            object-fit: contain;
+            border-radius: 24px;
+            filter: drop-shadow(0 30px 35px rgba(0,0,0,.55));
+            transform: rotate(1deg);
+        }
+
+        .game-section {
+            width: min(94%, 1400px);
+            margin: 0 auto 80px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .section-head small {
+            color: #73dc79;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .section-head h2 {
+            margin: 6px 0 0;
+            font-size: clamp(28px, 4vw, 42px);
+        }
+
+        .game-shell {
+            position: relative;
+            padding: 10px;
+            background: #050806;
+            border: 1px solid rgba(255,255,255,.10);
+            border-radius: 22px;
+            box-shadow: 0 25px 70px rgba(0,0,0,.45);
+        }
+
+        .game-frame {
+            position: relative;
+            height: min(72vh, 800px);
+            min-height: 500px;
+            overflow: hidden;
+            border-radius: 15px;
+            background: #000;
+        }
+
+        .game-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+        }
+
+        .game-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 4px 2px;
+        }
+
+        .status {
+            color: #9cac9f;
+            font-size: 13px;
+        }
+
+        .status b { color: #6ee777; }
+
+        .full-btn {
+            padding: 10px 16px;
+            background: rgba(255,255,255,.08);
+        }
+
+        .info-grid {
+            width: min(94%, 1400px);
+            margin: 0 auto 80px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .info-card {
+            padding: 26px;
+            background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 18px;
+        }
+
+        .info-card .icon {
+            font-size: 26px;
+            margin-bottom: 14px;
+        }
+
+        .info-card h3 { margin: 0 0 8px; }
+
+        .info-card p {
+            margin: 0;
+            color: #aebcaf;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .about {
+            width: min(94%, 1100px);
+            margin: 0 auto 90px;
+            text-align: center;
+        }
+
+        .about small {
+            color: #73dc79;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+        }
+
+        .about h2 {
+            font-size: clamp(30px, 4vw, 46px);
+            margin: 8px 0 15px;
+        }
+
+        .about p {
+            max-width: 800px;
+            margin: auto;
+            color: #aebcaf;
+            line-height: 1.8;
+        }
+
+
+        /* =========================================
+           PIXADU PREMIUM FOOTER
+        ========================================= */
+        .site-footer {
+            width: min(94%, 1400px);
+            margin: 0 auto 28px;
+            padding: 42px 42px 22px;
+            background: rgba(8, 15, 10, .72);
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 24px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 20px 60px rgba(0,0,0,.30);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.4fr .8fr .8fr;
+            gap: 45px;
+            padding-bottom: 32px;
+        }
+
+        .footer-brand {
+            max-width: 420px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .footer-logo-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: #35a943;
+            box-shadow: inset 0 -5px rgba(0,0,0,.15);
+        }
+
+        .footer-brand p {
+            margin: 0;
+            color: #91a196;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .footer-column h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            width: fit-content;
+            color: #8f9c93;
+            text-decoration: none;
+            font-size: 13px;
+            transition: .25s ease;
+        }
+
+        .footer-links a:hover {
+            color: #73dc79;
+            transform: translateX(3px);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            color: #68756c;
+            font-size: 12px;
+        }
+
+        .footer-bottom strong {
+            color: #9cac9f;
+            font-weight: 600;
+        }
+
+        @media (max-width: 850px) {
+            .site-footer {
+                padding: 32px 25px 20px;
             }
 
-            .game-header {
-
-                position: fixed;
-
-                top: 20px;
-
-                left: 50%;
-
-                transform: translateX(-50%);
-
-                width: min(95%, 1500px);
-
-                height: 82px;
-
-                padding: 0 28px;
-
-                display: flex;
-
-                justify-content: space-between;
-
-                align-items: center;
-
-                border-radius: 22px;
-
-                background: rgba(11, 18, 32, .70);
-
-                backdrop-filter: blur(18px);
-
-                border: 1px solid rgba(255, 255, 255, .08);
-
-                box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
-
-                z-index: 1000;
-
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
             }
 
-            .game-title {
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
 
-                display: flex;
-
-                align-items: center;
-
-                gap: 15px;
-
+        @media (max-width: 520px) {
+            .site-footer {
+                width: 94%;
+                padding: 28px 20px 18px;
+                border-radius: 20px;
+                margin-bottom: 15px;
             }
 
-            .game-title img {
-
-                width: 55px;
-
-                height: 55px;
-
-                border-radius: 12px;
-
-                object-fit: cover;
-
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px 18px;
             }
 
-            .game-title h2 {
-
-                color: white;
-
-                font-size: 24px;
-
+            .footer-brand {
+                grid-column: 1 / -1;
             }
 
-            .game-title span {
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                line-height: 1.6;
+            }
+        }
 
-                color: #94a3b8;
-
-                font-size: 14px;
-
+        @media (max-width: 850px) {
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 125px;
+                text-align: center;
             }
 
-            .back-btn,
+            .hero-copy { margin: auto; }
 
-            .fullscreen-btn {
+            .meta, .actions { justify-content: center; }
 
-                padding: 13px 26px;
-
-                border: none;
-
-                border-radius: 50px;
-
-                background: #22c55e;
-
-                color: white;
-
-                font-weight: 600;
-
-                cursor: pointer;
-
-                text-decoration: none;
-
-                transition: .3s;
-
+            .hero-art {
+                min-height: 280px;
+                order: -1;
             }
 
-            .back-btn:hover,
+            .hero-art img { max-height: 300px; }
 
-            .fullscreen-btn:hover {
+            .info-grid { grid-template-columns: 1fr; }
 
-                transform: translateY(-2px);
+            .game-frame {
+                height: 65vh;
+                min-height: 450px;
+            }
+        }
 
-                box-shadow: 0 10px 20px rgba(34, 197, 94, .35);
-
+        @media (max-width: 520px) {
+            .topbar {
+                height: 60px;
+                top: 10px;
+                border-radius: 15px;
             }
 
-            .game {
+            .brand span { font-size: 17px; }
+            .brand-icon { width: 34px; height: 34px; }
 
-                margin-top: 110px;
-
-                height: calc(100vh - 110px);
-
+            .top-btn {
+                padding: 9px 12px;
+                font-size: 12px;
             }
 
-            iframe {
-
-                width: 100%;
-
-                height: 100%;
-
-                border: none;
-
-                border-radius: 18px;
-
+            h1 {
+                font-size: 54px;
+                letter-spacing: -2px;
             }
+
+            .hero-copy p { font-size: 15px; }
+
+            .hero-art { min-height: 220px; }
+
+            .game-frame {
+                height: 60vh;
+                min-height: 390px;
+            }
+
+            .section-head {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .game-toolbar {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .full-btn { width: 100%; }
+        }
     </style>
-
 </head>
 
 <body>
+<div class="page">
 
-    <header class="game-header">
-
-        <a href="index.html" class="back-btn">
-            ← Back
+    <header class="topbar">
+        <a class="brand" href="index.html">
+            <span class="brand-icon">🎮</span>
+            <span>Pixadu</span>
         </a>
 
-        <div class="game-title">
+        <div class="top-actions">
+            <a class="top-btn" href="games.html">← Games</a>
+        </div>
+    </header>
 
-            <img src="images/minecraft.png" alt="Minecraft">
+    <main>
+        <section class="hero">
+            <div class="hero-copy">
+                <span class="eyebrow">PIXADU • BROWSER GAMING</span>
+                <h1>Minecraft</h1>
+                <p>
+                    Build, explore and survive your own blocky world.
+                    Jump straight into Minecraft from your browser.
+                </p>
 
-            <div>
+                <div class="meta">
+                    <span>⭐ 4.9 Rating</span>
+                    <span>🧱 Sandbox</span>
+                    <span>💻 PC</span>
+                    <span>🟢 Play in Browser</span>
+                </div>
 
-                <h2>Minecraft</h2>
+                <div class="actions">
+                    <a class="play-btn" href="#game">▶ Play Minecraft</a>
+                </div>
+            </div>
 
+            <div class="hero-art">
+                <img src="images/minecraft.png" alt="Minecraft">
+            </div>
+        </section>
+
+        <section class="game-section" id="game">
+            <div class="section-head">
+                <div>
+                    <small>READY TO PLAY?</small>
+                    <h2>Minecraft in your browser</h2>
+                </div>
+            </div>
+
+            <div class="game-shell">
+                <div class="game-frame">
+                    <iframe id="gameFrame"
+                        src="games/minecraft/index.html"
+                        tabindex="0"
+                        allowfullscreen
+                        allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
+                </div>
+
+                <div class="game-toolbar">
+                    <div class="status">🟢 <b>Game Ready</b> • Click inside the game to focus controls</div>
+                    <button class="full-btn" onclick="fullscreenGame()">⛶ Fullscreen</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-grid">
+            <article class="info-card">
+                <div class="icon">🧱</div>
+                <h3>Build Anything</h3>
+                <p>Create structures, experiment with blocks and shape your own world.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="icon">🌍</div>
+                <h3>Explore</h3>
+                <p>Travel through a blocky world and discover what is waiting around you.</p>
+            </article>
+
+            <article class="info-card">
+                <div class="icon">🎮</div>
+                <h3>Browser Play</h3>
+                <p>No separate game page is needed. Launch the playable build directly from Pixadu.</p>
+            </article>
+        </section>
+
+        <section class="about">
+            <small>ABOUT THE GAME</small>
+            <h2>Build. Explore. Survive.</h2>
+            <p>
+                Minecraft is a sandbox experience built around creativity and exploration.
+                Gather resources, build your surroundings and create your own adventure.
+            </p>
+        </section>
+    </main>
+</div>
+
+
+    <footer class="site-footer">
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <span class="footer-logo-icon">🎮</span>
+                    <span>Pixadu</span>
+                </a>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="games.html">3D Games</a>
+                    <a href="arcade.html">Arcade Games</a>
+                    <a href="pc.html">PC Only</a>
+                    <a href="about.html">About</a>
+                </div>
             </div>
 
         </div>
 
-        <button class="fullscreen-btn" onclick="fullscreenGame()">
-            ⛶ Fullscreen
-        </button>
+        <div class="footer-bottom">
+            <span>© 2026 Pixadu</span>
+            <strong>Made with ❤️ by Deepak Sharma</strong>
+        </div>
+    </footer>
 
-    </header>
-    <div class="game">
 
-        <iframe id="gameFrame" src="games/minecraft/index.html" tabindex="0" allowfullscreen
-            allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
-
-    </div>
-
-    <script>
+<script>
 
         // Save recently played game
         localStorage.setItem("recentGame", JSON.stringify({
@@ -212,4 +687,6 @@
 
 </body>
 
+
+</body>
 </html>

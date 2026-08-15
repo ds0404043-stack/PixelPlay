@@ -9,141 +9,241 @@ const frame = document.querySelector("#gameFrame");
 const fullscreen = document.querySelector("#fullscreenBtn");
 const exit = document.querySelector("#closeGame");
 
-playBtn.onclick = () => {
+if (!playBtn || !launcher || !overlay || !frame) {
+    console.error("GTA: required game elements are missing.");
+} else {
 
-    launcher.classList.add("active");
+    // ================================
+    // PLAY GAME
+    // ================================
 
-    setTimeout(() => {
+    playBtn.onclick = () => {
 
-        launcher.style.display = "none";
+        launcher.classList.add("active");
 
-        overlay.classList.add("active");
-        document.querySelector(".menu-btn").style.display = "none";
+        setTimeout(() => {
 
-        frame.src = "games/gtavc/GTA_Vice_City.html";
+            launcher.style.display = "none";
 
-    }, 2500);
+            overlay.classList.add("active");
 
-};
+            // IMPORTANT:
+            // The redesigned Pixadu page does NOT use .menu-btn.
+            // Do not access it here.
 
-fullscreen.onclick = async () => {
+            frame.src = "games/gtavc/GTA_Vice_City.html";
 
-    if (!document.fullscreenElement) {
+        }, 2500);
 
-        await overlay.requestFullscreen();
+    };
 
-        // Add a fake history entry
-        history.pushState({ game: true }, "");
 
-    } else {
+    // ================================
+    // FULLSCREEN
+    // ================================
 
-        document.exitFullscreen();
+    if (fullscreen) {
+
+        fullscreen.onclick = async () => {
+
+            if (!document.fullscreenElement) {
+
+                try {
+
+                    await overlay.requestFullscreen();
+
+                    history.pushState({ game: true }, "");
+
+                } catch (err) {
+
+                    console.error("GTA fullscreen error:", err);
+
+                }
+
+            } else {
+
+                try {
+
+                    await document.exitFullscreen();
+
+                } catch (err) {
+
+                    console.error("GTA exit fullscreen error:", err);
+
+                }
+
+            }
+
+        };
 
     }
 
-};
 
-exit.onclick = () => {
+    // ================================
+    // EXIT GAME
+    // ================================
 
-    frame.src = "";
+    if (exit) {
 
-    overlay.classList.remove("active");
+        exit.onclick = () => {
 
-    launcher.style.display = "none";
+            frame.src = "";
 
-    document.querySelector(".menu-btn").style.display = "";
+            overlay.classList.remove("active");
 
-    location.reload();
+            launcher.style.display = "none";
 
-};
+            location.reload();
 
-const clickOverlay = document.querySelector("#clickToPlay");
-const gotItBtn = document.querySelector("#gotItBtn");
+        };
 
-gotItBtn.addEventListener("click", (e) => {
-
-    e.stopPropagation();
-
-    clickOverlay.classList.add("hide");
-
-    frame.focus();
-
-});
-
-
-// Handle Android back button
-window.addEventListener("popstate", async () => {
-
-    if (document.fullscreenElement) {
-
-        // Exit fullscreen on first back press
-        await document.exitFullscreen();
-
-        // Stay on the page
-        history.pushState({ game: true }, "");
-
-        return;
     }
 
-});
 
-const escBtn = document.getElementById("escBtn");
+    // ================================
+    // CLICK TO PLAY
+    // ================================
 
-escBtn.addEventListener("click", () => {
+    const clickOverlay = document.querySelector("#clickToPlay");
+    const gotItBtn = document.querySelector("#gotItBtn");
 
-    frame.contentWindow.postMessage({
-        action: "releaseCursor"
-    }, "*");
+    if (gotItBtn && clickOverlay) {
 
-});
+        gotItBtn.addEventListener("click", (e) => {
 
-const toolbar = document.querySelector(".game-toolbar");
+            e.stopPropagation();
 
-fullscreen.onclick = async () => {
-    if (!document.fullscreenElement) {
-        await overlay.requestFullscreen();
+            clickOverlay.classList.add("hide");
+
+            frame.focus();
+
+        });
+
+    }
+
+
+    // ================================
+    // ANDROID / BROWSER BACK
+    // ================================
+
+    window.addEventListener("popstate", async () => {
+
+        if (document.fullscreenElement) {
+
+            try {
+
+                await document.exitFullscreen();
+
+            } catch (err) {
+
+                console.error("GTA fullscreen exit error:", err);
+
+            }
+
+            history.pushState({ game: true }, "");
+
+        }
+
+    });
+
+
+    // ================================
+    // ESC BUTTON
+    // ================================
+
+    const escBtn = document.getElementById("escBtn");
+
+    if (escBtn) {
+
+        escBtn.addEventListener("click", () => {
+
+            if (frame.contentWindow) {
+
+                frame.contentWindow.postMessage(
+                    {
+                        action: "releaseCursor"
+                    },
+                    "*"
+                );
+
+            }
+
+        });
+
+    }
+
+
+    // ================================
+    // GAME TOOLBAR
+    // ================================
+
+    const toolbar = document.querySelector(".game-toolbar");
+
+    let hideTimer;
+
+
+    function showToolbar() {
+
+        if (!toolbar) return;
 
         toolbar.style.opacity = "1";
 
-        setTimeout(() => {
-            toolbar.style.opacity = "0";
+        clearTimeout(hideTimer);
+
+        hideTimer = setTimeout(() => {
+
+            if (document.fullscreenElement) {
+
+                toolbar.style.opacity = "0";
+
+            }
+
         }, 2500);
+
     }
-};
 
-let hideTimer;
 
-overlay.addEventListener("mousemove", showToolbar);
-overlay.addEventListener("touchstart", showToolbar);
+    if (toolbar) {
 
-function showToolbar() {
-    toolbar.style.opacity = "1";
+        overlay.addEventListener("mousemove", showToolbar);
 
-    clearTimeout(hideTimer);
+        overlay.addEventListener("touchstart", showToolbar);
 
-    hideTimer = setTimeout(() => {
-        if (document.fullscreenElement) {
-            toolbar.style.opacity = "0";
-        }
-    }, 2500);
+    }
+
+
+    // ================================
+    // GAME MENU
+    // ================================
+
+    const gameMenuBtn =
+        document.getElementById("gameMenuBtn");
+
+    const gameMenuPopup =
+        document.querySelector(".game-menu-popup");
+
+
+    if (gameMenuBtn && gameMenuPopup) {
+
+        gameMenuBtn.addEventListener("click", (e) => {
+
+            e.stopPropagation();
+
+            gameMenuPopup.classList.toggle("active");
+
+        });
+
+
+        document.addEventListener("click", (e) => {
+
+            if (!e.target.closest(".game-menu")) {
+
+                gameMenuPopup.classList.remove("active");
+
+            }
+
+        });
+
+    }
+
 }
-
-const gameMenuBtn = document.getElementById("gameMenuBtn");
-const gameMenuPopup = document.querySelector(".game-menu-popup");
-
-gameMenuBtn.addEventListener("click", () => {
-
-    gameMenuPopup.classList.toggle("active");
-
-});
-
-document.addEventListener("click", (e) => {
-
-    if (
-        !e.target.closest(".game-menu")
-    ) {
-        gameMenuPopup.classList.remove("active");
-    }
-
-});
-
