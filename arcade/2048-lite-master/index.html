@@ -1,314 +1,378 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="utf-8">
-  <title>PixelPlay | 2048</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link href="style/main.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon" href="meta/apple-touch-icon.png">
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x1096.png"
-    media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"> <!-- iPhone 5+ -->
-  <link rel="apple-touch-startup-image" href="meta/apple-touch-startup-image-640x920.png"
-    media="(device-width: 320px) and (device-height: 480px) and (-webkit-device-pixel-ratio: 2)">
-  <!-- iPhone, retina -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport"
-    content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0, maximum-scale=1, user-scalable=no, minimal-ui">
-  <style>
-    html,
-    body {
-
-      background: #0f172a;
-
-      min-height: 100%;
-
-    }
-
-    body {
-
-      margin: 0;
-
-      font-family: 'Poppins', sans-serif;
-
-      background: #0f172a;
-
-      color: white;
-    }
-
-    .topbar {
-
-      display: flex;
-
-      justify-content: space-between;
-
-      align-items: center;
-
-      padding: 20px 40px;
-
-      background: #111827;
-
-      border-bottom: 1px solid rgba(255, 255, 255, .08);
-    }
-
-    .back-btn {
-
-      background: #f59e0b;
-
-      color: #111827;
-
-      padding: 12px 22px;
-
-      border-radius: 12px;
-
-      font-weight: 700;
-
-      transition: .3s;
-    }
-
-    .back-btn:hover {
-
-      transform: translateY(-3px);
-    }
-
-    .topbar h1 {
-
-      color: #f59e0b;
-
-      margin: 0;
-
-      font-size: 32px;
-    }
-
-    .game-card {
-
-      width: 1100px;
-
-      max-width: 95%;
-
-      margin: 40px auto;
-
-      padding: 20px;
-
-      background: #1e293b;
-
-      border-radius: 20px;
-
-      box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
-
-      display: flex;
-
-      justify-content: center;
-
-      align-items: center;
-
-    }
-
-    .container{
-
-    width:100%;
-
-    max-width:500px;
-
-    margin:0 auto;
-
-    padding:0;
-
-}
-
-    /*=========================
-RESPONSIVE
-=========================*/
-
-    @media (max-width:768px) {
-
-      .topbar {
-        flex-direction: column;
-        gap: 18px;
-        text-align: center;
-        padding: 20px;
-      }
-
-      .topbar h1 {
-
-        margin-top: 10px;
-
-      }
-
-      .back-btn {
-
-        width: auto;
-
-        min-width: 180px;
-
-        padding: 10px 18px;
-
-      }
-
-      .game-card {
-
-        width: calc(100% - 24px);
-
-        margin: 12px;
-
-        padding: 20px 12px;
-
-        border-radius: 18px;
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: flex-start;
-
-        overflow: visible;
-      }
-
-      .container {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .heading {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-      }
-
-      .scores-container {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-      }
-
-      .above-game {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        text-align: center;
-      }
-
-      .game-intro {
-        width: 100%;
-        text-align: center;
-      }
-
-      .restart-button {
-        float: none;
-        width: 220px;
-        margin: 0 auto;
-      }
-
-      .game-explanation {
-
-        width: 100%;
-
-        max-width: 280px;
-
-        text-align: center;
-
-        margin: 20px auto 0;
-
-        line-height: 1.7;
-      }
-
-    }
-  </style>
+    <title>
+        2048 Game
+    </title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="game.js"></script>
+    <script src="highscore.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <style>
+        :root {
+            --bg: #0b0f19;
+            --card: #111827;
+            --board: #1f2937;
+            --cell: #374151;
+            --accent: #f59e0b;
+            --text: #fff;
+            --muted: #9ca3af
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+            overflow-x: hidden;
+            background: radial-gradient(circle at top, #172033 0, #0b0f19 55%);
+            color: var(--text);
+            font-family: Rubik, Arial, sans-serif
+        }
+
+        body {
+            padding: 18px 12px 24px
+        }
+
+        #gametitle {
+            width: min(520px, 100%);
+            margin: 0 auto;
+            padding: 0 0 14px !important;
+            text-align: left !important
+        }
+
+        #gametitle h1 {
+            margin: 0;
+            font-size: clamp(34px, 8vw, 52px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1
+        }
+
+        #gametitle h1::after {
+            content: ' • PUZZLE';
+            font-size: .25em;
+            letter-spacing: 2px;
+            color: var(--accent);
+            vertical-align: middle;
+            margin-left: 7px
+        }
+
+        #scorediv {
+            width: min(520px, 100%);
+            margin: 0 auto;
+            padding: 0 !important;
+            overflow: visible
+        }
+
+        #scoretable {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 8px 0;
+            table-layout: fixed;
+            margin: 0 0 14px
+        }
+
+        #scoretable td {
+            padding: 0;
+            vertical-align: middle
+        }
+
+        .scoretitle {
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .09);
+            border-radius: 13px;
+            padding: 9px 10px !important;
+            text-align: center !important;
+            font-size: 13px;
+            line-height: 1.2;
+            white-space: nowrap
+        }
+
+        .scoretitle b {
+            display: block;
+            font-size: 9px;
+            letter-spacing: 1.3px;
+            color: var(--muted);
+            margin-bottom: 4px
+        }
+
+        #score,
+        #highscore {
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff
+        }
+
+        .newgamemid {
+            width: 35%
+        }
+
+        .newgamemid a {
+            text-decoration: none
+        }
+
+        #newgamebtn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 0 12px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: #111827;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(245, 158, 11, .22);
+            transition: .2s ease
+        }
+
+        #newgamebtn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.06)
+        }
+
+        #game {
+            position: relative;
+            width: min(520px, 100%);
+            margin: 0 auto !important;
+            padding: 10px !important;
+            border-radius: 22px;
+            background: rgba(17, 24, 39, .96);
+            border: 1px solid rgba(255, 255, 255, .1);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, .42);
+            overflow: visible !important;
+            text-align: center
+        }
+
+        #game:before {
+            content: '2048';
+            display: block;
+            text-align: left;
+            padding: 0 4px 9px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            color: var(--muted)
+        }
+
+        #game>* {
+            max-width: 100%
+        }
+
+        #game canvas,
+        #game table,
+        #game img,
+        #game svg {
+            max-width: 100%;
+            height: auto
+        }
+
+        #cover {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: none;
+            place-items: center;
+            background: #0b0f19;
+            color: #f59e0b
+        }
+
+        #covertext {
+            font-size: clamp(60px, 16vw, 120px);
+            font-weight: 900;
+            letter-spacing: -6px
+        }
+
+        #highscores {
+            display: none !important
+        }
+
+        /* scale only the actual game area on narrow screens; controls stay crisp */
+        @media(max-width:600px) {
+            body {
+                padding: 12px 8px 18px
+            }
+
+            #scoretable {
+                border-spacing: 5px 0
+            }
+
+            #score,
+            #highscore {
+                font-size: 18px
+            }
+
+            #newgamebtn {
+                min-height: 44px;
+                font-size: 12px
+            }
+
+            #game {
+                padding: 8px !important;
+                border-radius: 18px
+            }
+        }
+
+        @media(max-width:425px) {
+            body {
+                padding: 10px 6px 16px
+            }
+
+            #gametitle {
+                padding-bottom: 11px !important
+            }
+
+            #gametitle h1 {
+                font-size: 38px
+            }
+
+            #scoretable {
+                border-spacing: 3px 0
+            }
+
+            .scoretitle {
+                padding: 8px 5px !important;
+                font-size: 11px
+            }
+
+            .scoretitle b {
+                font-size: 8px
+            }
+
+            #score,
+            #highscore {
+                font-size: 16px
+            }
+
+            .newgamemid {
+                width: 37%
+            }
+
+            #newgamebtn {
+                min-height: 40px;
+                padding: 0 7px;
+                font-size: 11px
+            }
+
+            #game {
+                padding: 6px !important
+            }
+        }
+
+        @media(max-width:360px) {
+            body {
+                padding: 8px 4px 14px
+            }
+
+            #gametitle h1 {
+                font-size: 34px
+            }
+
+            #scoretable {
+                border-spacing: 2px 0
+            }
+
+            #score,
+            #highscore {
+                font-size: 14px
+            }
+
+            .scoretitle {
+                padding: 7px 3px !important
+            }
+
+            #newgamebtn {
+                min-height: 37px;
+                font-size: 10px;
+                padding: 0 5px
+            }
+
+            #game {
+                padding: 5px !important
+            }
+        }
+
+        @media(max-width:320px) {
+            #gametitle h1 {
+                font-size: 31px
+            }
+
+            #scoretable {
+                border-spacing: 1px 0
+            }
+
+            .scoretitle b {
+                font-size: 7px
+            }
+
+            #score,
+            #highscore {
+                font-size: 13px
+            }
+
+            #newgamebtn {
+                min-height: 35px;
+                font-size: 9px
+            }
+
+            #game {
+                padding: 4px !important;
+                border-radius: 15px
+            }
+        }
+    </style>
 
 </head>
 
 <body>
-
-  <div class="topbar">
-
-    <a href="../../2048.html" class="back-btn">
-
-      ← Back to PixelPlay
-
-    </a>
-
-    <h1>🟨 2048</h1>
-
-  </div>
-
-  <div class="game-card">
-    <div class="container">
-      <div class="heading">
-        <h1 class="title">2048</h1>
-        <div class="scores-container">
-          <div class="score-container">0</div>
-          <div class="best-container">0</div>
-        </div>
-      </div>
-      <div class="above-game">
-        <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
-        <a class="restart-button">New Game</a>
-      </div>
-      <div class="game-container">
-        <div class="game-message">
-          <p></p>
-          <div class="lower">
-            <a class="keep-playing-button">Keep going</a>
-            <a class="retry-button">Try again</a>
-          </div>
-        </div>
-        <div class="grid-container">
-          <div class="grid-row">
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-          </div>
-          <div class="grid-row">
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-          </div>
-          <div class="grid-row">
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-          </div>
-          <div class="grid-row">
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-            <div class="grid-cell"></div>
-          </div>
-        </div>
-        <div class="tile-container">
-        </div>
-      </div>
-      <p class="game-explanation">
-        <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two
-        tiles with the same number touch, they <strong>merge into one!</strong>
-      </p>
+    <div id="gametitle" style="text-align:center">
+        <h1>
+            2048 Game
+        </h1>
     </div>
-    <script src="js/bind_polyfill.js"></script>
-    <script src="js/classlist_polyfill.js"></script>
-    <script src="js/animframe_polyfill.js"></script>
-    <script src="js/keyboard_input_manager.js"></script>
-    <script src="js/html_actuator.js"></script>
-    <script src="js/grid.js"></script>
-    <script src="js/tile.js"></script>
-    <script src="js/local_storage_manager.js"></script>
-    <script src="js/game_manager.js"></script>
-    <script src="js/application.js"></script>
-  </div>
+    <div id="scorediv" align="center">
+        <table id='scoretable'>
+            <tr id='scorerow'>
+                <td class='scoretitle'>
+                    <b>Score:</b>
+                    <span id="score">0</span>
+                </td>
+                <td class="newgamemid">
+                    <a href="">
+                        <div id="newgamebtn" href="">
+                            <b>New Game</b>
+                        </div>
+                    </a>
+                </td>
+                <td class="scoretitle" style="text-align:right">
+                    <b>Best:</b>
+                    <span id="highscore">0</span>
+                </td>
+            </tr>
+        </table>
+    </div>
 
+    <div id="game" align="center">
+
+    </div>
+    <div id="cover">
+        <div id="covertext">
+            2048
+        </div>
+    </div>
+
+    <div style="display:none" id="highscores">
+    </div>
 </body>
 
 </html>

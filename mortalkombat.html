@@ -19,14 +19,77 @@ linear-gradient(180deg,#090506,#050505 60%,#020202)}
 body:after{content:"";position:fixed;inset:0;z-index:-1;background:repeating-linear-gradient(115deg,rgba(255,255,255,.015) 0 1px,transparent 1px 55px);pointer-events:none}
 
 /* FLOATING NAVBAR */
-.topbar{position:fixed;top:20px;left:50%;transform:translateX(-50%);z-index:1000;width:min(1120px,calc(100% - 36px));height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 10px 0 20px;background:rgba(12,8,10,.76);border:1px solid rgba(255,255,255,.11);border-radius:18px;backdrop-filter:blur(22px);box-shadow:0 15px 45px rgba(0,0,0,.5)}
-.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-size:21px;font-weight:800}
-.brand i{color:#e31b32}
-.back-games{display:inline-flex;align-items:center;gap:9px;min-height:42px;padding:0 17px;border-radius:12px;color:#fff;text-decoration:none;font-size:13px;font-weight:700;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);transition:.25s}
-.back-games:hover{background:rgba(220,20,40,.15);border-color:rgba(220,20,40,.45);box-shadow:0 8px 25px rgba(220,20,40,.18);transform:translateY(-1px)}
-.back-games i{transition:.25s}.back-games:hover i{transform:translateX(-3px)}
+.topbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: min(1120px, calc(100% - 36px));
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 0 20px;
+            background: rgba(10, 10, 15, .68);
+            border: 1px solid rgba(255, 255, 255, .11);
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, .35);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+        }
 
-/* HERO */
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+
+        .brand i {
+            color: #ef4444;
+            font-size: 19px;
+        }
+
+        .back-games {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 42px;
+            padding: 0 17px;
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+            transition: all .25s ease;
+        }
+
+        .back-games i {
+            font-size: 12px;
+            transition: transform .25s ease;
+        }
+
+        .back-games:hover {
+            background: rgba(239, 68, 68, .15);
+            border-color: rgba(239, 68, 68, .38);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, .12);
+            transform: translateY(-1px);
+        }
+
+        .back-games:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* HERO */
 .hero{width:min(1250px,90%);min-height:550px;margin:125px auto 35px;display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#ff4055;font-size:12px;font-weight:900;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
 .eyebrow:before{content:"";width:30px;height:3px;background:#d71936}
@@ -105,13 +168,33 @@ body:after{content:"";position:fixed;inset:0;z-index:-1;background:repeating-lin
 @media(max-width:520px){.site-footer{width:94%;padding:28px 20px 18px;border-radius:20px}.footer-main{grid-template-columns:1fr 1fr;gap:25px 18px}.footer-brand{grid-column:1/-1}.footer-bottom{flex-direction:column;align-items:flex-start;line-height:1.6}}
 @media(max-width:425px){.back-games span{display:none}.back-games{width:38px;padding:0}.hero h1{font-size:45px}.poster{min-height:250px}.poster img{max-height:250px}.game-frame iframe{height:450px}}
 </style>
+
+<style>
+/* EXACT TEKKEN 3 BACK BUTTON BEHAVIOR */
+@media(max-width:600px){
+    .topbar{height:64px;padding:0 18px;}
+    .back-games{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:42px;padding:0 17px;}
+}
+@media(max-width:425px){
+    .back-games span{display:none;}
+    .back-games{width:38px;padding:0;justify-content:center;gap:0;}
+    .back-games i{font-size:12px;margin:0;}
+}
+</style>
 </head>
 
 <body>
 <header class="topbar">
-<a href="index.html" class="brand"><i class="fa-solid fa-gamepad"></i><span>Pixadu</span></a>
-<a href="games.html" class="back-games"><i class="fa-solid fa-arrow-left"></i><span>Back to Games</span></a>
-</header>
+        <a href="index.html" class="brand">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>Pixadu</span>
+        </a>
+
+        <a href="games.html" class="back-games">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Games</span>
+        </a>
+    </header>
 
 <section class="hero">
 <div>

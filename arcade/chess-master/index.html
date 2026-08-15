@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>PixelPlay | Chess</title>
+    <title>Pixadu | Chess</title>
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.8.24.custom.min.js"></script>
     <script type="text/javascript" src="js/garbochess.js"></script>
@@ -25,225 +25,132 @@
             width: 50px;
         }
 
-        /*==============================
-PIXELPLAY THEME
-==============================*/
+        /* =========================================================
+           PIXELPLAY CHESS — PREMIUM UI
+           Game logic and chess assets remain unchanged.
+           ========================================================= */
+
+        :root {
+            --bg: #07090d;
+            --panel: rgba(18, 20, 28, .82);
+            --panel-2: rgba(24, 27, 37, .88);
+            --border: rgba(255,255,255,.10);
+            --text: #f8fafc;
+            --muted: #a7adbb;
+            --accent: #ef4444;
+            --accent-soft: rgba(239,68,68,.14);
+            --green: #22c55e;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-width: 0;
+            background: var(--bg);
+        }
 
         body {
-
             margin: 0;
-
-            background: #0f172a;
-
-            color: #ffffff;
-
+            min-width: 0;
+            min-height: 100vh;
+            color: var(--text);
             font-family: 'Poppins', sans-serif;
+            background:
+                radial-gradient(circle at 15% 0%, rgba(239,68,68,.13), transparent 32%),
+                radial-gradient(circle at 85% 20%, rgba(34,197,94,.08), transparent 28%),
+                linear-gradient(145deg, #07090d 0%, #0c0f16 52%, #07090d 100%);
+            overflow-x: hidden;
         }
 
-        .topbar {
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: aligny;
-
-            padding: 20px 40px;
-
-            background: #111827;
-
-            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            opacity: .22;
+            background-image:
+                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+            background-size: 42px 42px;
+            mask-image: linear-gradient(to bottom, black, transparent 80%);
         }
 
-        .topbar h1 {
 
-            margin: 0;
-
-            color: #22c55e;
-
-            font-size: 30px;
-        }
-
-        .back-btn {
-
-            color: #22c55e;
-
-            text-decoration: none;
-
-            font-weight: 600;
-
-            transition: .3s;
-        }
-
-        .back-btn:hover {
-
-            opacity: .7;
-        }
-
-        .game-card {
-
-            width: 900px;
-
-            max-width: 95%;
-
-            margin: 40px auto;
-
-            background: #1e293b;
-
-            border-radius: 20px;
-
-            padding: 30px;
-
-            box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
-        }
-
-        select,
-        input {
-
-            background: #0f172a;
-
-            color: white;
-
-            border: 1px solid #334155;
-
-            border-radius: 8px;
-
-            padding: 8px 12px;
-
-            margin: 5px;
-        }
-
-        a {
-
-            color: #22c55e;
-
-            text-decoration: none;
-
-            font-weight: 600;
-        }
-
-        textarea {
-
-            width: 100%;
-
-            max-width: 500px;
-
-            background: #0f172a;
-
-            color: white;
-
-            border: 1px solid #334155;
-
-            border-radius: 10px;
-
-            padding: 10px;
-
-            margin-top: 15px;
-        }
-
-        #FenTextBox {
-
-            width: 500px;
-
-            max-width: 100%;
-        }
-
-        #board {
-
-            margin: 25px auto;
-        }
-
+        /* Keep original chess sprites untouched */
         .no-highlight {
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
         }
 
-        .sprite-bishop_black {
-            background-position: 0 0;
-            width: 45px;
-            height: 45px;
+        .sprite-bishop_black { background-position: 0 0; width:45px; height:45px; }
+        .sprite-bishop_white { background-position: 0 -95px; width:45px; height:45px; }
+        .sprite-king_black { background-position: 0 -190px; width:45px; height:45px; }
+        .sprite-king_white { background-position: 0 -285px; width:45px; height:45px; }
+        .sprite-knight_black { background-position: 0 -380px; width:45px; height:45px; }
+        .sprite-knight_white { background-position: 0 -475px; width:45px; height:45px; }
+        .sprite-pawn_black { background-position: 0 -570px; width:45px; height:45px; }
+        .sprite-pawn_white { background-position: 0 -665px; width:45px; height:45px; }
+        .sprite-queen_black { background-position: 0 -760px; width:45px; height:45px; }
+        .sprite-queen_white { background-position: 0 -855px; width:45px; height:45px; }
+        .sprite-rook_black { background-position: 0 -950px; width:45px; height:45px; }
+        .sprite-rook_white { background-position: 0 -1045px; width:45px; height:45px; }
+
+            .game-card {
+                width: calc(100% - 16px);
+                margin-top: 20px;
+                padding: 10px;
+            }
+
+            .game-card::before {
+                margin-bottom: 12px;
+                font-size: 9px;
+            }
+
+            .game-card > div[align="center"] > div:first-child {
+                gap: 7px;
+            }
+
+            .game-card > div[align="center"] > div:first-child .back-btn {
+                min-height: 38px;
+            }
+
+            select,
+            input {
+                max-width: 100%;
+            }
+
+            #TimePerMove {
+                width: 65px;
+            }
+
+            textarea {
+                min-height: 90px;
+            }
         }
 
-        .sprite-bishop_white {
-            background-position: 0 -95px;
-            width: 45px;
-            height: 45px;
+        @media (max-width: 360px) {
+
+            .game-card {
+                width: calc(100% - 10px);
+                padding: 7px;
+            }
+
+            .game-card > div[align="center"] > div:first-child {
+                padding: 7px;
+            }
+
+            #board {
+                padding: 3px;
+                border-radius: 9px;
+            }
         }
 
-        .sprite-king_black {
-            background-position: 0 -190px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-king_white {
-            background-position: 0 -285px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-knight_black {
-            background-position: 0 -380px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-knight_white {
-            background-position: 0 -475px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-pawn_black {
-            background-position: 0 -570px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-pawn_white {
-            background-position: 0 -665px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-queen_black {
-            background-position: 0 -760px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-queen_white {
-            background-position: 0 -855px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-rook_black {
-            background-position: 0 -950px;
-            width: 45px;
-            height: 45px;
-        }
-
-        .sprite-rook_white {
-            background-position: 0 -1045px;
-            width: 45px;
-            height: 45px;
-        }
     </style>
 </head>
 
 <body class="pixelplay-theme">
-
-    <div class="topbar">
-
-        <a href="../../chess.html" class="back-btn">
-            ← Back to PixelPlay
-        </a>
-
-        <h1>♟ Chess</h1>
-
-    </div>
-
-    <div class="game-card">
+<div class="game-card">
         <div align="center">
 
             <div>
