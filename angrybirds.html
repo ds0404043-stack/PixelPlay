@@ -211,24 +211,6 @@
             box-shadow: 0 16px 42px rgba(239, 68, 68, .32);
         }
 
-        .fav {
-            width: 49px;
-            height: 49px;
-            border-radius: 13px;
-            border: 1px solid rgba(255, 255, 255, .1);
-            background: rgba(255, 255, 255, .06);
-            color: #fff;
-            cursor: pointer;
-            font-size: 17px;
-            transition: .25s;
-        }
-
-        .fav:hover,
-        .fav.active {
-            background: #ef4444;
-            border-color: #ef4444;
-        }
-
         .poster {
             position: relative;
             min-height: 430px;
@@ -321,17 +303,39 @@
         }
 
         .game-frame {
+            position: relative;
+            width: 100%;
+            height: 700px;
             background: #000;
             border-radius: 8px 8px 16px 16px;
             overflow: hidden;
             line-height: 0;
+            isolation: isolate;
         }
 
         .game-frame iframe {
             display: block;
-            width: 100%;
-            height: 700px;
+            width: 125%;
+            height: 125%;
+            min-height: 0;
             border: 0;
+            background: #000;
+            transform: scale(.8);
+            transform-origin: top left;
+        }
+
+
+        .game-frame:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+        }
+
+        .game-frame:fullscreen iframe {
+            width: 125%;
+            height: 125%;
+            transform: scale(.8);
+            transform-origin: top left;
         }
 
         /* INFO */
@@ -492,7 +496,7 @@
                 height: 48px;
             }
 
-            .game-frame iframe {
+            .game-frame {
                 height: 500px;
             }
 
@@ -503,6 +507,16 @@
 
             .about h2 {
                 font-size: 27px;
+            }
+        }
+
+
+        @media(max-width:600px) {
+            .game-frame iframe {
+                width: 142.857%;
+                height: 142.857%;
+                transform: scale(.7);
+                transform-origin: top left;
             }
         }
 
@@ -532,7 +546,7 @@
                 max-height: 250px;
             }
 
-            .game-frame iframe {
+            .game-frame {
                 height: 450px;
             }
         }
@@ -554,7 +568,7 @@
 
         .footer-main {
             display: grid;
-            grid-template-columns: 1.4fr .8fr;
+            grid-template-columns: 1.4fr .8fr .8fr;
             gap: 45px;
             padding-bottom: 32px;
         }
@@ -616,6 +630,43 @@
             transform: translateX(3px);
         }
 
+
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid rgba(239, 68, 68, .20);
+            border-radius: 12px;
+            color: #9299a8;
+            background: rgba(239, 68, 68, .06);
+            text-decoration: none;
+            font-size: 19px;
+            transition: .25s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-color: rgba(239, 68, 68, .55);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(239, 68, 68, .20);
+        }
+
         .footer-bottom {
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, .07);
@@ -656,8 +707,8 @@
             }
 
             .footer-main {
-                grid-template-columns: 1fr 1fr;
-                gap: 25px 18px;
+                grid-template-columns: 1fr;
+                gap: 25px;
             }
 
             .footer-brand {
@@ -759,9 +810,6 @@
                 <a href="#game" class="play">
                     <i class="fa-solid fa-play"></i> Play Angry Birds
                 </a>
-                <button class="fav" aria-label="Favorite">
-                    <i class="fa-regular fa-heart"></i>
-                </button>
             </div>
         </div>
 
@@ -787,7 +835,8 @@
                 </button>
             </div>
             <div class="game-frame">
-                <iframe src="games/angry birds/Angry Birds Chrome.html" frameborder="0" allowfullscreen></iframe>
+                <iframe src="games/angry birds/Angry Birds Chrome.html" frameborder="0"
+                    allow="fullscreen; autoplay; gamepad; pointer-lock; keyboard-lock" allowfullscreen></iframe>
             </div>
         </div>
     </section>
@@ -797,7 +846,8 @@
         <div class="info-card">
             <i class="fa-solid fa-bullseye"></i>
             <h3>Perfect Your Aim</h3>
-            <p>Choose the right angle and launch each bird with precision to hit the weakest point of every structure.</p>
+            <p>Choose the right angle and launch each bird with precision to hit the weakest point of every structure.
+            </p>
         </div>
         <div class="info-card">
             <i class="fa-solid fa-burst"></i>
@@ -836,8 +886,6 @@
                     try {
                         if (!document.fullscreenElement) {
                             await gameFrame.requestFullscreen();
-                            fullscreenBtn.innerHTML =
-                                '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
                         } else {
                             await document.exitFullscreen();
                         }
@@ -847,31 +895,13 @@
                 });
 
                 document.addEventListener("fullscreenchange", () => {
-                    if (!document.fullscreenElement) {
+                    if (document.fullscreenElement === gameFrame) {
+                        fullscreenBtn.innerHTML =
+                            '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
+                    } else {
                         fullscreenBtn.innerHTML =
                             '<i class="fa-solid fa-expand"></i> Fullscreen';
                     }
-                });
-            }
-
-            /* ---------- Favorite ---------- */
-            const favoriteBtn = document.querySelector(".fav");
-
-            if (favoriteBtn) {
-                const icon = favoriteBtn.querySelector("i");
-                const key = "pixadu_favorite_angrybirds";
-
-                if (localStorage.getItem(key) === "true") {
-                    favoriteBtn.classList.add("active");
-                    icon.className = "fa-solid fa-heart";
-                }
-
-                favoriteBtn.addEventListener("click", () => {
-                    const active = favoriteBtn.classList.toggle("active");
-                    icon.className = active
-                        ? "fa-solid fa-heart"
-                        : "fa-regular fa-heart";
-                    localStorage.setItem(key, active);
                 });
             }
 
@@ -892,6 +922,13 @@
                 console.warn("Could not save recent game:", error);
             }
         });
+    </script>
+
+    <script src="js/recent.js"></script>
+    <script>
+        if (typeof saveRecentGame === 'function') {
+            saveRecentGame("Angry Birds", "images/angrybirdshero.png", "angrybirds.html");
+        }
     </script>
 
     <!-- PIXADU FOOTER -->
@@ -918,6 +955,17 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
+            <div class="footer-column footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Discord" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://github.com/ds0404043-stack/PixelPlay" target="_blank" rel="noopener"
+                        aria-label="GitHub" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg==" target="_blank"
+                        rel="noopener" aria-label="Instagram" title="Instagram"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
 
         <div class="footer-bottom">
@@ -927,4 +975,5 @@
     </footer>
 
 </body>
+
 </html>

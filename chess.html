@@ -373,9 +373,9 @@
       max-width: 900px
     }
 
-    .art { 
-        object-position: center
-      }
+    .art {
+      object-position: center
+    }
 
     .footer {
       width: min(1200px, calc(100% - 40px));
@@ -584,7 +584,7 @@
   <nav class="topbar">
     <a href="index.html" class="logo"><span class="logo-icon"><i
           class="fa-solid fa-gamepad"></i></span><span>Pixadu</span></a>
-    <a href="games.html" class="back"><i class="fa-solid fa-arrow-left"></i><span>Back to Games</span></a>
+    <a href="arcade.html" class="back"><i class="fa-solid fa-arrow-left"></i><span>Back to Games</span></a>
   </nav>
   <main>
     <section class="hero">
@@ -595,8 +595,7 @@
           mind directly in your browser.</p>
         <div class="meta"><span>⭐ 4.9 Rating</span><span>🌐 Browser</span><span>♟ Single Player</span><span>🤖 AI
             Opponent</span></div>
-        <div class="actions"><a href="#game" class="play"><i class="fa-solid fa-play"></i> Play Chess</a><a
-            href="#about" class="ghost">Learn More</a></div>
+        <div class="actions"><a href="#game" class="play"><i class="fa-solid fa-play"></i> Play Chess</a></div>
       </div>
       <div><img class="art" src="images/chess.jpg" alt="Chess"></div>
     </section>
@@ -678,17 +677,17 @@
       </div>
       <div class="footer-links">
         <h3>Quick Links</h3>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="games.html">3D Games</a></li>
-        <li><a href="arcade.html">Arcade Games</a></li>
-        <li><a href="pc.html">PC Only</a></li>
-        <li><a href="about.html">About</a></li>
+        <a href="index.html">Home</a>
+        <a href="games.html">3D Games</a>
+        <a href="arcade.html">Arcade Games</a>
+        <a href="pc.html">PC Only</a>
+        <a href="about.html">About</a>
       </div>
       <div class="footer-social">
         <h3>Follow Us</h3>
         <div class="social-icons">
           <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-          <a href="https://github.com/pixadu/" aria-label="GitHub"><i
+          <a href="https://github.com/ds0404043-stack/PixelPlay" target="_blank" rel="noopener" aria-label="GitHub"><i
               class="fa-brands fa-github"></i></a>
           <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg==" aria-label="Instagram"><i
               class="fa-brands fa-instagram"></i></a>
@@ -700,6 +699,13 @@
 
   <script>
     const frame = document.getElementById("gameFrame"); document.getElementById("fullscreenBtn").onclick = () => document.fullscreenElement ? document.exitFullscreen() : frame.requestFullscreen?.();
+  </script>
+
+  <script src="js/recent.js"></script>
+  <script>
+    if (typeof saveRecentGame === 'function') {
+      saveRecentGame("Chess", "images/chess.jpg", "chess.html");
+    }
   </script>
 </body>
 

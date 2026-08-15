@@ -338,17 +338,35 @@
         }
 
         .game-frame {
+            position: relative;
+            width: 100%;
+            height: 700px;
             background: #000;
             border-radius: 8px 8px 16px 16px;
             overflow: hidden;
-            line-height: 0
+            line-height: 0;
+            isolation: isolate;
         }
 
         .game-frame iframe {
             display: block;
             width: 100%;
-            height: 700px;
-            border: 0
+            height: 100%;
+            min-height: 0;
+            border: 0;
+            background: #000;
+        }
+
+        .game-frame:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            background: #000;
+        }
+
+        .game-frame:fullscreen iframe {
+            width: 100%;
+            height: 100%;
         }
 
         /* TIP + INFO */
@@ -585,6 +603,39 @@
             transform: translateX(3px);
         }
 
+
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, .055);
+            border: 1px solid rgba(255, 255, 255, .09);
+            transition: .25s ease;
+        }
+
+        .social-icons a:hover {
+            background: linear-gradient(135deg, #ffb300, #ff6a00);
+            border-color: #ffb000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(255, 176, 0, .22);
+        }
+
         .footer-bottom {
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, .07);
@@ -704,7 +755,7 @@
                 height: 48px
             }
 
-            .game-frame iframe {
+            .game-frame {
                 height: 500px
             }
 
@@ -731,12 +782,45 @@
             }
 
             .footer-main {
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 25px 18px
             }
 
             .footer-brand {
                 grid-column: 1/-1
+            }
+
+
+            .footer-social h3 {
+                margin: 3px 0 15px;
+                color: #fff;
+                font-size: 14px;
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .social-icons a {
+                width: 40px;
+                height: 40px;
+                display: grid;
+                place-items: center;
+                border-radius: 11px;
+                color: #fff;
+                text-decoration: none;
+                background: rgba(255, 255, 255, .055);
+                border: 1px solid rgba(255, 255, 255, .09);
+                transition: .25s ease;
+            }
+
+            .social-icons a:hover {
+                background: linear-gradient(135deg, #ffb300, #ff6a00);
+                border-color: #ffb000;
+                transform: translateY(-2px);
+                box-shadow: 0 8px 22px rgba(255, 176, 0, .22);
             }
 
             .footer-bottom {
@@ -768,7 +852,7 @@
                 max-height: 250px
             }
 
-            .game-frame iframe {
+            .game-frame {
                 height: 450px
             }
         }
@@ -902,6 +986,17 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
+
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                    <a href="https://github.com/ds0404043-stack/PixelPlay" aria-label="GitHub"><i
+                            class="fa-brands fa-github"></i></a>
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg==" aria-label="Instagram"><i
+                            class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
 
         <div class="footer-bottom">
@@ -920,8 +1015,6 @@
                     try {
                         if (!document.fullscreenElement) {
                             await gameFrame.requestFullscreen();
-                            fullscreenBtn.innerHTML =
-                                '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
                         } else {
                             await document.exitFullscreen();
                         }
@@ -931,7 +1024,10 @@
                 });
 
                 document.addEventListener("fullscreenchange", () => {
-                    if (!document.fullscreenElement) {
+                    if (document.fullscreenElement === gameFrame) {
+                        fullscreenBtn.innerHTML =
+                            '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
+                    } else {
                         fullscreenBtn.innerHTML =
                             '<i class="fa-solid fa-expand"></i> Fullscreen';
                     }
@@ -954,22 +1050,14 @@
                     localStorage.setItem(key, active);
                 });
             }
-
-            const recentGame = {
-                name: "Moto X3M",
-                image: "images/motox3m.jpg",
-                url: "motox3m.html"
-            };
-
-            try {
-                let recent = JSON.parse(localStorage.getItem("pixadu_recent_games") || "[]");
-                recent = recent.filter(game => game.url !== recentGame.url);
-                recent.unshift(recentGame);
-                localStorage.setItem("pixadu_recent_games", JSON.stringify(recent.slice(0, 10)));
-            } catch (error) {
-                console.warn("Could not save recent game:", error);
-            }
         });
+    </script>
+
+    <script src="js/recent.js"></script>
+    <script>
+        if (typeof saveRecentGame === 'function') {
+            saveRecentGame("Moto X3M", "images/moto x3m.jpg", "motox3m.html");
+        }
     </script>
 
 </body>

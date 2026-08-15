@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>Minecraft | Pixadu</title>
 
     <style>
@@ -268,18 +269,22 @@
 
         .game-frame {
             position: relative;
-            height: min(72vh, 800px);
-            min-height: 500px;
+            width: 100%;
+            height: 700px;
             overflow: hidden;
             border-radius: 15px;
             background: #000;
+            line-height: 0;
+            isolation: isolate;
         }
 
         .game-frame iframe {
+            display: block;
             width: 100%;
             height: 100%;
+            min-height: 0;
             border: 0;
-            display: block;
+            background: #000;
         }
 
         .game-toolbar {
@@ -472,6 +477,43 @@
             transform: translateX(3px);
         }
 
+
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            border: 1px solid rgba(115, 220, 121, .20);
+            border-radius: 12px;
+            color: #9cac9f;
+            background: rgba(115, 220, 121, .06);
+            text-decoration: none;
+            font-size: 19px;
+            transition: .25s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+            background: linear-gradient(135deg, #39b54a, #2d8f39);
+            border-color: rgba(115, 220, 121, .55);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(57, 181, 74, .20);
+        }
+
         .footer-bottom {
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, .07);
@@ -486,6 +528,19 @@
         .footer-bottom strong {
             color: #9cac9f;
             font-weight: 600;
+        }
+
+
+        /* Fullscreen game wrapper */
+        .game-frame:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+        }
+
+        .game-frame:fullscreen iframe {
+            width: 100%;
+            height: 100%;
         }
 
         @media (max-width: 850px) {
@@ -887,7 +942,7 @@
                 <div class="game-shell">
                     <div class="game-frame">
                         <iframe id="gameFrame" src="games/minecraft/index.html" tabindex="0" allowfullscreen
-                            allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
+                            allow="fullscreen; autoplay; gamepad; pointer-lock; keyboard-lock"></iframe>
                     </div>
 
                     <div class="game-toolbar">
@@ -954,6 +1009,15 @@
                 </div>
             </div>
 
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Discord" title="Discord"><i class="fab fa-discord"></i></a>
+                    <a href="https://github.com/ds0404043-stack/PixelPlay" target="_blank" rel="noopener" aria-label="GitHub" title="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg==" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+
         </div>
 
         <div class="footer-bottom">
@@ -975,13 +1039,19 @@
 
         function fullscreenGame() {
             const iframe = document.getElementById("gameFrame");
+            const gameFrame = iframe.closest(".game-frame");
 
-            if (iframe.requestFullscreen) {
-                iframe.requestFullscreen();
-            } else if (iframe.webkitRequestFullscreen) {
-                iframe.webkitRequestFullscreen();
-            } else if (iframe.msRequestFullscreen) {
-                iframe.msRequestFullscreen();
+            if (document.fullscreenElement) {
+                if (document.exitFullscreen) document.exitFullscreen();
+            } else {
+                const request =
+                    gameFrame.requestFullscreen ||
+                    gameFrame.webkitRequestFullscreen ||
+                    gameFrame.msRequestFullscreen;
+
+                if (request) {
+                    request.call(gameFrame);
+                }
             }
 
             setTimeout(() => {
@@ -992,10 +1062,21 @@
             }, 300);
         }
 
+        document.addEventListener("fullscreenchange", () => {
+            const iframe = document.getElementById("gameFrame");
+            const gameFrame = iframe.closest(".game-frame");
+            const button = document.querySelector(".full-btn");
+
+            if (document.fullscreenElement === gameFrame) {
+                button.innerHTML = "⛶ Exit Fullscreen";
+            } else {
+                button.innerHTML = "⛶ Fullscreen";
+            }
+
+            iframe.focus();
+        });
+
     </script>
-
-</body>
-
 
 </body>
 

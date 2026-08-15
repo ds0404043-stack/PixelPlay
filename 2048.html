@@ -211,24 +211,6 @@
             box-shadow: 0 16px 42px rgba(245, 158, 11, .32);
         }
 
-        .fav {
-            width: 49px;
-            height: 49px;
-            border-radius: 13px;
-            border: 1px solid rgba(255, 255, 255, .1);
-            background: rgba(255, 255, 255, .06);
-            color: #fff;
-            cursor: pointer;
-            font-size: 17px;
-            transition: .25s;
-        }
-
-        .fav:hover,
-        .fav.active {
-            background: #f59e0b;
-            border-color: #f59e0b;
-        }
-
         .poster {
             position: relative;
             min-height: 430px;
@@ -554,7 +536,7 @@
 
         .footer-main {
             display: grid;
-            grid-template-columns: 1.4fr .8fr;
+            grid-template-columns: 1.3fr .8fr .8fr;
             gap: 45px;
             padding-bottom: 32px;
         }
@@ -630,6 +612,43 @@
         .footer-bottom strong {
             color: #aab2c0;
             font-weight: 600;
+        }
+
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 9px;
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .09);
+            transition: .25s ease;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-2px);
+            color: #fff;
+            background: rgba(245, 158, 11, .14);
+            border-color: rgba(245, 158, 11, .38);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, .12);
+        }
+
+        .social-icons i {
+            font-size: 17px;
         }
 
         @media (max-width: 850px) {
@@ -731,7 +750,7 @@
             <span>Pixadu</span>
         </a>
 
-        <a href="games.html" class="back-games">
+        <a href="arcade.html" class="back-games">
             <i class="fa-solid fa-arrow-left"></i>
             <span>Back to Games</span>
         </a>
@@ -753,7 +772,6 @@
             </div>
             <div class="actions">
                 <a href="#game" class="play"><i class="fa-solid fa-play"></i> Play 2048</a>
-                <button class="fav" aria-label="Favorite"><i class="fa-regular fa-heart"></i></button>
             </div>
         </div>
 
@@ -840,49 +858,14 @@
                     }
                 });
             }
-
-            const favoriteBtn = document.querySelector(".fav");
-
-            if (favoriteBtn) {
-                const icon = favoriteBtn.querySelector("i");
-                const key = "pixadu_favorite_2048";
-
-                if (localStorage.getItem(key) === "true") {
-                    favoriteBtn.classList.add("active");
-                    icon.className = "fa-solid fa-heart";
-                }
-
-                favoriteBtn.addEventListener("click", () => {
-                    const active = favoriteBtn.classList.toggle("active");
-
-                    icon.className = active
-                        ? "fa-solid fa-heart"
-                        : "fa-regular fa-heart";
-
-                    localStorage.setItem(key, active);
-                });
-            }
-
-            const recentGame = {
-                name: "2048",
-                image: "images/2048.jpg",
-                url: "2048.html"
-            };
-
-            try {
-                let recent = JSON.parse(
-                    localStorage.getItem("pixadu_recent_games") || "[]"
-                );
-
-                recent = recent.filter(game => game.url !== recentGame.url);
-                recent.unshift(recentGame);
-                recent = recent.slice(0, 10);
-
-                localStorage.setItem("pixadu_recent_games", JSON.stringify(recent));
-            } catch (error) {
-                console.warn("Could not save recent game:", error);
-            }
         });
+    </script>
+
+    <script src="js/recent.js"></script>
+    <script>
+        if (typeof saveRecentGame === 'function') {
+            saveRecentGame("2048", "images/2048.jpg", "2048.html");
+        }
     </script>
 
 
@@ -910,8 +893,23 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
-        </div>
 
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" aria-label="Discord">
+                        <i class="fa-brands fa-discord"></i>
+                    </a>
+                    <a href="https://github.com/ds0404043-stack/PixelPlay" target="_blank" rel="noopener"
+                        aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                    <a href="https://www.instagram.com/pixelplayweb?igsh=MWcwMW43enI4OWYxbg==" target="_blank"
+                        rel="noopener" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="footer-bottom">

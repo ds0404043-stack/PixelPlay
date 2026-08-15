@@ -827,13 +827,11 @@ a {
 }
 
 .choose-card img {
-
     width: 100%;
-
-    height: 250px;
-
+    height: auto;
+    display: block;
     object-fit: cover;
-
+    background: none;
 }
 
 .choose-card h3 {
@@ -1381,108 +1379,6 @@ a {
 
 }
 
-/* =====================================================
-   13. FOOTER
-===================================================== */
-
-.footer {
-    margin-top: 100px;
-    background: #0b1220;
-    border-top: 1px solid rgba(255, 255, 255, .08);
-}
-
-.footer-container {
-    width: 90%;
-    max-width: 1400px;
-    margin: auto;
-    padding: 60px 0;
-
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 50px;
-}
-
-.footer-brand h2 {
-    color: #22c55e;
-    margin-bottom: 20px;
-}
-
-.footer-brand p {
-    color: #94a3b8;
-    line-height: 1.8;
-    max-width: 380px;
-}
-
-.footer-links,
-.footer-social {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-links h3,
-.footer-social h3 {
-    margin-bottom: 20px;
-}
-
-.footer-links a {
-    color: #cbd5e1;
-    margin-bottom: 12px;
-    transition: .3s;
-}
-
-.footer-links a:hover {
-    color: #22c55e;
-    transform: translateX(6px);
-}
-
-.social-icons {
-    display: flex;
-    gap: 18px;
-}
-
-.social-icons a {
-    width: 45px;
-    height: 45px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-radius: 50%;
-    background: #1e293b;
-
-    transition: .3s;
-}
-
-.social-icons a:hover {
-    background: #22c55e;
-    transform: translateY(-5px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid rgba(255, 255, 255, .08);
-    color: #94a3b8;
-}
-
-/* Footer Responsive */
-
-@media (max-width:768px) {
-
-    .footer-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .footer-brand p {
-        max-width: none;
-    }
-
-    .social-icons {
-        justify-content: center;
-    }
-}
 
 /* =====================================================
    14. RESPONSIVE
@@ -1630,19 +1526,22 @@ a {
 
     .recently-played .game-card {
         flex-direction: column;
-        text-align: center;
+        align-items: center;
+        /* text-align: center; */
     }
 
-    .recently-played img {
+    .recently-played .game-card img {
         width: 100%;
-        max-width: 220px;
+        max-width: 360px;
+        height: 200px;
+        object-fit: cover;
+        display: block;
     }
 
     .recently-played .game-info {
         width: 100%;
+        box-sizing: border-box;
     }
-
-
 
     .featured .game-card {
         flex-direction: column;
@@ -1676,11 +1575,5 @@ a {
 
     .feature-card {
         width: 100%;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        text-align: center;
-        gap: 30px;
     }
 }

@@ -1,249 +1,303 @@
 console.log("GTA Loaded");
 
-const playBtn = document.querySelector(".play-game");
-const launcher = document.querySelector(".launcher-screen");
+const gtaPlayBtn = document.querySelector(".play-game");
+const gtaLauncher = document.querySelector("#gtaLauncher");
+const gameOverlay = document.querySelector("#gameOverlay");
+const gameFrame = document.querySelector("#gameFrame");
 
-const overlay = document.querySelector("#gameOverlay");
-const frame = document.querySelector("#gameFrame");
+const gtaFullscreenBtn = document.querySelector("#fullscreenBtn");
+const gtaExitBtn = document.querySelector("#closeGame");
+const gtaEscBtn = document.querySelector("#escBtn");
 
-const fullscreen = document.querySelector("#fullscreenBtn");
-const exit = document.querySelector("#closeGame");
+const gameMenuBtn = document.querySelector("#gameMenuBtn");
+const gtaMenu = document.querySelector(".game-menu");
 
-if (!playBtn || !launcher || !overlay || !frame) {
-    console.error("GTA: required game elements are missing.");
-} else {
+const continueGameBtn = document.querySelector("#continueGameBtn");
 
-    // ================================
-    // PLAY GAME
-    // ================================
+const cheatsBtn = document.querySelector("#cheatsBtn");
+const cheatsPopup = document.querySelector("#cheatsPopup");
+const closeCheats = document.querySelector("#closeCheats");
 
-    playBtn.onclick = () => {
+let gtaStarted = false;
+let gtaContinued = false;
 
-        launcher.classList.add("active");
 
-        setTimeout(() => {
+/* =========================================
+   LAUNCHER
+========================================= */
 
-            launcher.style.display = "none";
+function showLauncher() {
+    if (!gtaLauncher) return;
 
-            overlay.classList.add("active");
+    gtaLauncher.classList.add("active");
+    gtaLauncher.style.display = "flex";
+}
 
-            // IMPORTANT:
-            // The redesigned Pixadu page does NOT use .menu-btn.
-            // Do not access it here.
+function hideLauncher() {
+    if (!gtaLauncher) return;
 
-            frame.src = "games/gtavc/GTA_Vice_City.html";
+    gtaLauncher.classList.remove("active");
+    gtaLauncher.style.display = "none";
+}
 
-        }, 2500);
 
+/* =========================================
+   START VICE CITY
+========================================= */
+
+function startViceCity() {
+
+    if (!gameOverlay || !gameFrame) return;
+
+    gtaStarted = true;
+
+    // Open the game layer FIRST
+    gameOverlay.classList.add("active");
+
+    // Load Vice City only once
+    if (
+        !gameFrame.src ||
+        !gameFrame.src.includes("GTA_Vice_City.html")
+    ) {
+        gameFrame.src = "games/gtavc/GTA_Vice_City.html";
+    }
+}
+
+
+/* =========================================
+   PLAY VICE CITY
+   ONLY SHOW INSTRUCTIONS
+========================================= */
+
+if (gtaPlayBtn) {
+
+    gtaPlayBtn.onclick = (e) => {
+
+        e.preventDefault();
+
+        gtaStarted = false;
+        gtaContinued = false;
+
+        showLauncher();
     };
+}
 
 
-    // ================================
-    // FULLSCREEN
-    // ================================
+/* =========================================
+   CONTINUE PLAYING
+   THIS BUTTON STARTS THE GAME
+========================================= */
 
-    if (fullscreen) {
+if (continueGameBtn) {
 
-        fullscreen.onclick = async () => {
+    continueGameBtn.onclick = (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        gtaContinued = true;
+
+        // Start the game FIRST
+        startViceCity();
+
+        // Then hide instructions
+        hideLauncher();
+
+        // Focus the game
+        try {
+            gameFrame.focus();
+            gameFrame.contentWindow?.focus();
+        } catch (error) {
+            console.warn("Could not focus GTA iframe");
+        }
+    };
+}
+
+
+/* =========================================
+   GAME MENU
+========================================= */
+
+if (gameMenuBtn && gtaMenu) {
+
+    gameMenuBtn.addEventListener("click", (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        gtaMenu.classList.toggle("open");
+    });
+
+    document.addEventListener("click", (e) => {
+
+        if (!gtaMenu.contains(e.target)) {
+            gtaMenu.classList.remove("open");
+        }
+    });
+}
+
+
+/* =========================================
+   FULLSCREEN
+========================================= */
+
+if (gtaFullscreenBtn) {
+
+    gtaFullscreenBtn.onclick = async () => {
+
+        gtaMenu?.classList.remove("open");
+
+        try {
 
             if (!document.fullscreenElement) {
 
-                try {
+                await gameOverlay.requestFullscreen();
 
-                    await overlay.requestFullscreen();
-
-                    history.pushState({ game: true }, "");
-
-                } catch (err) {
-
-                    console.error("GTA fullscreen error:", err);
-
-                }
+                history.pushState(
+                    { game: true },
+                    ""
+                );
 
             } else {
 
-                try {
-
-                    await document.exitFullscreen();
-
-                } catch (err) {
-
-                    console.error("GTA exit fullscreen error:", err);
-
-                }
-
-            }
-
-        };
-
-    }
-
-
-    // ================================
-    // EXIT GAME
-    // ================================
-
-    if (exit) {
-
-        exit.onclick = () => {
-
-            frame.src = "";
-
-            overlay.classList.remove("active");
-
-            launcher.style.display = "none";
-
-            location.reload();
-
-        };
-
-    }
-
-
-    // ================================
-    // CLICK TO PLAY
-    // ================================
-
-    const clickOverlay = document.querySelector("#clickToPlay");
-    const gotItBtn = document.querySelector("#gotItBtn");
-
-    if (gotItBtn && clickOverlay) {
-
-        gotItBtn.addEventListener("click", (e) => {
-
-            e.stopPropagation();
-
-            clickOverlay.classList.add("hide");
-
-            frame.focus();
-
-        });
-
-    }
-
-
-    // ================================
-    // ANDROID / BROWSER BACK
-    // ================================
-
-    window.addEventListener("popstate", async () => {
-
-        if (document.fullscreenElement) {
-
-            try {
-
                 await document.exitFullscreen();
-
-            } catch (err) {
-
-                console.error("GTA fullscreen exit error:", err);
-
             }
 
-            history.pushState({ game: true }, "");
+        } catch (error) {
 
+            console.error(
+                "Fullscreen error:",
+                error
+            );
+        }
+    };
+}
+
+
+/* =========================================
+   RELEASE CURSOR
+========================================= */
+
+if (gtaEscBtn) {
+
+    gtaEscBtn.addEventListener("click", () => {
+
+        gtaMenu?.classList.remove("open");
+
+        try {
+
+            gameFrame?.contentWindow?.postMessage(
+                {
+                    action: "releaseCursor"
+                },
+                "*"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Release Cursor error:",
+                error
+            );
+        }
+    });
+}
+
+
+/* =========================================
+   CHEATS
+========================================= */
+
+if (cheatsBtn && cheatsPopup) {
+
+    cheatsBtn.addEventListener("click", (e) => {
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        cheatsPopup.classList.add("active");
+
+        gtaMenu?.classList.remove("open");
+    });
+}
+
+
+if (closeCheats && cheatsPopup) {
+
+    closeCheats.addEventListener("click", () => {
+
+        cheatsPopup.classList.remove("active");
+    });
+}
+
+
+/* =========================================
+   EXIT GAME
+========================================= */
+
+if (gtaExitBtn) {
+
+    gtaExitBtn.onclick = () => {
+
+        gtaMenu?.classList.remove("open");
+
+        if (gameFrame) {
+            gameFrame.src = "";
         }
 
+        if (gameOverlay) {
+            gameOverlay.classList.remove("active");
+        }
+
+        gtaStarted = false;
+        gtaContinued = false;
+
+        location.reload();
+    };
+}
+
+
+/* =========================================
+   BROWSER BACK
+========================================= */
+
+window.addEventListener("popstate", async () => {
+
+    if (document.fullscreenElement) {
+
+        try {
+
+            await document.exitFullscreen();
+
+            history.pushState(
+                { game: true },
+                ""
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Exit fullscreen error:",
+                error
+            );
+        }
+    }
+});
+
+
+/* =========================================
+   GAME LOAD
+========================================= */
+
+if (gameFrame) {
+
+    gameFrame.addEventListener("load", () => {
+
+        // Never reload the page
+        // Never restart the iframe here
+
+        if (!gtaContinued) {
+            showLauncher();
+        }
     });
-
-
-    // ================================
-    // ESC BUTTON
-    // ================================
-
-    const escBtn = document.getElementById("escBtn");
-
-    if (escBtn) {
-
-        escBtn.addEventListener("click", () => {
-
-            if (frame.contentWindow) {
-
-                frame.contentWindow.postMessage(
-                    {
-                        action: "releaseCursor"
-                    },
-                    "*"
-                );
-
-            }
-
-        });
-
-    }
-
-
-    // ================================
-    // GAME TOOLBAR
-    // ================================
-
-    const toolbar = document.querySelector(".game-toolbar");
-
-    let hideTimer;
-
-
-    function showToolbar() {
-
-        if (!toolbar) return;
-
-        toolbar.style.opacity = "1";
-
-        clearTimeout(hideTimer);
-
-        hideTimer = setTimeout(() => {
-
-            if (document.fullscreenElement) {
-
-                toolbar.style.opacity = "0";
-
-            }
-
-        }, 2500);
-
-    }
-
-
-    if (toolbar) {
-
-        overlay.addEventListener("mousemove", showToolbar);
-
-        overlay.addEventListener("touchstart", showToolbar);
-
-    }
-
-
-    // ================================
-    // GAME MENU
-    // ================================
-
-    const gameMenuBtn =
-        document.getElementById("gameMenuBtn");
-
-    const gameMenuPopup =
-        document.querySelector(".game-menu-popup");
-
-
-    if (gameMenuBtn && gameMenuPopup) {
-
-        gameMenuBtn.addEventListener("click", (e) => {
-
-            e.stopPropagation();
-
-            gameMenuPopup.classList.toggle("active");
-
-        });
-
-
-        document.addEventListener("click", (e) => {
-
-            if (!e.target.closest(".game-menu")) {
-
-                gameMenuPopup.classList.remove("active");
-
-            }
-
-        });
-
-    }
-
 }
