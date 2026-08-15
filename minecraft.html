@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft | Pixadu</title>
 
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
-        html, body {
+        html,
+        body {
             margin: 0;
             min-height: 100%;
             font-family: Arial, Helvetica, sans-serif;
@@ -16,14 +20,17 @@
             color: #fff;
         }
 
-        body { overflow-x: hidden; }
+        body {
+            overflow-x: hidden;
+        }
 
         .page {
             min-height: 100vh;
             background:
-                linear-gradient(180deg, rgba(3,10,5,.20), #07110b 55%, #050a07),
-                radial-gradient(circle at 80% 10%, rgba(76,175,80,.18), transparent 35%);
+                linear-gradient(180deg, rgba(3, 10, 5, .20), #07110b 55%, #050a07),
+                radial-gradient(circle at 80% 10%, rgba(76, 175, 80, .18), transparent 35%);
         }
+
         /* TEKKEN 3 RESPONSIVE NAVBAR */
         .topbar {
             position: fixed;
@@ -113,14 +120,16 @@
             margin: auto;
         }
 
-        .hero-copy { max-width: 680px; }
+        .hero-copy {
+            max-width: 680px;
+        }
 
         .eyebrow {
             display: inline-flex;
             padding: 8px 13px;
             border-radius: 999px;
-            background: rgba(77,175,80,.13);
-            border: 1px solid rgba(77,175,80,.30);
+            background: rgba(77, 175, 80, .13);
+            border: 1px solid rgba(77, 175, 80, .30);
             color: #7bea7f;
             font-size: 12px;
             font-weight: 800;
@@ -133,7 +142,7 @@
             line-height: .9;
             letter-spacing: -4px;
             text-transform: uppercase;
-            text-shadow: 0 8px 25px rgba(0,0,0,.5);
+            text-shadow: 0 8px 25px rgba(0, 0, 0, .5);
         }
 
         .hero-copy p {
@@ -153,8 +162,8 @@
 
         .meta span {
             padding: 9px 12px;
-            background: rgba(255,255,255,.06);
-            border: 1px solid rgba(255,255,255,.08);
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid rgba(255, 255, 255, .08);
             border-radius: 10px;
             color: #dce8de;
             font-size: 13px;
@@ -167,14 +176,33 @@
         }
 
         .play-btn {
-            padding: 15px 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+
+            padding: 14px 24px;
+
+            color: #fff;
+            text-decoration: none;
+
             background: #39b54a;
-            box-shadow: 0 12px 30px rgba(57,181,74,.25);
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 12px;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            box-shadow: 0 12px 30px rgba(57, 181, 74, .25);
+
+            cursor: pointer;
+            transition: .25s ease;
         }
 
         .play-btn:hover {
             transform: translateY(-3px);
             background: #46c956;
+            box-shadow: 0 16px 35px rgba(57, 181, 74, .32);
         }
 
         .hero-art {
@@ -189,7 +217,7 @@
             position: absolute;
             width: 75%;
             height: 75%;
-            background: rgba(65,160,69,.25);
+            background: rgba(65, 160, 69, .25);
             filter: blur(70px);
             border-radius: 50%;
         }
@@ -200,7 +228,7 @@
             max-height: 440px;
             object-fit: contain;
             border-radius: 24px;
-            filter: drop-shadow(0 30px 35px rgba(0,0,0,.55));
+            filter: drop-shadow(0 30px 35px rgba(0, 0, 0, .55));
             transform: rotate(1deg);
         }
 
@@ -233,9 +261,9 @@
             position: relative;
             padding: 10px;
             background: #050806;
-            border: 1px solid rgba(255,255,255,.10);
+            border: 1px solid rgba(255, 255, 255, .10);
             border-radius: 22px;
-            box-shadow: 0 25px 70px rgba(0,0,0,.45);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .45);
         }
 
         .game-frame {
@@ -267,11 +295,46 @@
             font-size: 13px;
         }
 
-        .status b { color: #6ee777; }
+        .status b {
+            color: #6ee777;
+        }
 
         .full-btn {
-            padding: 10px 16px;
-            background: rgba(255,255,255,.08);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            min-height: 42px;
+            padding: 0 17px;
+
+            color: #fff;
+            background: rgba(255, 255, 255, .07);
+
+            border: 1px solid rgba(255, 255, 255, .12);
+            border-radius: 12px;
+
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, .05),
+                0 8px 25px rgba(0, 0, 0, .18);
+
+            transition: all .25s ease;
+        }
+
+        .full-btn:hover {
+            background: rgba(57, 181, 74, .15);
+            border-color: rgba(57, 181, 74, .40);
+            transform: translateY(-1px);
+        }
+
+        .full-btn:active {
+            transform: translateY(0);
         }
 
         .info-grid {
@@ -284,8 +347,8 @@
 
         .info-card {
             padding: 26px;
-            background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
-            border: 1px solid rgba(255,255,255,.08);
+            background: linear-gradient(145deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .025));
+            border: 1px solid rgba(255, 255, 255, .08);
             border-radius: 18px;
         }
 
@@ -294,7 +357,9 @@
             margin-bottom: 14px;
         }
 
-        .info-card h3 { margin: 0 0 8px; }
+        .info-card h3 {
+            margin: 0 0 8px;
+        }
 
         .info-card p {
             margin: 0;
@@ -336,11 +401,11 @@
             margin: 0 auto 28px;
             padding: 42px 42px 22px;
             background: rgba(8, 15, 10, .72);
-            border: 1px solid rgba(255,255,255,.09);
+            border: 1px solid rgba(255, 255, 255, .09);
             border-radius: 24px;
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            box-shadow: 0 20px 60px rgba(0,0,0,.30);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .30);
         }
 
         .footer-main {
@@ -372,7 +437,7 @@
             place-items: center;
             border-radius: 11px;
             background: #35a943;
-            box-shadow: inset 0 -5px rgba(0,0,0,.15);
+            box-shadow: inset 0 -5px rgba(0, 0, 0, .15);
         }
 
         .footer-brand p {
@@ -409,7 +474,7 @@
 
         .footer-bottom {
             padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,.07);
+            border-top: 1px solid rgba(255, 255, 255, .07);
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -469,18 +534,27 @@
                 text-align: center;
             }
 
-            .hero-copy { margin: auto; }
+            .hero-copy {
+                margin: auto;
+            }
 
-            .meta, .actions { justify-content: center; }
+            .meta,
+            .actions {
+                justify-content: center;
+            }
 
             .hero-art {
                 min-height: 280px;
                 order: -1;
             }
 
-            .hero-art img { max-height: 300px; }
+            .hero-art img {
+                max-height: 300px;
+            }
 
-            .info-grid { grid-template-columns: 1fr; }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
 
             .game-frame {
                 height: 65vh;
@@ -714,6 +788,7 @@
 
         /* Critical narrow-device overflow protection */
         @media (max-width: 360px) {
+
             html,
             body {
                 width: 100%;
@@ -756,106 +831,102 @@
                 max-width: calc(100% - 20px);
             }
         }
-
     </style>
 </head>
 
 <body>
-<div class="page">
+    <div class="page">
 
-    <header class="topbar">
-        <a href="index.html" class="brand">
-            <i class="fa-solid fa-gamepad"></i>
-            <span>Pixadu</span>
-        </a>
+        <header class="topbar">
+            <a href="index.html" class="brand">
+                <span class="footer-logo-icon">🎮</span>
+                    <span>Pixadu</span>
+            </a>
 
-        <a href="games.html" class="back-games">
-            <span class="back-arrow" aria-hidden="true">←</span>
-            <span class="back-text">Back to Games</span>
-        </a>
-    </header>
+            <a href="games.html" class="back-games">
+                <span class="back-arrow" aria-hidden="true">←</span>
+                <span class="back-text">Back to Games</span>
+            </a>
+        </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-copy">
-                <span class="eyebrow">PIXADU • BROWSER GAMING</span>
-                <h1>Minecraft</h1>
+        <main>
+            <section class="hero">
+                <div class="hero-copy">
+                    <span class="eyebrow">PIXADU • BROWSER GAMING</span>
+                    <h1>Minecraft</h1>
+                    <p>
+                        Build, explore and survive your own blocky world.
+                        Jump straight into Minecraft from your browser.
+                    </p>
+
+                    <div class="meta">
+                        <span>⭐ 4.9 Rating</span>
+                        <span>🧱 Sandbox</span>
+                        <span>💻 PC</span>
+                        <span>🟢 Play in Browser</span>
+                    </div>
+
+                    <div class="actions">
+                        <a class="play-btn" href="#game">▶ Play Minecraft</a>
+                    </div>
+                </div>
+
+                <div class="hero-art">
+                    <img src="images/minecraft.png" alt="Minecraft">
+                </div>
+            </section>
+
+            <section class="game-section" id="game">
+                <div class="section-head">
+                    <div>
+                        <small>READY TO PLAY?</small>
+                        <h2>Minecraft in your browser</h2>
+                    </div>
+                </div>
+
+                <div class="game-shell">
+                    <div class="game-frame">
+                        <iframe id="gameFrame" src="games/minecraft/index.html" tabindex="0" allowfullscreen
+                            allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
+                    </div>
+
+                    <div class="game-toolbar">
+                        <div class="status">🟢 <b>Game Ready</b> • Click inside the game to focus controls</div>
+                        <button class="full-btn" onclick="fullscreenGame()">⛶ Fullscreen</button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="info-grid">
+                <article class="info-card">
+                    <div class="icon">🧱</div>
+                    <h3>Build Anything</h3>
+                    <p>Create structures, experiment with blocks and shape your own world.</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="icon">🌍</div>
+                    <h3>Explore</h3>
+                    <p>Travel through a blocky world and discover what is waiting around you.</p>
+                </article>
+
+                <article class="info-card">
+                    <div class="icon">🎮</div>
+                    <h3>Browser Play</h3>
+                    <p>No separate game page is needed. Launch the playable build directly from Pixadu.</p>
+                </article>
+            </section>
+
+            <section class="about">
+                <small>ABOUT THE GAME</small>
+                <h2>Build. Explore. Survive.</h2>
                 <p>
-                    Build, explore and survive your own blocky world.
-                    Jump straight into Minecraft from your browser.
+                    Minecraft is a sandbox experience built around creativity and exploration.
+                    Gather resources, build your surroundings and create your own adventure.
                 </p>
-
-                <div class="meta">
-                    <span>⭐ 4.9 Rating</span>
-                    <span>🧱 Sandbox</span>
-                    <span>💻 PC</span>
-                    <span>🟢 Play in Browser</span>
-                </div>
-
-                <div class="actions">
-                    <a class="play-btn" href="#game">▶ Play Minecraft</a>
-                </div>
-            </div>
-
-            <div class="hero-art">
-                <img src="images/minecraft.png" alt="Minecraft">
-            </div>
-        </section>
-
-        <section class="game-section" id="game">
-            <div class="section-head">
-                <div>
-                    <small>READY TO PLAY?</small>
-                    <h2>Minecraft in your browser</h2>
-                </div>
-            </div>
-
-            <div class="game-shell">
-                <div class="game-frame">
-                    <iframe id="gameFrame"
-                        src="games/minecraft/index.html"
-                        tabindex="0"
-                        allowfullscreen
-                        allow="fullscreen; pointer-lock; keyboard-lock"></iframe>
-                </div>
-
-                <div class="game-toolbar">
-                    <div class="status">🟢 <b>Game Ready</b> • Click inside the game to focus controls</div>
-                    <button class="full-btn" onclick="fullscreenGame()">⛶ Fullscreen</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="info-grid">
-            <article class="info-card">
-                <div class="icon">🧱</div>
-                <h3>Build Anything</h3>
-                <p>Create structures, experiment with blocks and shape your own world.</p>
-            </article>
-
-            <article class="info-card">
-                <div class="icon">🌍</div>
-                <h3>Explore</h3>
-                <p>Travel through a blocky world and discover what is waiting around you.</p>
-            </article>
-
-            <article class="info-card">
-                <div class="icon">🎮</div>
-                <h3>Browser Play</h3>
-                <p>No separate game page is needed. Launch the playable build directly from Pixadu.</p>
-            </article>
-        </section>
-
-        <section class="about">
-            <small>ABOUT THE GAME</small>
-            <h2>Build. Explore. Survive.</h2>
-            <p>
-                Minecraft is a sandbox experience built around creativity and exploration.
-                Gather resources, build your surroundings and create your own adventure.
-            </p>
-        </section>
-    </main>
-</div>
+            </section>
+        </main>
+    </div>
 
 
     <footer class="site-footer">
@@ -892,7 +963,7 @@
     </footer>
 
 
-<script>
+    <script>
 
         // Save recently played game
         localStorage.setItem("recentGame", JSON.stringify({
@@ -927,4 +998,5 @@
 
 
 </body>
+
 </html>
