@@ -33,8 +33,28 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getDatabase(app);
 
-window.loginGoogle = () => {
-    signInWithPopup(auth, provider);
+window.loginGoogle = async () => {
+    try {
+        await signInWithPopup(auth, provider);
+    } catch (error) {
+        console.error("Google login failed:", error);
+
+        if (error.code === "auth/popup-closed-by-user") {
+            return;
+        }
+
+        if (error.code === "auth/popup-blocked") {
+            alert("Google login popup was blocked. Please allow popups for Pixadu.");
+            return;
+        }
+
+        if (error.code === "auth/unauthorized-domain") {
+            alert("This website is not authorized for Google login in Firebase.");
+            return;
+        }
+
+        alert("Google login failed. Check the browser console for the exact error.");
+    }
 };
 
 window.logoutUser = () => {
