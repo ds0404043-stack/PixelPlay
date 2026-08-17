@@ -93,7 +93,7 @@ function updateHero() {
 
         else {
 
-            heroPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i> 🎮 Start Playing';
+            heroPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>  Start Playing';
 
         }
 

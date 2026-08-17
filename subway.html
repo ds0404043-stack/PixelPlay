@@ -214,25 +214,6 @@
             box-shadow: 0 16px 42px rgba(156, 255, 0, .30)
         }
 
-        .fav {
-            width: 49px;
-            height: 49px;
-            border-radius: 13px;
-            border: 1px solid rgba(255, 255, 255, .1);
-            background: rgba(255, 255, 255, .06);
-            color: #fff;
-            cursor: pointer;
-            font-size: 17px;
-            transition: .25s
-        }
-
-        .fav:hover,
-        .fav.active {
-            background: #9cff00;
-            color: #071007;
-            border-color: #9cff00
-        }
-
         .poster {
             position: relative;
             min-height: 430px;
@@ -521,7 +502,7 @@
 
         .footer-main {
             display: grid;
-            grid-template-columns: 1.4fr .8fr;
+            grid-template-columns: 1.4fr .8fr .8fr;
             gap: 45px;
             padding-bottom: 32px
         }
@@ -581,6 +562,38 @@
         .footer-links a:hover {
             color: #9cff00;
             transform: translateX(3px)
+        }
+
+
+        .footer-column h3,
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 12px
+        }
+
+        .social-icons a {
+            width: 42px;
+            height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, .06);
+            color: #9299a8;
+            text-decoration: none;
+            transition: .25s ease
+        }
+
+        .social-icons a:hover {
+            background: #35a943;
+            color: #fff;
+            transform: translateY(-4px)
         }
 
         .footer-bottom {
@@ -940,6 +953,179 @@
             background: var(--subway-yellow);
             color: #05070b;
         }
+
+        /* =========================================
+   SUBWAY SURFERS WORLD SELECTOR
+========================================= */
+        .world-selector {
+            padding: 25px;
+            background: #080d13;
+            border-radius: 18px;
+            line-height: 1.5;
+        }
+
+        .world-selector-head {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .world-selector-head .world-label {
+            color: var(--subway-yellow);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .world-selector-head h3 {
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .world-selector-head p {
+            color: #87939d;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .world-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .world-card {
+            position: relative;
+            min-width: 0;
+            height: 365px;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #101820;
+            border: 1px solid rgba(255, 255, 255, .08);
+            cursor: pointer;
+            transition: .3s ease;
+        }
+
+        .world-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0) 38%,
+                    rgba(0, 0, 0, .15) 50%,
+                    rgba(0, 0, 0, .88) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .world-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            display: block;
+        }
+
+        .world-content {
+            position: absolute;
+            left: 18px;
+            right: 18px;
+            bottom: 18px;
+            z-index: 2;
+        }
+
+        .world-card h4 {
+            position: relative;
+            z-index: 1;
+            font-size: 16px;
+            line-height: 1.25;
+            margin: 0 0 6px;
+            color: #fff;
+        }
+
+        .world-card p {
+            position: relative;
+            z-index: 1;
+            color: #d1d8dc;
+            font-size: 10px;
+            line-height: 1.45;
+            margin: 0 0 12px;
+        }
+
+        .world-play {
+            position: relative;
+            z-index: 1;
+            display: inline-block;
+            width: fit-content;
+            line-height: 1.2;
+            padding: 8px 11px;
+            border-radius: 9px;
+            background: var(--subway-blue);
+            color: #001018;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .world-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 194, 255, .5);
+            box-shadow: 0 18px 40px rgba(0, 194, 255, .12);
+        }
+
+        .world-card.selected {
+            border-color: var(--subway-yellow);
+            box-shadow: 0 0 0 2px rgba(255, 204, 0, .18);
+        }
+
+        .change-world {
+            display: none;
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .change-world:hover {
+            background: rgba(0, 194, 255, .12);
+            border-color: rgba(0, 194, 255, .35);
+        }
+
+        @media(max-width:1100px) {
+            .world-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+
+        @media(max-width:760px) {
+            .world-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .world-card {
+                height: 330px;
+            }
+        }
+
+        @media(max-width:520px) {
+            .world-selector {
+                padding: 18px;
+            }
+
+            .world-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .world-card {
+                height: 350px;
+            }
+        }
     </style>
 </head>
 
@@ -975,9 +1161,6 @@
 
                 <div class="actions">
                     <a href="#game" class="play"><i class="fa-solid fa-play"></i> Play Subway Surfers</a>
-                    <button class="fav" id="favoriteBtn" aria-label="Favorite">
-                        <i class="fa-regular fa-heart"></i>
-                    </button>
                 </div>
             </div>
 
@@ -996,15 +1179,81 @@
 
             <div class="game-shell">
                 <div class="game-top">
-                    <span class="status">● Game Ready</span>
-                    <button id="fullscreenBtn" class="fullscreen">
-                        <i class="fa-solid fa-expand"></i> Fullscreen
-                    </button>
+                    <span class="status" id="gameStatus">● Choose a World</span>
+
+                    <div style="display:flex; gap:8px;">
+                        <button id="changeWorldBtn" class="change-world">
+                            <i class="fa-solid fa-earth-americas"></i> Change World
+                        </button>
+
+                        <button id="fullscreenBtn" class="fullscreen">
+                            <i class="fa-solid fa-expand"></i> Fullscreen
+                        </button>
+                    </div>
                 </div>
 
                 <div class="game-frame" id="gameFrame">
-                    <iframe id="gameIframe" src="games/subway surfers/Subway Surfers_ Iceland.html" frameborder="0"
-                        allow="fullscreen" allowfullscreen></iframe>
+
+                    <!-- WORLD SELECTOR -->
+                    <div class="world-selector" id="worldSelector">
+                        <div class="world-selector-head">
+                            <div class="world-label">SUBWAY SURFERS</div>
+                            <h3>Choose Your World</h3>
+                            <p>Select a world and start running.</p>
+                        </div>
+
+                        <div class="world-grid">
+                            <div class="world-card" data-world="games/subway surfers/world/classic/index.html">
+                                <img class="world-image" src="images/classic.jpg" alt="Classic">
+                                <div class="world-content">
+                                    <h4>Classic</h4>
+                                    <p>The classic Subway Surfers experience.</p>
+                                    <span class="world-play">PLAY WORLD</span>
+                                </div>
+                            </div>
+
+                            <div class="world-card" data-world="games/subway surfers/world/easter-edinburgh/index.html">
+                                <img class="world-image" src="images/easter-edinburgh.jpg" alt="Easter Edinburgh">
+                                <div class="world-content">
+                                    <h4>Easter Edinburgh</h4>
+                                    <p>Run through the Edinburgh event.</p>
+                                    <span class="world-play">PLAY WORLD</span>
+                                </div>
+                            </div>
+
+                            <div class="world-card"
+                                data-world="games/subway surfers/world/shenzhen-showdown/index.html">
+                                <img class="world-image" src="images/shenzhen-showdown.jpg" alt="Shenzhen Showdown">
+                                <div class="world-content">
+                                    <h4>Shenzhen Showdown</h4>
+                                    <p>Race through Shenzhen.</p>
+                                    <span class="world-play">PLAY WORLD</span>
+                                </div>
+                            </div>
+
+                            <div class="world-card" data-world="games/subway surfers/world/underwater/index.html">
+                                <img class="world-image" src="images/underwater.jpg" alt="Underwater">
+                                <div class="world-content">
+                                    <h4>Underwater</h4>
+                                    <p>Dive into an underwater run.</p>
+                                    <span class="world-play">PLAY WORLD</span>
+                                </div>
+                            </div>
+
+                            <div class="world-card" data-world="games/subway surfers/world/vegas-queens/index.html">
+                                <img class="world-image" src="images/vegas-queens.jpg" alt="Vegas Queens">
+                                <div class="world-content">
+                                    <h4>Vegas Queens</h4>
+                                    <p>Run through the Vegas event.</p>
+                                    <span class="world-play">PLAY WORLD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ACTUAL GAME -->
+                    <iframe id="gameIframe" src="" frameborder="0" allow="fullscreen" allowfullscreen
+                        style="display:none;"></iframe>
 
                     <div class="android-overlay" id="androidOverlay">
                         <div class="android-message">
@@ -1070,6 +1319,7 @@
                     <span class="footer-logo-icon">🎮</span>
                     <span>Pixadu</span>
                 </a>
+
                 <p>
                     Play your favorite games directly in your browser.
                     No downloads. Just play.
@@ -1078,6 +1328,7 @@
 
             <div class="footer-column">
                 <h3>Explore</h3>
+
                 <div class="footer-links">
                     <a href="index.html">Home</a>
                     <a href="games.html">3D Games</a>
@@ -1086,6 +1337,26 @@
                     <a href="about.html">About</a>
                 </div>
             </div>
+
+            <!-- KEEP FOLLOW US -->
+            <div class="footer-social">
+                <h3>Follow Us</h3>
+
+                <div class="social-icons">
+                    <a href="#" aria-label="Discord">
+                        <i class="fa-brands fa-discord"></i>
+                    </a>
+
+                    <a href="https://github.com/pixadu/" aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+
+                    <a href="https://www.instagram.com/pixaduweb?igsh=MWcwMW43enI4OWYxbg==" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                </div>
+            </div>
+
         </div>
 
         <div class="footer-bottom">
@@ -1101,7 +1372,50 @@
             const fullscreenBtn = document.getElementById("fullscreenBtn");
             const overlay = document.getElementById("androidOverlay");
             const closeOverlay = document.getElementById("closeAndroidOverlay");
-            const favoriteBtn = document.getElementById("favoriteBtn");
+            /* =========================================
+                           SUBWAY SURFERS WORLD SELECTOR
+                        ========================================= */
+
+            const worldSelector = document.getElementById("worldSelector");
+            const worldCards = document.querySelectorAll(".world-card");
+            const changeWorldBtn = document.getElementById("changeWorldBtn");
+            const gameStatus = document.getElementById("gameStatus");
+
+            worldCards.forEach(card => {
+                card.addEventListener("click", () => {
+                    const worldPath = card.dataset.world;
+                    const worldName = card.querySelector("h4").textContent;
+
+                    worldCards.forEach(c => c.classList.remove("selected"));
+                    card.classList.add("selected");
+
+                    iframe.src = worldPath;
+                    worldSelector.style.display = "none";
+                    iframe.style.display = "block";
+
+                    gameStatus.textContent = "● " + worldName;
+                    changeWorldBtn.style.display = "inline-block";
+
+                    gameFrame.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+                });
+            });
+
+            changeWorldBtn.addEventListener("click", () => {
+                iframe.src = "";
+                iframe.style.display = "none";
+                worldSelector.style.display = "block";
+                changeWorldBtn.style.display = "inline-block";
+                gameStatus.textContent = "● Choose a World";
+
+                worldCards.forEach(card => {
+                    card.classList.remove("selected");
+                });
+
+                changeWorldBtn.style.display = "none";
+            });
 
             /* Fullscreen */
             fullscreenBtn.addEventListener("click", async () => {
@@ -1129,22 +1443,6 @@
                         '<i class="fa-solid fa-expand"></i> Fullscreen';
                 }
             });
-
-            /* Favorite */
-            const favoriteKey = "pixadu_favorite_subway_surfer";
-            const icon = favoriteBtn.querySelector("i");
-
-            if (localStorage.getItem(favoriteKey) === "true") {
-                favoriteBtn.classList.add("active");
-                icon.className = "fa-solid fa-heart";
-            }
-
-            favoriteBtn.addEventListener("click", () => {
-                const active = favoriteBtn.classList.toggle("active");
-                icon.className = active ? "fa-solid fa-heart" : "fa-regular fa-heart";
-                localStorage.setItem(favoriteKey, active);
-            });
-
             /* Recently played */
             const recentGame = {
                 name: "Subway Surfers",
