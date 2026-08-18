@@ -1255,17 +1255,7 @@
                     <iframe id="gameIframe" src="" frameborder="0" allow="fullscreen" allowfullscreen
                         style="display:none;"></iframe>
 
-                    <div class="android-overlay" id="androidOverlay">
-                        <div class="android-message">
-                            <i class="fa-solid fa-mobile-screen-button"></i>
-                            <h3>Playing on Android?</h3>
-                            <p>
-                                Please enable <strong>Desktop Site</strong> in your browser
-                                to play Subway Surfers.
-                            </p>
-                            <button id="closeAndroidOverlay">Got it</button>
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </section>
@@ -1370,8 +1360,6 @@
             const iframe = document.getElementById("gameIframe");
             const gameFrame = document.getElementById("gameFrame");
             const fullscreenBtn = document.getElementById("fullscreenBtn");
-            const overlay = document.getElementById("androidOverlay");
-            const closeOverlay = document.getElementById("closeAndroidOverlay");
             /* =========================================
                            SUBWAY SURFERS WORLD SELECTOR
                         ========================================= */
@@ -1460,16 +1448,8 @@
                 console.warn("Could not save recent game:", error);
             }
 
-            /* Android desktop-site overlay */
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            if (isAndroid) {
-                overlay.style.display = "flex";
-            }
-
-            closeOverlay.addEventListener("click", () => {
-                overlay.style.display = "none";
-            });
         });
+
     </script>
 
     <script src="js/recent.js"></script>
