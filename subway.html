@@ -1126,6 +1126,64 @@
                 height: 350px;
             }
         }
+
+        /* =========================================
+   MOBILE PORTRAIT FULLSCREEN FIX
+========================================= */
+
+        .game-frame:fullscreen,
+        .game-frame:-webkit-full-screen {
+            width: 100vw;
+            height: 100dvh;
+            min-height: 100dvh;
+            max-height: 100dvh;
+            border-radius: 0;
+            padding: 0;
+            margin: 0;
+            background: #000;
+        }
+
+        .game-frame:fullscreen iframe,
+        .game-frame:-webkit-full-screen iframe {
+            width: 100vw !important;
+            height: 100dvh !important;
+            min-height: 100dvh !important;
+            max-height: 100dvh !important;
+            display: block;
+            border: 0;
+        }
+
+        /* Phone portrait */
+        @media (max-width: 600px) and (orientation: portrait) {
+            .game-frame {
+                width: 100%;
+            }
+
+            .game-frame iframe {
+                width: 100%;
+                height: 70dvh;
+            }
+
+            .game-frame:fullscreen,
+            .game-frame:-webkit-full-screen {
+                width: 100vw;
+                height: 100dvh;
+            }
+
+            .game-frame:fullscreen iframe,
+            .game-frame:-webkit-full-screen iframe {
+                width: 100vw !important;
+                height: 100dvh !important;
+            }
+        }
+
+        /* Keep portrait fullscreen on phones */
+        @media (max-width: 600px) and (orientation: portrait) {
+            .game-frame:fullscreen {
+                width: 100vw;
+                height: 100dvh;
+            }
+        }
     </style>
 </head>
 
@@ -1409,20 +1467,43 @@
             fullscreenBtn.addEventListener("click", async () => {
                 try {
                     if (!document.fullscreenElement) {
+
                         await gameFrame.requestFullscreen();
+
+                        // Lock phone to portrait when supported
+                        try {
+                            if (screen.orientation && screen.orientation.lock) {
+                                await screen.orientation.lock("portrait");
+                            }
+                        } catch (e) {
+                            console.log("Portrait lock not supported");
+                        }
+
                         fullscreenBtn.innerHTML =
                             '<i class="fa-solid fa-compress"></i> Exit Fullscreen';
+
+                        setTimeout(() => {
+                            iframe.focus();
+                            try {
+                                iframe.contentWindow.focus();
+                            } catch (e) { }
+                        }, 300);
+
                     } else {
+
+                        // Unlock orientation
+                        try {
+                            if (screen.orientation && screen.orientation.unlock) {
+                                screen.orientation.unlock();
+                            }
+                        } catch (e) { }
+
                         await document.exitFullscreen();
                     }
+
                 } catch (error) {
                     console.warn("Fullscreen unavailable:", error);
                 }
-
-                setTimeout(() => {
-                    iframe.focus();
-                    try { iframe.contentWindow.focus(); } catch (e) { }
-                }, 300);
             });
 
             document.addEventListener("fullscreenchange", () => {
