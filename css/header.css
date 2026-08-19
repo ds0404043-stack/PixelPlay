@@ -671,13 +671,38 @@ a {
     top: calc(100% + 10px);
     left: 0;
     width: 100%;
+    max-height: 520px;
     background: #121826;
     border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 14px;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: none;
     z-index: 99999;
     box-shadow: 0 15px 40px rgba(0, 0, 0, .45);
+
+    /* Smooth scrolling */
+    scroll-behavior: smooth;
+
+    /* Firefox */
+    scrollbar-width: thin;
+}
+
+.searchDropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.searchDropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.searchDropdown::-webkit-scrollbar-thumb {
+    background: #3a4355;
+    border-radius: 10px;
+}
+
+.searchDropdown::-webkit-scrollbar-thumb:hover {
+    background: #4d5870;
 }
 
 .search-item {

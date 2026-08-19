@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Racer | Pixadu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #07070b;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 15%, rgba(220, 38, 38, .18), transparent 32%),
+                radial-gradient(circle at 85% 35%, rgba(245, 158, 11, .10), transparent 30%),
+                linear-gradient(180deg, #09090d 0%, #07070b 55%, #050507 100%);
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(120deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 45px 45px;
+            mask-image: linear-gradient(to bottom, black, transparent 80%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* FLOATING PIXADU NAVBAR */
+        .topbar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            width: min(1120px, calc(100% - 36px));
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 10px 0 20px;
+            background: rgba(10, 10, 15, .68);
+            border: 1px solid rgba(255, 255, 255, .11);
+            border-radius: 18px;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, .35);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 21px;
+            font-weight: 800;
+            letter-spacing: -.4px;
+        }
+
+        .brand i {
+            color: #ef4444;
+            font-size: 19px;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-follow {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 9px 6px 12px;
+            border: 1px solid rgba(239, 68, 68, .20);
+            border-radius: 12px;
+            background: rgba(239, 68, 68, .055);
+            box-shadow: inset 0 0 18px rgba(239, 68, 68, .035);
+        }
+
+        .nav-follow span {
+            color: #fca5a5;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            margin-right: 2px;
+        }
+
+        .nav-follow a {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            color: #d1d5db;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: .25s ease;
+        }
+
+        .nav-follow a:hover {
+            color: #fff;
+            background: #ef4444;
+            box-shadow: 0 0 18px rgba(239, 68, 68, .35);
+            transform: translateY(-1px);
+        }
+
+        .back-games {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 42px;
+            padding: 0 17px;
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .12);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, .05);
+            transition: all .25s ease;
+        }
+
+        .back-games i {
+            font-size: 12px;
+            transition: transform .25s ease;
+        }
+
+        .back-games:hover {
+            background: rgba(239, 68, 68, .15);
+            border-color: rgba(239, 68, 68, .38);
+            box-shadow: 0 8px 25px rgba(239, 68, 68, .12);
+            transform: translateY(-1px);
+        }
+
+        .back-games:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* HERO */
+        .hero {
+            width: min(1250px, 90%);
+            min-height: 510px;
+            margin: 125px auto 30px;
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 35px;
+            align-items: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #f87171;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .eyebrow::before {
+            content: "";
+            width: 28px;
+            height: 2px;
+            background: #ef4444;
+        }
+
+        .hero h1 {
+            font-size: clamp(54px, 7vw, 92px);
+            line-height: .95;
+            letter-spacing: -4px;
+            margin-bottom: 20px;
+            text-shadow: 0 12px 45px rgba(239, 68, 68, .18);
+        }
+
+        .hero-copy {
+            max-width: 580px;
+            color: #aab4c3;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .badge {
+            padding: 8px 13px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .055);
+            border: 1px solid rgba(255, 255, 255, .09);
+            color: #dbe3ed;
+            font-size: 12px;
+        }
+
+        .badge strong {
+            color: #fff;
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .play {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 21px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            box-shadow: 0 12px 35px rgba(239, 68, 68, .22);
+            transition: .25s;
+        }
+
+        .play:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 16px 42px rgba(239, 68, 68, .32);
+        }
+
+        .fav {
+            width: 49px;
+            height: 49px;
+            border-radius: 13px;
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            cursor: pointer;
+            font-size: 17px;
+            transition: .25s;
+        }
+
+        .fav:hover,
+        .fav.active {
+            background: #ef4444;
+            border-color: #ef4444;
+        }
+
+        .poster {
+            position: relative;
+            min-height: 430px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .poster::before {
+            content: "";
+            position: absolute;
+            width: 82%;
+            height: 82%;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, .16);
+            filter: blur(65px);
+        }
+
+        .poster img {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 500px);
+            max-height: 450px;
+            object-fit: cover;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, .13);
+            box-shadow: 0 35px 90px rgba(0, 0, 0, .62), 0 0 60px rgba(239, 68, 68, .12);
+            transform: rotate(1deg);
+            transition: .35s;
+        }
+
+        .poster img:hover {
+            transform: rotate(0) scale(1.02);
+        }
+
+        /* GAME */
+        .game-wrap {
+            width: min(1250px, 92%);
+            margin: 20px auto 0;
+        }
+
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .section-head h2 {
+            font-size: 30px;
+        }
+
+        .section-head p {
+            color: #7f8a9a;
+            font-size: 13px;
+        }
+
+        .game-shell {
+            padding: 12px;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .09);
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .38);
+        }
+
+        .game-top {
+            height: 52px;
+            padding: 0 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0c0c11;
+            border-radius: 16px 16px 8px 8px;
+        }
+
+        .status {
+            color: #86efac;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .fullscreen {
+            border: 1px solid rgba(255, 255, 255, .1);
+            background: rgba(255, 255, 255, .06);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .game-frame {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            background: #000;
+            border-radius: 8px 8px 16px 16px;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .game-frame iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-height: 0;
+            border: 0;
+            background: #000;
+        }
+
+        .game-frame:fullscreen {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+            background: #000;
+        }
+
+        .game-frame:fullscreen iframe {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* INFO */
+        .info-grid {
+            width: min(1250px, 92%);
+            margin: 32px auto 0;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .info-card {
+            padding: 22px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, .035);
+            border: 1px solid rgba(255, 255, 255, .075);
+        }
+
+        .info-card i {
+            color: #ef4444;
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+
+        .info-card h3 {
+            font-size: 15px;
+            margin-bottom: 7px;
+        }
+
+        .info-card p {
+            color: #8994a4;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        /* ABOUT */
+        .about {
+            width: min(1250px, 92%);
+            margin: 70px auto;
+            padding: 38px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .025));
+            border: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .about .label {
+            color: #f87171;
+            font-size: 11px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+
+        .about h2 {
+            margin: 8px 0 15px;
+            font-size: 34px;
+        }
+
+        .about p {
+            max-width: 850px;
+            color: #9aa6b6;
+            line-height: 1.9;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:900px) {
+            .nav {
+                display: none;
+            }
+
+            .menu {
+                display: block;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-copy {
+                margin: auto;
+            }
+
+            .meta,
+            .actions {
+                justify-content: center;
+            }
+
+            .poster {
+                min-height: 360px;
+            }
+
+            .poster img {
+                max-height: 360px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media(max-width:600px) {
+            .topbar {
+                height: 64px;
+                padding: 0 18px;
+            }
+
+            .search {
+                display: none;
+            }
+
+            .nav-follow {
+                display: none;
+            }
+
+            .hero {
+                width: 92%;
+                margin-top: 28px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 56px;
+                letter-spacing: -3px;
+            }
+
+            .hero-copy {
+                font-size: 14px;
+            }
+
+            .poster {
+                min-height: 300px;
+            }
+
+            .poster img {
+                max-height: 300px;
+                border-radius: 18px;
+            }
+
+            .game-wrap,
+            .info-grid,
+            .about {
+                width: 94%;
+            }
+
+            .section-head {
+                display: block;
+            }
+
+            .section-head h2 {
+                font-size: 25px;
+                margin-bottom: 5px;
+            }
+
+            .game-shell {
+                padding: 7px;
+                border-radius: 17px;
+            }
+
+            .game-top {
+                height: 48px;
+            }
+
+            .game-frame {
+                height: 500px;
+            }
+
+            .about {
+                padding: 25px;
+                margin-top: 50px;
+            }
+
+            .about h2 {
+                font-size: 27px;
+            }
+        }
+
+        @media(max-width:425px) {
+            .back-games span {
+                display: none;
+            }
+
+            .back-games {
+                width: 38px;
+                padding: 0;
+            }
+
+            .hero {
+                margin-top: 105px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .poster {
+                min-height: 250px;
+            }
+
+            .poster img {
+                max-height: 250px;
+            }
+
+            .game-frame {
+                height: 450px;
+            }
+        }
+
+        /* =========================================
+           PIXADU PREMIUM FOOTER
+        ========================================= */
+        .site-footer {
+            width: min(94%, 1400px);
+            margin: 0 auto 28px;
+            padding: 42px 42px 22px;
+            background: rgba(10, 10, 15, .80);
+            border: 1px solid rgba(255, 255, 255, .09);
+            border-radius: 24px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .30);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1.4fr .8fr .8fr;
+            gap: 45px;
+            padding-bottom: 32px;
+        }
+
+        .footer-brand {
+            max-width: 420px;
+        }
+
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 11px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .footer-logo-icon {
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            box-shadow: inset 0 -5px rgba(0, 0, 0, .15);
+        }
+
+        .footer-brand p {
+            margin: 0;
+            color: #9299a8;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .footer-column h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            width: fit-content;
+            color: #9299a8;
+            text-decoration: none;
+            font-size: 13px;
+            transition: .25s ease;
+        }
+
+        .footer-links a:hover {
+            color: #f87171;
+            transform: translateX(3px);
+        }
+
+
+        /* TEKKEN 3 RED FOLLOW US */
+        .footer-social h3 {
+            margin: 3px 0 15px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .social-icons a {
+            width: 38px;
+            height: 38px;
+            display: grid;
+            place-items: center;
+            border-radius: 11px;
+            color: #fff;
+            text-decoration: none;
+            background: rgba(255, 255, 255, .055);
+            border: 1px solid rgba(239, 68, 68, .18);
+            transition: .25s ease;
+        }
+
+        .social-icons a:hover {
+            color: #fff;
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-color: #ef4444;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(239, 68, 68, .22);
+        }
+
+        .footer-bottom {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, .07);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            color: #707887;
+            font-size: 12px;
+        }
+
+        .footer-bottom strong {
+            color: #aab2c0;
+            font-weight: 600;
+        }
+
+        @media (max-width: 850px) {
+            .site-footer {
+                padding: 32px 25px 20px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 30px;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+        }
+
+
+        @media (max-width: 520px) {
+            .footer-main {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-brand,
+            .footer-column,
+            .footer-social {
+                grid-column: auto;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .site-footer {
+                width: 94%;
+                padding: 28px 20px 18px;
+                border-radius: 20px;
+                margin-bottom: 15px;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+                gap: 25px 18px;
+            }
+
+            .footer-brand {
+                grid-column: 1 / -1;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                line-height: 1.6;
+            }
+        }
+
+
+        /* TEKKEN 3 RED FOOTER VIBE */
+        .site-footer {
+            position: relative;
+            overflow: hidden;
+            border-color: rgba(239, 68, 68, .14);
+        }
+
+        .site-footer::before {
+            content: "";
+            position: absolute;
+            width: 330px;
+            height: 190px;
+            left: -100px;
+            top: -110px;
+            border-radius: 50%;
+            background: rgba(239, 68, 68, .10);
+            filter: blur(75px);
+            pointer-events: none;
+        }
+
+        .site-footer::after {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 170px;
+            right: -90px;
+            bottom: -110px;
+            border-radius: 50%;
+            background: rgba(185, 28, 28, .08);
+            filter: blur(75px);
+            pointer-events: none;
+        }
+
+        .site-footer>* {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-links a:hover {
+            color: #ef4444;
+            text-shadow: 0 0 14px rgba(239, 68, 68, .18);
+        }
+
+        .footer-logo-icon {
+            box-shadow:
+                inset 0 -5px rgba(0, 0, 0, .18),
+                0 8px 25px rgba(239, 68, 68, .18);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <a href="index.html" class="brand">
+            <i class="fa-solid fa-gamepad"></i>
+            <span>Pixadu</span>
+        </a>
+
+
+        <a href="games.html" class="back-games">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Back to Games</span>
+        </a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div>
+            <div class="eyebrow">PIXADU • BROWSER GAMING</div>
+            <h1>Traffic Racer</h1>
+            <p class="hero-copy">
+                Hit the road, dodge traffic and push your speed to the limit.
+                Play Traffic Racer directly in your browser with a fast arcade-style driving experience.
+            </p>
+            <div class="meta">
+                <span class="badge">⭐ <strong>4.7</strong> Rating</span>
+                <span class="badge">🏎️ Racing</span>
+                <span class="badge">🎮 Arcade</span>
+                <span class="badge">🟢 Play in Browser</span>
+            </div>
+            <div class="actions">
+                <a href="#game" class="play"><i class="fa-solid fa-play"></i> Play Traffic Racer</a>
+            </div>
+        </div>
+
+        <div class="poster">
+            <img src="images/traffic-racer.png" alt="Traffic Racer">
+        </div>
+    </section>
+
+    <section id="game" class="game-wrap">
+        <div class="section-head">
+            <div>
+                <h2>Play Traffic Racer</h2>
+                <p>Fast racing • Browser ready • Keyboard & mobile controls</p>
+            </div>
+        </div>
+
+        <div class="game-shell">
+            <div class="game-top">
+                <span class="status">● Game Ready</span>
+                <button id="fullscreenBtn" class="fullscreen">
+                    <i class="fa-solid fa-expand"></i> Fullscreen
+                </button>
+            </div>
+            <div class="game-frame">
+                <iframe src="games/traffic-racer-main/index.html" frameborder="0"
+                    allow="fullscreen; autoplay; gamepad" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-grid">
+        <div class="info-card">
+            <i class="fa-solid fa-car"></i>
+            <h3>Fast Racing</h3>
+            <p>Race through traffic, avoid crashes and keep pushing your score higher.</p>
+        </div>
+        <div class="info-card">
+            <i class="fa-solid fa-gamepad"></i>
+            <h3>Desktop & Mobile</h3>
+            <p>Enjoy the game on desktop and mobile with the controls supported by the game build.</p>
+        </div>
+        <div class="info-card">
+            <i class="fa-solid fa-expand"></i>
+            <h3>Fullscreen Play</h3>
+            <p>Switch to fullscreen when you want a larger and more immersive driving experience.</p>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="label">ABOUT THE GAME</div>
+        <h2>Traffic Racer</h2>
+        <p>
+            Traffic Racer is a fast-paced arcade racing game where you drive through traffic,
+            avoid collisions and chase higher scores.
+        </p>
+        <p>
+            Pick up speed, stay focused and see how far you can go without crashing.
+        </p>
+    </section>
+    <script>
+        /* =========================================
+           PIXADU — TEKKEN 3 PAGE INLINE JS
+           No external page JS required
+        ========================================= */
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            /* ---------- Fullscreen ---------- */
+            const fullscreenBtn = document.getElementById("fullscreenBtn");
+            const gameFrame = document.querySelector(".game-frame");
+
+            if (fullscreenBtn && gameFrame) {
+                fullscreenBtn.addEventListener("click", async () => {
+                    try {
+                        if (!document.fullscreenElement) {
+                            await gameFrame.requestFullscreen();
+                        } else {
+                            await document.exitFullscreen();
+                        }
+                    } catch (error) {
+                        console.warn("Fullscreen unavailable:", error);
+                    }
+                });
+
+                document.addEventListener("fullscreenchange", () => {
+                    const active = document.fullscreenElement === gameFrame;
+                    fullscreenBtn.innerHTML = active
+                        ? '<i class="fa-solid fa-compress"></i> Exit Fullscreen'
+                        : '<i class="fa-solid fa-expand"></i> Fullscreen';
+                });
+            }
+        });
+    </script>
+
+    <script src="js/recent.js"></script>
+    <script>if (typeof saveRecentGame === 'function') { saveRecentGame("Traffic Racer", "images/traffic-racer.jpg", "traffic-racer.html"); }</script>
+
+    <footer class="site-footer">
+        <div class="footer-main">
+
+            <div class="footer-brand">
+                <a href="index.html" class="footer-logo">
+                    <span class="footer-logo-icon">🎮</span>
+                    <span>Pixadu</span>
+                </a>
+                <p>
+                    Play your favorite games directly in your browser.
+                    No downloads. Just play.
+                </p>
+            </div>
+
+            <div class="footer-column">
+                <h3>Explore</h3>
+                <div class="footer-links">
+                    <a href="index.html">Home</a>
+                    <a href="games.html">3D Games</a>
+                    <a href="arcade.html">Arcade Games</a>
+                    <a href="pc.html">PC Only</a>
+                    <a href="about.html">About</a>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="footer-social">
+            <h3>Follow Us</h3>
+            <div class="social-icons">
+                <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://github.com/ds0404043-stack/PixelPlay" aria-label="GitHub"><i
+                        class="fa-brands fa-github"></i></a>
+                <a href="https://www.instagram.com/pixaduweb?igsh=MWcwMW43enI4OWYxbg==" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Pixadu</span>
+            <strong>Made with ❤️ by Deepak Sharma</strong>
+        </div>
+    </footer>
+
+</body>
+
+</html>

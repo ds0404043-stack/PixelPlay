@@ -3,59 +3,71 @@ const gamesDatabase = [
     {
         name: "Minecraft",
         genre: "Sandbox",
-        platform: "Browser",
+        platform: "PC",
         page: "minecraft.html",
         image: "images/minecraft.png",
         keywords: [
+            "game",
             "minecraft",
-            "blocks",
+            "mine",
+            "craft",
             "sandbox",
+            "building",
             "survival",
-            "craft"
+            "pc"
         ]
     },
 
     {
         name: "Grand Theft Auto Vice City",
-        genre: "Open World",
-        platform: "Browser",
+        genre: "Action",
+        platform: "PC",
         page: "gta.html",
         image: "images/gta vice city.png",
         keywords: [
+            "game",
             "gta",
+            "gta vc",
+            "gta vice city",
+            "grand theft auto",
             "vice city",
             "rockstar",
-            "open world",
-            "crime"
+            "action",
+            "open world"
         ]
     },
 
     {
         name: "Grand Theft Auto III",
-        genre: "Open World",
+        genre: "Action",
         platform: "PC",
         page: "gta3.html",
         image: "images/gta3.jpg",
         keywords: [
+            "game",
             "gta",
-            "gta3",
+            "gta 3",
+            "gta iii",
+            "grand theft auto",
             "grand theft auto 3",
-            "liberty city",
-            "rockstar"
+            "action",
+            "open world"
         ]
     },
 
     {
         name: "Angry Birds",
-        genre: "Arcade",
-        platform: "Browser",
+        genre: "Puzzle",
+        platform: "Mobile",
         page: "angrybirds.html",
         image: "images/angrybirdshero.png",
         keywords: [
+            "game",
             "angry birds",
+            "angry",
             "birds",
-            "slingshot",
-            "pig"
+            "puzzle",
+            "mobile"
         ]
     },
 
@@ -66,9 +78,11 @@ const gamesDatabase = [
         page: "chess.html",
         image: "images/chess.jpg",
         keywords: [
+            "game",
             "chess",
             "strategy",
-            "board game"
+            "board game",
+            "board"
         ]
     },
 
@@ -79,10 +93,14 @@ const gamesDatabase = [
         page: "2048.html",
         image: "images/2048.jpg",
         keywords: [
+            "game",
             "2048",
             "puzzle",
-            "tiles",
-            "numbers"
+            "number",
+            "numbers",
+            "math",
+            "brain",
+            "strategy"
         ]
     },
 
@@ -93,27 +111,153 @@ const gamesDatabase = [
         page: "hexgl.html",
         image: "images/hexgl.jpg",
         keywords: [
+            "game",
             "hexgl",
             "racing",
-            "future",
-            "webgl"
+            "race",
+            "car",
+            "cars",
+            "speed",
+            "browser"
         ]
     },
 
-        {
+    {
         name: "Tekken 3",
         genre: "Fighting",
         platform: "PlayStation",
         page: "tekken3.html",
         image: "images/tekken3.jpg",
         keywords: [
+            "game",
             "tekken",
             "tekken 3",
+            "tekken3",
             "fighting",
-            "arcade",
+            "fight",
             "playstation",
             "ps1",
             "psx"
+        ]
+    },
+
+    {
+        name: "Bloody Roar II",
+        genre: "Fighting",
+        platform: "PlayStation",
+        page: "bloodyroar2.html",
+        image: "images/bloodyroar2.jpg",
+        keywords: [
+            "game",
+            "bloody roar",
+            "bloody roar 2",
+            "bloody roar ii",
+            "fighting",
+            "fight",
+            "beast",
+            "playstation",
+            "ps1",
+            "psx"
+        ]
+    },
+
+    {
+        name: "Mortal Kombat Trilogy",
+        genre: "Fighting",
+        platform: "PlayStation",
+        page: "mortalkombat.html",
+        image: "images/mortalkombattrilogy.jpg",
+        keywords: [
+            "game",
+            "mortal kombat",
+            "mortal kombat trilogy",
+            "mk trilogy",
+            "mk",
+            "fighting",
+            "fight",
+            "playstation",
+            "ps1",
+            "psx"
+        ]
+    },
+
+    {
+        name: "Subway Surfers",
+        genre: "Action",
+        platform: "PC",
+        page: "subway.html",
+        image: "images/subway-surfers.jpg",
+        keywords: [
+            "game",
+            "subway surfers",
+            "subway",
+            "surfers",
+            "running",
+            "runner",
+            "action",
+            "endless runner"
+        ]
+    },
+
+    {
+        name: "Moto X3M",
+        genre: "Racing",
+        platform: "HTML5",
+        page: "motox3m.html",
+        image: "images/motox3m.jpg",
+        keywords: [
+            "game",
+            "moto x3m",
+            "moto",
+            "motorcycle",
+            "bike",
+            "racing",
+            "race",
+            "stunts",
+            "racing game"
+        ]
+    },
+
+    {
+        name: "Road Rash",
+        genre: "Racing",
+        platform: "PlayStation",
+        page: "roadrash.html",
+        image: "images/road rash.jpg",
+        keywords: [
+            "game",
+            "road rash",
+            "road",
+            "rash",
+            "motorcycle",
+            "bike",
+            "racing",
+            "race",
+            "racing game",
+            "playstation",
+            "ps1",
+            "psx"
+        ]
+    },
+
+    {
+        name: "Traffic Racer",
+        genre: "Racing",
+        platform: "Web",
+        page: "traffic-racer.html",
+        image: "images/traffic-racer.png",
+        keywords: [
+            "game",
+            "traffic racer",
+            "traffic",
+            "racing",
+            "race",
+            "car",
+            "cars",
+            "driving",
+            "highway",
+            "speed",
+            "racer"
         ]
     }
 

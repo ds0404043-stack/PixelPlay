@@ -16,6 +16,453 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+/* =========================================================
+   PIXADU GAMES PAGE — PREMIUM ENHANCEMENTS
+   ========================================================= */
+
+:root{
+    --px-red:#ff3341;
+    --px-red-soft:rgba(255,51,65,.14);
+    --px-bg:#070708;
+    --px-panel:#111014;
+    --px-panel-2:#17151a;
+    --px-border:rgba(255,255,255,.08);
+    --px-text:#fff;
+    --px-muted:#9b98a0;
+}
+
+/* Smooth page feel */
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 8% 8%,rgba(255,40,55,.08),transparent 24rem),
+        radial-gradient(circle at 92% 38%,rgba(95,55,255,.07),transparent 28rem),
+        #070708;
+}
+
+.games-hero{
+    position:relative;
+    overflow:hidden;
+}
+
+.games-hero::after{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    right:-180px;
+    top:-180px;
+    border-radius:50%;
+    background:rgba(255,51,65,.10);
+    filter:blur(45px);
+    pointer-events:none;
+}
+
+.games-search{
+    position:relative;
+    z-index:3;
+}
+
+.search-container{
+    transition:.25s ease;
+}
+
+.search-container:focus-within{
+    border-color:rgba(255,51,65,.55) !important;
+    box-shadow:0 0 0 4px rgba(255,51,65,.08),0 15px 45px rgba(0,0,0,.25);
+    transform:translateY(-2px);
+}
+
+.sort-section{
+    display:flex;
+    justify-content:flex-end;
+    max-width:1200px;
+    margin:0 auto 12px;
+    padding:0 20px;
+}
+
+#sortGames{
+    min-width:180px;
+    padding:12px 15px;
+    color:#fff;
+    background:#131116;
+    border:1px solid var(--px-border);
+    border-radius:12px;
+    outline:none;
+    cursor:pointer;
+}
+
+#sortGames:focus{
+    border-color:rgba(255,51,65,.55);
+}
+
+/* Stats */
+.pixadu-stats{
+    width:min(1200px,calc(100% - 40px));
+    margin:30px auto 8px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.stat-card{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:17px 18px;
+    border:1px solid var(--px-border);
+    border-radius:16px;
+    background:linear-gradient(145deg,#151319,#0d0c0f);
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+    transition:.25s ease;
+}
+
+.stat-card:hover{
+    transform:translateY(-3px);
+    border-color:rgba(255,51,65,.25);
+}
+
+.stat-icon{
+    width:42px;
+    height:42px;
+    display:grid;
+    place-items:center;
+    border-radius:12px;
+    background:var(--px-red-soft);
+    font-size:20px;
+}
+
+.stat-card strong{
+    display:block;
+    font-size:17px;
+}
+
+.stat-card small{
+    display:block;
+    margin-top:2px;
+    color:var(--px-muted);
+    font-size:12px;
+}
+
+/* Trending */
+.trending-section{
+    width:min(1200px,calc(100% - 40px));
+    margin:42px auto 25px;
+}
+
+.section-heading{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:16px;
+}
+
+.section-kicker{
+    color:#ff5965;
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:1.7px;
+}
+
+.section-heading h2{
+    margin-top:5px;
+    font-size:clamp(22px,3vw,30px);
+}
+
+.view-all-btn{
+    border:1px solid var(--px-border);
+    background:#151318;
+    color:#fff;
+    padding:10px 14px;
+    border-radius:11px;
+    cursor:pointer;
+    transition:.2s ease;
+}
+
+.view-all-btn:hover{
+    background:#211e24;
+    border-color:rgba(255,51,65,.35);
+}
+
+.trending-track{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.trending-card{
+    position:relative;
+    height:205px;
+    overflow:hidden;
+    border:1px solid var(--px-border);
+    border-radius:17px;
+    background:#111;
+    text-decoration:none;
+    color:#fff;
+    isolation:isolate;
+}
+
+.trending-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition:transform .45s ease,filter .45s ease;
+}
+
+.trending-card::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(to top,rgba(0,0,0,.94),rgba(0,0,0,.05) 70%);
+    z-index:0;
+}
+
+.trending-card:hover img{
+    transform:scale(1.08);
+    filter:saturate(1.15);
+}
+
+.trending-overlay{
+    position:absolute;
+    left:15px;
+    right:15px;
+    bottom:14px;
+    z-index:1;
+}
+
+.trending-overlay span{
+    display:inline-block;
+    margin-bottom:6px;
+    padding:5px 8px;
+    border-radius:7px;
+    background:rgba(255,51,65,.82);
+    font-size:10px;
+    font-weight:800;
+}
+
+.trending-overlay strong{
+    display:block;
+    font-size:19px;
+}
+
+.trending-overlay small{
+    display:block;
+    margin-top:4px;
+    color:#c6c3c9;
+}
+
+/* Categories */
+.categories{
+    gap:9px !important;
+    flex-wrap:wrap;
+}
+
+.category-btn{
+    transition:.2s ease !important;
+}
+
+.category-btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Game cards */
+.games-grid{
+    align-items:stretch;
+}
+
+.game-card{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.07) !important;
+    background:linear-gradient(150deg,#151319,#0d0c0f) !important;
+    box-shadow:0 12px 35px rgba(0,0,0,.22);
+    transition:transform .3s ease,box-shadow .3s ease,border-color .3s ease !important;
+}
+
+.game-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(120deg,rgba(255,255,255,.05),transparent 35%);
+    opacity:0;
+    transition:.3s ease;
+    z-index:1;
+}
+
+.game-card:hover{
+    transform:translateY(-8px) !important;
+    border-color:rgba(255,51,65,.28) !important;
+    box-shadow:0 22px 55px rgba(0,0,0,.42);
+}
+
+.game-card:hover::before{
+    opacity:1;
+}
+
+.game-card .image-wrapper{
+    overflow:hidden;
+}
+
+.game-card .image-wrapper img{
+    transition:transform .45s ease,filter .45s ease !important;
+}
+
+.game-card:hover .image-wrapper img{
+    transform:scale(1.07);
+    filter:saturate(1.1);
+}
+
+.favorite{
+    transition:.2s ease !important;
+    z-index:5 !important;
+}
+
+.favorite:hover{
+    transform:scale(1.1);
+}
+
+.play-btn-small{
+    transition:.2s ease !important;
+}
+
+.play-btn-small:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 22px rgba(255,51,65,.22);
+}
+
+/* No results */
+.no-games-message{
+    width:min(500px,calc(100% - 40px));
+    margin:30px auto;
+    padding:40px 20px;
+    text-align:center;
+    border:1px solid var(--px-border);
+    border-radius:18px;
+    background:#111014;
+}
+
+.no-games-message > div{
+    font-size:42px;
+    margin-bottom:8px;
+}
+
+.no-games-message h3{
+    font-size:22px;
+}
+
+.no-games-message p{
+    margin:7px 0 18px;
+    color:var(--px-muted);
+}
+
+.no-games-message button{
+    border:0;
+    border-radius:10px;
+    padding:11px 16px;
+    background:var(--px-red);
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* Mobile */
+@media(max-width:900px){
+    .pixadu-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .trending-track{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .pixadu-stats,
+    .trending-section{
+        width:calc(100% - 28px);
+    }
+
+    .pixadu-stats{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+    }
+
+    .stat-card{
+        padding:13px;
+    }
+
+    .stat-icon{
+        width:36px;
+        height:36px;
+        font-size:17px;
+    }
+
+    .section-heading{
+        align-items:flex-start;
+    }
+
+    .trending-track{
+        display:flex;
+        overflow-x:auto;
+        scroll-snap-type:x mandatory;
+        padding-bottom:7px;
+        scrollbar-width:none;
+    }
+
+    .trending-track::-webkit-scrollbar{
+        display:none;
+    }
+
+    .trending-card{
+        flex:0 0 78%;
+        scroll-snap-align:start;
+    }
+
+    .sort-section{
+        padding:0 14px;
+    }
+
+    #sortGames{
+        width:100%;
+    }
+}
+
+@media(max-width:430px){
+    .pixadu-stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat-card small{
+        font-size:10px;
+    }
+
+    .stat-card strong{
+        font-size:14px;
+    }
+
+    .trending-card{
+        flex-basis:86%;
+    }
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{
+        scroll-behavior:auto !important;
+        transition:none !important;
+        animation:none !important;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -279,6 +726,102 @@
     </section>
 
 
+
+    <!-- ================= QUICK STATS ================= -->
+
+    <section class="pixadu-stats">
+
+        <div class="stat-card">
+            <span class="stat-icon">🎮</span>
+            <div>
+                <strong id="statGames">11</strong>
+                <small>Playable Games</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-icon">⚡</span>
+            <div>
+                <strong>Instant</strong>
+                <small>Browser Gaming</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-icon">❤️</span>
+            <div>
+                <strong id="statFavorites">0</strong>
+                <small>My Favorites</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-icon">📱</span>
+            <div>
+                <strong>Mobile</strong>
+                <small>Friendly</small>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ================= TRENDING ================= -->
+
+    <section class="trending-section">
+
+        <div class="section-heading">
+            <div>
+                <span class="section-kicker">🔥 TRENDING NOW</span>
+                <h2>Players are playing these</h2>
+            </div>
+
+            <button class="view-all-btn" id="showAllGames">
+                View All <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <div class="trending-track">
+
+            <a class="trending-card" href="traffic-racer.html">
+                <img src="images/traffic-racer.png" alt="Traffic Racer">
+                <div class="trending-overlay">
+                    <span>🏎️ Racing</span>
+                    <strong>Traffic Racer</strong>
+                    <small>Play Now →</small>
+                </div>
+            </a>
+
+            <a class="trending-card" href="tekken3.html">
+                <img src="images/tekken3.jpg" alt="Tekken 3">
+                <div class="trending-overlay">
+                    <span>🥊 Fighting</span>
+                    <strong>Tekken 3</strong>
+                    <small>Play Now →</small>
+                </div>
+            </a>
+
+            <a class="trending-card" href="minecraft.html">
+                <img src="images/minecraft.png" alt="Minecraft">
+                <div class="trending-overlay">
+                    <span>🧱 Sandbox</span>
+                    <strong>Minecraft</strong>
+                    <small>Play Now →</small>
+                </div>
+            </a>
+
+            <a class="trending-card" href="gta.html">
+                <img src="images/gta vice city.png" alt="GTA Vice City">
+                <div class="trending-overlay">
+                    <span>🚗 Action</span>
+                    <strong>GTA Vice City</strong>
+                    <small>Play Now →</small>
+                </div>
+            </a>
+
+        </div>
+
+    </section>
+
     <!-- ================= CATEGORIES ================= -->
 
     <section class="categories">
@@ -297,12 +840,14 @@
 
         <button class="category-btn" data-filter="Fighting">Fighting</button>
 
+        <button class="category-btn" data-filter="Puzzle">Puzzle</button>
+
     </section>
 
     <section class="games-info">
 
         <h2>
-            🎮 <span id="gameCount">3</span> Games Available
+            🎮 <span id="gameCount">11</span> Games Available
         </h2>
 
     </section>
@@ -405,11 +950,11 @@
         </div>
 
 
-        <div class="game-card" data-category="Action">
+        <div class="game-card" data-category="Puzzle">
 
             <div class="image-wrapper">
 
-                <img src="images/angrybirdshero.png" alt="GTA Vice City">
+                <img src="images/angrybirdshero.png" alt="Angry Birds">
 
             </div>
 
@@ -787,7 +1332,64 @@
 
         </div>
 
+
+        <!-- Traffic Racer -->
+
+        <div class="game-card" data-category="Racing">
+
+            <div class="image-wrapper">
+
+                <img src="images/traffic-racer.png" alt="Traffic Racer">
+
+            </div>
+
+            <div class="favorite">
+
+                <i class="fa-regular fa-heart"></i>
+
+            </div>
+
+            <div class="status-badge live">
+                LIVE
+            </div>
+
+            <div class="game-content">
+
+                <span class="game-tag">Racing</span>
+                <span class="platform-tag">Web</span>
+                <span class="year">2026</span>
+
+                <h3>Traffic Racer</h3>
+
+                <p>
+                    Dodge traffic, push your speed and chase a higher score in this fast-paced racing game.
+                </p>
+
+                <div class="game-bottom">
+
+                    <span class="rating">
+                        ⭐ 4.8
+                    </span>
+
+                    <a href="traffic-racer.html" class="play-btn-small">
+                        ▶ Play Now
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
     </section>
+
+    <div id="noGamesMessage" class="no-games-message" hidden>
+        <div>🎮</div>
+        <h3>No games found</h3>
+        <p>Try another search or category.</p>
+        <button id="clearGameFilters">Clear Filters</button>
+    </div>
 
     <footer class="site-footer">
 
@@ -853,6 +1455,176 @@
     <script src="js/search.js"></script>
     <script src="js/login-modal.js"></script>
     <script type="module" src="js/firebase.js"></script>
+
+
+<script>
+/* =========================================================
+   PIXADU GAMES — SEARCH / FILTER / SORT ENHANCEMENTS
+   ========================================================= */
+document.addEventListener("DOMContentLoaded", () => {
+
+    const grid = document.querySelector(".games-grid");
+    const cards = grid ? Array.from(grid.querySelectorAll(".game-card")) : [];
+    const categoryButtons = Array.from(document.querySelectorAll(".category-btn"));
+    const gameSearch = document.getElementById("gameSearch");
+    const headerSearch = document.getElementById("searchInput");
+    const mobileSearch = document.getElementById("mobileSearchInput");
+    const sortSelect = document.getElementById("sortGames");
+    const count = document.getElementById("gameCount");
+    const statGames = document.getElementById("statGames");
+    const statFavorites = document.getElementById("statFavorites");
+    const noResults = document.getElementById("noGamesMessage");
+    const clearBtn = document.getElementById("clearGameFilters");
+    const showAll = document.getElementById("showAllGames");
+
+    let activeCategory = "all";
+    let searchTerm = "";
+
+    function getTitle(card){
+        return (card.querySelector("h3")?.textContent || "").trim();
+    }
+
+    function getRating(card){
+        const text = card.querySelector(".rating")?.textContent || "";
+        const match = text.match(/(\d+(?:\.\d+)?)/);
+        return match ? parseFloat(match[1]) : 0;
+    }
+
+    function getYear(card){
+        const year = card.querySelector(".year")?.textContent || "0";
+        return parseInt(year,10) || 0;
+    }
+
+    function applyFilters(){
+        let visible = 0;
+
+        cards.forEach(card => {
+            const title = getTitle(card).toLowerCase();
+            const description = (card.querySelector("p")?.textContent || "").toLowerCase();
+            const category = (card.dataset.category || "").toLowerCase();
+
+            const matchesSearch =
+                !searchTerm ||
+                title.includes(searchTerm) ||
+                description.includes(searchTerm) ||
+                category.includes(searchTerm);
+
+            const matchesCategory =
+                activeCategory === "all" ||
+                category === activeCategory.toLowerCase();
+
+            const show = matchesSearch && matchesCategory;
+
+            card.style.display = show ? "" : "none";
+
+            if(show) visible++;
+        });
+
+        if(count) count.textContent = visible;
+        if(statGames) statGames.textContent = visible;
+
+        if(noResults) noResults.hidden = visible !== 0;
+    }
+
+    function setSearch(value){
+        searchTerm = value.trim().toLowerCase();
+
+        [gameSearch, headerSearch, mobileSearch].forEach(input => {
+            if(input && input.value !== value) input.value = value;
+        });
+
+        applyFilters();
+    }
+
+    [gameSearch, headerSearch, mobileSearch].forEach(input => {
+        if(!input) return;
+
+        input.addEventListener("input", () => {
+            setSearch(input.value);
+        });
+    });
+
+    categoryButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            activeCategory = button.dataset.filter || "all";
+
+            categoryButtons.forEach(btn => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            applyFilters();
+        });
+    });
+
+    if(sortSelect){
+        sortSelect.addEventListener("change", () => {
+            const mode = sortSelect.value;
+
+            const sorted = [...cards].sort((a,b) => {
+                if(mode === "az"){
+                    return getTitle(a).localeCompare(getTitle(b));
+                }
+
+                if(mode === "rating"){
+                    return getRating(b) - getRating(a);
+                }
+
+                if(mode === "year"){
+                    return getYear(b) - getYear(a);
+                }
+
+                return cards.indexOf(a) - cards.indexOf(b);
+            });
+
+            sorted.forEach(card => grid.appendChild(card));
+            applyFilters();
+        });
+    }
+
+    if(clearBtn){
+        clearBtn.addEventListener("click", () => {
+            activeCategory = "all";
+            setSearch("");
+
+            categoryButtons.forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.filter === "all");
+            });
+
+            if(sortSelect) sortSelect.value = "default";
+        });
+    }
+
+    if(showAll){
+        showAll.addEventListener("click", () => {
+            activeCategory = "all";
+            setSearch("");
+
+            categoryButtons.forEach(btn => {
+                btn.classList.toggle("active", btn.dataset.filter === "all");
+            });
+
+            document.querySelector(".games-info")?.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+        });
+    }
+
+    /* Favorite counter — works with the existing favorite buttons. */
+    function updateFavoriteCount(){
+        const favorites = document.querySelectorAll(".favorite.active, .favorite.is-favorite");
+        if(statFavorites) statFavorites.textContent = favorites.length;
+    }
+
+    document.querySelectorAll(".favorite").forEach(button => {
+        button.addEventListener("click", () => {
+            requestAnimationFrame(updateFavoriteCount);
+        });
+    });
+
+    updateFavoriteCount();
+    applyFilters();
+});
+</script>
 
 </body>
 
