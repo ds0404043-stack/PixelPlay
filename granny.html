@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Granny | Pixadu</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(130, 0, 0, .22), transparent 28%),
+                radial-gradient(circle at 85% 35%, rgba(70, 0, 0, .20), transparent 30%),
+                #050505;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(rgba(255, 255, 255, .012) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, .012) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        body.game-is-fullscreen {
+            overflow: hidden !important
+        }
+
+        .topbar {
+            width: min(1200px, calc(100% - 32px));
+            margin: 20px auto 0;
+            padding: 14px 18px;
+            border: 1px solid rgba(255, 45, 45, .16);
+            background: rgba(10, 10, 10, .78);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 20;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, .35), 0 0 40px rgba(120, 0, 0, .08)
+        }
+
+        .brand {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: -1px
+        }
+
+        .brand span {
+            color: #ff3030
+        }
+
+        .back-games {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cfcfcf;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .25s
+        }
+
+        .back-games:hover {
+            color: #ff3838;
+            transform: translateX(-3px)
+        }
+
+        .hero {
+            width: min(1200px, calc(100% - 32px));
+            margin: 70px auto 0;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 55px;
+            align-items: center
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: rgba(130, 0, 0, .16);
+            border: 1px solid rgba(255, 50, 50, .18);
+            color: #ff5b5b;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 18px
+        }
+
+        .eyebrow i {
+            font-size: 9px;
+            color: #ff3030
+        }
+
+        .hero h1 {
+            font-size: clamp(52px, 8vw, 100px);
+            line-height: .92;
+            letter-spacing: -5px;
+            font-weight: 900;
+            margin-bottom: 24px;
+            text-transform: uppercase;
+            text-shadow: 0 0 30px rgba(255, 0, 0, .16), 0 10px 35px rgba(0, 0, 0, .7)
+        }
+
+        .hero h1 span {
+            color: #b40000
+        }
+
+        .hero-description {
+            max-width: 680px;
+            color: #aaa;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 25px
+        }
+
+        .meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+            margin-bottom: 30px
+        }
+
+        .badge {
+            padding: 8px 12px;
+            border-radius: 9px;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .08);
+            color: #d8d8d8;
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        .badge i {
+            color: #e32626;
+            margin-right: 5px
+        }
+
+        .play-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 11px;
+            padding: 14px 23px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #b00000, #e52a2a);
+            border: 1px solid rgba(255, 80, 80, .25);
+            box-shadow: 0 12px 30px rgba(150, 0, 0, .28), inset 0 1px rgba(255, 255, 255, .15);
+            color: white;
+            font-size: 14px;
+            font-weight: 800;
+            transition: .25s
+        }
+
+        .play-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(170, 0, 0, .38), 0 0 30px rgba(255, 0, 0, .12)
+        }
+
+        .poster-wrap {
+            display: flex;
+            justify-content: center
+        }
+
+        .poster {
+            position: relative;
+            width: min(100%, 360px);
+            aspect-ratio: 3/4;
+            border-radius: 22px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 50, 50, .22);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, .7), 0 0 55px rgba(120, 0, 0, .18);
+            transform: rotate(2deg);
+            transition: .35s
+        }
+
+        .poster:hover {
+            transform: rotate(0deg) scale(1.025)
+        }
+
+        .poster::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, .72), transparent 55%);
+            pointer-events: none
+        }
+
+        .poster img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .game-section {
+            width: min(1200px, calc(100% - 32px));
+            margin: 95px auto 0
+        }
+
+        .section-heading {
+            margin-bottom: 22px
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+            font-weight: 800;
+            letter-spacing: -1px
+        }
+
+        .section-heading p {
+            margin-top: 6px;
+            color: #777;
+            font-size: 14px
+        }
+
+        .game-shell {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 50, 50, .18);
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .65), 0 0 50px rgba(110, 0, 0, .10)
+        }
+
+        .game-header {
+            min-height: 52px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: #0a0a0a;
+            border-bottom: 1px solid rgba(255, 255, 255, .06)
+        }
+
+        .game-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #bdbdbd;
+            font-size: 12px;
+            font-weight: 600
+        }
+
+        .game-status i {
+            color: #d32626;
+            font-size: 9px
+        }
+
+        .fullscreen-btn {
+            border: 1px solid rgba(255, 255, 255, .08);
+            background: rgba(255, 255, 255, .04);
+            color: #ddd;
+            padding: 8px 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            transition: .2s
+        }
+
+        .fullscreen-btn:hover {
+            color: #fff;
+            background: rgba(180, 0, 0, .22);
+            border-color: rgba(255, 60, 60, .25)
+        }
+
+        .game-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            min-height: 0;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .game-frame iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            min-width: 0;
+            min-height: 0;
+            border: 0;
+            background: #000;
+        }
+
+        .game-shell.custom-fullscreen {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 999999 !important;
+            width: 100vw !important;
+            max-width: none !important;
+            height: 100dvh !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            background: #000 !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        .game-shell.custom-fullscreen .game-header {
+            flex: 0 0 52px;
+        }
+
+        .game-shell.custom-fullscreen .game-frame {
+            flex: 1 1 auto;
+            width: 100% !important;
+            height: auto !important;
+            min-height: 0 !important;
+            aspect-ratio: auto !important;
+        }
+
+        .game-shell.custom-fullscreen .game-frame iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 18px
+        }
+
+        .info-card {
+            padding: 21px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .025);
+            border: 1px solid rgba(255, 255, 255, .065)
+        }
+
+        .info-card i {
+            color: #d72828;
+            font-size: 18px;
+            margin-bottom: 12px
+        }
+
+        .info-card h3 {
+            font-size: 14px;
+            margin-bottom: 6px
+        }
+
+        .info-card p {
+            color: #777;
+            font-size: 12px;
+            line-height: 1.6
+        }
+
+        .about {
+            width: min(900px, calc(100% - 32px));
+            margin: 90px auto;
+            text-align: center
+        }
+
+        .about h2 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 18px
+        }
+
+        .about p {
+            color: #888;
+            font-size: 14px;
+            line-height: 1.9
+        }
+
+        footer {
+            margin-top: 100px;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+            background: #030303
+        }
+
+        .footer-inner {
+            width: min(1200px, calc(100% - 32px));
+            margin: auto;
+            padding: 55px 0 30px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1fr;
+            gap: 40px
+        }
+
+        .footer-brand h2 {
+            font-size: 28px;
+            font-weight: 900
+        }
+
+        .footer-brand h2 span {
+            color: #e32626
+        }
+
+        .footer-brand p {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.7;
+            margin-top: 10px;
+            max-width: 330px
+        }
+
+        .footer-column h3 {
+            font-size: 13px;
+            margin-bottom: 15px;
+            color: #eee
+        }
+
+        .footer-column a {
+            display: block;
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 9px;
+            transition: .2s
+        }
+
+        .footer-column a:hover {
+            color: #e32626
+        }
+
+        .socials {
+            display: flex;
+            gap: 9px;
+            margin-top: 16px
+        }
+
+        .socials a {
+            width: 35px;
+            height: 35px;
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, .045);
+            border: 1px solid rgba(255, 255, 255, .06);
+            color: #aaa;
+            margin: 0
+        }
+
+        .socials a:hover {
+            color: #fff;
+            background: rgba(180, 0, 0, .35)
+        }
+
+        .footer-bottom {
+            width: min(1200px, calc(100% - 32px));
+            margin: auto;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, .05);
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            color: #555;
+            font-size: 11px
+        }
+
+        @media(max-width:900px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 40px
+            }
+
+            .poster-wrap {
+                order: -1
+            }
+
+            .poster {
+                width: min(100%, 300px)
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:650px) {
+            .topbar {
+                width: calc(100% - 22px);
+                margin-top: 12px
+            }
+
+            .hero {
+                width: calc(100% - 22px);
+                margin-top: 45px;
+                gap: 35px
+            }
+
+            .hero h1 {
+                font-size: clamp(48px, 15vw, 64px);
+                letter-spacing: -3px
+            }
+
+            .hero-description {
+                font-size: 14px;
+                line-height: 1.7
+            }
+
+            .poster {
+                width: min(250px, 70vw)
+            }
+
+            .game-section {
+                width: calc(100% - 22px);
+                margin-top: 65px
+            }
+
+            .game-shell {
+                width: 100%;
+                max-width: 100%;
+                border-radius: 14px
+            }
+
+            .game-frame {
+                width: 100%;
+                aspect-ratio: 16 / 9
+            }
+
+            .game-frame iframe {
+                width: 100%;
+                height: 100%
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr
+            }
+
+            .footer-inner {
+                width: calc(100% - 22px);
+                grid-template-columns: 1fr;
+                gap: 30px
+            }
+
+            .footer-bottom {
+                width: calc(100% - 22px);
+                flex-direction: column
+            }
+
+            .game-shell.custom-fullscreen {
+                border-radius: 0 !important
+            }
+        }
+
+        @media(max-width:425px) {
+            .topbar {
+                width: calc(100% - 16px)
+            }
+
+            .hero {
+                width: calc(100% - 16px)
+            }
+
+            .back-games {
+                font-size: 12px
+            }
+
+            .brand {
+                font-size: 22px
+            }
+
+            .hero h1 {
+                font-size: clamp(44px, 14vw, 54px)
+            }
+
+            .poster {
+                width: min(220px, 65vw);
+                border-radius: 16px
+            }
+
+            .game-section {
+                width: calc(100% - 16px)
+            }
+
+            .game-header {
+                min-height: 50px;
+                padding: 9px 10px
+            }
+
+            .fullscreen-btn {
+                padding: 8px 10px
+            }
+
+            .game-frame {
+                aspect-ratio: 16 / 9
+            }
+
+            .about {
+                width: calc(100% - 22px)
+            }
+
+            .about h2 {
+                font-size: 27px
+            }
+        }
+
+        @media(min-width:1400px) {
+            .game-frame {
+                aspect-ratio: 16 / 8.8
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="topbar">
+        <a href="index.html" class="brand">Pixa<span>du</span></a>
+        <a href="games.html" class="back-games">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Games
+        </a>
+    </nav>
+
+    <main>
+
+        <section class="hero">
+            <div class="hero-content">
+                <div class="eyebrow">
+                    <i class="fa-solid fa-circle"></i>
+                    Horror Survival
+                </div>
+
+                <h1>GR<span>A</span>NNY</h1>
+
+                <p class="hero-description">
+                    Trapped inside Granny's house, your only goal is to escape.
+                    Stay quiet, explore carefully, find useful items and avoid
+                    getting caught in this terrifying browser survival experience.
+                </p>
+
+                <div class="meta">
+                    <div class="badge"><i class="fa-solid fa-skull"></i> Horror</div>
+                    <div class="badge"><i class="fa-solid fa-house"></i> Survival</div>
+                    <div class="badge"><i class="fa-solid fa-globe"></i> Browser Game</div>
+                    <div class="badge"><i class="fa-solid fa-gamepad"></i> Keyboard</div>
+                </div>
+
+                <a href="#play" class="play-btn">
+                    <i class="fa-solid fa-play"></i>
+                    Play Granny
+                </a>
+            </div>
+
+            <div class="poster-wrap">
+                <div class="poster">
+                    <img src="images/granny.jpg" alt="Granny">
+                </div>
+            </div>
+        </section>
+
+        <section class="game-section" id="play">
+            <div class="section-heading">
+                <h2>Play Granny</h2>
+                <p>The game runs directly in your browser.</p>
+            </div>
+
+            <div class="game-shell" id="gameShell">
+                <div class="game-header">
+                    <div class="game-status">
+                        <i class="fa-solid fa-circle"></i>
+                        Game Ready
+                    </div>
+
+                    <button class="fullscreen-btn" id="fullscreenBtn" type="button">
+                        <i class="fa-solid fa-expand"></i>
+                        Fullscreen
+                    </button>
+                </div>
+
+                <div class="game-frame" id="gameFrame">
+                    <iframe src="games/granny/granny-main/index.html" title="Granny"
+                        allow="fullscreen; autoplay; gamepad" allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fa-solid fa-skull-crossbones"></i>
+                    <h3>Survival Horror</h3>
+                    <p>Explore the house carefully and survive the terrifying Granny encounter.</p>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa-solid fa-globe"></i>
+                    <h3>Browser Ready</h3>
+                    <p>No separate launcher is required. Play Granny directly through Pixadu.</p>
+                </div>
+
+                <div class="info-card">
+                    <i class="fa-solid fa-expand"></i>
+                    <h3>Fullscreen Play</h3>
+                    <p>Expand the game area for a more immersive horror experience.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about">
+            <h2>About Granny</h2>
+            <p>
+                Granny is a survival horror game where you must navigate a dangerous
+                house while trying to find a way out. Every sound matters, every room
+                can hide something useful, and getting caught can quickly turn the
+                situation against you. Play the browser version here on Pixadu and
+                see if you can escape.
+            </p>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                <h2>Pixa<span>du</span></h2>
+                <p>
+                    Play games directly in your browser. Discover classic and
+                    modern gaming experiences without leaving Pixadu.
+                </p>
+
+                <div class="socials">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a href="https://github.com/ds0404043-stack/Pixadu" target="_blank" rel="noopener"
+                        aria-label="GitHub">
+                        <i class="fa-brands fa-github"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h3>Pixadu</h3>
+                <a href="index.html">Home</a>
+                <a href="games.html">Games</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="footer-column">
+                <h3>Games</h3>
+                <a href="tekken3.html">Tekken 3</a>
+                <a href="granny.html">Granny</a>
+                <a href="gta3.html">GTA 3</a>
+                <a href="gtavc.html">GTA Vice City</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <span>© 2026 Pixadu. All rights reserved.</span>
+            <span>Made with ❤️ by Deepak Sharma</span>
+        </div>
+    </footer>
+
+    <script>
+        const fullscreenBtn = document.getElementById("fullscreenBtn");
+        const gameShell = document.getElementById("gameShell");
+
+        let gameFullscreen = false;
+
+        function setGameFullscreen(active) {
+            gameFullscreen = active;
+            gameShell.classList.toggle("custom-fullscreen", active);
+            document.body.classList.toggle("game-is-fullscreen", active);
+
+            fullscreenBtn.innerHTML = active
+                ? '<i class="fa-solid fa-compress"></i> Exit Fullscreen'
+                : '<i class="fa-solid fa-expand"></i> Fullscreen';
+
+            fullscreenBtn.setAttribute("aria-label", active ? "Exit fullscreen" : "Enter fullscreen");
+        }
+
+        fullscreenBtn.addEventListener("click", () => {
+            setGameFullscreen(!gameFullscreen);
+        });
+
+        document.addEventListener("keydown", (event) => {
+            if (event.key === "Escape" && gameFullscreen) {
+                setGameFullscreen(false);
+            }
+        });
+
+        window.addEventListener("resize", () => {
+            if (gameFullscreen) {
+                gameShell.style.height = window.innerHeight + "px";
+            } else {
+                gameShell.style.height = "";
+            }
+        });
+    </script>
+
+    <script src="js/recent.js"></script>
+
+    <script>
+        if (typeof saveRecentGame === "function") {
+            saveRecentGame(
+                "Granny",
+                "images/granny.jpg",
+                "granny.html"
+            );
+        }
+    </script>
+
+</body>
+
+</html>

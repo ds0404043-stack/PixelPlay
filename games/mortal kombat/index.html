@@ -28,122 +28,221 @@
             transform: translate(-50%, -50%);
             z-index: 9999;
 
-            padding: 18px 35px;
-            font-size: 20px;
-            font-weight: bold;
+            padding: 16px 42px;
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #fff;
 
             cursor: pointer;
-            border: none;
-            border-radius: 10px;
+            border: 1px solid rgba(255, 110, 20, 0.8);
+            border-radius: 4px;
+            background: linear-gradient(135deg, #140500, #b83b00 55%, #3b0800);
+            box-shadow:
+                0 0 25px rgba(255, 75, 0, 0.35),
+                inset 0 0 18px rgba(255, 255, 255, 0.08);
+            transition: 0.2s ease;
+        }
+
+        #startGame:hover {
+            transform: translate(-50%, -50%) scale(1.04);
+            box-shadow:
+                0 0 35px rgba(255, 75, 0, 0.65),
+                inset 0 0 20px rgba(255, 255, 255, 0.12);
         }
 
         #loadingBox {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+            inset: 0;
             z-index: 10000;
-
-            width: min(90%, 520px);
-            padding: 25px;
+            width: 100%;
+            height: 100%;
             box-sizing: border-box;
 
-            background: rgba(15, 15, 15, 0.97);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 16px;
+            background:
+                linear-gradient(
+                    180deg,
+                    rgba(0, 0, 0, 0.08) 0%,
+                    rgba(0, 0, 0, 0.25) 45%,
+                    rgba(0, 0, 0, 0.82) 100%
+                ),
+                url("./mortal-kombat-trilogy-banner.png") center center / cover no-repeat;
 
             color: white;
-            text-align: center;
             font-family: Arial, sans-serif;
         }
 
+        #loadingBox::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: radial-gradient(
+                circle at center,
+                transparent 25%,
+                rgba(0, 0, 0, 0.48) 100%
+            );
+        }
+
+        .loader-content {
+            position: absolute;
+            left: 50%;
+            bottom: 6%;
+            transform: translateX(-50%);
+            z-index: 2;
+            width: min(760px, 88%);
+            text-align: center;
+        }
+
         .loading-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
+            font-size: clamp(18px, 2.2vw, 28px);
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            text-shadow: 0 0 16px rgba(255, 85, 15, 0.85);
         }
 
         .loading-text {
-            font-size: 14px;
-            opacity: 0.8;
-            margin-bottom: 18px;
+            margin-bottom: 14px;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(11px, 1.4vw, 15px);
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .progress-track {
             width: 100%;
-            height: 12px;
-            background: #292929;
-            border-radius: 20px;
+            height: 14px;
+            padding: 2px;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.82);
+            border: 1px solid rgba(255, 110, 30, 0.7);
+            border-radius: 3px;
             overflow: hidden;
+            box-shadow: 0 0 18px rgba(255, 70, 0, 0.3);
         }
 
         #progressBar {
             width: 0%;
             height: 100%;
-            background: #ff1744;
+            border-radius: 2px;
+            background: linear-gradient(
+                90deg,
+                #7a1900,
+                #ff5a00 45%,
+                #ffc247
+            );
+            box-shadow:
+                0 0 12px rgba(255, 85, 0, 0.95),
+                0 0 28px rgba(255, 70, 0, 0.45);
             transition: width 0.15s ease;
         }
 
         #progressText {
-            margin-top: 10px;
-            font-size: 18px;
-            font-weight: bold;
+            margin-top: 9px;
+            font-size: clamp(16px, 2vw, 22px);
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 8px #000;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .info-box {
-            margin-top: 18px;
-            padding: 13px;
-
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 10px;
-
-            font-size: 13px;
-            line-height: 1.5;
+            flex: 1;
+            min-width: 0;
+            padding: 10px 13px;
+            box-sizing: border-box;
+            background: rgba(5, 5, 5, 0.72);
+            border: 1px solid rgba(255, 100, 30, 0.3);
+            border-radius: 5px;
+            backdrop-filter: blur(5px);
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 11px;
+            line-height: 1.45;
             text-align: left;
         }
 
-        .controls-box {
-            margin-top: 10px;
+        .info-box strong {
+            color: #fff;
+            letter-spacing: 0.6px;
+        }
+
+        .loader-scanline {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            opacity: 0.13;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent 0px,
+                transparent 3px,
+                rgba(255, 255, 255, 0.08) 4px
+            );
+        }
+
+        @media (max-width: 650px) {
+            .loader-content {
+                bottom: 4%;
+                width: 91%;
+            }
+
+            .info-row {
+                display: none;
+            }
+
+            .loading-title {
+                letter-spacing: 2px;
+            }
+
+            .progress-track {
+                height: 12px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <button id="startGame">START GAME</button>
+    <button id="startGame">ENTER THE TOURNAMENT</button>
 
     <div id="loadingBox">
+        <div class="loader-scanline"></div>
 
-        <div class="loading-title">
-            🎮 Loading Mortal Kombat Trilogy
+        <div class="loader-content">
+            <div class="loading-title">PREPARE YOURSELF...</div>
+
+            <div class="loading-text">
+                Downloading game data
+            </div>
+
+            <div class="progress-track">
+                <div id="progressBar"></div>
+            </div>
+
+            <div id="progressText">
+                0 / 0 MB
+            </div>
+
+            <div class="info-row">
+                <div class="info-box">
+                    📥 <strong>FIRST DOWNLOAD</strong><br>
+                    Keep this page open while the game data is downloading.
+                </div>
+
+                <div class="info-box">
+                    🎮 <strong>CONTROLS</strong><br>
+                    Controls can be remapped from the emulator settings.
+                </div>
+            </div>
         </div>
-
-        <div class="loading-text">
-            Downloading game data...
-        </div>
-
-        <div class="progress-track">
-            <div id="progressBar"></div>
-        </div>
-
-        <div id="progressText">
-            0 / 0 MB
-        </div>
-
-        <div class="info-box">
-            📥 <strong>First download may take some time.</strong><br>
-            Please keep this page open while the game is downloading.
-            Once the data is cached, future launches may be faster.
-        </div>
-
-        <div class="info-box controls-box">
-            🎮 <strong>Controls</strong><br>
-            If you're not comfortable with the default controls,
-            you can remap the controls to your own keys from the
-            emulator's control settings.
-        </div>
-
     </div>
 
     <div id="game"></div>

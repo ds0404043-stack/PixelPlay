@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <title>Granny | Pixadu</title>
+
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #050505;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #unityContainer {
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+    }
+
+    /* =========================
+       LOADER
+    ========================= */
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #181818 0%,
+          #090909 45%,
+          #000 100%
+        );
+
+      transition:
+        opacity 0.8s ease,
+        visibility 0.8s ease;
+    }
+
+    #loader.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* subtle horror vignette */
+
+    #loader::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+
+      background:
+        radial-gradient(
+          ellipse at center,
+          transparent 35%,
+          rgba(0, 0, 0, 0.85) 100%
+        );
+
+      pointer-events: none;
+    }
+
+    .loader-content {
+      position: relative;
+      z-index: 2;
+
+      width: min(520px, 88vw);
+      text-align: center;
+    }
+
+    /* =========================
+       TITLE
+    ========================= */
+
+    .game-title {
+      margin: 0;
+
+      font-size: clamp(52px, 9vw, 92px);
+      font-weight: 900;
+      letter-spacing: 10px;
+
+      color: #eeeeee;
+
+      text-shadow:
+        0 0 5px rgba(255, 255, 255, 0.25),
+        0 0 25px rgba(255, 0, 0, 0.15);
+
+      animation: titlePulse 3s ease-in-out infinite;
+    }
+
+    .game-title span {
+      color: #b40000;
+      text-shadow:
+        0 0 8px rgba(180, 0, 0, 0.7),
+        0 0 30px rgba(180, 0, 0, 0.35);
+    }
+
+    @keyframes titlePulse {
+      0%,
+      100% {
+        opacity: 0.9;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .subtitle {
+      margin-top: 8px;
+
+      color: #777;
+      font-size: 13px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       LOADING TEXT
+    ========================= */
+
+    .loading-status {
+      margin-top: 65px;
+
+      color: #ddd;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    #loadingText {
+      color: #b40000;
+      font-weight: 700;
+    }
+
+    /* =========================
+       PROGRESS BAR
+    ========================= */
+
+    .progress-wrapper {
+      margin-top: 18px;
+
+      width: 100%;
+      height: 8px;
+
+      background: #222;
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        inset 0 0 8px rgba(0, 0, 0, 0.8),
+        0 0 12px rgba(180, 0, 0, 0.08);
+    }
+
+    #progressBar {
+      width: 0%;
+      height: 100%;
+
+      background: linear-gradient(
+        90deg,
+        #520000,
+        #b40000,
+        #ff1a1a
+      );
+
+      border-radius: inherit;
+
+      box-shadow:
+        0 0 12px rgba(180, 0, 0, 0.7);
+
+      transition: width 0.15s ease;
+    }
+
+    /* =========================
+       PROGRESS INFO
+    ========================= */
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      margin-top: 12px;
+
+      color: #666;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+
+    #percentage {
+      color: #ddd;
+      font-weight: bold;
+    }
+
+    /* =========================
+       TIP
+    ========================= */
+
+    .tip {
+      margin-top: 55px;
+
+      color: #555;
+      font-size: 12px;
+      letter-spacing: 1px;
+
+      animation: tipFade 2.5s ease-in-out infinite;
+    }
+
+    @keyframes tipFade {
+      0%,
+      100% {
+        opacity: 0.35;
+      }
+
+      50% {
+        opacity: 0.8;
+      }
+    }
+
+    /* =========================
+       LOADING DOTS
+    ========================= */
+
+    .dots::after {
+      content: "";
+      animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+      0% {
+        content: "";
+      }
+
+      25% {
+        content: ".";
+      }
+
+      50% {
+        content: "..";
+      }
+
+      75%,
+      100% {
+        content: "...";
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 600px) {
+
+      .game-title {
+        letter-spacing: 6px;
+      }
+
+      .loading-status {
+        margin-top: 45px;
+        font-size: 13px;
+      }
+
+      .tip {
+        margin-top: 40px;
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- UNITY GAME -->
+  <div id="unityContainer"></div>
+
+  <!-- PIXADU LOADER -->
+  <div id="loader">
+
+    <div class="loader-content">
+
+      <h1 class="game-title">
+        GR<span>A</span>NNY
+      </h1>
+
+      <div class="subtitle">
+        A Pixadu Game
+      </div>
+
+      <div class="loading-status">
+        <span id="loadingText">
+          Preparing the house
+        </span>
+        <span class="dots"></span>
+      </div>
+
+      <div class="progress-wrapper">
+        <div id="progressBar"></div>
+      </div>
+
+      <div class="progress-info">
+        <span id="loadedSize">0.00 MB / 567.86 MB</span>
+        <span id="percentage">0%</span>
+      </div>
+
+      <div class="tip">
+        Find a way out... before she finds you.
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    const loader = document.getElementById("loader");
+    const loadingText = document.getElementById("loadingText");
+    const progressBar = document.getElementById("progressBar");
+    const loadedSize = document.getElementById("loadedSize");
+    const percentage = document.getElementById("percentage");
+
+    let loadedBytes = 0;
+
+    const TOTAL_MB = 567.86;
+    const TOTAL_BYTES = TOTAL_MB * 1024 * 1024;
+
+
+    /*
+      ==========================================
+      DOWNLOAD FILE WITH PROGRESS
+      ==========================================
+    */
+
+    async function fetchWithProgress(url) {
+
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(
+          "Failed to load: " + url
+        );
+      }
+
+      const reader = response.body.getReader();
+
+      const chunks = [];
+
+      let received = 0;
+
+      while (true) {
+
+        const {
+          done,
+          value
+        } = await reader.read();
+
+        if (done) break;
+
+        received += value.length;
+        loadedBytes += value.length;
+
+        chunks.push(value);
+
+        updateProgress();
+      }
+
+      const fullBuffer =
+        new Uint8Array(received);
+
+      let offset = 0;
+
+      for (const chunk of chunks) {
+
+        fullBuffer.set(
+          chunk,
+          offset
+        );
+
+        offset += chunk.length;
+      }
+
+      return fullBuffer.buffer;
+    }
+
+
+    /*
+      ==========================================
+      UPDATE LOADER
+      ==========================================
+    */
+
+    function updateProgress() {
+
+      const mbDone =
+        loadedBytes /
+        (1024 * 1024);
+
+      let percent =
+        (loadedBytes /
+        TOTAL_BYTES) * 100;
+
+      percent =
+        Math.min(percent, 100);
+
+      progressBar.style.width =
+        percent + "%";
+
+      percentage.textContent =
+        Math.floor(percent) + "%";
+
+      loadedSize.textContent =
+        mbDone.toFixed(2) +
+        " MB / " +
+        TOTAL_MB.toFixed(2) +
+        " MB";
+
+      if (percent < 25) {
+
+        loadingText.textContent =
+          "Entering the house";
+
+      } else if (percent < 50) {
+
+        loadingText.textContent =
+          "Exploring the house";
+
+      } else if (percent < 75) {
+
+        loadingText.textContent =
+          "Something is watching";
+
+      } else if (percent < 95) {
+
+        loadingText.textContent =
+          "She is coming";
+
+      } else {
+
+        loadingText.textContent =
+          "Almost ready";
+
+      }
+    }
+
+
+    /*
+      ==========================================
+      GET DATA PARTS
+      ==========================================
+    */
+
+    function getParts(
+      file,
+      start,
+      end
+    ) {
+
+      const parts = [];
+
+      for (
+        let i = start;
+        i <= end;
+        i++
+      ) {
+
+        parts.push(
+          file + ".part" + i
+        );
+      }
+
+      return parts;
+    }
+
+
+    /*
+      ==========================================
+      MERGE DATA PARTS
+      ==========================================
+    */
+
+    async function mergeFiles(fileParts) {
+
+      const buffers =
+        await Promise.all(
+          fileParts.map(
+            part => fetchWithProgress(part)
+          )
+        );
+
+      const mergedBlob =
+        new Blob(buffers);
+
+      return URL.createObjectURL(
+        mergedBlob
+      );
+    }
+
+
+    /*
+      ==========================================
+      START GRANNY
+      ==========================================
+    */
+
+    (async () => {
+
+      try {
+
+        const dataUrl =
+          await mergeFiles(
+            getParts(
+              "Build/GrannyPortButBetter.data.unityweb",
+              1,
+              29
+            )
+          );
+
+
+        /*
+          Redirect Unity's data request
+          to our locally merged file.
+        */
+
+        const originalOpen =
+          XMLHttpRequest.prototype.open;
+
+        XMLHttpRequest.prototype.open =
+          function (
+            method,
+            url,
+            ...rest
+          ) {
+
+            if (
+              url.includes(
+                "GrannyPortButBetter.data.unityweb"
+              )
+            ) {
+
+              url = dataUrl;
+            }
+
+            return originalOpen.call(
+              this,
+              method,
+              url,
+              ...rest
+            );
+          };
+
+
+        /*
+          Start Unity
+        */
+
+        UnityLoader.instantiate(
+          "unityContainer",
+          "Build/GrannyPortButBetter.json",
+          {
+            onProgress: UnityProgress
+          }
+        );
+
+
+        /*
+          Game data downloaded.
+          Give Unity a moment to initialize.
+        */
+
+        progressBar.style.width = "100%";
+        percentage.textContent = "100%";
+
+        loadingText.textContent =
+          "Starting Granny";
+
+        setTimeout(() => {
+
+          loader.classList.add("hide");
+
+          setTimeout(() => {
+
+            loader.remove();
+
+          }, 900);
+
+        }, 1200);
+
+
+      } catch (error) {
+
+        console.error(
+          "Granny loading error:",
+          error
+        );
+
+        loadingText.textContent =
+          "Failed to load Granny";
+
+        loadingText.style.color =
+          "#ff2222";
+
+      }
+
+    })();
+
+  </script>
+
+</body>
+</html>

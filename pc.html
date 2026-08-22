@@ -9,6 +9,92 @@
     <link rel="stylesheet" href="css/games.css">
     <link rel="stylesheet" href="css/footer.css">
     <style>
+
+        /* ================= MOBILE PC-ONLY MODE ================= */
+        .mobile-pc-notice {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-pc-notice {
+                display: flex;
+                width: min(92%, 520px);
+                margin: 35px auto 50px;
+                min-height: 360px;
+                padding: 35px 25px;
+                box-sizing: border-box;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                background: linear-gradient(145deg, #111827, #1b2638);
+                border: 1px solid rgba(124, 58, 237, .35);
+                border-radius: 24px;
+                box-shadow: 0 18px 45px rgba(0,0,0,.35);
+            }
+
+            .mobile-pc-notice .pc-icon {
+                width: 85px;
+                height: 85px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 22px;
+                border-radius: 50%;
+                background: rgba(124,58,237,.14);
+                border: 1px solid rgba(124,58,237,.35);
+                color: #a78bfa;
+                font-size: 38px;
+            }
+
+            .mobile-pc-notice h2 {
+                margin: 0 0 12px;
+                color: #fff;
+                font-size: 26px;
+            }
+
+            .mobile-pc-notice p {
+                margin: 0;
+                max-width: 390px;
+                color: #b8c4d6;
+                font-size: 14px;
+                line-height: 1.7;
+            }
+
+            .mobile-pc-notice .pc-badge {
+                margin-top: 22px;
+                padding: 8px 15px;
+                border-radius: 999px;
+                background: rgba(34,197,94,.12);
+                border: 1px solid rgba(34,197,94,.25);
+                color: #4ade80;
+                font-size: 12px;
+                font-weight: 700;
+            }
+
+            .mobile-pc-notice .back-games-btn {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                margin-top: 20px;
+                padding: 11px 18px;
+                border-radius: 12px;
+                text-decoration: none;
+                background: #7c3aed;
+                color: #fff;
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            .mobile-hide-pc-content {
+                display: none !important;
+            }
+
+            .desktop-notice {
+                display: none;
+            }
+        }
+
         /* ================= Desktop Notice ================= */
 
         .desktop-notice {
@@ -296,6 +382,23 @@
 
     </section>
 
+
+    <section class="mobile-pc-notice">
+        <div class="pc-icon">
+            <i class="fa-solid fa-desktop"></i>
+        </div>
+        <h2>PC Only</h2>
+        <p>
+            These games are currently built for desktop and laptop browsers.
+            Mobile controls are not available yet.
+        </p>
+        <span class="pc-badge">🖥️ DESKTOP / LAPTOP REQUIRED</span>
+        <a href="games.html" class="back-games-btn">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Games
+        </a>
+    </section>
+
     <section class="desktop-notice">
         <div class="desktop-info">
             <i class="fa-solid fa-circle-info"></i>
@@ -313,7 +416,7 @@
 
     <!-- ================= SEARCH ================= -->
 
-    <section class="games-search">
+    <section class="games-search mobile-hide-pc-content">
 
         <div class="search-container">
 
@@ -325,7 +428,7 @@
 
     </section>
 
-    <section class="sort-section">
+    <section class="sort-section mobile-hide-pc-content">
 
         <select id="sortGames">
 
@@ -341,7 +444,7 @@
 
     <!-- ================= CATEGORIES ================= -->
 
-    <section class="categories">
+    <section class="categories mobile-hide-pc-content">
 
         <button class="category-btn active" data-filter="all">All</button>
 
@@ -357,7 +460,7 @@
 
     </section>
 
-    <section class="games-info">
+    <section class="games-info mobile-hide-pc-content">
 
         <h2>
             💻 Desktop Games Available
@@ -367,7 +470,7 @@
 
     <!-- ================= GAME GRID ================= -->
 
-    <section class="games-grid">
+    <section class="games-grid mobile-hide-pc-content">
 
         <!-- gta iii-->
 
@@ -414,6 +517,49 @@
             </div>
 
         </div>
+
+
+        <div class="game-card">
+
+    <div class="image-wrapper">
+        <img src="images/granny.jpg" alt="Granny">
+    </div>
+
+    <div class="favorite">
+        <i class="fa-regular fa-heart"></i>
+    </div>
+
+    <div class="status-badge live">
+        LIVE
+    </div>
+
+    <div class="game-content">
+
+        <span class="game-tag">Horror</span>
+        <span class="platform-tag">PC Only</span>
+        <span class="year">2017</span>
+
+        <h3>Granny</h3>
+
+        <p>
+            Escape the terrifying house while avoiding Granny and finding your way out.
+        </p>
+
+        <div class="game-bottom">
+
+            <span class="rating">
+                ⭐ 4.7
+            </span>
+
+            <a href="granny.html" class="play-btn-small">
+                Play Now
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
 
 
         <div class="game-card coming-soon">
