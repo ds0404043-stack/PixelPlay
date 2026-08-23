@@ -6,7 +6,7 @@ const featuredGames = [
 
     {
         title: "Minecraft",
-        heading: "Play Minecraft <br> Directly In Your Browser",
+        heading: "Build. Explore. Survive⛏️",
         description: "Build, explore and survive in an endless block world.",
         image: "images/minecraft.png",
         page: "minecraft.html"
@@ -45,8 +45,8 @@ const featuredGames = [
     },
 
     {
-        title: "Play Subway Surfers <br> Directly In Your Browser",
-        heading:"Escape the Inspector",
+        title: "Subway Surfers",
+        heading: "Escape the Inspector",
         description: "Run, dodge trains, collect coins and escape the inspector in this endless runner.",
         image: "images/subway-surfers.jpg",
         page: "subway.html"
@@ -56,6 +56,7 @@ const featuredGames = [
 
 // Hero Elements
 const hero = document.querySelector(".hero");
+const heroContent = document.querySelector(".hero-content");
 const heroTitle = document.getElementById("heroTitle");
 const heroDescription = document.getElementById("heroDescription");
 const heroImage = document.getElementById("heroImage");
@@ -65,52 +66,118 @@ const nextHero = document.getElementById("nextHero");
 const heroDots = document.querySelectorAll(".hero-dot");
 
 let currentGame = 0;
+let heroInterval = null;
+let heroChanging = false;
+let heroChangeTimer = null;
 
-// Update Hero
-function updateHero() {
+// Preload hero artwork so the transition never waits for the next image.
+featuredGames.forEach(game => {
+    const preload = new Image();
+    preload.src = game.image;
+});
+
+// Update only the content for the selected game.
+function applyHeroContent(game) {
+
+    heroTitle.innerHTML = game.heading;
+    heroDescription.textContent = game.description;
+
+    heroImage.alt = game.title;
+    heroPlayBtn.href = game.page;
+
+    if (game.page === "building.html") {
+        heroPlayBtn.innerHTML = "🚧 Coming Soon";
+    } else {
+        heroPlayBtn.innerHTML =
+            '<i class="fa-solid fa-play"></i>  Start Playing';
+    }
+
+    heroDots.forEach(dot => dot.classList.remove("active"));
+
+    if (heroDots[currentGame]) {
+        heroDots[currentGame].classList.add("active");
+    }
+}
+
+// Smooth hero transition.
+function updateHero(direction = 1, instant = false) {
 
     const game = featuredGames[currentGame];
 
-    heroImage.classList.add("fade-out");
-    document.querySelector(".hero-content").classList.add("fade-out");
+    clearTimeout(heroChangeTimer);
 
-    setTimeout(() => {
+    if (instant) {
 
-        heroTitle.innerHTML = game.heading;
-
-        heroDescription.textContent = game.description;
+        applyHeroContent(game);
 
         heroImage.src = game.image;
-        heroImage.alt = game.title;
 
-        heroPlayBtn.href = game.page;
+        heroImage.classList.remove(
+            "hero-slide-out",
+            "hero-slide-in"
+        );
 
-        if (game.page === "building.html") {
+        heroImage.classList.add("hero-slide-active");
 
-            heroPlayBtn.innerHTML = "🚧 Coming Soon";
+        heroContent.classList.remove(
+            "hero-content-out",
+            "hero-content-in"
+        );
 
-        }
+        return;
+    }
 
-        else {
+    if (heroChanging) return;
 
-            heroPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>  Start Playing';
+    heroChanging = true;
 
-        }
+    // Slide the current content out smoothly.
+    heroImage.classList.remove("hero-slide-active");
+    heroImage.classList.add("hero-slide-out");
 
-        heroDots.forEach(dot => dot.classList.remove("active"));
-        heroDots[currentGame].classList.add("active");
+    heroContent.classList.remove("hero-content-in");
+    heroContent.classList.add("hero-content-out");
 
-        heroImage.classList.remove("fade-out");
-        document.querySelector(".hero-content").classList.remove("fade-out");
+    heroChangeTimer = setTimeout(() => {
 
-    }, 200);
+        // Change the hidden content.
+        applyHeroContent(game);
 
+        heroImage.src = game.image;
+
+        // Prepare the new slide.
+        heroImage.classList.remove("hero-slide-out");
+        heroImage.classList.add("hero-slide-in");
+
+        heroContent.classList.remove("hero-content-out");
+        heroContent.classList.add("hero-content-in");
+
+        // Force the browser to paint the starting state first.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+
+                heroImage.classList.remove("hero-slide-in");
+                heroImage.classList.add("hero-slide-active");
+
+                heroContent.classList.remove("hero-content-in");
+
+            });
+        });
+
+        heroChangeTimer = setTimeout(() => {
+            heroChanging = false;
+        }, 330);
+
+    }, 170);
 }
 
-updateHero();
+// Initial hero state — no startup flash.
+updateHero(1, true);
 
-// Next Slide
+// Next slide.
 function nextSlide() {
+
+    if (heroChanging) return;
 
     currentGame++;
 
@@ -118,12 +185,13 @@ function nextSlide() {
         currentGame = 0;
     }
 
-    updateHero();
-
+    updateHero(1);
 }
 
-// Previous Slide
+// Previous slide.
 function previousSlide() {
+
+    if (heroChanging) return;
 
     currentGame--;
 
@@ -131,74 +199,172 @@ function previousSlide() {
         currentGame = featuredGames.length - 1;
     }
 
-    updateHero();
+    updateHero(-1);
+}
+
+// Auto slide.
+function startHeroTimer() {
+
+    clearInterval(heroInterval);
+
+    heroInterval = setInterval(() => {
+        nextSlide();
+    }, 7000);
+}
+
+function stopHeroTimer() {
+    clearInterval(heroInterval);
+    heroInterval = null;
+}
+
+startHeroTimer();
+
+// Pause on hover — do NOT change the slide when the mouse leaves.
+if (hero) {
+
+    hero.addEventListener("mouseenter", () => {
+        stopHeroTimer();
+    });
+
+    hero.addEventListener("mouseleave", () => {
+        startHeroTimer();
+    });
 
 }
 
-// Auto Slide
-let heroInterval = setInterval(nextSlide, 7000);
+// Arrow buttons.
+if (nextHero) {
+    nextHero.addEventListener("click", () => {
+        nextSlide();
+        startHeroTimer();
+    });
+}
 
-// Pause on Hover
-hero.addEventListener("mouseenter", () => {
+if (prevHero) {
+    prevHero.addEventListener("click", () => {
+        previousSlide();
+        startHeroTimer();
+    });
+}
 
-    clearInterval(heroInterval);
-
-});
-
-hero.addEventListener("mouseleave", () => {
-
-    nextSlide();
-
-    clearInterval(heroInterval);
-
-    heroInterval = setInterval(nextSlide, 7000);
-
-});
-
-// Buttons
-nextHero.addEventListener("click", nextSlide);
-prevHero.addEventListener("click", previousSlide);
-
-// Dots
+// Dots.
 heroDots.forEach((dot, index) => {
 
     dot.addEventListener("click", () => {
 
+        if (index === currentGame || heroChanging) return;
+
+        const previousIndex = currentGame;
         currentGame = index;
 
-        updateHero();
+        updateHero(index > previousIndex ? 1 : -1);
+        startHeroTimer();
 
     });
 
 });
 
-// Swipe Support
+// Swipe + mouse wheel support.
 let touchStartX = 0;
 let touchEndX = 0;
+let wheelLocked = false;
+let lastWheelDirection = 0;
 
-hero.addEventListener("touchstart", e => {
+if (hero) {
 
-    touchStartX = e.changedTouches[0].screenX;
+    // Touch/swipe is locked to the hero IMAGE only.
+    // The rest of the page remains normally scrollable.
+    const heroImageArea = document.querySelector(".hero-image");
 
-});
+    if (heroImageArea) {
 
-hero.addEventListener("touchend", e => {
+        heroImageArea.addEventListener("touchstart", e => {
 
-    touchEndX = e.changedTouches[0].screenX;
+            touchStartX = e.changedTouches[0].screenX;
+            stopHeroTimer();
 
-    if (touchStartX - touchEndX > 50) {
+        }, { passive: true });
 
-        nextSlide();
+        heroImageArea.addEventListener("touchmove", e => {
+
+            const currentX = e.changedTouches[0].screenX;
+            const distance = Math.abs(currentX - touchStartX);
+
+            // Once the finger is clearly swiping horizontally,
+            // lock native page scrolling for this gesture.
+            if (distance > 10) {
+                e.preventDefault();
+            }
+
+        }, { passive: false });
+
+        heroImageArea.addEventListener("touchend", e => {
+
+            touchEndX = e.changedTouches[0].screenX;
+
+            const swipeDistance = touchStartX - touchEndX;
+
+            if (Math.abs(swipeDistance) > 50) {
+
+                // Prevent the page from continuing to move after the swipe.
+                if (swipeDistance > 0) {
+                    nextSlide();
+                } else {
+                    previousSlide();
+                }
+
+            }
+
+            startHeroTimer();
+
+        }, { passive: true });
+
+        heroImageArea.addEventListener("touchcancel", () => {
+            startHeroTimer();
+        }, { passive: true });
 
     }
 
-    if (touchEndX - touchStartX > 50) {
+    // Mouse-wheel control is ONLY active while the cursor is directly
+    // over the hero artwork/image. The rest of the page scrolls normally.
+    // Reuse the heroImageArea declared above.
+    if (heroImageArea) {
 
-        previousSlide();
+        heroImageArea.addEventListener("wheel", e => {
+
+            if (Math.abs(e.deltaY) < 8) return;
+
+            // Prevent page scrolling only when the wheel is over the image.
+            e.preventDefault();
+            e.stopPropagation();
+
+            if (wheelLocked) return;
+
+            const direction = e.deltaY > 0 ? 1 : -1;
+
+            wheelLocked = true;
+
+            stopHeroTimer();
+
+            if (direction > 0) {
+                nextSlide();
+            } else {
+                previousSlide();
+            }
+
+            // Allows continuous scrolling while avoiding duplicate
+            // events from a single wheel tick.
+            setTimeout(() => {
+                wheelLocked = false;
+            }, 300);
+
+            startHeroTimer();
+
+        }, { passive: false });
 
     }
 
-});
+}
 
 console.log("SCRIPT LOADED");
 
@@ -274,34 +440,54 @@ if (sessionStorage.getItem("pixelplay_loader")) {
 } else {
 
     let index = 0;
+    let loaderFinished = false;
 
-    loadingText.textContent = loadingMessages[0];
+    if (loadingText) {
+        loadingText.textContent = loadingMessages[0];
+    }
 
     const interval = setInterval(() => {
 
         index++;
 
-        if (index < loadingMessages.length) {
+        if (index < loadingMessages.length && loadingText) {
             loadingText.textContent = loadingMessages[index];
         }
 
-    }, 600);
+    }, 500);
 
-    window.addEventListener("load", () => {
+    function finishLoader() {
 
+        if (loaderFinished) return;
+
+        loaderFinished = true;
+        clearInterval(interval);
+
+        hideLoader();
         revealSections();
 
-        setTimeout(() => {
-
-            clearInterval(interval);
-
-            hideLoader();
-
+        try {
             sessionStorage.setItem("pixelplay_loader", "true");
+        } catch (error) {
+            // Ignore storage errors — the page should still continue.
+        }
 
-        }, 2500);
+    }
 
-    });
+    // Normal path: wait for the page to finish loading.
+    window.addEventListener("load", () => {
+
+        setTimeout(() => {
+            finishLoader();
+        }, 700);
+
+    }, { once: true });
+
+    // Safety fallback: NEVER let the loader stay stuck because
+    // an image, font, or external resource takes too long.
+    setTimeout(() => {
+        finishLoader();
+    }, 3500);
 
 }
 
@@ -397,3 +583,36 @@ if (homeLink) {
     });
 
 }
+
+/* ======================================================
+   PIXADU HOMEPAGE V2 — SMALL INTERACTION POLISH
+====================================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Make the first viewport feel alive immediately.
+    document.querySelectorAll(".hero, .quick-play").forEach(section => {
+        section.classList.add("active");
+    });
+
+    // Hero touch handling is managed by the main hero slider block above.
+
+    // Subtle tilt on desktop hero artwork.
+    if (window.matchMedia("(pointer:fine)").matches) {
+        const heroVisual = document.querySelector(".hero-image img");
+
+        if (heroVisual) {
+            heroVisual.addEventListener("mousemove", (e) => {
+                const rect = heroVisual.getBoundingClientRect();
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+                heroVisual.style.transform =
+                    `perspective(900px) rotateY(${x * 4}deg) rotateX(${y * -3}deg) scale(1.015)`;
+            });
+
+            heroVisual.addEventListener("mouseleave", () => {
+                heroVisual.style.transform = "";
+            });
+        }
+    }
+});

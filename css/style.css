@@ -398,191 +398,468 @@ a {
 }
 
 /* =====================================================
-   07. FEATURED
+   CONTINUE PLAYING
 ===================================================== */
 
-.featured {
-
+.recently-played {
     width: 90%;
-
-    margin: 70px auto;
-
+    max-width: 1400px;
+    margin: 45px auto 20px;
+    text-align: left;
 }
 
-.featured h2 {
-
-    font-size: 40px;
-
-    margin-bottom: 40px;
-
+.recently-played h2 {
+    margin: 0 0 25px;
+    font-size: 34px;
+    line-height: 1.2;
+    font-weight: 700;
 }
 
-.game-card {
+/* Recent game card */
+
+.recently-played .game-card {
+    width: 100%;
+    max-width: 900px;
 
     display: flex;
+    align-items: stretch;
 
     overflow: hidden;
 
-    border-radius: 20px;
+    background: #1e293b;
 
-    background: var(--card);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 22px;
 
-    transition: .4s;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
 
+    transition: .35s ease;
 }
 
-.game-card:hover {
+.recently-played .game-card:hover {
+    transform: translateY(-5px);
 
-    transform: translateY(-12px) scale(1.02);
+    border-color: rgba(34, 197, 94, .35);
 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, .40);
-
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, .35),
+        0 0 25px rgba(34, 197, 94, .08);
 }
 
-.game-card img {
+/* Game image */
 
-    width: 45%;
+.recently-played .game-card img {
+    width: 380px;
+    height: 220px;
+
+    flex-shrink: 0;
+
+    display: block;
 
     object-fit: cover;
 
+    background: #111827;
 }
 
-.game-info {
+/* Game information */
 
+.recently-played .game-info {
     flex: 1;
 
-    display: flex;
+    padding: 30px;
 
+    display: flex;
     flex-direction: column;
-
     justify-content: center;
-
-    padding: 40px;
-
 }
 
-.game-info h3 {
+.recently-played .game-info h3 {
+    margin: 0 0 10px;
 
-    font-size: 40px;
-
-    margin-bottom: 20px;
-
+    font-size: 28px;
+    line-height: 1.2;
 }
 
-.game-info p {
+.recently-played .game-info p {
+    margin: 0 0 22px;
 
-    color: var(--text-light);
+    color: var(--text-muted);
 
-    line-height: 1.7;
-
-    margin-bottom: 30px;
-
+    font-size: 15px;
 }
 
-.game-stats {
+/* Continue button */
 
-    display: flex;
-
-    gap: 25px;
-
-    margin-bottom: 35px;
-
-}
-
-.game-stats span {
-
-    color: var(--primary);
-
-}
-
-.play-game {
-
-    display: inline-block;
+.recently-played .play-game {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     width: fit-content;
 
-    padding: 15px 35px;
+    padding: 12px 26px;
 
     border-radius: 50px;
 
     background: var(--primary);
 
-    transition: var(--transition);
+    color: white;
 
+    font-weight: 600;
+
+    transition: .3s ease;
 }
 
-.play-game:hover {
+.recently-played .play-game:hover {
+    transform: translateY(-3px);
 
-    transform: scale(1.05);
-
-    box-shadow: 0 0 25px var(--primary);
-
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, .45);
 }
 
-.featured-grid {
 
-    display: grid;
+/* =====================================================
+   CONTINUE PLAYING — TABLET
+===================================================== */
 
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+@media (max-width: 768px) {
 
-    gap: 30px;
+    .recently-played {
+        width: 90%;
+        margin: 35px auto 20px;
+    }
 
-    margin-top: 40px;
+    .recently-played h2 {
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
 
+    .recently-played .game-card {
+        max-width: 650px;
+    }
+
+    .recently-played .game-card img {
+        width: 280px;
+        height: 190px;
+    }
+
+    .recently-played .game-info {
+        padding: 22px;
+    }
+
+    .recently-played .game-info h3 {
+        font-size: 23px;
+    }
 }
 
-.featured-card {
+
+/* =====================================================
+   CONTINUE PLAYING — MOBILE
+===================================================== */
+
+@media (max-width: 427px) {
+
+    .recently-played {
+        width: calc(100% - 40px);
+        margin: 30px auto 15px;
+    }
+
+    .recently-played h2 {
+        font-size: 26px;
+        margin-bottom: 18px;
+    }
+
+    .recently-played .game-card {
+        width: 100%;
+
+        flex-direction: column;
+
+        border-radius: 18px;
+    }
+
+    .recently-played .game-card img {
+        width: 100%;
+        max-width: none;
+        height: 200px;
+
+        object-fit: cover;
+    }
+
+    .recently-played .game-info {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .recently-played .game-info h3 {
+        font-size: 22px;
+    }
+
+    .recently-played .game-info p {
+        font-size: 13px;
+    }
+
+    .recently-played .play-game {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   07. FEATURED GAMES
+===================================================== */
+
+.featured {
+    width: 100%;
+    margin: 0;
+    padding: 70px 0 35px;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* CURATED FOR YOU */
+.featured .section-kicker {
+    width: 100%;
+    margin: 0 auto 12px;
+    padding: 0;
+
+    text-align: center;
+
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* FEATURED HEADING */
+.featured .featured-heading-row {
+    width: 100%;
+    margin: 0 auto 38px;
+    padding: 0 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+}
+
+/* Inner heading */
+.featured .featured-heading-row>div {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    text-align: center;
+}
+
+/* Featured Games */
+.featured .featured-heading-row h2 {
+    width: 100%;
+
+    margin: 0 0 10px;
+    padding: 0;
+
+    text-align: center;
+
+    font-size: clamp(36px, 4vw, 52px);
+    line-height: 1.1;
+    font-weight: 700;
+}
+
+/* Subtitle */
+.featured .featured-heading-row p {
+    width: 100%;
+    max-width: 700px;
+
+    margin: 0 auto;
+    padding: 0;
+
+    text-align: center;
+
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FEATURED CARDS
+========================= */
+
+.featured-slider {
+    width: 100%;
+    overflow: hidden;
+    padding: 8px 0 25px;
+}
+
+.featured-track {
+    display: flex;
+    gap: 25px;
+    width: max-content;
+
+    animation: scroll 25s linear infinite;
+}
+
+.featured-track:hover {
+    animation-play-state: paused;
+}
+
+.featured-item {
+    width: 280px;
+    min-width: 280px;
 
     background: #1e293b;
-
+    border: 1px solid rgba(255, 255, 255, .08);
     border-radius: 20px;
 
     overflow: hidden;
+    flex-shrink: 0;
 
     transition: .35s;
-
 }
 
-.featured-card:hover {
-
-    transform: translateY(-10px);
-
+.featured-item:hover {
+    transform: translateY(-8px);
+    border-color: rgba(34, 197, 94, .35);
     box-shadow: 0 15px 35px rgba(0, 0, 0, .35);
-
 }
 
-.featured-card img {
-
+.featured-item img {
     width: 100%;
+    height: 180px;
 
-    height: 220px;
-
+    display: block;
     object-fit: cover;
-
 }
 
-.featured-info {
+.featured-item h3 {
+    margin: 0;
+    padding: 18px;
 
-    padding: 25px;
-
+    font-size: 24px;
 }
 
-.featured-info h3 {
+.featured-item a {
+    display: block;
 
-    margin: 15px 0;
+    margin: 0 18px 18px;
+    padding: 12px;
 
-    font-size: 28px;
+    background: rgba(34, 197, 94, .10);
+    border: 1px solid rgba(34, 197, 94, .30);
 
+    text-align: center;
+
+    border-radius: 40px;
+
+    color: white;
+    font-weight: 600;
+
+    transition: .3s;
 }
 
-.featured-info p {
+.featured-item a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+}
 
-    color: #cbd5e1;
 
-    line-height: 1.7;
+/* =========================
+   FEATURED ANIMATION
+========================= */
 
-    margin-bottom: 25px;
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
 
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 768px) {
+
+    .featured {
+        padding: 60px 0 25px;
+    }
+
+    .featured .section-kicker {
+        font-size: 11px;
+        letter-spacing: 2.5px;
+    }
+
+    .featured .featured-heading-row {
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+
+    .featured .featured-heading-row h2 {
+        font-size: 38px;
+    }
+
+    .featured .featured-heading-row p {
+        font-size: 14px;
+    }
+
+    .featured-item {
+        width: 250px;
+        min-width: 250px;
+    }
+
+    .featured-item img {
+        height: 165px;
+    }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 427px) {
+
+    .featured {
+        padding: 50px 0 20px;
+    }
+
+    .featured .section-kicker {
+        font-size: 10px;
+        letter-spacing: 2px;
+    }
+
+    .featured .featured-heading-row {
+        padding: 0 18px;
+        margin-bottom: 25px;
+    }
+
+    .featured .featured-heading-row h2 {
+        font-size: 31px;
+    }
+
+    .featured .featured-heading-row p {
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+
+        font-size: 13px;
+    }
+
+    .featured-item {
+        width: 235px;
+        min-width: 235px;
+    }
+
+    .featured-item img {
+        height: 150px;
+    }
 }
 
 /* =====================================================
@@ -1575,5 +1852,1375 @@ a {
 
     .feature-card {
         width: 100%;
+    }
+}
+
+/* =====================================================
+   PIXADU HOMEPAGE V2 — VISUAL UPGRADE
+   Added as a safe override layer.
+===================================================== */
+
+body {
+    background:
+        radial-gradient(circle at 78% 12%, rgba(34, 197, 94, .10), transparent 28%),
+        radial-gradient(circle at 12% 42%, rgba(59, 130, 246, .06), transparent 24%),
+        #08131f;
+}
+
+.hero {
+    position: relative;
+    width: min(1240px, 92%);
+    min-height: 720px;
+    padding: 135px 0 90px;
+    gap: clamp(35px, 5vw, 85px);
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 8% -8% auto;
+    height: 430px;
+    background: radial-gradient(circle, rgba(34, 197, 94, .11), transparent 68%);
+    filter: blur(12px);
+    z-index: -2;
+    pointer-events: none;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    bottom: 12px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, .45), transparent);
+    opacity: .65;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    flex: 0 1 540px;
+}
+
+.hero-tag {
+    border: 1px solid rgba(34, 197, 94, .28);
+    box-shadow: 0 0 25px rgba(34, 197, 94, .08);
+    letter-spacing: .2px;
+}
+
+.hero h1 {
+    font-size: clamp(44px, 5vw, 72px);
+    letter-spacing: -2.5px;
+    text-shadow: 0 8px 40px rgba(0, 0, 0, .35);
+}
+
+.hero p {
+    font-size: 17px;
+    max-width: 560px;
+    line-height: 1.8;
+}
+
+.hero-buttons {
+    gap: 14px;
+}
+
+.play-btn,
+.explore-btn {
+    min-height: 54px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.play-btn {
+    box-shadow: 0 12px 35px rgba(34, 197, 94, .18);
+}
+
+.explore-btn {
+    border-color: rgba(255, 255, 255, .18);
+    background: rgba(255, 255, 255, .035);
+    backdrop-filter: blur(10px);
+}
+
+.hero-mini-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 34px;
+}
+
+.hero-mini-stats div {
+    min-width: 105px;
+    padding: 12px 15px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, .035);
+    backdrop-filter: blur(10px);
+}
+
+.hero-mini-stats strong,
+.hero-mini-stats span {
+    display: block;
+}
+
+.hero-mini-stats strong {
+    color: #fff;
+    font-size: 18px;
+}
+
+.hero-mini-stats span {
+    color: var(--text-muted);
+    font-size: 11px;
+    margin-top: 2px;
+}
+
+.hero-image {
+    flex: 1 1 580px;
+    width: min(650px, 52vw);
+    height: 420px;
+    align-items: center;
+}
+
+.hero-image::before {
+    content: "";
+    position: absolute;
+    inset: 6% 4%;
+    border: 1px solid rgba(255, 255, 255, .10);
+    border-radius: 28px;
+    transform: rotate(2deg);
+    background: rgba(255, 255, 255, .018);
+}
+
+.hero-visual-glow {
+    position: absolute;
+    width: 78%;
+    height: 78%;
+    background: radial-gradient(circle, rgba(34, 197, 94, .24), transparent 65%);
+    filter: blur(35px);
+    pointer-events: none;
+}
+
+.hero-image img {
+    position: relative;
+    z-index: 2;
+    width: 94%;
+    max-width: 620px;
+    height: 100%;
+    border: 1px solid rgba(255, 255, 255, .13);
+    border-radius: 28px;
+    box-shadow:
+        0 35px 80px rgba(0, 0, 0, .45),
+        0 0 70px rgba(34, 197, 94, .11);
+}
+
+.hero-live-pill {
+    position: absolute;
+    top: 2px;
+    right: 6%;
+    z-index: 4;
+    padding: 9px 13px;
+    border-radius: 999px;
+    background: rgba(8, 19, 31, .86);
+    border: 1px solid rgba(34, 197, 94, .25);
+    color: #dfffea;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+    backdrop-filter: blur(12px);
+}
+
+.hero-live-pill span {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 12px #22c55e;
+    animation: pixaduPulse 1.5s infinite;
+}
+
+.hero-arrow {
+    z-index: 5;
+    width: 44px;
+    height: 44px;
+    background: rgba(8, 19, 31, .75);
+    border: 1px solid rgba(255, 255, 255, .10);
+    backdrop-filter: blur(8px);
+}
+
+.hero-arrow:hover {
+    background: var(--primary);
+    box-shadow: 0 0 25px rgba(34, 197, 94, .35);
+}
+
+.hero-dots {
+    z-index: 6;
+    bottom: -28px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: rgba(8, 19, 31, .72);
+    border: 1px solid rgba(255, 255, 255, .07);
+    backdrop-filter: blur(8px);
+}
+
+.hero-dot {
+    width: 7px;
+    height: 7px;
+    background: #475569;
+}
+
+.hero-dot.active {
+    width: 22px;
+    border-radius: 99px;
+    transform: none;
+}
+
+/* Quick play strip */
+.quick-play {
+    width: min(1240px, 92%);
+    margin: 10px auto 75px;
+}
+
+.quick-play-inner {
+    display: grid;
+    grid-template-columns: .72fr 1.8fr;
+    gap: 35px;
+    align-items: center;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 24px;
+    background: linear-gradient(100deg, rgba(255, 255, 255, .045), rgba(34, 197, 94, .035));
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .16);
+}
+
+.quick-play-heading span,
+.section-kicker {
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.quick-play-heading h2 {
+    margin-top: 5px;
+    font-size: 30px;
+}
+
+.quick-play-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.quick-play-card {
+    min-height: 82px;
+    padding: 14px;
+    display: grid;
+    grid-template-columns: 44px 1fr 18px;
+    align-items: center;
+    gap: 11px;
+    border: 1px solid rgba(255, 255, 255, .07);
+    border-radius: 17px;
+    background: rgba(8, 19, 31, .55);
+    transition: .3s ease;
+}
+
+.quick-play-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(34, 197, 94, .35);
+    background: rgba(34, 197, 94, .07);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, .22);
+}
+
+.quick-icon {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    background: rgba(34, 197, 94, .10);
+    font-size: 21px;
+}
+
+.quick-play-card strong,
+.quick-play-card small {
+    display: block;
+}
+
+.quick-play-card strong {
+    font-size: 14px;
+}
+
+.quick-play-card small {
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 10px;
+}
+
+.quick-play-card>i {
+    color: #64748b;
+    transition: .3s;
+}
+
+.quick-play-card:hover>i {
+    color: var(--primary);
+    transform: translateX(3px);
+}
+
+/* Featured section */
+.featured {
+    width: 100%;
+    margin: 0 auto;
+    padding: 75px 0 90px;
+}
+
+.featured-heading-row {
+    width: 90%;
+    margin: 0 auto 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+}
+
+.featured-heading-row h2 {
+    margin: 5px 0 7px;
+    font-size: clamp(32px, 4vw, 48px);
+    text-align: left;
+}
+
+.featured-heading-row p {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.section-view-all {
+    flex-shrink: 0;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.section-view-all i {
+    margin-left: 5px;
+    transition: .25s;
+}
+
+.section-view-all:hover i {
+    transform: translateX(4px);
+}
+
+.featured-slider {
+    width: 100%;
+    padding: 15px 0 30px;
+}
+
+.featured-track {
+    gap: 18px;
+    animation-duration: 32s;
+}
+
+.featured-item {
+    width: 290px;
+    border: 1px solid rgba(255, 255, 255, .07);
+    background: linear-gradient(180deg, #18263a, #111c2d);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .18);
+}
+
+.featured-item:hover {
+    border-color: rgba(34, 197, 94, .3);
+    box-shadow: 0 22px 45px rgba(0, 0, 0, .32), 0 0 30px rgba(34, 197, 94, .07);
+}
+
+.featured-item img {
+    height: 190px;
+    transition: transform .45s ease, filter .45s ease;
+}
+
+.featured-item:hover img {
+    transform: scale(1.06);
+    filter: saturate(1.12);
+}
+
+.featured-item h3 {
+    padding: 17px 18px 8px;
+    font-size: 19px;
+}
+
+.featured-item a {
+    margin: 0 18px 18px;
+    background: rgba(34, 197, 94, .13);
+    border: 1px solid rgba(34, 197, 94, .25);
+    color: #dfffea;
+    transition: .3s;
+}
+
+.featured-item a:hover {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 0 22px rgba(34, 197, 94, .25);
+}
+
+/* Give the next sections a more deliberate rhythm */
+.features,
+.choose-section,
+.trending {
+    position: relative;
+}
+
+.features {
+    padding-top: 40px;
+}
+
+.choose-section {
+    margin-top: 110px;
+}
+
+.trending {
+    background: linear-gradient(180deg, transparent, rgba(34, 197, 94, .025), transparent);
+}
+
+/* Final CTA */
+.final-cta {
+    position: relative;
+    width: min(1100px, 90%);
+    margin: 100px auto 115px;
+    min-height: 330px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(34, 197, 94, .17);
+    border-radius: 32px;
+    background:
+        radial-gradient(circle at 50% 120%, rgba(34, 197, 94, .18), transparent 55%),
+        linear-gradient(135deg, rgba(255, 255, 255, .05), rgba(255, 255, 255, .015));
+    box-shadow: 0 30px 80px rgba(0, 0, 0, .25);
+}
+
+.final-cta::before,
+.final-cta::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(34, 197, 94, .10);
+}
+
+.final-cta::before {
+    width: 380px;
+    height: 380px;
+    right: -120px;
+    top: -200px;
+}
+
+.final-cta::after {
+    width: 260px;
+    height: 260px;
+    left: -100px;
+    bottom: -160px;
+}
+
+.final-cta-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 45px 20px;
+}
+
+.final-cta h2 {
+    margin: 13px 0 12px;
+    font-size: clamp(34px, 5vw, 58px);
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+}
+
+.final-cta h2 span {
+    color: var(--primary);
+}
+
+.final-cta p {
+    max-width: 540px;
+    margin: 0 auto 25px;
+    color: var(--text-light);
+}
+
+.final-cta .play-btn {
+    display: inline-flex;
+}
+
+@keyframes pixaduPulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .45;
+        transform: scale(.75);
+    }
+}
+
+/* Responsive V2 */
+@media (max-width: 1024px) {
+    .hero {
+        min-height: 650px;
+    }
+
+    .hero h1 {
+        font-size: clamp(40px, 5.5vw, 58px);
+    }
+
+    .quick-play-inner {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero {
+        min-height: auto;
+        padding: 125px 0 80px;
+    }
+
+    .hero-content {
+        flex: none;
+    }
+
+    .hero-mini-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-image {
+        flex: none;
+        width: 100%;
+        height: min(52vw, 360px);
+        min-height: 245px;
+    }
+
+    .hero-image img {
+        max-width: 560px;
+    }
+
+    .quick-play {
+        margin-top: 0;
+    }
+
+    .quick-play-links {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-heading-row {
+        align-items: start;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        width: 90%;
+        padding-top: 112px;
+    }
+
+    .hero h1 {
+        font-size: 2.35rem;
+        letter-spacing: -1.2px;
+    }
+
+    .hero-mini-stats {
+        gap: 7px;
+    }
+
+    .hero-mini-stats div {
+        min-width: 92px;
+        padding: 10px;
+    }
+
+    .hero-image {
+        height: 235px;
+        min-height: 0;
+    }
+
+    .hero-live-pill {
+        right: 0;
+        top: -5px;
+        font-size: 8px;
+    }
+
+    .hero-arrow {
+        width: 38px;
+        height: 38px;
+    }
+
+    .featured-heading-row {
+        width: 90%;
+        display: block;
+    }
+
+    .section-view-all {
+        display: inline-block;
+        margin-top: 12px;
+    }
+
+    .quick-play-inner {
+        padding: 18px;
+    }
+
+    .quick-play-heading h2 {
+        font-size: 25px;
+    }
+
+    .final-cta {
+        min-height: 300px;
+        border-radius: 24px;
+        margin-top: 70px;
+        margin-bottom: 80px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .featured-track {
+        animation: none;
+    }
+
+    .hero-image img,
+    .quick-play-card,
+    .featured-item,
+    .play-btn {
+        transition: none;
+    }
+}
+
+
+/* =====================================================
+   HOMEPAGE — REMOVE EXCESSIVE SECTION GAP
+===================================================== */
+
+/* Tighten the bottom of Featured Games */
+.featured {
+    padding-bottom: 28px !important;
+}
+
+/* Remove the huge empty area before Why Choose Pixadu */
+.features {
+    margin-top: 20px !important;
+    margin-bottom: 80px !important;
+}
+
+/* Keep the heading itself nicely separated from its cards */
+.features h2 {
+    margin-top: 0 !important;
+}
+
+/* Mobile spacing */
+@media (max-width: 768px) {
+    .featured {
+        padding-bottom: 20px !important;
+    }
+
+    .features {
+        margin-top: 15px !important;
+        margin-bottom: 60px !important;
+    }
+}
+
+@media (max-width: 427px) {
+    .featured {
+        padding-bottom: 16px !important;
+    }
+
+    .features {
+        margin-top: 10px !important;
+        margin-bottom: 50px !important;
+    }
+}
+
+
+
+/* =====================================================
+   PIXADU — GLASS BUTTONS + HOVER SHINE
+   IMPORTANT:
+   - Navbar/header is NOT modified.
+   - Existing layout/positioning is NOT modified.
+   - Hero arrow positioning is preserved exactly.
+===================================================== */
+
+/* Glass effect — content buttons only */
+.play-btn,
+.explore-btn,
+.recently-played .play-game,
+.featured-item a,
+.choose-btn,
+.play-small,
+.notify-btn {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+        0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Green glass primary buttons */
+.play-btn,
+.recently-played .play-game,
+.choose-btn,
+.play-small {
+    background: rgba(34, 197, 94, 0.20);
+    border-color: rgba(34, 197, 94, 0.45);
+}
+
+/* Hero arrows — GLASS ONLY.
+   Do NOT change position, top, left, right or transform here. */
+.hero-arrow {
+    overflow: hidden;
+    isolation: isolate;
+    background: rgba(255, 255, 255, 0.10);
+    border-color: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* Shine */
+.play-btn::after,
+.explore-btn::after,
+.recently-played .play-game::after,
+.featured-item a::after,
+.choose-btn::after,
+.play-small::after,
+.notify-btn::after,
+.hero-arrow::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -80%;
+    width: 45%;
+    height: 340%;
+    background: linear-gradient(
+        105deg,
+        transparent 0%,
+        transparent 35%,
+        rgba(255, 255, 255, 0.08) 43%,
+        rgba(255, 255, 255, 0.72) 50%,
+        rgba(255, 255, 255, 0.08) 57%,
+        transparent 65%,
+        transparent 100%
+    );
+    transform: rotate(18deg) translateX(-180%);
+    transition: transform .7s ease;
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Hover — normal content buttons */
+.play-btn:hover,
+.explore-btn:hover,
+.recently-played .play-game:hover,
+.featured-item a:hover,
+.choose-btn:hover,
+.play-small:hover,
+.notify-btn:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.42);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.30),
+        0 12px 30px rgba(0, 0, 0, 0.25),
+        0 0 28px rgba(255, 255, 255, 0.10);
+}
+
+/* Green hover */
+.play-btn:hover,
+.recently-played .play-game:hover,
+.choose-btn:hover,
+.play-small:hover {
+    background: rgba(34, 197, 94, 0.28);
+    border-color: rgba(34, 197, 94, 0.65);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 12px 30px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(34, 197, 94, 0.28);
+}
+
+/* Arrow hover — preserve the ORIGINAL vertical centering */
+.hero-arrow:hover {
+    transform: translateY(-50%) scale(1.08);
+    background: rgba(34, 197, 94, 0.22);
+    border-color: rgba(34, 197, 94, 0.60);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.25),
+        0 0 25px rgba(34, 197, 94, 0.30);
+}
+
+/* Shine sweep */
+.play-btn:hover::after,
+.explore-btn:hover::after,
+.recently-played .play-game:hover::after,
+.featured-item a:hover::after,
+.choose-btn:hover::after,
+.play-small:hover::after,
+.notify-btn:hover::after,
+.hero-arrow:hover::after {
+    transform: rotate(18deg) translateX(520%);
+}
+
+/* Press */
+.play-btn:active,
+.explore-btn:active,
+.recently-played .play-game:active,
+.featured-item a:active,
+.choose-btn:active,
+.play-small:active,
+.notify-btn:active {
+    transform: scale(0.96);
+}
+
+/* Arrow press — preserve vertical centering */
+.hero-arrow:active {
+    transform: translateY(-50%) scale(0.96);
+}
+
+
+/* =====================================================
+   PIXADU — GLASS UI FOR ALL CONTENT BOXES
+   Navbar/header remains controlled by header.css.
+   Layout, sizing and positioning are NOT changed.
+===================================================== */
+
+/* Main content panels / cards */
+.hero-tag,
+.hero-mini-stats > div,
+.quick-play-card,
+.recently-played .game-card,
+.featured-item,
+.feature-card,
+.trend-card,
+.final-cta,
+.section-kicker,
+.hero-live-pill {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.105),
+            rgba(255, 255, 255, 0.035)
+        );
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.035),
+        0 12px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* Slightly stronger glass for the larger cards */
+.recently-played .game-card,
+.featured-item,
+.feature-card,
+.trend-card,
+.final-cta {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.10),
+            rgba(255, 255, 255, 0.025)
+        );
+}
+
+/* Glass highlight at the top of every box */
+.hero-tag::before,
+.hero-mini-stats > div::before,
+.quick-play-card::before,
+.recently-played .game-card::before,
+.featured-item::before,
+.feature-card::before,
+.trend-card::before,
+.final-cta::before,
+.section-kicker::before,
+.hero-live-pill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.42),
+        transparent
+    );
+
+    opacity: 0.65;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Soft internal light */
+.hero-tag::after,
+.hero-mini-stats > div::after,
+.quick-play-card::after,
+.recently-played .game-card::after,
+.featured-item::after,
+.feature-card::after,
+.trend-card::after,
+.final-cta::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -110px;
+    right: -80px;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 255, 255, 0.075),
+        transparent 68%
+    );
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Keep actual content above glass effects */
+.hero-tag > *,
+.hero-mini-stats > div > *,
+.quick-play-card > *,
+.recently-played .game-card > *,
+.featured-item > *,
+.feature-card > *,
+.trend-card > *,
+.final-cta > *,
+.section-kicker > *,
+.hero-live-pill > * {
+    position: relative;
+    z-index: 3;
+}
+
+/* Hover = glass gets brighter */
+.hero-tag:hover,
+.hero-mini-stats > div:hover,
+.quick-play-card:hover,
+.recently-played .game-card:hover,
+.featured-item:hover,
+.feature-card:hover,
+.trend-card:hover,
+.final-cta:hover {
+    border-color: rgba(255, 255, 255, 0.28);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.145),
+            rgba(255, 255, 255, 0.045)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.22),
+        0 18px 45px rgba(0, 0, 0, 0.25),
+        0 0 28px rgba(255, 255, 255, 0.055);
+}
+
+/* Green Pixadu glow on interactive boxes */
+.quick-play-card:hover,
+.trend-card:hover {
+    border-color: rgba(34, 197, 94, 0.38);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.20),
+        0 18px 45px rgba(0, 0, 0, 0.25),
+        0 0 30px rgba(34, 197, 94, 0.10);
+}
+
+/* Glass stat boxes */
+.hero-mini-stats > div {
+    transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
+}
+
+.hero-mini-stats > div:hover {
+    transform: translateY(-4px);
+}
+
+/* Featured cards get a subtle glass layer over their images */
+.featured-item img,
+.trend-card img,
+.recently-played .game-card img {
+    position: relative;
+    z-index: 1;
+}
+
+/* Glass feel for the dots container */
+.hero-dots {
+    padding: 8px 13px;
+    border-radius: 999px;
+
+    background: rgba(8, 19, 31, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 8px 22px rgba(0, 0, 0, 0.18);
+}
+
+/* Keep dot positioning/animation intact */
+.hero-dots .hero-dot {
+    position: relative;
+    z-index: 2;
+}
+
+/* Glass CTA */
+.final-cta {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 20px 55px rgba(0, 0, 0, 0.25),
+        0 0 50px rgba(34, 197, 94, 0.07);
+}
+
+/* Glass tag */
+.hero-tag {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34, 197, 94, 0.16),
+            rgba(255, 255, 255, 0.035)
+        );
+    border-color: rgba(34, 197, 94, 0.28);
+}
+
+/* Glass live pill */
+.hero-live-pill {
+    background: rgba(8, 19, 31, 0.58);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Mobile performance */
+@media (max-width: 768px) {
+    .hero-tag,
+    .hero-mini-stats > div,
+    .quick-play-card,
+    .recently-played .game-card,
+    .featured-item,
+    .feature-card,
+    .trend-card,
+    .final-cta,
+    .section-kicker,
+    .hero-live-pill {
+        backdrop-filter: blur(10px) saturate(120%);
+        -webkit-backdrop-filter: blur(10px) saturate(120%);
+    }
+}
+
+
+/* =====================================================
+   PIXADU — PREMIUM ANIMATED BACKGROUND
+   Background only — layout and navbar are untouched.
+===================================================== */
+
+html,
+body {
+    background: #050b14;
+}
+
+/* Deep multi-layer ambient background */
+body {
+    position: relative;
+    background:
+        radial-gradient(
+            circle at 78% 18%,
+            rgba(34, 197, 94, 0.18) 0%,
+            rgba(34, 197, 94, 0.07) 20%,
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 15% 32%,
+            rgba(0, 170, 255, 0.14) 0%,
+            rgba(0, 120, 255, 0.05) 22%,
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at 72% 78%,
+            rgba(139, 92, 246, 0.12) 0%,
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 28% 92%,
+            rgba(20, 184, 166, 0.10) 0%,
+            transparent 36%
+        ),
+        linear-gradient(
+            135deg,
+            #050b14 0%,
+            #071522 42%,
+            #061b1b 72%,
+            #050b14 100%
+        );
+    background-attachment: fixed;
+}
+
+/* Large soft moving light */
+body::before {
+    content: "";
+    position: fixed;
+    width: 700px;
+    height: 700px;
+    top: -280px;
+    right: -180px;
+
+    background: radial-gradient(
+        circle,
+        rgba(34, 197, 94, 0.13),
+        rgba(34, 197, 94, 0.035) 35%,
+        transparent 70%
+    );
+
+    filter: blur(35px);
+    pointer-events: none;
+    z-index: -1;
+
+    animation: pixaduAmbientGreen 14s ease-in-out infinite alternate;
+}
+
+/* Blue/purple ambient light */
+body::after {
+    content: "";
+    position: fixed;
+    width: 650px;
+    height: 650px;
+    left: -250px;
+    bottom: -280px;
+
+    background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.12),
+        rgba(139, 92, 246, 0.045) 38%,
+        transparent 70%
+    );
+
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+
+    animation: pixaduAmbientBlue 18s ease-in-out infinite alternate;
+}
+
+/* Very subtle cinematic grid */
+body {
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        ),
+        radial-gradient(
+            circle at 78% 18%,
+            rgba(34, 197, 94, 0.18),
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 15% 32%,
+            rgba(0, 170, 255, 0.13),
+            transparent 44%
+        ),
+        radial-gradient(
+            circle at 72% 78%,
+            rgba(139, 92, 246, 0.11),
+            transparent 38%
+        ),
+        linear-gradient(
+            135deg,
+            #050b14 0%,
+            #071522 42%,
+            #061b1b 72%,
+            #050b14 100%
+        );
+
+    background-size:
+        70px 70px,
+        70px 70px,
+        auto,
+        auto,
+        auto,
+        auto;
+}
+
+/* Soft glow behind the hero */
+.hero {
+    position: relative;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 760px;
+    height: 500px;
+    top: 5%;
+    left: 28%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(34, 197, 94, 0.10),
+            rgba(0, 170, 255, 0.045) 38%,
+            transparent 70%
+        );
+
+    filter: blur(35px);
+    pointer-events: none;
+    z-index: -1;
+
+    animation: pixaduHeroGlow 10s ease-in-out infinite alternate;
+}
+
+/* Ambient light animations */
+@keyframes pixaduAmbientGreen {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(-120px, 100px, 0) scale(1.18);
+    }
+}
+
+@keyframes pixaduAmbientBlue {
+    0% {
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate3d(130px, -90px, 0) scale(1.15);
+    }
+}
+
+@keyframes pixaduHeroGlow {
+    0% {
+        transform: translateX(-35px) scale(0.95);
+        opacity: 0.55;
+    }
+
+    100% {
+        transform: translateX(45px) scale(1.08);
+        opacity: 1;
+    }
+}
+
+/* Keep mobile lighter and smooth */
+@media (max-width: 768px) {
+    body {
+        background-size:
+            55px 55px,
+            55px 55px,
+            auto,
+            auto,
+            auto,
+            auto;
+    }
+
+    body::before,
+    body::after {
+        filter: blur(55px);
+        opacity: 0.75;
+    }
+
+    .hero::before {
+        width: 500px;
+        height: 400px;
+    }
+}
+
+
+/* =====================================================
+   PIXADU — SMOOTH HERO SLIDER TRANSITION
+   Added as a safe override layer.
+   Existing layout, arrows and responsive sizing are untouched.
+===================================================== */
+
+.hero-image img {
+    will-change: opacity, filter;
+    transition:
+        opacity .55s cubic-bezier(.22, .61, .36, 1),
+        filter .55s cubic-bezier(.22, .61, .36, 1);
+}
+
+/* Outgoing slide */
+.hero-image img.hero-slide-out {
+    opacity: 0;
+    filter: blur(5px);
+}
+
+/* Incoming slide starts soft and blurred */
+.hero-image img.hero-slide-in {
+    opacity: 0;
+    filter: blur(5px);
+}
+
+/* Final visible state */
+.hero-image img.hero-slide-active {
+    opacity: 1;
+    filter: blur(0);
+}
+
+/* Smooth text transition */
+.hero-content {
+    will-change: opacity, filter;
+    transition:
+        opacity .42s cubic-bezier(.22, .61, .36, 1),
+        filter .42s cubic-bezier(.22, .61, .36, 1);
+}
+
+.hero-content.hero-content-out {
+    opacity: 0;
+    filter: blur(3px);
+}
+
+.hero-content.hero-content-in {
+    opacity: 0;
+    filter: blur(3px);
+}
+
+/* Smooth dots */
+.hero-dot {
+    transition:
+        background .35s ease,
+        width .35s ease,
+        transform .35s ease,
+        opacity .35s ease;
+}
+
+/* Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    .hero-image img,
+    .hero-content,
+    .hero-dot {
+        transition: none !important;
     }
 }

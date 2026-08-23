@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pixadu | Games</title>
     <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/arcade.css">
+    <link rel="stylesheet" href="css/arcade.css?v=pixadu-arcade-glass-20260823">
+    <link rel="stylesheet" href="css/login-modal.css?v=20260823-favfix">
     <link rel="stylesheet" href="css/footer.css">
 
     <!-- Google Font -->
@@ -18,6 +19,27 @@
 </head>
 
 <body>
+
+    <!-- ================= LOGIN MODAL ================= -->
+    <div id="loginModal" class="login-modal">
+        <div class="login-modal-overlay"></div>
+        <div class="login-modal-box">
+            <button id="closeLoginModal" class="login-modal-close" type="button">&times;</button>
+            <div class="login-modal-icon">🎮</div>
+            <h2>Login Required</h2>
+            <p class="login-modal-text">Sign in to save your favorite games and keep your Pixadu library synced.</p>
+            <div class="login-benefits">
+                <div><span>❤️</span><p>Save Favorite Games</p></div>
+                <div><span>☁️</span><p>Sync Across Devices</p></div>
+                <div><span>🎮</span><p>Build Your Game Library</p></div>
+            </div>
+            <button id="modalLoginBtn" class="modal-login-btn" type="button">
+                <i class="fa-brands fa-google"></i> Continue with Google
+            </button>
+            <button id="modalLaterBtn" class="modal-later-btn" type="button">Maybe Later</button>
+        </div>
+    </div>
+
 
 
     <header id="top">
@@ -485,7 +507,7 @@
 
     </footer>
 
-    <script src="js/games.js"></script>
+    <script src="js/games.js?v=20260823-favfix"></script>
     <script src="js/header.js"></script>
     <script src="js/search-data.js"></script>
     <script src="js/search.js"></script>

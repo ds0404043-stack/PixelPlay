@@ -175,9 +175,24 @@
                     Start Playing
                 </a>
 
-                <a href="#chooseAdventure" class="explore-btn">
+                <a href="#featured" class="explore-btn">
                     📚 Browse Games
                 </a>
+            </div>
+
+            <div class="hero-mini-stats">
+                <div>
+                    <strong>7+</strong>
+                    <span>Games</span>
+                </div>
+                <div>
+                    <strong>100%</strong>
+                    <span>Browser</span>
+                </div>
+                <div>
+                    <strong>⚡</strong>
+                    <span id="quick">Instant Play</span>
+                </div>
             </div>
 
         </div>
@@ -214,6 +229,44 @@
 
     </section>
 
+    <section class="quick-play reveal" aria-label="Quick game categories">
+        <div class="quick-play-inner">
+            <div class="quick-play-heading">
+                <span>EXPLORE PIXADU</span>
+                <h2>Pick your vibe.</h2>
+            </div>
+
+            <div class="quick-play-links">
+                <a href="games.html" class="quick-play-card">
+                    <span class="quick-icon">🎮</span>
+                    <div>
+                        <strong>3D Games</strong>
+                        <small>Big worlds & action</small>
+                    </div>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="arcade.html" class="quick-play-card">
+                    <span class="quick-icon">🕹️</span>
+                    <div>
+                        <strong>Arcade</strong>
+                        <small>Quick & classic fun</small>
+                    </div>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <a href="pc.html" class="quick-play-card">
+                    <span class="quick-icon">💻</span>
+                    <div>
+                        <strong>PC Only</strong>
+                        <small>Desktop gaming zone</small>
+                    </div>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="recently-played reveal" id="recentlyPlayed" style="display:none;">
         <h2>🕒 Continue Playing</h2>
 
@@ -237,7 +290,13 @@
 
     <section class="featured" id="featured">
 
-        <h2>🔥 Featured Games</h2>
+        <div class="section-kicker">CURATED FOR YOU</div>
+        <div class="featured-heading-row">
+            <div>
+                <h2>Featured Games</h2>
+                <p>Jump straight into the games worth playing right now.</p>
+            </div>
+        </div>
 
         <div class="featured-slider">
 
@@ -374,51 +433,6 @@
         </div>
 
     </section>
-
-    <section class="choose-section reveal" id="chooseAdventure">
-
-        <h2>🎮 Choose Your Adventure</h2>
-
-        <div class="choose-container">
-
-            <div class="choose-card">
-
-                <img src="images/3d.jpg" alt="3D Games">
-
-                <h3>3D Games</h3>
-
-                <p>
-                    Explore immersive worlds, action adventures,
-                    racing and open-world experiences.
-                </p>
-
-                <a href="games.html" class="choose-btn">
-                    Browse 3D Games
-                </a>
-
-            </div>
-
-            <div class="choose-card">
-
-                <img src="images/arcade.jpg" alt="Arcade">
-
-                <h3>Arcade Games</h3>
-
-                <p>
-                    Jump into quick, lightweight classics that
-                    you can play instantly in your browser.
-                </p>
-
-                <a href="arcade.html" class="choose-btn">
-                    Play Arcade
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
     <section class="trending" id="trending">
 
         <div class="trending-title">
@@ -426,7 +440,7 @@
             <div class="title-line"></div>
 
             <h2>
-                <span>🔥</span>
+                <span></span>
                 Trending Games
             </h2>
 
@@ -518,6 +532,16 @@
 
         </div>
 
+    </section>
+
+    <section class="final-cta reveal">
+        <div class="final-cta-glow"></div>
+        <div class="final-cta-content">
+            <span class="hero-tag">READY WHEN YOU ARE</span>
+            <h2>Your next game is<br><span>one click away.</span></h2>
+            <p>No downloads. No waiting around. Just pick a game and play.</p>
+            <a href="#quick" class="play-btn"><i class="fa-solid fa-gamepad"></i> Start Exploring</a>
+        </div>
     </section>
 
     <footer class="site-footer">

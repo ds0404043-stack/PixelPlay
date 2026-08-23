@@ -49,36 +49,8 @@ a {
     color: white;
 }
 
-header {
-    position: fixed;
-    top: 15px;
-    left: 50%;
-    transform: translateX(-50%);
+/* Header layout/theme is controlled by css/header.css. */
 
-    width: 95%;
-    max-width: 1450px;
-
-    z-index: 1000;
-
-    background: rgba(15, 23, 42, .55);
-
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-
-    border: 1px solid rgba(255, 255, 255, .08);
-
-    border-radius: 18px;
-
-    transition: .35s;
-}
-
-header:hover {
-
-    box-shadow:
-
-        0 15px 40px rgba(0, 0, 0, .35);
-
-}
 
 
 /* ===========================
@@ -375,11 +347,9 @@ ARCADE HERO
 
 .games-grid .game-card:hover {
 
-    transform: translateY(-12px);
+    transform: translateY(-10px) scale(1.02);
 
     box-shadow: 0 20px 40px rgba(0, 0, 0, .35);
-
-    transform: scale(1.08);
 
 }
 
@@ -854,4 +824,397 @@ COMING SOON
 
     }
 
+}
+
+/* =========================================================
+   PIXADU ARCADE — GLASS SHINE UPDATE
+   Matches the new Games-page visual language.
+========================================================= */
+
+/* ---------- PAGE GLASS ---------- */
+
+html,
+body {
+    background:
+        radial-gradient(circle at 82% 12%, rgba(34,230,168,.18), transparent 34%),
+        radial-gradient(circle at 12% 38%, rgba(0,210,255,.13), transparent 38%),
+        radial-gradient(circle at 78% 82%, rgba(139,92,246,.13), transparent 38%),
+        linear-gradient(135deg, #08272d 0%, #0d3b3d 38%, #102d46 65%, #21163c 100%) !important;
+    background-attachment: fixed;
+}
+
+/* ---------- UNIVERSAL NAVBAR ---------- */
+/* Navbar is controlled by css/header.css. */
+
+/* ---------- GLASS SHINE UTILITY ---------- */
+
+.games-hero,
+.search-container,
+.category-btn,
+.game-card,
+.coming-card,
+.games-info,
+#loadMoreBtn,
+.hero-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+/* Moving diagonal glass reflection */
+.games-hero::after,
+.search-container::after,
+.category-btn::after,
+.game-card::after,
+.coming-card::after,
+.games-info::after,
+#loadMoreBtn::after,
+.hero-btn::after {
+    content: "";
+    position: absolute;
+    top: -90%;
+    left: -125%;
+    width: 48%;
+    height: 280%;
+    transform: rotate(24deg);
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.22),
+        rgba(255,255,255,.08),
+        transparent
+    );
+    pointer-events: none;
+    z-index: 20;
+    transition: left .75s cubic-bezier(.22,.61,.36,1);
+}
+
+.games-hero:hover::after,
+.search-container:hover::after,
+.category-btn:hover::after,
+.game-card:hover::after,
+.coming-card:hover::after,
+.games-info:hover::after,
+#loadMoreBtn:hover::after,
+.hero-btn:hover::after {
+    left: 150%;
+}
+
+/* ---------- HERO ---------- */
+
+.games-hero {
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 28px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.075),
+            rgba(255,255,255,.025)
+        );
+    backdrop-filter: blur(16px) saturate(125%);
+    -webkit-backdrop-filter: blur(16px) saturate(125%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        0 25px 65px rgba(0,0,0,.18);
+}
+
+.games-hero span {
+    background: rgba(34,230,168,.12) !important;
+    border: 1px solid rgba(34,230,168,.24);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 8px 25px rgba(34,230,168,.08);
+}
+
+.hero-features div {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.03)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    backdrop-filter: blur(12px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        0 10px 30px rgba(0,0,0,.12);
+}
+
+/* ---------- SEARCH / SORT ---------- */
+
+.search-container {
+    background:
+        linear-gradient(
+            110deg,
+            rgba(34,230,168,.16),
+            rgba(0,210,255,.10) 48%,
+            rgba(139,92,246,.12)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.20) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        0 18px 45px rgba(0,0,0,.14) !important;
+    backdrop-filter: blur(16px) saturate(135%);
+}
+
+#sortGames {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,230,168,.16),
+            rgba(0,210,255,.10),
+            rgba(139,92,246,.09)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.18) !important;
+    backdrop-filter: blur(14px);
+}
+
+/* ---------- CATEGORIES ---------- */
+
+.category-btn {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    backdrop-filter: blur(12px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.10),
+        0 8px 22px rgba(0,0,0,.10);
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,230,168,.72),
+            rgba(0,210,180,.48)
+        ) !important;
+    border-color: rgba(255,255,255,.22) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        0 10px 28px rgba(34,230,168,.16);
+}
+
+/* ---------- LIVE GAME CARDS ---------- */
+
+.games-grid .game-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.095),
+            rgba(255,255,255,.025)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    backdrop-filter: blur(14px) saturate(120%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        0 16px 40px rgba(0,0,0,.16);
+}
+
+.games-grid .game-card:hover {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.13),
+            rgba(255,255,255,.045)
+        ) !important;
+    border-color: rgba(255,255,255,.24) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.20),
+        0 25px 55px rgba(0,0,0,.24),
+        0 0 30px rgba(34,230,168,.06);
+}
+
+.play-btn-small {
+    position: relative;
+    overflow: hidden;
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,230,168,.78),
+            rgba(22,163,74,.48)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.20);
+}
+
+/* ---------- COMING SOON CARDS ---------- */
+
+.coming-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.025)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.13) !important;
+    backdrop-filter: blur(14px) saturate(120%);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 16px 40px rgba(0,0,0,.15);
+}
+
+.coming-card:hover {
+    border-color: rgba(255,255,255,.23) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        0 25px 55px rgba(0,0,0,.23),
+        0 0 30px rgba(139,92,246,.07);
+}
+
+.coming-tag {
+    background: rgba(139,92,246,.15) !important;
+    border: 1px solid rgba(167,139,250,.20);
+}
+
+/* ---------- INFO / LOAD MORE ---------- */
+
+.games-info {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 20px;
+    padding: 24px 28px;
+    backdrop-filter: blur(12px);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.09),
+        0 12px 30px rgba(0,0,0,.10);
+}
+
+#loadMoreBtn {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(34,230,168,.82),
+            rgba(0,210,180,.52)
+        ) !important;
+    border: 1px solid rgba(255,255,255,.20);
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.22),
+        0 10px 28px rgba(34,230,168,.13);
+}
+
+/* Footer layout/theme is controlled by css/footer.css. */
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 768px) {
+    .games-hero {
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 22px;
+    }
+
+}
+
+
+/* =========================================================
+   SORT DROPDOWN — CLEAN GLASS SELECT
+   Uses the universal navbar unchanged and avoids pseudo-elements
+   on the native <select>, which can break the browser popup.
+========================================================= */
+
+.sort-section {
+    position: relative;
+    z-index: 50;
+}
+
+#sortGames {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    min-width: 220px;
+    min-height: 58px;
+    padding: 0 48px 0 20px;
+
+    color: #ffffff !important;
+    font: 500 16px "Poppins", sans-serif;
+
+    background-color: rgba(10, 45, 58, .72) !important;
+    background-image:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.10),
+            rgba(255,255,255,.035)
+        ),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat, no-repeat;
+    background-position: 0 0, right 17px center;
+    background-size: 100% 100%, 16px 16px;
+
+    border: 1px solid rgba(255,255,255,.18) !important;
+    border-radius: 16px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.13),
+        0 12px 30px rgba(0,0,0,.12);
+
+    backdrop-filter: blur(16px) saturate(135%);
+    -webkit-backdrop-filter: blur(16px) saturate(135%);
+
+    outline: none;
+    cursor: pointer;
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+
+/* Never add a shine pseudo-element to the native select. */
+#sortGames::before,
+#sortGames::after {
+    content: none !important;
+    display: none !important;
+}
+
+#sortGames:hover {
+    border-color: rgba(34,230,168,.45) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.18),
+        0 14px 34px rgba(0,0,0,.16),
+        0 0 20px rgba(34,230,168,.07);
+}
+
+#sortGames:focus {
+    border-color: rgba(34,230,168,.60) !important;
+    box-shadow:
+        0 0 0 3px rgba(34,230,168,.10),
+        inset 0 1px 0 rgba(255,255,255,.18),
+        0 14px 34px rgba(0,0,0,.16);
+}
+
+/* Chrome/Edge on Windows use the system popup for native options.
+   Dark color-scheme prevents the white unreadable popup. */
+#sortGames,
+#sortGames option {
+    color-scheme: dark;
+}
+
+#sortGames option {
+    background: #102d3b;
+    color: #ffffff;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .sort-section {
+        justify-content: center;
+        margin-top: 24px;
+    }
+
+    #sortGames {
+        width: min(100%, 320px);
+        min-width: 0;
+    }
 }
