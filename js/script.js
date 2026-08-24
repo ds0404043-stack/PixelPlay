@@ -1,372 +1,85 @@
 // ======================================================
-// HERO SLIDER
+// 3D HERO COVERFLOW
 // ======================================================
-
 const featuredGames = [
-
-    {
-        title: "Minecraft",
-        heading: "Build. Explore. Survive⛏️",
-        description: "Build, explore and survive in an endless block world.",
-        image: "images/minecraft.png",
-        page: "minecraft.html"
-    },
-
-    {
-        title: "GTA Vice City",
-        heading: "Return To Vice City",
-        description: "Experience the legendary open-world crime adventure.",
-        image: "images/gta vice city.png",
-        page: "gta.html"
-    },
-
-    {
-        title: "Angry Birds",
-        heading: "Destroy Pig Fortresses",
-        description: "Launch birds and solve fun physics puzzles.",
-        image: "images/angrybirdshero.png",
-        page: "angrybirds.html"
-    },
-
-    {
-        title: "Chess",
-        heading: "Challenge Your Mind",
-        description: "Play the world's most iconic strategy game.",
-        image: "images/chess.jpg",
-        page: "chess.html"
-    },
-
-    {
-        title: "2048",
-        heading: "Can You Reach 2048?",
-        description: "Slide the tiles and beat your highest score.",
-        image: "images/2048.jpg",
-        page: "2048.html"
-    },
-
-    {
-        title: "Subway Surfers",
-        heading: "Escape the Inspector",
-        description: "Run, dodge trains, collect coins and escape the inspector in this endless runner.",
-        image: "images/subway-surfers.jpg",
-        page: "subway.html"
-    }
-
-];
-
-// Hero Elements
-const hero = document.querySelector(".hero");
-const heroContent = document.querySelector(".hero-content");
-const heroTitle = document.getElementById("heroTitle");
-const heroDescription = document.getElementById("heroDescription");
-const heroImage = document.getElementById("heroImage");
-const heroPlayBtn = document.getElementById("heroPlayBtn");
-const prevHero = document.getElementById("prevHero");
-const nextHero = document.getElementById("nextHero");
-const heroDots = document.querySelectorAll(".hero-dot");
-
-let currentGame = 0;
-let heroInterval = null;
-let heroChanging = false;
-let heroChangeTimer = null;
-
-// Preload hero artwork so the transition never waits for the next image.
-featuredGames.forEach(game => {
-    const preload = new Image();
-    preload.src = game.image;
+    { title: "Minecraft", heading: "Build. Explore. Survive.", description: "Build, explore and survive in an endless block world.", image: "images/minecraft.png", page: "minecraft.html" },
+    { title: "GTA Vice City", heading: "Return To Vice City", description: "“Return to Vice City and rule the streets.", image: "images/gta vice city.png", page: "gta.html" },
+    { title: "Angry Birds", heading: "Destroy Pig Fortresses", description: "Launch birds and solve fun physics puzzles.", image: "images/angrybirdshero.png", page: "angrybirds.html" },
+    { title: "Chess", heading: "Challenge Your Mind", description: "Play the world's most iconic strategy game.", image: "images/chess.jpg", page: "chess.html" },
+    { title: "2048", heading: "Can You Reach 2048?", description: "Slide the tiles and beat your highest score.", image: "images/2048.jpg", page: "2048.html" },
+    { title: "Subway Surfers", heading: "Escape the Inspector", description: "Run, dodge trains and escape the inspector.", image: "images/subway-surfers.jpg", page: "subway.html" },
+    { title: "Tekken 3", heading: "Enter The Fight", description: "Classic arcade fighting action, right in your browser.", image: "images/tekken3.jpg", page: "tekken3.html" }];
+const hero = document.querySelector(".hero-3d"), track = document.getElementById("coverflowTrack"), stage = document.getElementById("coverflowStage"), title = document.getElementById("heroTitle"), desc = document.getElementById("heroDescription"), play = document.getElementById("heroPlayBtn"), prev = document.getElementById("prevHero"), next = document.getElementById("nextHero"), dots = document.getElementById("heroDots");
+let currentGame = 0, autoTimer, dragStart = 0, dragging = false, lastWheel = 0;
+featuredGames.forEach(g => { const i = new Image(); i.src = g.image; });
+featuredGames.forEach((g, i) => {
+    const c = document.createElement("article"); c.className = "cover-card"; c.innerHTML = `<img src="${g.image}" alt="${g.title}"><div class="cover-shine"></div><div class="cover-label">${g.title}</div>`; c.addEventListener("click", () => { if (i === currentGame) location.href = g.page; else { currentGame = i; render(); resetAuto(); } }); track.appendChild(c);
+    const d = document.createElement("button"); d.className = "hero-dot"; d.addEventListener("click", () => { currentGame = i; render(); resetAuto(); }); dots.appendChild(d);
 });
+const cards = [...track.children], mod = (n, m) => ((n % m) + m) % m;
+function render() {
+    const n = cards.length;
+    cards.forEach((c, i) => { let d = i - currentGame; if (d > n / 2) d -= n; if (d < -n / 2) d += n; let ad = Math.abs(d); c.className = "cover-card " + (!d ? "is-center" : ""); c.style.setProperty("--x", d * 142 + "px"); c.style.setProperty("--z", -ad * 150 + "px"); c.style.setProperty("--r", d * 34 + "deg"); c.style.setProperty("--s", !d ? 1 : Math.max(.64, 1 - ad * .12)); c.style.opacity = ad <= 3 ? (!d ? 1 : Math.max(.28, 1 - ad * .23)) : 0; c.style.pointerEvents = ad <= 3 ? "auto" : "none"; c.style.zIndex = 20 - ad; });
+    const g = featuredGames[currentGame]; title.textContent = g.heading; desc.textContent = g.description; play.href = g.page; dots.querySelectorAll(".hero-dot").forEach((d, i) => d.classList.toggle("active", i === currentGame));
+}
+function nextSlide() { currentGame = mod(currentGame + 1, cards.length); render() } function previousSlide() { currentGame = mod(currentGame - 1, cards.length); render() }
+function resetAuto() { clearInterval(autoTimer); autoTimer = setInterval(nextSlide, 6500) }
+prev?.addEventListener("click", () => { previousSlide(); resetAuto() }); next?.addEventListener("click", () => { nextSlide(); resetAuto() });
+let wheelGestureActive = false;
+let wheelEndTimer = null;
+let wheelLastDirection = 0;
 
-// Update only the content for the selected game.
-function applyHeroContent(game) {
+stage?.addEventListener("wheel", e => {
 
-    heroTitle.innerHTML = game.heading;
-    heroDescription.textContent = game.description;
+    e.preventDefault();
+    e.stopPropagation();
 
-    heroImage.alt = game.title;
-    heroPlayBtn.href = game.page;
+    const direction = e.deltaY > 0 ? 1 : -1;
 
-    if (game.page === "building.html") {
-        heroPlayBtn.innerHTML = "🚧 Coming Soon";
-    } else {
-        heroPlayBtn.innerHTML =
-            '<i class="fa-solid fa-play"></i>  Start Playing';
+    clearTimeout(wheelEndTimer);
+
+    /*
+       Mouse wheel:
+       every individual wheel notch changes one card.
+
+       Trackpad:
+       many tiny events arrive together. They are treated
+       as one gesture, but the lock is released as soon as
+       the event burst actually ends.
+    */
+
+    if (!wheelGestureActive) {
+
+        wheelGestureActive = true;
+        wheelLastDirection = direction;
+
+        if (direction > 0) {
+            nextSlide();
+        } else {
+            previousSlide();
+        }
+
+        resetAuto();
     }
 
-    heroDots.forEach(dot => dot.classList.remove("active"));
-
-    if (heroDots[currentGame]) {
-        heroDots[currentGame].classList.add("active");
-    }
-}
-
-// Smooth hero transition.
-function updateHero(direction = 1, instant = false) {
-
-    const game = featuredGames[currentGame];
-
-    clearTimeout(heroChangeTimer);
-
-    if (instant) {
-
-        applyHeroContent(game);
-
-        heroImage.src = game.image;
-
-        heroImage.classList.remove(
-            "hero-slide-out",
-            "hero-slide-in"
-        );
-
-        heroImage.classList.add("hero-slide-active");
-
-        heroContent.classList.remove(
-            "hero-content-out",
-            "hero-content-in"
-        );
-
-        return;
-    }
-
-    if (heroChanging) return;
-
-    heroChanging = true;
-
-    // Slide the current content out smoothly.
-    heroImage.classList.remove("hero-slide-active");
-    heroImage.classList.add("hero-slide-out");
-
-    heroContent.classList.remove("hero-content-in");
-    heroContent.classList.add("hero-content-out");
-
-    heroChangeTimer = setTimeout(() => {
-
-        // Change the hidden content.
-        applyHeroContent(game);
-
-        heroImage.src = game.image;
-
-        // Prepare the new slide.
-        heroImage.classList.remove("hero-slide-out");
-        heroImage.classList.add("hero-slide-in");
-
-        heroContent.classList.remove("hero-content-out");
-        heroContent.classList.add("hero-content-in");
-
-        // Force the browser to paint the starting state first.
-        requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-
-                heroImage.classList.remove("hero-slide-in");
-                heroImage.classList.add("hero-slide-active");
-
-                heroContent.classList.remove("hero-content-in");
-
-            });
-        });
-
-        heroChangeTimer = setTimeout(() => {
-            heroChanging = false;
-        }, 330);
-
-    }, 170);
-}
-
-// Initial hero state — no startup flash.
-updateHero(1, true);
-
-// Next slide.
-function nextSlide() {
-
-    if (heroChanging) return;
-
-    currentGame++;
-
-    if (currentGame >= featuredGames.length) {
-        currentGame = 0;
-    }
-
-    updateHero(1);
-}
-
-// Previous slide.
-function previousSlide() {
-
-    if (heroChanging) return;
-
-    currentGame--;
-
-    if (currentGame < 0) {
-        currentGame = featuredGames.length - 1;
-    }
-
-    updateHero(-1);
-}
-
-// Auto slide.
-function startHeroTimer() {
-
-    clearInterval(heroInterval);
-
-    heroInterval = setInterval(() => {
-        nextSlide();
-    }, 7000);
-}
-
-function stopHeroTimer() {
-    clearInterval(heroInterval);
-    heroInterval = null;
-}
-
-startHeroTimer();
-
-// Pause on hover — do NOT change the slide when the mouse leaves.
-if (hero) {
-
-    hero.addEventListener("mouseenter", () => {
-        stopHeroTimer();
-    });
-
-    hero.addEventListener("mouseleave", () => {
-        startHeroTimer();
-    });
-
-}
-
-// Arrow buttons.
-if (nextHero) {
-    nextHero.addEventListener("click", () => {
-        nextSlide();
-        startHeroTimer();
-    });
-}
-
-if (prevHero) {
-    prevHero.addEventListener("click", () => {
-        previousSlide();
-        startHeroTimer();
-    });
-}
-
-// Dots.
-heroDots.forEach((dot, index) => {
-
-    dot.addEventListener("click", () => {
-
-        if (index === currentGame || heroChanging) return;
-
-        const previousIndex = currentGame;
-        currentGame = index;
-
-        updateHero(index > previousIndex ? 1 : -1);
-        startHeroTimer();
-
-    });
-
-});
-
-// Swipe + mouse wheel support.
-let touchStartX = 0;
-let touchEndX = 0;
-let wheelLocked = false;
-let lastWheelDirection = 0;
-
-if (hero) {
-
-    // Touch/swipe is locked to the hero IMAGE only.
-    // The rest of the page remains normally scrollable.
-    const heroImageArea = document.querySelector(".hero-image");
-
-    if (heroImageArea) {
-
-        heroImageArea.addEventListener("touchstart", e => {
-
-            touchStartX = e.changedTouches[0].screenX;
-            stopHeroTimer();
-
-        }, { passive: true });
-
-        heroImageArea.addEventListener("touchmove", e => {
-
-            const currentX = e.changedTouches[0].screenX;
-            const distance = Math.abs(currentX - touchStartX);
-
-            // Once the finger is clearly swiping horizontally,
-            // lock native page scrolling for this gesture.
-            if (distance > 10) {
-                e.preventDefault();
-            }
-
-        }, { passive: false });
-
-        heroImageArea.addEventListener("touchend", e => {
-
-            touchEndX = e.changedTouches[0].screenX;
-
-            const swipeDistance = touchStartX - touchEndX;
-
-            if (Math.abs(swipeDistance) > 50) {
-
-                // Prevent the page from continuing to move after the swipe.
-                if (swipeDistance > 0) {
-                    nextSlide();
-                } else {
-                    previousSlide();
-                }
-
-            }
-
-            startHeroTimer();
-
-        }, { passive: true });
-
-        heroImageArea.addEventListener("touchcancel", () => {
-            startHeroTimer();
-        }, { passive: true });
-
-    }
-
-    // Mouse-wheel control is ONLY active while the cursor is directly
-    // over the hero artwork/image. The rest of the page scrolls normally.
-    // Reuse the heroImageArea declared above.
-    if (heroImageArea) {
-
-        heroImageArea.addEventListener("wheel", e => {
-
-            if (Math.abs(e.deltaY) < 8) return;
-
-            // Prevent page scrolling only when the wheel is over the image.
-            e.preventDefault();
-            e.stopPropagation();
-
-            if (wheelLocked) return;
-
-            const direction = e.deltaY > 0 ? 1 : -1;
-
-            wheelLocked = true;
-
-            stopHeroTimer();
-
-            if (direction > 0) {
-                nextSlide();
-            } else {
-                previousSlide();
-            }
-
-            // Allows continuous scrolling while avoiding duplicate
-            // events from a single wheel tick.
-            setTimeout(() => {
-                wheelLocked = false;
-            }, 300);
-
-            startHeroTimer();
-
-        }, { passive: false });
-
-    }
-
-}
-
-console.log("SCRIPT LOADED");
+    /*
+       Detect the END of the physical trackpad swipe.
+       Very short = ready for the next swipe.
+    */
+    wheelEndTimer = setTimeout(() => {
+
+        wheelGestureActive = false;
+        wheelLastDirection = 0;
+
+    }, 80);
+
+}, { passive: false });
+
+stage?.addEventListener("pointerdown", e => { dragging = true; dragStart = e.clientX; stage.setPointerCapture?.(e.pointerId); clearInterval(autoTimer) });
+stage?.addEventListener("pointerup", e => { if (!dragging) return; let dx = e.clientX - dragStart; dragging = false; if (Math.abs(dx) > 45) dx < 0 ? nextSlide() : previousSlide(); resetAuto() });
+stage?.addEventListener("pointercancel", () => { dragging = false; resetAuto() });
+hero?.addEventListener("mouseenter", () => clearInterval(autoTimer)); hero?.addEventListener("mouseleave", resetAuto);
+render(); resetAuto();
 
 // ======================================================
 // CURSOR GLOW
@@ -446,7 +159,7 @@ function hideLoader() {
 
     try {
         sessionStorage.setItem("pixelplay_loader", "true");
-    } catch (e) {}
+    } catch (e) { }
 }
 
 function finishLoader() {
@@ -463,14 +176,14 @@ function finishLoader() {
 setTimeout(() => {
     try {
         revealSections();
-    } catch (e) {}
+    } catch (e) { }
 }, 0);
 
 let alreadyLoaded = false;
 
 try {
     alreadyLoaded = sessionStorage.getItem("pixelplay_loader") === "true";
-} catch (e) {}
+} catch (e) { }
 
 if (alreadyLoaded) {
 
@@ -498,7 +211,7 @@ if (alreadyLoaded) {
     window.addEventListener("load", () => {
         try {
             revealSections();
-        } catch (e) {}
+        } catch (e) { }
 
         setTimeout(finishLoader, 250);
     }, { once: true });

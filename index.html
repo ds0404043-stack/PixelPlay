@@ -164,81 +164,24 @@ setTimeout(function () {
 
     </header>
 
-    <section class="hero reveal">
-
-        <div class="hero-content">
-
-            <span class="hero-tag">
-                🎮 Browser Gaming Platform
-            </span>
-
-            <h1 id="heroTitle">
-                Play Minecraft <br>
-                Directly In Your Browser
-            </h1>
-
-            <p id="heroDescription">
-                Build, explore and survive in an endless block world.
-            </p>
-
+    <section class="hero hero-3d reveal" id="homeHero">
+        <div class="hero-3d-copy">
+            <span class="hero-tag">🎮 Browser Gaming Platform</span>
+            <h1 id="heroTitle">Build. Explore. Survive⛏️</h1>
+            <p id="heroDescription">Build, explore and survive in an endless block world.</p>
             <div class="hero-buttons">
-                <a id="heroPlayBtn" href="minecraft.html" class="play-btn">
-                    <i class="fa-solid fa-play"></i>
-                    Start Playing
-                </a>
-
-                <a href="#featured" class="explore-btn">
-                    📚 Browse Games
-                </a>
+                <a id="heroPlayBtn" href="minecraft.html" class="play-btn"><i class="fa-solid fa-play"></i> Start Playing</a>
+                <a href="#featured" class="explore-btn">📚 Browse Games</a>
             </div>
-
-            <div class="hero-mini-stats">
-                <div>
-                    <strong>7+</strong>
-                    <span>Games</span>
-                </div>
-                <div>
-                    <strong>100%</strong>
-                    <span>Browser</span>
-                </div>
-                <div>
-                    <strong>⚡</strong>
-                    <span id="quick">Instant Play</span>
-                </div>
-            </div>
-
+            <div class="hero-mini-stats"><div><strong>7+</strong><span>Games</span></div><div><strong>100%</strong><span>Browser</span></div><div><strong>⚡</strong><span>Instant Play</span></div></div>
         </div>
-
-        <div class="hero-image">
-
-            <button id="prevHero" class="hero-arrow left">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <img id="heroImage" src="images/minecraft.png" alt="Minecraft">
-
-            <div class="hero-dots">
-
-                <span class="hero-dot active"></span>
-
-                <span class="hero-dot"></span>
-
-                <span class="hero-dot"></span>
-
-                <span class="hero-dot"></span>
-
-                <span class="hero-dot"></span>
-
-                <span class="hero-dot"></span>
-
-            </div>
-
-            <button id="nextHero" class="hero-arrow right">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
+        <div class="hero-coverflow">
+            <button id="prevHero" class="hero-arrow left"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="coverflow-stage" id="coverflowStage"><div class="coverflow-track" id="coverflowTrack"></div></div>
+            <button id="nextHero" class="hero-arrow right"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="hero-dots" id="heroDots"></div>
+            <div class="coverflow-hint">DRAG • SWIPE • SCROLL</div>
         </div>
-
     </section>
 
     <section class="quick-play reveal" aria-label="Quick game categories">
