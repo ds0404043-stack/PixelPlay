@@ -419,6 +419,7 @@ window.addEventListener("scroll", revealSections);
 
 const loader = document.getElementById("loader");
 const loadingText = document.getElementById("loading-text");
+const progress = document.querySelector("#loader .progress");
 
 const loadingMessages = [
     "Loading Assets...",
@@ -427,192 +428,87 @@ const loadingMessages = [
     "Almost Ready..."
 ];
 
-function hideLoader() {
-    loader.classList.add("loader-hide");
+let loaderDone = false;
+
+function setLoaderProgress(value) {
+    if (progress) progress.style.width = value + "%";
 }
 
-if (sessionStorage.getItem("pixelplay_loader")) {
+function hideLoader() {
+    if (loaderDone) return;
+    loaderDone = true;
 
-    // Loader already shown in this tab
+    setLoaderProgress(100);
+
+    if (loader) {
+        loader.classList.add("loader-hide");
+    }
+
+    try {
+        sessionStorage.setItem("pixelplay_loader", "true");
+    } catch (e) {}
+}
+
+function finishLoader() {
+    if (loadingText) {
+        loadingText.textContent = "Almost Ready...";
+    }
+
+    setLoaderProgress(100);
+
+    setTimeout(hideLoader, 250);
+}
+
+/* Always reveal the page independently of the loader. */
+setTimeout(() => {
+    try {
+        revealSections();
+    } catch (e) {}
+}, 0);
+
+let alreadyLoaded = false;
+
+try {
+    alreadyLoaded = sessionStorage.getItem("pixelplay_loader") === "true";
+} catch (e) {}
+
+if (alreadyLoaded) {
+
     hideLoader();
-    revealSections();
 
 } else {
 
-    let index = 0;
-    let loaderFinished = false;
+    setLoaderProgress(8);
 
-    if (loadingText) {
-        loadingText.textContent = loadingMessages[0];
-    }
+    const steps = [
+        [550, 35, "Initializing Engine..."],
+        [1100, 68, "Preparing Minecraft..."],
+        [1650, 90, "Almost Ready..."]
+    ];
 
-    const interval = setInterval(() => {
-
-        index++;
-
-        if (index < loadingMessages.length && loadingText) {
-            loadingText.textContent = loadingMessages[index];
-        }
-
-    }, 500);
-
-    function finishLoader() {
-
-        if (loaderFinished) return;
-
-        loaderFinished = true;
-        clearInterval(interval);
-
-        hideLoader();
-        revealSections();
-
-        try {
-            sessionStorage.setItem("pixelplay_loader", "true");
-        } catch (error) {
-            // Ignore storage errors — the page should still continue.
-        }
-
-    }
-
-    // Normal path: wait for the page to finish loading.
-    window.addEventListener("load", () => {
-
+    steps.forEach(([delay, value, message]) => {
         setTimeout(() => {
-            finishLoader();
-        }, 700);
+            if (loaderDone) return;
+            if (loadingText) loadingText.textContent = message;
+            setLoaderProgress(value);
+        }, delay);
+    });
 
+    /* Normal fast path. */
+    window.addEventListener("load", () => {
+        try {
+            revealSections();
+        } catch (e) {}
+
+        setTimeout(finishLoader, 250);
     }, { once: true });
 
-    // Safety fallback: NEVER let the loader stay stuck because
-    // an image, font, or external resource takes too long.
+    /*
+       Absolute safety fallback.
+       This does NOT call revealSections(), so an error anywhere
+       else on the page cannot stop the loader from disappearing.
+    */
     setTimeout(() => {
         finishLoader();
     }, 3500);
-
 }
-
-// ======================================================
-// CONTINUE PLAYING
-// ======================================================
-
-const recentGame = JSON.parse(localStorage.getItem("recentGame"));
-const recentSection = document.getElementById("recentlyPlayed");
-
-if (recentGame && recentSection) {
-
-    recentSection.style.display = "block";
-
-    document.getElementById("recentName").textContent = recentGame.name;
-    document.getElementById("recentImage").src = recentGame.image;
-    document.getElementById("recentLink").href = recentGame.page;
-
-    const diff = Date.now() - recentGame.time;
-
-    let lastPlayed = "";
-
-    const minutes = Math.floor(diff / 60000);
-    const hours = Math.floor(diff / 3600000);
-    const days = Math.floor(diff / 86400000);
-
-    if (minutes < 1) {
-
-        lastPlayed = "Last Played: Just now";
-
-    } else if (minutes < 60) {
-
-        lastPlayed = `Last Played: ${minutes} minute${minutes > 1 ? "s" : ""} ago`;
-
-    } else if (hours < 24) {
-
-        lastPlayed = `Last Played: ${hours} hour${hours > 1 ? "s" : ""} ago`;
-
-    } else if (days === 1) {
-
-        lastPlayed = "Last Played: Yesterday";
-
-    } else {
-
-        lastPlayed = `Last Played: ${days} days ago`;
-
-    }
-
-    document.getElementById("recentTime").textContent = lastPlayed;
-
-}
-
-
-// ======================================================
-// STICKY HEADER
-// ======================================================
-
-const header = document.querySelector("header");
-
-window.addEventListener("scroll", () => {
-
-    if (!header) return;
-
-    if (window.scrollY > 30) {
-
-        header.classList.add("scrolled");
-
-    } else {
-
-        header.classList.remove("scrolled");
-
-    }
-
-});
-
-// ======================================================
-// HOME SCROLL
-// ======================================================
-
-const homeLink = document.getElementById("homeLink");
-
-if (homeLink) {
-
-    homeLink.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-
-    });
-
-}
-
-/* ======================================================
-   PIXADU HOMEPAGE V2 — SMALL INTERACTION POLISH
-====================================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-    // Make the first viewport feel alive immediately.
-    document.querySelectorAll(".hero, .quick-play").forEach(section => {
-        section.classList.add("active");
-    });
-
-    // Hero touch handling is managed by the main hero slider block above.
-
-    // Subtle tilt on desktop hero artwork.
-    if (window.matchMedia("(pointer:fine)").matches) {
-        const heroVisual = document.querySelector(".hero-image img");
-
-        if (heroVisual) {
-            heroVisual.addEventListener("mousemove", (e) => {
-                const rect = heroVisual.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-                heroVisual.style.transform =
-                    `perspective(900px) rotateY(${x * 4}deg) rotateX(${y * -3}deg) scale(1.015)`;
-            });
-
-            heroVisual.addEventListener("mouseleave", () => {
-                heroVisual.style.transform = "";
-            });
-        }
-    }
-});

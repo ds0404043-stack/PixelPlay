@@ -39,6 +39,18 @@
     </div>
 
 
+<script>
+setTimeout(function () {
+    var pixaduLoader = document.getElementById("loader");
+    if (pixaduLoader) {
+        pixaduLoader.classList.add("loader-hide");
+        pixaduLoader.style.opacity = "0";
+        pixaduLoader.style.visibility = "hidden";
+        pixaduLoader.style.pointerEvents = "none";
+    }
+}, 4500);
+</script>
+
     <header id="top">
         <nav class="navbar">
 
