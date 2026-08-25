@@ -9,6 +9,114 @@
     <title>GTA Vice City</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        #loading-screen {
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 50% 35%, rgba(24, 132, 255, 0.14), transparent 32%),
+                linear-gradient(135deg, #05070b 0%, #07121c 50%, #030508 100%);
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .loading-card {
+            width: min(520px, calc(100vw - 40px));
+            padding: 34px 32px 30px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 24px;
+            background: rgba(12, 18, 27, 0.82);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(14px);
+        }
+
+        .pixadu-loader-logo {
+            width: 68px;
+            height: 68px;
+            margin: 0 auto 14px;
+            display: grid;
+            place-items: center;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #18d26e, #087fce);
+            color: #fff;
+            font-size: 34px;
+            font-weight: 900;
+            box-shadow: 0 10px 30px rgba(24, 210, 110, 0.22);
+            animation: loaderPulse 1.8s ease-in-out infinite;
+        }
+
+        .loading-brand {
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 4px;
+            color: #21d878;
+        }
+
+        .loading-title {
+            margin-top: 12px;
+            font-size: clamp(24px, 5vw, 34px);
+            font-weight: 800;
+        }
+
+        .loading-subtitle {
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.58);
+            font-size: 14px;
+        }
+
+        .loading-progress {
+            height: 8px;
+            margin: 28px 0 12px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+        }
+
+        #loading-progress-fill {
+            width: 0%;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #18d26e, #20a9ff);
+            box-shadow: 0 0 18px rgba(24, 210, 110, 0.45);
+            transition: width 0.15s ease;
+        }
+
+        #loading-text {
+            min-height: 20px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+
+        @keyframes loaderPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 10px 30px rgba(24, 210, 110, 0.22);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 14px 38px rgba(24, 210, 110, 0.34);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loading-card {
+                padding: 28px 22px 24px;
+                border-radius: 20px;
+            }
+
+            .pixadu-loader-logo {
+                width: 58px;
+                height: 58px;
+                font-size: 29px;
+            }
+        }
+
         #move,
         #look {
             position: fixed;
@@ -38,8 +146,19 @@
     data-state-menu="1" data-state-cutscene="0" data-state-mobring="0" data-state-job="0"
     data-state-disable-controls="0" data-state-panzer="0" data-state-car-with-weapon="0" data-state-hunter="0"
     data-state-scope-mode="0" data-state-scope-gun="0">
-    <div id="loading-text"
-        style="color: white; font-size: 48px; font-family: cursive; text-align: center; margin-top: 20px;"> LOADING...
+    <div id="loading-screen">
+        <div class="loading-card">
+            <div class="pixadu-loader-logo">P</div>
+            <div class="loading-brand">PIXADU</div>
+            <div class="loading-title">GTA Vice City</div>
+            <div class="loading-subtitle">Preparing Vice City for you...</div>
+
+            <div class="loading-progress">
+                <div id="loading-progress-fill"></div>
+            </div>
+
+            <div id="loading-text">LOADING... 0.00 MB / 633.45 MB</div>
+        </div>
     </div>
     <div class="wasted-container" hidden>
 
@@ -164,7 +283,14 @@
 
                 let mbDone = (loadedBytes / (1024 * 1024)).toFixed(2);
                 let mbTotal = '633.45';
+                let progressPercent = Math.min((loadedBytes / (633.45 * 1024 * 1024)) * 100, 100);
+
                 loadingText.textContent = `LOADING... ${mbDone} MB / ${mbTotal} MB`;
+
+                const progressFill = document.querySelector("#loading-progress-fill");
+                if (progressFill) {
+                    progressFill.style.width = `${progressPercent}%`;
+                }
             }
 
             let fullBuffer = new Uint8Array(received);
@@ -250,7 +376,7 @@
 
             // Load game scripts
             const script = document.createElement("script");
-            script.src = window.location.origin + "/PixelPlay/games/gtavc/gamepadEmulator.js";
+            script.src = window.location.origin + "/games/gtavc/gamepadEmulator.js";
             document.body.appendChild(script);
 
             ["idbfs.js", "game.js"].forEach(src => {
@@ -259,7 +385,8 @@
                 document.body.appendChild(s);
             });
 
-            loadingText.remove();
+            const loadingScreen = document.querySelector("#loading-screen");
+            if (loadingScreen) loadingScreen.remove();
         });
     </script>
 
