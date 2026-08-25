@@ -11,9 +11,24 @@ const featuredGames = [
     { title: "Tekken 3", heading: "Enter The Fight", description: "Classic arcade fighting action, right in your browser.", image: "images/tekken3.jpg", page: "tekken3.html" }];
 const hero = document.querySelector(".hero-3d"), track = document.getElementById("coverflowTrack"), stage = document.getElementById("coverflowStage"), title = document.getElementById("heroTitle"), desc = document.getElementById("heroDescription"), play = document.getElementById("heroPlayBtn"), prev = document.getElementById("prevHero"), next = document.getElementById("nextHero"), dots = document.getElementById("heroDots");
 let currentGame = 0, autoTimer, dragStart = 0, dragging = false, lastWheel = 0;
-featuredGames.forEach(g => { const i = new Image(); i.src = g.image; });
+// Preload AND decode hero images before the first coverflow render.
+// This prevents low-end/mobile browsers from showing the first slide soft/blurry
+// while the image is still being decoded and promoted to a 3D layer.
+const heroImageReady = featuredGames.map(g => new Promise(resolve => {
+    const i = new Image();
+    i.decoding = "sync";
+    i.loading = "eager";
+    i.src = g.image;
+    const done = () => {
+        if (i.decode) i.decode().catch(() => {}).finally(resolve);
+        else resolve();
+    };
+    if (i.complete) done();
+    else i.addEventListener("load", done, { once: true });
+    i.addEventListener("error", resolve, { once: true });
+}));
 featuredGames.forEach((g, i) => {
-    const c = document.createElement("article"); c.className = "cover-card"; c.innerHTML = `<img src="${g.image}" alt="${g.title}"><div class="cover-shine"></div><div class="cover-label">${g.title}</div>`; c.addEventListener("click", () => { if (i === currentGame) location.href = g.page; else { currentGame = i; render(); resetAuto(); } }); track.appendChild(c);
+    const c = document.createElement("article"); c.className = "cover-card"; c.innerHTML = `<img src="${g.image}" alt="${g.title}" loading="eager" decoding="sync"><div class="cover-shine"></div><div class="cover-label">${g.title}</div>`; c.addEventListener("click", () => { if (i === currentGame) location.href = g.page; else { currentGame = i; render(); resetAuto(); } }); track.appendChild(c);
     const d = document.createElement("button"); d.className = "hero-dot"; d.addEventListener("click", () => { currentGame = i; render(); resetAuto(); }); dots.appendChild(d);
 });
 const cards = [...track.children], mod = (n, m) => ((n % m) + m) % m;
@@ -79,7 +94,12 @@ stage?.addEventListener("pointerdown", e => { dragging = true; dragStart = e.cli
 stage?.addEventListener("pointerup", e => { if (!dragging) return; let dx = e.clientX - dragStart; dragging = false; if (Math.abs(dx) > 45) dx < 0 ? nextSlide() : previousSlide(); resetAuto() });
 stage?.addEventListener("pointercancel", () => { dragging = false; resetAuto() });
 hero?.addEventListener("mouseenter", () => clearInterval(autoTimer)); hero?.addEventListener("mouseleave", resetAuto);
-render(); resetAuto();
+// Wait for the hero images to be decoded before the first render.
+// The page loader is already covering this area, so this does not create a blank flash.
+Promise.all(heroImageReady).finally(() => {
+    render();
+    resetAuto();
+});
 
 // ======================================================
 // CURSOR GLOW
