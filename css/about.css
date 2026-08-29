@@ -622,3 +622,211 @@ CTA
     transform: translateY(-6px);
 
 }
+
+
+/* =========================
+   FOUNDER — PIXADU
+   ========================= */
+
+.founder-section {
+    padding: 90px 8%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 15% 50%, rgba(34, 197, 94, .12), transparent 32%),
+        radial-gradient(circle at 85% 50%, rgba(59, 130, 246, .12), transparent 32%),
+        #0f172a;
+}
+
+.founder-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size: 45px 45px;
+    pointer-events: none;
+}
+
+.founder-section .container {
+    position: relative;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.founder-section .section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.founder-section .section-title > span {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #22c55e;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+}
+
+.founder-section .section-title h2 {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: clamp(32px, 5vw, 48px);
+    line-height: 1.15;
+}
+
+.founder-section .section-title p {
+    max-width: 650px;
+    margin: 0 auto;
+    color: #94a3b8;
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+.founder-section .section-title p strong {
+    color: #fff;
+}
+
+.founder-section .section-title h2::after {
+    content: "";
+    display: block;
+    width: 55px;
+    height: 4px;
+    margin: 18px auto 0;
+    border-radius: 10px;
+    background: linear-gradient(90deg, #22c55e, #3b82f6);
+}
+
+/* Beautiful founder card */
+.founder-section .container::after {
+    content: "DEEPak";
+    display: none;
+}
+
+.founder-section .founder-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 32px;
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 28px;
+    background: linear-gradient(
+        135deg,
+        rgba(30,41,59,.88),
+        rgba(15,23,42,.92)
+    );
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.30),
+        inset 0 1px 0 rgba(255,255,255,.06);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    overflow: hidden;
+    transition: .35s ease;
+}
+
+.founder-section .founder-card::before {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    top: -100px;
+    right: -60px;
+    border-radius: 50%;
+    background: rgba(34,197,94,.15);
+    filter: blur(20px);
+}
+
+.founder-section .founder-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(34,197,94,.45);
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.38),
+        0 0 35px rgba(34,197,94,.08);
+}
+
+.founder-section .founder-photo {
+    width: 150px;
+    height: 150px;
+    flex: 0 0 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid rgba(34,197,94,.85);
+    box-shadow:
+        0 0 0 7px rgba(34,197,94,.08),
+        0 15px 35px rgba(0,0,0,.35);
+}
+
+.founder-section .founder-info {
+    position: relative;
+    z-index: 1;
+}
+
+.founder-section .founder-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding: 7px 13px;
+    border-radius: 999px;
+    background: rgba(34,197,94,.10);
+    border: 1px solid rgba(34,197,94,.22);
+    color: #4ade80;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.founder-section .founder-info h3 {
+    margin: 0 0 8px;
+    color: #fff;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.founder-section .founder-role {
+    margin: 0 0 14px;
+    color: #22c55e;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.founder-section .founder-description {
+    margin: 0;
+    max-width: 570px;
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+    .founder-section {
+        padding: 70px 20px;
+    }
+
+    .founder-section .founder-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 28px 22px;
+        gap: 22px;
+    }
+
+    .founder-section .founder-photo {
+        width: 125px;
+        height: 125px;
+        flex-basis: 125px;
+    }
+
+    .founder-section .founder-info h3 {
+        font-size: 28px;
+    }
+
+    .founder-section .founder-description {
+        margin: 0 auto;
+    }
+}
