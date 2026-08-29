@@ -23,23 +23,54 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Pixadu Founder Structured Data -->
+    <!-- Pixadu identity and founder structured data -->
     <script type="application/ld+json">
-    {
+{
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Deepak Sharma",
-      "jobTitle": "Founder & Developer of Pixadu",
-      "image": "https://pixadu.github.io/images/my.png",
-      "url": "https://pixadu.github.io/about.html",
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Pixadu",
-        "url": "https://pixadu.github.io/"
-      }
-    }
+      "@graph": [
+            {
+                  "@type": "Person",
+                  "@id": "https://pixadu.github.io/about.html#deepak-sharma",
+                  "name": "Deepak Sharma",
+                  "jobTitle": "Founder & Developer of Pixadu",
+                  "description": "Deepak Sharma is the founder and developer of Pixadu, a browser gaming platform.",
+                  "image": "https://pixadu.github.io/images/my.png",
+                  "url": "https://pixadu.github.io/about.html",
+                  "worksFor": {
+                        "@type": "Organization",
+                        "@id": "https://pixadu.github.io/#organization",
+                        "name": "Pixadu",
+                        "url": "https://pixadu.github.io/",
+                        "logo": "https://pixadu.github.io/favicon.ico",
+                        "founder": {
+                              "@id": "https://pixadu.github.io/about.html#deepak-sharma"
+                        }
+                  },
+                  "sameAs": [
+                        "https://github.com/ds0404043-stack",
+                        "https://www.instagram.com/pixaduweb/"
+                  ],
+                  "knowsAbout": [
+                        "browser gaming",
+                        "web development",
+                        "HTML5",
+                        "CSS3",
+                        "JavaScript"
+                  ]
+            },
+            {
+                  "@type": "WebPage",
+                  "@id": "https://pixadu.github.io/about.html#webpage",
+                  "url": "https://pixadu.github.io/about.html",
+                  "name": "About Pixadu | Deepak Sharma",
+                  "description": "About Pixadu and its founder, Deepak Sharma.",
+                  "mainEntity": {
+                        "@id": "https://pixadu.github.io/about.html#deepak-sharma"
+                  }
+            }
+      ]
+}
     </script>
-
 </head>
 
 <body>

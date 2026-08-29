@@ -14,6 +14,10 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Homepage performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <title>Pixadu - Play Free Browser Games Online</title>
 
     <meta name="description"
@@ -37,6 +41,50 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style id="pixadu-home-performance">
+        /* Keep animations isolated from the document's scrolling paint work. */
+
+        .coverflow-stage {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .coverflow-stage.coverflow-ready {
+            opacity: 1;
+            visibility: visible;
+            transition: opacity .18s ease;
+        }
+        .cover-card.coverflow-initial {
+            transition: none !important;
+        }
+
+        .coverflow-stage,
+        .coverflow-track {
+            contain: layout paint style;
+            will-change: transform;
+        }
+
+        .featured-track {
+            contain: layout paint;
+        }
+
+        .cursor-glow {
+            pointer-events: none;
+        }
+
+        /* Respect devices that explicitly request reduced motion. */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -56,21 +104,7 @@
         </div>
 
     </div>
-
-
-    <script>
-        setTimeout(function () {
-            var pixaduLoader = document.getElementById("loader");
-            if (pixaduLoader) {
-                pixaduLoader.classList.add("loader-hide");
-                pixaduLoader.style.opacity = "0";
-                pixaduLoader.style.visibility = "hidden";
-                pixaduLoader.style.pointerEvents = "none";
-            }
-        }, 4500);
-    </script>
-
-    <header id="top">
+<header id="top">
         <nav class="navbar">
 
             <a href="#" class="logo">
@@ -108,14 +142,14 @@
                     </button>
 
                     <div id="profileMenu" class="profile-menu" style="display:none;">
-                        <img id="userPhoto" src="" alt="">
+                        <img id="userPhoto" src="" alt="" decoding="async">
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
 
                     <div id="profileDropdown" class="profile-dropdown">
 
                         <div class="profile-header">
-                            <img id="dropdownPhoto" src="" alt="">
+                            <img id="dropdownPhoto" src="" alt="" decoding="async">
                             <div>
                                 <h4 id="dropdownName">Player</h4>
                                 <p id="dropdownEmail">player@example.com</p>
@@ -253,7 +287,7 @@
 
         <div class="game-card">
 
-            <img id="recentImage" src="" alt="Recent Game">
+            <img id="recentImage" src="" alt="Recent Game" loading="lazy" decoding="async">
 
             <div class="game-info">
 
@@ -285,48 +319,48 @@
 
                 <!-- Minecraft -->
                 <div class="featured-item">
-                    <img src="images/minecraft.png">
+                    <img src="images/minecraft.png" loading="lazy" decoding="async">
                     <h3>Minecraft</h3>
                     <a href="minecraft.html">Play</a>
                 </div>
 
                 <!-- GTA -->
                 <div class="featured-item">
-                    <img src="images/gta vice city.png">
+                    <img src="images/gta vice city.png" loading="lazy" decoding="async">
                     <h3>GTA Vice City</h3>
                     <a href="gta.html">Play</a>
                 </div>
 
                 <!-- Chess -->
                 <div class="featured-item">
-                    <img src="images/chess.jpg">
+                    <img src="images/chess.jpg" loading="lazy" decoding="async">
                     <h3>Chess</h3>
                     <a href="chess.html">Play</a>
                 </div>
 
                 <!-- 2048 -->
                 <div class="featured-item">
-                    <img src="images/2048.jpg">
+                    <img src="images/2048.jpg" loading="lazy" decoding="async">
                     <h3>2048</h3>
                     <a href="2048.html">Play</a>
                 </div>
 
                 <!-- Angry Birds -->
                 <div class="featured-item">
-                    <img src="images/angrybirdshero.png">
+                    <img src="images/angrybirdshero.png" loading="lazy" decoding="async">
                     <h3>Angry Birds</h3>
                     <a href="angrybirds.html">Play</a>
                 </div>
 
                 <div class="featured-item">
-                    <img src="images/tekken3.jpg">
+                    <img src="images/tekken3.jpg" loading="lazy" decoding="async">
                     <h3>tekken 3</h3>
                     <a href="tekken3.html">Play</a>
                 </div>
 
                 <!-- Subway Surfers -->
                 <div class="featured-item">
-                    <img src="images/subway-surfers.jpg" alt="Subway Surfers">
+                    <img src="images/subway-surfers.jpg" alt="Subway Surfers" loading="lazy" decoding="async">
                     <h3>Subway Surfers</h3>
                     <a href="subway.html">Play</a>
                 </div>
@@ -335,48 +369,48 @@
 
                 <!-- Minecraft -->
                 <div class="featured-item">
-                    <img src="images/minecraft.png">
+                    <img src="images/minecraft.png" loading="lazy" decoding="async">
                     <h3>Minecraft</h3>
                     <a href="minecraft.html">Play</a>
                 </div>
 
                 <!-- GTA -->
                 <div class="featured-item">
-                    <img src="images/gta vice city.png">
+                    <img src="images/gta vice city.png" loading="lazy" decoding="async">
                     <h3>GTA Vice City</h3>
                     <a href="gta.html">Play</a>
                 </div>
 
                 <!-- Chess -->
                 <div class="featured-item">
-                    <img src="images/chess.jpg">
+                    <img src="images/chess.jpg" loading="lazy" decoding="async">
                     <h3>Chess</h3>
                     <a href="chess.html">Play</a>
                 </div>
 
                 <!-- 2048 -->
                 <div class="featured-item">
-                    <img src="images/2048.jpg">
+                    <img src="images/2048.jpg" loading="lazy" decoding="async">
                     <h3>2048</h3>
                     <a href="2048.html">Play</a>
                 </div>
 
                 <!-- Angry Birds -->
                 <div class="featured-item">
-                    <img src="images/angrybirdshero.png">
+                    <img src="images/angrybirdshero.png" loading="lazy" decoding="async">
                     <h3>Angry Birds </h3>
                     <a href="angrybirds.html">Play</a>
                 </div>
 
                 <div class="featured-item">
-                    <img src="images/tekken3.jpg">
+                    <img src="images/tekken3.jpg" loading="lazy" decoding="async">
                     <h3>tekken 3</h3>
                     <a href="tekken3.html">Play</a>
                 </div>
 
                 <!-- Subway Surfers -->
                 <div class="featured-item">
-                    <img src="images/subway-surfers.jpg" alt="Subway Surfers">
+                    <img src="images/subway-surfers.jpg" alt="Subway Surfers" loading="lazy" decoding="async">
                     <h3>Subway Surfers</h3>
                     <a href="subway.html">Play</a>
                 </div>
@@ -438,7 +472,7 @@
             <!-- Subway Surfers -->
             <div class="trend-card" id="subway-surfer-card">
 
-                <img src="images/subway-surfers.jpg" alt="Subway Surfers">
+                <img src="images/subway-surfers.jpg" alt="Subway Surfers" loading="lazy" decoding="async">
 
                 <div class="trend-info">
 
@@ -463,7 +497,7 @@
             </div>
             <div class="trend-card" id="gta-card">
 
-                <img src="images/gta vice city.png" alt="GTA Vice City">
+                <img src="images/gta vice city.png" alt="GTA Vice City" loading="lazy" decoding="async">
 
                 <div class="trend-info">
 
@@ -487,7 +521,7 @@
 
             <div class="trend-card" id="tekken3-card">
 
-                <img src="images/tekken3.jpg" alt="Tekken 3">
+                <img src="images/tekken3.jpg" alt="Tekken 3" loading="lazy" decoding="async">
 
                 <div class="trend-info">
 
