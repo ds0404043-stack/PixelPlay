@@ -259,6 +259,43 @@ const gamesDatabase = [
             "speed",
             "racer"
         ]
-    }
+    },
+
+
+    {
+        name: "Granny",
+        genre: "Horror",
+        platform: "PC",
+        page: "granny.html",
+        image: "images/granny.jpg",
+        keywords: [
+            "game",
+            "granny",
+            "horror",
+            "survival",
+            "escape",
+            "pc",
+            "granny game"
+        ]
+    },
+
+    {
+        name: "Granny 2",
+        genre: "Horror",
+        platform: "PC",
+        page: "granny2.html",
+        image: "images/granny2.jpg",
+        keywords: [
+            "game",
+            "granny",
+            "granny 2",
+            "granny2",
+            "horror",
+            "survival",
+            "escape",
+            "granny sequel",
+            "pc"
+        ]
+    },
 
 ];
